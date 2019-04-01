@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SMP Challenge</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <link rel="stylesheet" href="/static/css/jquery.Jcrop.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/sprintf.js"></script>
+    <script src="/static/js/md5.js"></script>
+    <style type="text/css">
+      #nav-first {
+        border-radius: 0px;
+        margin-bottom: 0px;
+        min-height: 80px;
+      }
+
+      #nav-second {
+        border-radius: 0px;
+        margin-bottom: 0px;
+        top: 80px;
+      }
+
+      #nav-first-main {
+        margin: 0 0;
+        height: 80px;
+      }
+
+      #nav-first-main>li {
+        height: 80px;
+      }
+      #nav-first-main>li>a {
+        height: 80px;
+        padding-top: 0;
+        padding-bottom: 0;
+        line-height: 80px;
+      }
+
+      #nav-second-main {
+        margin: 0 80px;
+      }
+
+      .nav-second-li {
+        font-size: 120%;
+      }
+
+      #block1 {
+        background-color: white;
+      }
+
+      #block2 {
+        background-color: #f8f8f8;
+      }
+
+      #block3 {
+        background-color: white;
+      }
+
+      #block4 {
+        background-color: #f8f8f8;
+      }
+
+      #block5 {
+        background-color: white;
+      }
+
+      #block6 {
+        background-color: #f8f8f8;
+      }
+
+      #block7 {
+        background-color: black;
+      }
+
+      .p-body{
+        text-align: justify;
+        font-family: "Arial", sans-serif;
+        font-size: 120%;
+      }
+
+      h1,h2{
+        font-family: "Arial", serif;
+        /*font-size: 150%;*/
+      }
+
+      .timeline-li {
+        font-family: "Arial", sans-serif;
+        font-size: 120%;
+      }
+
+      #logo {
+        padding-left:100px;
+        padding-top: 10px;
+      }
+
+      .thumbnail {
+        border-color: transparent;
+        background-color: transparent;
+      }
+
+      .avatar {
+        border-radius: 50%;
+      }
+
+      .nav-li {
+        font-size: 120%;
+      }
+
+      td,th {
+        text-align: center;
+      }
+
+      .orange {
+        color: rgb(248,206,69) !important;
+      }
+
+      .container-fluid {
+        padding-top: 130px;
+      }
+
+    </style>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $("#href-register").click(function(e){
+          e.preventDefault();
+          $("#modal-register").modal("show");
+        });
+
+        $("#href-login").click(function(e){
+          e.preventDefault();
+          $("#modal-login").modal("show");
+        });
+
+        $("input").focus(function(){
+          $(".form-group").removeClass("has-error");
+          $(".help-block").hide();
+        });
+
+        $("#register").click(function(e){
+          var email = $("#email").val();
+          var username = $("#username").val();
+          var password = $("#password").val();
+          var repeat_password = $("#repeat-password").val();
+
+          var flag = true;
+          if (email == "") {
+            $("#email").parent().addClass("has-error");
+            $("#email-warn").text("email can not be empty").show();
+            flag = false;
+          }
+
+          if (username == "") {
+            $("#username").parent().addClass("has-error");
+            $("#username-warn").text("username can not be empty").show();
+            flag = false;
+          }
+
+          if (password == "") {
+            $("#password").parent().addClass("has-error");
+            $("#password-warn").text("password can not be empty").show();
+            flag = false;
+          }
+
+          if (repeat_password == "") {
+            $("#repeat-password").parent().addClass("has-error");
+            $("#repeat-password-warn").text("repeat-password can not be empty").show();
+            flag = false;
+          }
+
+          if (password.length > 0 && password.length < 8) {
+            $("#password").parent().addClass("has-error");
+            $("#password-warn").text("password too short").show();
+            flag = false;
+          }
+
+          if (repeat_password.length > 0 && password != repeat_password) {
+            $("#repeat-password").parent().addClass("has-error");
+            $("#repeat-password-warn").text("Two input password must be consistent").show();
+            flag = false;
+          }
+
+          if (flag == false) {
+            return;
+          }
+
+          password = md5(password);
+          var data = {
+            "email": email,
+            "username": username,
+            "password": password
+          }
+          $.post("/register", data, function(data, status) {
+            if (data.code == "00000") {
+              $("#modal-body").html(sprintf('<h4 id="register-notice">We have send a verification email to <a>%s</a>, please check it</h4>', email));
+              $("#modal-footer").hide();
+            }
+            else if (data.code == "10002") {
+              $("#username").parent().addClass("has-error");
+              $("#username-warn").text("username exists").show();
+            }
+            else if (data.code == "10004") {
+              $("#email").parent().addClass("has-error");
+              $("#email-warn").text("email can not be empty").show();
+            }
+          });
+
+        });
+
+        $("#login").click(function(e){
+          var email = $("#login-email").val();
+          var password = $("#login-password").val();
+
+          var flag = true;
+          if (email == "") {
+            $("#login-email").parent().addClass("has-error");
+            $("#login-email-warn").text("email can not be empty").show();
+            flag = false;
+          }
+          if (password == "") {
+            $("#login-password").parent().addClass("has-error");
+            $("#login-password-warn").text("password can not be empty").show();
+            flag = false;
+          }
+
+          if (flag == false) {
+            return;
+          }
+
+          password = md5(password);
+          var data = {
+            "email": email,
+            "password": password
+          }
+
+          $.post("/login", data, function(data, status) {
+            if (data.code == "00000") {
+              window.location.reload();
+            }
+            else if (data.code == "10006") {
+              $("#login-email").parent().addClass("has-error");
+              $("#login-email-warn").text("email not exists").show();
+            }
+            else if (data.code == "10007") {
+              $("#login-password").parent().addClass("has-error");
+              $("#login-password-warn").text("password error").show();
+            }
+          });
+
+        });
+        $("#logout").click(function(e) {
+          e.preventDefault();
+          $.post("/logout", function(data, status) {
+            window.location.reload();
+          })
+        });
+      });
+    </script>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="nav-second">
+      <div class="container">
+        <ul class="nav navbar-nav" id="nav-second-main">
+          <li class="nav-li"><a class="nav-second-li" href="/" id="href-home"><b>Home</b></a></li>
+          <li class="nav-li active"><a class="nav-second-li" href="#" id="href-dataset"><b>Dataset</b></a></li>
+          <li class="nav-li"><a class="nav-second-li" href="/challenge" id="href-challenge"><b>Challenge</b></a></li>
+          <li class="nav-li"><a class="nav-second-li" href="/leaderboard" id="href-leaderboard"><b>Leaderboard</b></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <nav class="navbar navbar-default navbar-fixed-top" id="nav-first">
+      <div class="container">
+        <div class="navbar-header">
+          <img src="/static/img/logo.png" width="400px" id="logo">
+        </div>
+
+        {% if not login %}
+        <ul class="nav navbar-nav navbar-right" id="nav-first-main">
+          <li class="nav-li"><a href="#" id="href-register"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Register</a></li>
+          <li class="nav-li"><a href="#" id="href-login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login</a></li>
+          <li class="nav-li"><a href="mailto:social.media.prediction@gmail.com" id="href-contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
+        </ul>
+        {% else %}
+        <ul class="nav navbar-nav navbar-right" id="nav-first-main">
+          <li class="nav-li dropdown">
+            <a href="#" id="user" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{username}}</a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Edit Team</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#" id="logout">Logout</a></li>
+            </ul>
+          </li>
+          <li class="nav-li"><a href="mailto:social.media.prediction@gmail.com" id="href-contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
+        </ul>
+        {% endif %}
+      </div>
+    </nav>
+
+
+    <div class="container-fluid" id="maintext">
+
+      <div class="row" id="block1">
+        <div class="col-md-8 col-md-offset-2">
+          <h2><b>Dataset Overview</b></h2>
+          
+          <p class="p-body">The SMP datasets TPIC2017 contains 680K photos, which collected from Flickr (a photo sharing platform) and corresponding anonymized photo-sharing records ranges of 3 years. TPIC is a multi-faceted data collection, which contains photo image, user profile and photo metadata. For each task, we split the data with time-order, resulting in 90% for training and 10% for testing. The tables below show the statistics of TPIC2017.
+          </p>
+          <a href="https://github.com/social-media-prediction/TPIC2017">https://github.com/social-media-prediction/TPIC2017</a>
+          <br>
+          <table class="table table-bordered table-striped">
+            <tr>
+              <th>Dataset</th>
+              <th>#Post</th>
+              <th>#User</th>
+              <th>Temporal Range (Years)</th>
+              <th>Avg. Title Length</th>
+              <th>Avg. Tag Count</th>
+              <th>Avg. Description Length</th>
+              <th>Avg. Views</th>
+            </tr>
+            <tr>
+              <td>TPIC2017</td>
+              <td>680K</td>
+              <td>80K</td>
+              <td>3</td>
+              <td>20</td>
+              <td>9</td>
+              <td>114</td>
+              <td>131</td>
+            </tr>
+          </table>
+          <br>
+        </div>
+      </div>
+
+      <div class="row" id="block2">
+        <div class="col-md-8 col-md-offset-2">
+          <h2><b>Statistics</b></h2>
+          
+          <p class="p-body">The SMP datasets TPIC2017 contains 680K photos, which collected from Flickr (a photo sharing platform) and corresponding anonymized photo-sharing records ranges of 3 years. TPIC is a multi-faceted data collection, which contains photo image, user profile and photo metadata. For each task, we split the data with time-order, resulting in 90% for training and 10% for testing. The tables below show the statistics of TPIC2017.
+          </p>
+          <a href="https://github.com/social-media-prediction/TPIC2017">https://github.com/social-media-prediction/TPIC2017</a>
+          <br><br>
+        </div>
+
+      </div>
+
+      <div class="row" id="block3">
+        <div class="col-md-8 col-md-offset-2">
+          <h2><b>Download</b></h2>
+          
+          <p class="p-body">The SMP datasets TPIC2017 contains 680K photos, which collected from Flickr (a photo sharing platform) and corresponding anonymized photo-sharing records ranges of 3 years. TPIC is a multi-faceted data collection, which contains photo image, user profile and photo metadata. For each task, we split the data with time-order, resulting in 90% for training and 10% for testing. The tables below show the statistics of TPIC2017.
+          </p>
+          <a href="https://github.com/social-media-prediction/TPIC2017">https://github.com/social-media-prediction/TPIC2017</a>
+          <br>
+        </div>
+      </div>
+
+    </div>
+
+        <div class="modal fade" id="modal-register">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="modal-title">Register</h4>
+          </div>
+          <div class="modal-body" id="modal-body">
+            <form id="form">
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email">
+                <span id="email-warn" class="help-block"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username">
+                <span id="username-warn" class="help-block"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password">
+                <span id="password-warn" class="help-block"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="repeat-password">Repeat Password</label>
+                <input type="password" class="form-control" id="repeat-password">
+                <span id="repeat-password-warn" class="help-block"></span>
+              </div>
+              
+            </form>
+            
+          </div>
+          <div class="modal-footer" id="modal-footer">
+            <center><button type="button" class="btn btn-primary" id="register">Register</button></center>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="modal-login">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Login</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="login-email">Email</label>
+                <input type="email" class="form-control" id="login-email">
+                <span id="login-email-warn" class="help-block"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" class="form-control" id="login-password">
+                <span id="login-password-warn" class="help-block"></span>
+              </div>
+
+              <a>Forget password?</a>
+            </form>
+            
+          </div>
+          <div class="modal-footer">
+            <center><button type="button" class="btn btn-primary" id="login">Login</button></center>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+ </html>

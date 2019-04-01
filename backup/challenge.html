@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SMP Challenge</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <link rel="stylesheet" href="/static/css/jquery.Jcrop.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/sprintf.js"></script>
+    <style type="text/css">
+      .navbar {
+        border-radius: 0px;
+      }
+      body {
+        padding-top: 70px;
+      }
+    </style>
+    <script type="text/javascript">
+      $(document).ready(function(){
+
+      });
+    </script>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="nav">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">SMP Challenge - ACMMM 19</a>
+      </div>
+      <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/">Home</a></li>
+          <li class="active"><a href="#">Challenge</a></li>
+          <li><a href="/datasets">Datasets</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container-fluid" id="maintext">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <p>The challenge will focus on temporal prediction of social media, and the topic is <b>Temporal Popularity Prediction</b>. Meanwhile, we are open for innovative self-proposed topics, which related with new predictive problem in social media.</p>
+
+          <h3>Task: Temporal Popularity Prediction</h3>
+          <p>The task is focused on predicting the impact of new social media posts (photos, videos or news) before they were shared on social media. Given a new post with temporal multimedia context of a publisher, the popularity computed by the normalized score of clicks or visits of the post (e.g., tweet count for Twitter, view count for Flickr, etc).</p>
+          <p>The contestants are asked to develop their temporal prediction models based on the SMP dataset provided by the Challenge (as training data), plus possibly additional public/private data, to address one or both of the given tasks. For the evaluation purpose, a contesting system is asked to produce prediction results of popularity. The accuracy will be evaluated by pre-defined quantitative evaluation. The contestants need to introduce their systems and datasets in the conference.</p>
+
+          <h3>Evaluation Criteria & Ranking</h3>
+          <p>The evaluation provided here can be used to obtain performances on the testing set of SMP. It contains multiple common metrics, including Spearman’s Rho (SR), Mean Absolute Error (MAE), Mean Squared Error (MSE).</p>
+          <p>The ranking for the competition for each year is based on quantitative evaluation, respectively. Specifically, a rank list of teams is produced by sorting their scores on each objective evaluation metric, respectively. The final rank of a team is measured by combining its ranking positions in the three ranking list for respective task and defined as:</p>
+          <p><i>R</i>(team) = <i>R</i>(team)@SR + <i>R</i>(team)@MAE + <i>R</i>(team)@MSE</p>
+          <p>where <i>R</i>(team) is the rank position of the team on a particular metric, e.g., if the team achieves the best performance in terms of Spearman’s Rho, then R(team)@SR is "1". The smaller the final ranking, the better the performance.</p>
+
+          <h3>Timeline</h3>
+          <p>March 20, 2019: Dataset available for download (training set)</p>
+          <p>May 25, 2019: Test set available for download</p>
+          <p>June 5, 2019: Results submission</p>
+          <p>June 6, 2019: Objective evaluation and human evaluation</p>
+          <p>June 15, 2019: Evaluation results announce</p>
+          <p>July 8, 2019: Paper submission deadline (please follow the instructions on the main conference website)</p>
+        </div>
+
+      </div>
+    </div>
+
+  </body>
+ </html>
