@@ -122,7 +122,7 @@
     </style>
     <script type="text/javascript">
       $(document).ready(function(){
-        $("#href-register").click(function(e){
+                $("#href-register").click(function(e){
           e.preventDefault();
           $("#modal-register").modal("show");
         });
@@ -192,7 +192,7 @@
           }
           $.post("/register", data, function(data, status) {
             if (data.code == "00000") {
-              $("#modal-body").html(sprintf('<h4 id="register-notice">We have send a verification email to <a>%s</a>, please check it</h4>', email));
+              $("#modal-body").html(sprintf('<h4 id="register-notice">We have send a verification email to <a>%s</a>, please check it in two hours</h4>', email));
               $("#modal-footer").hide();
             }
             else if (data.code == "10002") {
@@ -201,7 +201,7 @@
             }
             else if (data.code == "10004") {
               $("#email").parent().addClass("has-error");
-              $("#email-warn").text("email can not be empty").show();
+              $("#email-warn").text("email exists").show();
             }
           });
 
@@ -248,11 +248,166 @@
           });
 
         });
+
         $("#logout").click(function(e) {
           e.preventDefault();
           $.post("/logout", function(data, status) {
             window.location.reload();
           })
+        });
+
+        {% if register_success %}
+        $("#modal-register-success").modal("show");
+        $("#modal-register-success").on("hidden.bs.modal", function(e) {
+          window.location.href = "/"
+        })
+        {% endif %}
+
+        $("#editteam").click(function(e) {
+          e.preventDefault();
+          $("#modal-team").modal("show");
+        });
+
+        var nownum = 1;
+        $("#addmember").click(function(e) {
+          e.preventDefault();
+          var html = '<div class="row">\
+                <div class="col-md-2">\
+                  <br>\
+                  <label class="member-title" id="member%d-title">Member %d</label>\
+                </div>\
+                <div class="col-md-3">\
+                  <div class="form-group">\
+                    <label for="member%d-name sr-only"></label>\
+                    <input type="text" class="form-control team-input" id="member%d-name">\
+                    <span class="help-block"></span>\
+                  </div>\
+                </div>\
+                <div class="col-md-3">\
+                  <div class="form-group">\
+                    <label for="member%d-email sr-only"></label>\
+                    <input type="email" class="form-control team-input" id="member%d-email">\
+                    <span class="help-block"></span>\
+                  </div>\
+                </div>\
+                <div class="col-md-3">\
+                  <div class="form-group">\
+                    <label for="member%d-organization sr-only"></label>\
+                    <input type="text" class="form-control team-input" id="member%d-organization">\
+                    <span class="help-block"></span>\
+                  </div>\
+                </div>\
+                <div class="col-md-1">\
+                  <br>\
+                  <button class="btn btn-danger delete-member" id="delete-member%d" deleteid="%d"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>\
+                </div>\
+              </div>';
+
+          $("#team-form").append(sprintf(html, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum));
+          nownum += 1;
+        });
+
+        $(document).on("click", ".delete-member", function(e) {
+          e.preventDefault();
+          $(this).parent().parent().remove();
+          var deleteid=parseInt($(this).attr("deleteid"));
+          for (var i = deleteid+1; i <= nownum; i++) {
+            $(sprintf("#member%d-title", i)).text(sprintf("Member %d", i-1)).attr("id", sprintf("member%d-title", i-1));
+            $(sprintf("#delete-member%d", i)).attr("id", sprintf("delete-member%d", i-1)).attr("deleteid", sprintf("%d", i-1))
+          }
+
+          nownum -= 1;
+        });
+
+        $("#save").click(function(e) {
+          e.preventDefault();
+
+          var team_input = $(".team-input");
+          var flag=true;
+          for (var i = 0; i < team_input.length; i++) {
+            if ($(team_input[i]).val() == "") {
+              $(team_input[i]).parent().find("span").show().text("can not be empty");
+              $(team_input[i]).parent().addClass("has-error");
+              flag=false;
+            }
+          }
+          if (flag == false) {
+            return;
+          }
+
+          var data = {
+            'teamname': $("#team-name").val(),
+            'caption-name': $("#caption-name").val(),
+            'caption-email': $("#caption-email").val(),
+            'caption-organization': $("#caption-organization").val(),
+            'member-num': nownum
+          }
+
+          for (var i = 1; i < nownum; i++) {
+            data[sprintf("member%d-name", i)] = $(sprintf("#member%d-name", i)).val();
+            data[sprintf("member%d-email", i)] = $(sprintf("#member%d-email", i)).val();
+            data[sprintf("member%d-organization", i)] = $(sprintf("#member%d-organization", i)).val();
+          }
+
+          $.post("/update_team", data, function(data, status) {
+            if (data.code == "00000") {
+              alert("update success");
+              $("#modal-team").modal("hide");
+            }
+            else if (data.code == "10009") {
+              $("#team-name").parent().addClass("has-error");
+              $("#team-name").parent().find("span").text("team name exists").show();
+            }
+          });
+
+        });
+
+        $.getJSON("/get_team", function(data, status) {
+          if (data.code == "00000") {
+            $("#team-name").val(data.teamname);
+            $("#caption-name").val(data.members[0].name);
+            $("#caption-email").val(data.members[0].email);
+            $("#caption-organization").val(data.members[0].organization);
+            nownum = data.members.length;
+            for (var i = 1; i < nownum; i++) {
+              var html = '<div class="row">\
+                <div class="col-md-2">\
+                  <br>\
+                  <label class="member-title" id="member%d-title">Member %d</label>\
+                </div>\
+                <div class="col-md-3">\
+                  <div class="form-group">\
+                    <label for="member%d-name sr-only"></label>\
+                    <input type="text" class="form-control team-input" id="member%d-name">\
+                    <span class="help-block"></span>\
+                  </div>\
+                </div>\
+                <div class="col-md-3">\
+                  <div class="form-group">\
+                    <label for="member%d-email sr-only"></label>\
+                    <input type="email" class="form-control team-input" id="member%d-email">\
+                    <span class="help-block"></span>\
+                  </div>\
+                </div>\
+                <div class="col-md-3">\
+                  <div class="form-group">\
+                    <label for="member%d-organization sr-only"></label>\
+                    <input type="text" class="form-control team-input" id="member%d-organization">\
+                    <span class="help-block"></span>\
+                  </div>\
+                </div>\
+                <div class="col-md-1">\
+                  <br>\
+                  <button class="btn btn-danger delete-member" id="delete-member%d" deleteid="%d"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>\
+                </div>\
+              </div>';
+
+              $("#team-form").append(sprintf(html, i,i,i,i,i,i,i,i,i,i));
+              $(sprintf("#member%d-name", i)).val(data.members[i].name);
+              $(sprintf("#member%d-email", i)).val(data.members[i].email);
+              $(sprintf("#member%d-organization", i)).val(data.members[i].organization);
+            }
+          }
         });
 
       });
@@ -288,7 +443,7 @@
           <li class="nav-li dropdown">
             <a href="#" id="user" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{username}}</a>
             <ul class="dropdown-menu">
-              <li><a href="#">Edit Team</a></li>
+              <li><a href="#" id="editteam">Edit Team</a></li>
               <li role="separator" class="divider"></li>
               <li><a href="#" id="logout">Logout</a></li>
             </ul>
@@ -412,6 +567,70 @@
           </div>
           <div class="modal-footer">
             <center><button type="button" class="btn btn-primary" id="login">Login</button></center>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="modal-team">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">My Team</h4>
+          </div>
+          <div class="modal-body">
+            <form id="team-form">
+              <div class="form-group">
+                <label for="team-name">Team Name</label>
+                <input type="text" class="form-control team-input" id="team-name">
+                <span id="team-name-warn" class="help-block"></span>
+              </div>
+
+              <div class="row">
+                <div class="col-md-2">
+                  <br>
+                  <label class="member-title">Caption</label>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="caption-name">Name</label>
+                    <input type="text" class="form-control team-input" id="caption-name">
+                    <span class="help-block"></span>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="caption-email">Email</label>
+                    <input type="email" class="form-control team-input" id="caption-email">
+                    <span class="help-block"></span>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="caption-organization">Organization</label>
+                    <input type="text" class="form-control team-input" id="caption-organization">
+                    <span class="help-block"></span>
+                  </div>
+                </div>
+                <!-- <div class="col-md-1">
+                  <button class="btn btn-danger"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+                </div> -->
+              </div>
+
+              
+
+            </form>
+            <div class="row">
+              <div class="col-md-1 col-md-offset-2">
+                <br>
+                <button class="btn btn-default"><span class="glyphicon glyphicon-plus" id="addmember"></span></button>
+              </div>
+            </div>
+            
+          </div>
+          <div class="modal-footer">
+            <center><button type="button" class="btn btn-primary" id="save">Save</button></center>
           </div>
         </div>
       </div>
