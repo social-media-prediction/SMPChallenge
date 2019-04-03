@@ -182,6 +182,12 @@ def send_reset_email(email):
 
 @app.route('/', methods=['GET'])
 def index():
+
+    if 'debug' in request.args:
+        res = make_response(render_template('index.html'))
+        res.delete_cookie('token')
+        return res
+
     cookies = request.cookies
     if not 'token' in cookies:
         return render_template('index.html')
@@ -205,6 +211,12 @@ def index():
 
 @app.route('/challenge', methods=['GET'])
 def challenge():
+
+    if 'debug' in request.args:
+        res = make_response(render_template('challenge.html'))
+        res.delete_cookie('token')
+        return res
+
     cookies = request.cookies
     if not 'token' in cookies:
         return render_template('challenge.html')
@@ -228,6 +240,12 @@ def challenge():
 
 @app.route('/dataset', methods=['GET'])
 def dataset():
+
+    if 'debug' in request.args:
+        res = make_response(render_template('dataset.html'))
+        res.delete_cookie('token')
+        return res
+
     cookies = request.cookies
     if not 'token' in cookies:
         return render_template('dataset.html')
@@ -251,6 +269,12 @@ def dataset():
 
 @app.route('/leaderboard', methods=['GET'])
 def leaderboard():
+
+    if 'debug' in request.args:
+        res = make_response(render_template('leaderboard.html'))
+        res.delete_cookie('token')
+        return res
+
     cookies = request.cookies
     if not 'token' in cookies:
         return render_template('leaderboard.html')
