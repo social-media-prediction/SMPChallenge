@@ -83,7 +83,7 @@
       }
 
       #block7 {
-        background-color: black;
+        background-color: #080808;
       }
 
       .p-body{
@@ -207,6 +207,10 @@
           color: #666
       }
 
+      #forget {
+        cursor: pointer;
+      }
+
     </style>
     <script type="text/javascript">
       $(document).ready(function(){
@@ -279,10 +283,12 @@
             "username": username,
             "password": password
           }
+          $(this).attr("disabled", "disabled");
           $.post("/register", data, function(data, status) {
             if (data.code == "00000") {
               $("#modal-body").html(sprintf('<h4 id="register-notice">We have send a verification email to <a>%s</a>, please check it in two hours</h4>', email));
               $("#modal-footer").hide();
+              $(this).removeAttr("disabled");
             }
             else if (data.code == "10002") {
               $("#username").parent().addClass("has-error");
@@ -497,6 +503,28 @@
               $(sprintf("#member%d-organization", i)).val(data.members[i].organization);
             }
           }
+        });
+
+        $("#forget").click(function(){
+          var email = $("#login-email").val();
+          if (email == "") {
+            alert("please enter your email address");
+            return;
+          }
+          var data = {
+            "email": email
+          }
+          $("#login").attr("disabled", "disabled")
+          $.post("/forget_password", data, function(data, status) {
+            if (data.code == "00000") {
+              alert(sprintf("We have sent an password reset email to %s, please have a check.", email))
+              $("#login").removeAttr("disabled");
+            }
+            else {
+              alert("email does not exist");
+              return;
+            }
+          });
         });
 
       });
@@ -815,7 +843,7 @@ The purpose of <b class="orange">SMP (Social Media Prediction) Challenge</b> is 
                 <span id="login-password-warn" class="help-block"></span>
               </div>
 
-              <a>Forget password?</a>
+              <a id="forget">Forget password?</a>
             </form>
             
           </div>
@@ -832,6 +860,18 @@ The purpose of <b class="orange">SMP (Social Media Prediction) Challenge</b> is 
         <div class="modal-content">
           <div class="modal-body">
             <h4>Register Success</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if register_fail %}
+    <div class="modal fade" id="modal-register-success">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <h4>Verification link expires. Please register again.</h4>
           </div>
         </div>
       </div>

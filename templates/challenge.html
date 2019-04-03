@@ -133,6 +133,10 @@
         padding-top: 130px;
       }
 
+      #forget {
+        cursor: pointer;
+      }
+
     </style>
     <script type="text/javascript">
       $(document).ready(function(){
@@ -424,6 +428,28 @@
           }
         });
 
+        $("#forget").click(function(){
+          var email = $("#login-email").val();
+          if (email == "") {
+            alert("please enter your email address");
+            return;
+          }
+          var data = {
+            "email": email
+          }
+          $("#login").attr("disabled", "disabled")
+          $.post("/forget_password", data, function(data, status) {
+            if (data.code == "00000") {
+              alert(sprintf("We have sent an password reset email to %s, please have a check.", email))
+              $("#login").removeAttr("disabled");
+            }
+            else {
+              alert("email does not exist");
+              return;
+            }
+          });
+        });
+
       });
     </script>
   </head>
@@ -532,6 +558,13 @@
           <br>
         </div>
       </div>
+
+      <div class="row" id="block7">
+        <div class="col-md-10 col-md-offset-1">
+          <center><h5 style="color:white;">Copyright © 2018.Company name All rights reserved</h5></center>
+        </div>
+      </div>
+      
     </div>
 
         <div class="modal fade" id="modal-register">
@@ -598,7 +631,7 @@
                 <span id="login-password-warn" class="help-block"></span>
               </div>
 
-              <a>Forget password?</a>
+              <a id="forget">Forget password?</a>
             </form>
             
           </div>

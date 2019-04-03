@@ -39,11 +39,27 @@ def send_verify_email_tool(url, email_address):
     server.starttls()
     server.login(sender_email, password)
 
-    msg = email.mime.text.MIMEText('<!DOCTYPE html><html><p>Please verify your email address</p><p>You have register an account on smp-challenge.com, please click the follow link to verify your emaill.</p><a href="%s">%s</a><p>This link will expire in 2 hours</p></html>'%(url, url), 'html')
+    msg = email.mime.text.MIMEText('<!DOCTYPE html><html><p>Please verify your email address </p><p>You have register an account on smp-challenge.com, please click the follow link to verify your emaill.</p><a href="%s">%s</a><p>This link will expire in 2 hours</p><p>The SMP Challenge Team</p></html>'%(url, url), 'html')
     msg['From'] = sender_email
     msg['To'] = email_address
     msg['Subject'] = 'Please verify your email address'
+    server.sendmail(sender_email, email_address, msg.as_string())
 
+def send_reset_email_tool(url, email_address):
+    smtp_server = 'smtp.gmail.com'
+    port = 587
+    sender_email = 'social.media.prediction@gmail.com'
+    password = 'SMPchallenge'
+
+    server = smtplib.SMTP(smtp_server, port)
+    server.starttls()
+    server.login(sender_email, password)
+
+
+    msg = email.mime.text.MIMEText('<!DOCTYPE html><html><p>You\'re receiving this email because you requested a password reset for your account at smp-challenge.com.</p><p>Please go to the following page to set a new password:</p><a href="%s">%s</a><p>This link will expire in 2 hours</p><p>The SMP Challenge Team</p></html>'%(url, url), 'html')
+    msg['From'] = sender_email
+    msg['To'] = email_address
+    msg['Subject'] = 'Password reset on SMP challenge server'
     server.sendmail(sender_email, email_address, msg.as_string())
 
 def generate_token():
@@ -87,6 +103,16 @@ def check_verify(code):
     r.delete(code)
     user_info = json.loads(user_info)
     return user_info['username'], user_info['password'], user_info['email']
+
+def check_reset(code):
+    email = r.get(code)
+    return email
+
+def update_password(email, password, code):
+    cursor.execute('update user set password="%s" where email="%s"'%(password, email))
+    conn.commit()
+    r.delete(code)
+    return SUCCESS
 
 def add_user(username, password, email):
     cursor.execute('insert into user values (NULL, "%s", "%s", "%s")'%(username, password, email))
@@ -136,6 +162,23 @@ def uid2team(uid):
         return UID_ERROR, None, None
     else:
         return SUCCESS, tmp[0][0], json.loads(base64.b64decode(tmp[0][1]))
+
+def check_email_exist(email):
+    tmp = cursor.execute('select email from user where email="%s"'%email).fetchall()
+    if len(tmp) != 0:
+        return SUCCESS
+    else:
+        return EMAIL_NOT_EXIST
+
+def send_reset_email(email):
+    reset_token = generate_token()
+    r.set(reset_token, email, 7200)
+
+    reset_url = 'http://smp-challenge.com/reset_password/%s'%reset_token
+
+    send_reset_email_tool(reset_url, email)
+
+    return SUCCESS
 
 @app.route('/', methods=['GET'])
 def index():
@@ -251,11 +294,19 @@ def verify(code):
 
     if username != None:
         add_user(username, password, email)
+    else:
+        res = make_response(render_template('index.html', register_fail=True))
+        res.delete_cookie('token')
+        return res
 
     res = make_response(render_template('index.html', register_success=True))
-    _, token = check_login(email, password)
-    res.set_cookie('token', token)
-    return res
+    status, token = check_login(email, password)
+    if status == SUCCESS:
+        res.set_cookie('token', token)
+        return res
+    else:
+        res.delete_cookie('token')
+        return res
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -338,22 +389,37 @@ def forget_password():
 
     email = form['email']
     res = check_email_exist(email)
-    if res == False:
+    if res == EMAIL_NOT_EXIST:
         return jsonify(code=EMAIL_NOT_EXIST)
 
     send_reset_email(email)
     return jsonify(code=SUCCESS)
 
-@app.route('/reset_password/<code>', methods=['GET'])
+@app.route('/reset_password/<code>', methods=['GET', 'POST'])
 def reset_password(code):
-    form = request.form
-    if not 'password' in form:
-        return jsonify(code=PARAMETER_ERROR)
+    if request.method == 'GET':
+        email = check_reset(code)
+        if email == None:
+            res = make_response(render_template('reset_password.html', expire=True))
+            res.delete_cookie('token')
+            return res
 
-    password = form['password']
-    uid = code2uid(code)
-    res = check_update(uid, password)
-    return jsonify(code=res)
+        res = make_response(render_template('reset_password.html', email=email, token=code))
+        res.delete_cookie("token")
+        return res
+    elif request.method == 'POST':
+        email = check_reset(code)
+        if email == None:
+            return jsonify(code=EMAIL_NOT_EXIST)
+
+        form = request.form
+        if not 'password' in form:
+            return jsonify(code=PARAMETER_ERROR)
+        password = form['password']
+        email = check_reset(code)
+        update_password(email, password, code)
+
+        return jsonify(code=SUCCESS)
 
 @app.route('/logout', methods=['POST'])
 def logout():
