@@ -10,7 +10,6 @@
     <script src="/static/js/sprintf.js"></script>
     <script src="/static/js/run_prettify.js"></script>
     <script src="/static/js/md5.js"></script>
-    
     <style type="text/css">
       #nav-first {
         border-radius: 0px;
@@ -63,7 +62,8 @@
       }
 
       #block2 {
-        background-color: #f8f8f8;
+        /*background-color: #f8f8f8;*/
+        background-color: #e8e8e8;
       }
 
       #block3 {
@@ -71,7 +71,7 @@
       }
 
       #block4 {
-        background-color: #f8f8f8;
+        background-color: #e8e8e8;
       }
 
       #block5 {
@@ -79,7 +79,7 @@
       }
 
       #block6 {
-        background-color: #f8f8f8;
+        background-color: #e8e8e8;
       }
 
       #block7 {
@@ -136,7 +136,7 @@
       }
 
       .orange {
-        color: rgb(248,206,69) !important;
+        color: rgb(241,156,55) !important;
       }
 
       .white {
@@ -153,6 +153,58 @@
 
       .member-title {
         padding-top: 10px;
+      }
+
+      .p-title {
+        color: rgb(241,156,55) !important;
+      }
+
+      .timeline {
+          display: block;
+          margin: 15px 0
+      }
+
+      .timeline ul {
+          margin-left: 25px;
+          margin-top: 30px;
+          border-left: 2px solid #ddd;
+          list-style: none;
+      }
+
+      .timeline ul li {
+          width: 100%;
+          margin-left: -51px;
+          line-height: 20px;
+          margin-bottom: 20px
+      }
+
+      .timeline ul li b {
+          width: 10px;
+          height: 10px;
+          background: #fff;
+          border: 2px solid rgb(241,156,55);
+          margin: 0 5px;
+          border-radius: 6px;
+          -webkit-border-radius: 10px;
+          -moz-border-radius: 10px;
+          overflow: hidden;
+          display: inline-block;
+          float: left
+      }
+
+      .timeline ul li span {
+          padding-left: 7px;
+          font-size: 16px;
+          line-height: 20px;
+          color: rgb(241,156,55);
+          font-weight: bold
+      }
+
+      .timeline ul li p {
+          padding-left: 25px;
+          font-size: 13px;
+          line-height: 25px;
+          color: #666
       }
 
     </style>
@@ -504,7 +556,7 @@
       <div class="row" id="block1">
         
         <div class="col-md-8 col-md-offset-2">
-          <h2><b>News</b></h2>
+          <h2 class="p-title"><b>News</b></h2>
           <ul>
             <li class="timeline-li red"><b>[04-01-2019]</b>: We have released the training data.</li>
             <li class="timeline-li"><b>[03-25-2019]</b>: We are hosting Social Media Prediction Challenge, co-organized with ACM Multimedia 2019.</li>
@@ -516,8 +568,7 @@
       <div class="row" id="block2">
         
         <div class="col-md-8 col-md-offset-2">
-          <!-- <center><h1 class="p-title"><b><span class="orange">S</span>ocial <span class="orange">M</span>edia <span class="orange">P</span>rediction Challenge</b></h1></center> -->
-          <h2><b>Overview</b></h2>
+          <h2 class="p-title"><b>Overview</b></h2>
           <p class="p-body">People are interested in predicting the future. For example, which films will bomb or who will win the upcoming Grammy Awards? Making predictions for future via increasing ubiquity of social multimedia (photos, video or news) is not only an open challenge of multimedia area but also valuable to various applications and scenarios, such as multimedia recommendation, advertising system, fashion analysis etc. Predictive analytics is thus a field that has attracted major attention in both of academia and industry, and it covers several significant areas of multimedia and artificial intelligence.
           </p>
           <p class="p-body">
@@ -533,8 +584,7 @@ The purpose of <b class="orange">SMP (Social Media Prediction) Challenge</b> is 
 
       <div class="row" id="block3">
         <div class="col-md-8 col-md-offset-2">
-          <!-- <h2><b>Temporal Popularity Image Collection (TPIC)</b></h2> -->
-          <h2><b>Dataset Statistics</b></h2>
+          <h2 class="p-title"><b>Dataset Statistics</b></h2>
           <p class="p-body">The SMP datasets TPIC2017 contains 680K photos, which collected from Flickr (a photo sharing platform) and corresponding anonymized photo-sharing records ranges of 3 years. TPIC is a multi-faceted data collection, which contains photo image, user profile and photo metadata. For each task, we split the data with time-order, resulting in 90% for training and 10% for testing. The tables below show the statistics of TPIC2017.
           </p>
           <a href="https://github.com/social-media-prediction/TPIC2017">https://github.com/social-media-prediction/TPIC2017</a>
@@ -567,22 +617,24 @@ The purpose of <b class="orange">SMP (Social Media Prediction) Challenge</b> is 
 
       <div class="row" id="block4">
         <div class="col-md-8 col-md-offset-2">
-          <h2><b>Important dates</b></h2>
-          <ul>
-            <li class="timeline-li">March 20, 2019: Dataset available for download (training set)</li>
-            <li class="timeline-li">May 25, 2019: Test set available for download</li>
-            <li class="timeline-li">June 5, 2019: Results submission</li>
-            <li class="timeline-li">June 6, 2019: Objective evaluation and human evaluation</li>
-            <li class="timeline-li">June 15, 2019: Evaluation results announce</li>
-            <li class="timeline-li">July 8, 2019: Paper submission deadline (please follow the instructions on the main conference website)</li>
-          </ul>
+          <h2 class="p-title"><b>Important dates</b></h2>
+          <div class="timeline">
+            <ul>
+              <li><b></b><span>March 20, 2019</span><p>Dataset available for download (training set)</p></li>
+              <li><b></b><span>May 25, 2019</span><p>Test set available for download</p></li>
+              <li><b></b><span>June 5, 2019</span><p>Results submission</p></li>
+              <li><b></b><span>June 6, 2019</span><p>Objective evaluation and human evaluation</p></li>
+              <li><b></b><span>June 15, 2019</span><p>Evaluation results announce</p></li>
+              <li><b></b><span>July 8, 2019</span><p>Paper submission deadline (please follow the instructions on the main conference website)</p></li>
+            </ul>
+          </div>
           <br>
         </div>
       </div>
 
       <div class="row" id="block5">
         <div class="col-md-8 col-md-offset-2">
-          <h2><b>Citation</b></h2>
+          <h2 class="p-title"><b>Citation</b></h2>
           <p class="p-body">If you intend to publish results that use the information and resources provided by this challenge, please include the following references:</p>
           <pre class="prettyprint lang-cv">
 @inproceedings{Wu2017DTCN,
@@ -615,7 +667,7 @@ The purpose of <b class="orange">SMP (Social Media Prediction) Challenge</b> is 
 
       <div class="row" id="block6">
         <div class="col-md-8 col-md-offset-2">
-          <h2><b>Our Teams</b></h2>
+          <h2 class="p-title"><b>Our Teams</b></h2>
           <br>
           <div class="row">
             <div class="col-md-3">
@@ -624,7 +676,7 @@ The purpose of <b class="orange">SMP (Social Media Prediction) Challenge</b> is 
                 <div class="caption">
                   <center><h4>Bo Wu</h4></center>
                   <p><center>Columbia University</center><br></p>
-                  <p><center><a>bw2619@columbia.edu</a></center></p>
+                  <p><center><a href="mailto:bo.wu@columbia.edu">bo.wu@columbia.edu</a></center></p>
                 </div>
               </div>
             </div>
@@ -635,7 +687,7 @@ The purpose of <b class="orange">SMP (Social Media Prediction) Challenge</b> is 
                 <div class="caption">
                   <center><h4>Wen-Huang Cheng</h4></center>
                   <p><center>National Chiao Tung University</center></p>
-                  <p><center><a>whcheng@nctu.edu.tw</a></center></p>
+                  <p><center><a href="mailto:whcheng@nctu.edu.tw">whcheng@nctu.edu.tw</a></center></p>
                 </div>
               </div>
             </div>
@@ -646,7 +698,7 @@ The purpose of <b class="orange">SMP (Social Media Prediction) Challenge</b> is 
                 <div class="caption">
                   <center><h4>Jiebo Luo</h4></center>
                   <p><center>University of Rochester</center><br></p>
-                  <p><center><a>jluo@cs.rochester.edu</a></center></p>
+                  <p><center><a href="mailto:jluo@cs.rochester.edu">jluo@cs.rochester.edu</a></center></p>
                 </div>
               </div>
             </div>
@@ -657,7 +709,7 @@ The purpose of <b class="orange">SMP (Social Media Prediction) Challenge</b> is 
                 <div class="caption">
                   <center><h4>Bei Liu</h4></center>
                   <p><center>Microsoft Research Asia</center><br></p>
-                  <p><center><a>liubei.cs@gmail.com</a></center></p>
+                  <p><center><a href="mailto:libei@microsoft.com">libei@microsoft.com</a></center></p>
                 </div>
               </div>
             </div>
@@ -671,10 +723,22 @@ The purpose of <b class="orange">SMP (Social Media Prediction) Challenge</b> is 
                 <div class="caption">
                   <center><h4>Zhaoyang Zeng</h4></h2>
                   <p><center>Sun Yat-sen University</center><br></p>
-                  <p><center><a>root@zengzhaoyang.com</a></center></p>
+                  <p><center><a href="mailto:zengzhy5@mail2.sysu.edu.cn">zengzhy5@mail2.sysu.edu.cn</a></center></p>
                 </div>
               </div>
             </div>
+
+            <div class="col-md-3">
+              <div class="thumbnail">
+                <img src="/static/img/peiyeli.jpg" width="100%" class="avatar">
+                <div class="caption">
+                  <center><h4>Peiye Li</h4></h2>
+                  <p><center>Beijing University of Posts and Telecommunications</center></p>
+                  <p><center><a href="mailto:liupeiye@bupt.edu.cn">liupeiye@bupt.edu.cn</a></center></p>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>

@@ -3,7 +3,6 @@
   <head>
     <title>SMP Challenge</title>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
-    <link rel="stylesheet" href="/static/css/jquery.Jcrop.css">
     <link rel="stylesheet" href="/static/css/bootstrap.css">
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/bootstrap.js"></script>
@@ -50,7 +49,8 @@
       }
 
       #block2 {
-        background-color: #f8f8f8;
+        /*background-color: #f8f8f8;*/
+        background-color: #e8e8e8;
       }
 
       #block3 {
@@ -58,7 +58,7 @@
       }
 
       #block4 {
-        background-color: #f8f8f8;
+        background-color: #e8e8e8;
       }
 
       #block5 {
@@ -66,7 +66,7 @@
       }
 
       #block6 {
-        background-color: #f8f8f8;
+        background-color: #e8e8e8;
       }
 
       #block7 {
@@ -112,7 +112,19 @@
       }
 
       .orange {
-        color: rgb(248,206,69) !important;
+        color: rgb(241,156,55) !important;
+      }
+
+      .help-block {
+        display: none;
+      }
+
+      .member-title {
+        padding-top: 10px;
+      }
+
+      .p-title {
+        color: rgb(241,156,55) !important;
       }
 
       .container-fluid {
@@ -458,7 +470,7 @@
 
       <div class="row" id="block1">
         <div class="col-md-8 col-md-offset-2">
-          <h2><b>Dataset Overview</b></h2>
+          <h2 class="p-title"><b>Dataset Overview</b></h2>
           
           <p class="p-body">The SMP datasets TPIC2017 contains 680K photos, which collected from Flickr (a photo sharing platform) and corresponding anonymized photo-sharing records ranges of 3 years. TPIC is a multi-faceted data collection, which contains photo image, user profile and photo metadata. For each task, we split the data with time-order, resulting in 90% for training and 10% for testing. The tables below show the statistics of TPIC2017.
           </p>
@@ -492,7 +504,7 @@
 
       <div class="row" id="block2">
         <div class="col-md-8 col-md-offset-2">
-          <h2><b>Statistics</b></h2>
+          <h2 class="p-title"><b>Statistics</b></h2>
           
           <p class="p-body">The SMP datasets TPIC2017 contains 680K photos, which collected from Flickr (a photo sharing platform) and corresponding anonymized photo-sharing records ranges of 3 years. TPIC is a multi-faceted data collection, which contains photo image, user profile and photo metadata. For each task, we split the data with time-order, resulting in 90% for training and 10% for testing. The tables below show the statistics of TPIC2017.
           </p>
@@ -504,7 +516,7 @@
 
       <div class="row" id="block3">
         <div class="col-md-8 col-md-offset-2">
-          <h2><b>Download</b></h2>
+          <h2 class="p-title"><b>Download</b></h2>
           
           <p class="p-body">The SMP datasets TPIC2017 contains 680K photos, which collected from Flickr (a photo sharing platform) and corresponding anonymized photo-sharing records ranges of 3 years. TPIC is a multi-faceted data collection, which contains photo image, user profile and photo metadata. For each task, we split the data with time-order, resulting in 90% for training and 10% for testing. The tables below show the statistics of TPIC2017.
           </p>

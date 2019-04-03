@@ -7,6 +7,8 @@ import os
 import json
 import sqlite3
 import redis
+import smtplib
+import email.mime.text
 
 app = Flask(__name__)
 app.debug = True
@@ -26,6 +28,25 @@ conn = sqlite3.connect('smp.db', check_same_thread=False)
 cursor = conn.cursor()
 
 r = redis.Redis(host='localhost', port=6379)
+
+def send_verify_email_tool(url, email_address):
+    smtp_server = 'smtp.gmail.com'
+    port = 587
+    sender_email = 'social.media.prediction@gmail.com'
+    password = 'SMPchallenge'
+
+    context = ssl.create_default_context()
+
+    server = smtplib.SMTP(smtp_server, port)
+    server.starttls()
+    server.login(sender_email, password)
+
+    msg = email.mime.text.MIMEText('<!DOCTYPE html><html><p>Please verify your email address</p><p>You have register an account on smp-challenge.com, please click the follow link to verify your emaill.</p><a href="%s">%s</a><p>This link will expire in 2 hours</p></html>'%(url, url), 'html')
+    msg['From'] = sender_email
+    msg['To'] = email_address
+    msg['Subject'] = 'Please verify your email address'
+
+    server.sendmail(sender_email, email_address, msg.as_string())
 
 def generate_token():
     code = ''.join(map(lambda xx:(hex(ord(xx))[2:]),os.urandom(16)))
@@ -55,7 +76,8 @@ def send_verify_email(username, password, email):
     r.set(verify_token, user_info, 7200)
 
     verify_url = 'http://smp-challenge.com/verify/%s'%verify_token
-    print verify_url
+
+    send_verify_email_tool(verify_url, email)
 
     return SUCCESS
 
