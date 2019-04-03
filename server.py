@@ -35,8 +35,6 @@ def send_verify_email_tool(url, email_address):
     sender_email = 'social.media.prediction@gmail.com'
     password = 'SMPchallenge'
 
-    context = ssl.create_default_context()
-
     server = smtplib.SMTP(smtp_server, port)
     server.starttls()
     server.login(sender_email, password)
