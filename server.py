@@ -238,6 +238,36 @@ def challenge():
     res.set_cookie('token', token)
     return res
 
+@app.route('/description', methods=['GET'])
+def description():
+
+    if 'debug' in request.args:
+        res = make_response(render_template('description.html'))
+        res.delete_cookie('token')
+        return res
+
+    cookies = request.cookies
+    if not 'token' in cookies:
+        return render_template('description.html')
+    token = cookies['token']
+
+    status, uid = token2uid(token)
+    if status != SUCCESS:
+        res = make_response(render_template('description.html'))
+        res.delete_cookie('token')
+        return res
+
+    status, username = uid2username(uid)
+    if status != SUCCESS:
+        res = make_response(render_template('description.html'))
+        res.delete_cookie('token')
+        return res
+
+    res = make_response(render_template('description.html', login=True, username=username))
+    res.set_cookie('token', token)
+    return res
+
+
 @app.route('/dataset', methods=['GET'])
 def dataset():
 
@@ -266,6 +296,36 @@ def dataset():
     res = make_response(render_template('dataset.html', login=True, username=username))
     res.set_cookie('token', token)
     return res
+
+@app.route('/test', methods=['GET'])
+def test():
+
+    if 'debug' in request.args:
+        res = make_response(render_template('test.html'))
+        res.delete_cookie('token')
+        return res
+
+    cookies = request.cookies
+    if not 'token' in cookies:
+        return render_template('test.html')
+    token = cookies['token']
+
+    status, uid = token2uid(token)
+    if status != SUCCESS:
+        res = make_response(render_template('test.html'))
+        res.delete_cookie('token')
+        return res
+
+    status, username = uid2username(uid)
+    if status != SUCCESS:
+        res = make_response(render_template('test.html'))
+        res.delete_cookie('token')
+        return res
+
+    res = make_response(render_template('test.html', login=True, username=username))
+    res.set_cookie('token', token)
+    return res
+
 
 @app.route('/leaderboard', methods=['GET'])
 def leaderboard():

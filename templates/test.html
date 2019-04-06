@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <style>
+    /* #chartdiv {
+      width: 100%;
+
+    } */
+    ..chart-wrapper {
+  position: relative;
+
+  canvas {
+    width: 100%;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+  }
+
+  #chartjs-tooltip {
+    opacity: 1;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    background: rgba(0, 0, 0, .7);
+    color: white;
+    padding: 6px;
+    border-radius: 3px;
+    -webkit-transition: all .1s ease;
+    transition: all .1s ease;
+    pointer-events: none;
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+.chartjs-tooltip-key {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+}
+
+    </style>
+
+    <!-- Resources -->
+
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/Chart.min.js"></script>
+    <script src="/static/js/Chart.bundle.min.js"></script>
+    <script src="/static/js/Chart.js"></script>
+    <!-- Chart code -->
+
+</head>
+<body>
+        <!-- <canvas id="chart-area" > -->
+        <div class="chart-wrapper">
+  <canvas id="myChart"></canvas>
+  <div id="chartjs-tooltip">Tooltip here, YAY</div>
+</div>
+<script>
+var ctx = document.getElementById("myChart");
+var sliceData = [25, 58, 35, 43, 76, 10];
+var sliceLabels = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"]
+var canvasWidth = $(ctx).width();
+var grd;
+
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+}
+
+function createGrad(colorOne = "#62D7FA", opacityOne = 1, colorTwo = "#ffffff", opacityTwo = 1, colorStop = 95){
+
+	var rgbOne = hexToRgb(colorOne);
+  var rgbTwo = hexToRgb(colorTwo);
+  colorStop = colorStop/100;
+
+  grd = ctx.getContext("2d").createRadialGradient(
+    canvasWidth/2,
+    canvasWidth/2,
+    0.000,
+    canvasWidth/2,
+    canvasWidth/2,
+    canvasWidth/2
+  );
+
+  // Add colors
+  grd.addColorStop(0.000, 'rgba(' + rgbOne.r + ', ' + rgbOne.g + ', ' + rgbOne.b + ', ' + opacityOne + ')');
+  grd.addColorStop(colorStop, 'rgba(' + rgbOne.r + ', ' + rgbOne.g + ', ' + rgbOne.b + ', ' + opacityOne + ')');
+  grd.addColorStop(colorStop, 'rgba(' + rgbTwo.r + ', ' + rgbTwo.g + ', ' + rgbTwo.b + ', ' + opacityTwo + ')');
+  grd.addColorStop(1.000, 'rgba(' + rgbTwo.r + ', ' + rgbTwo.g + ', ' + rgbTwo.b + ', ' + opacityTwo + ')');
+
+	return grd;
+}
+
+var data = {
+  labels: sliceLabels,
+  datasets: [{
+    label: '# of Votes',
+    data: sliceData,
+    backgroundColor: createGrad(),
+    hoverBackgroundColor: "#FF8000",
+    borderWidth: 1,
+    borderColor: "#fff",
+    hoverBorderColor: "#fff"
+  }]
+};
+
+var options = {
+  cutoutPercentage: 60,
+  responsive: true,
+  animation: {
+  	animateScale: true
+  },
+  hover: {
+    onHover: function(data) {
+      // console.log(data);
+    }, // Called when any of the events fire. Called in the context of the chart and passed an array of active elements (bars, points, etc)
+    mode: 'label', // Sets which elements hover. Acceptable options are 'single', 'label', or 'dataset'. single highlights the closest element. label highlights elements in all datasets at the same X value. dataset highlights the closest dataset.
+    animationDuration: 400 // Duration in milliseconds it takes to animate hover style changes
+  },
+  onClick: function(e, a, b) {
+    // console.log(e, a, b);
+  },
+  legend: {
+    labels: {
+      generateLabels: function(data) {
+        // console.log(data);
+      }
+    },
+    display: false,
+    onClick: function(e, data) {
+      // console.log(e, data);
+    }
+  },
+  rotation: -Math.PI,
+  circumference: Math.PI,
+  tooltips: {
+    enabled: false,
+    custom: function(tooltip) {
+      if (!tooltip || (tooltip.body && !tooltip.body[1])) {
+        return;
+      }
+
+      // Tooltip Element
+      var tooltipEl = $('#chartjs-tooltip');
+
+      if (!tooltipEl[0]) {
+        $('body').append('<div id="chartjs-tooltip"></div>');
+        tooltipEl = $('#chartjs-tooltip');
+      }
+
+      // Hide if no tooltip
+      if (!tooltip.opacity) {
+        tooltipEl.css({
+          opacity: 1
+        });
+
+        $('.chartjs-wrap canvas')
+          .each(function(index, el) {
+            $(el).css('cursor', 'default');
+          });
+        return;
+      }
+
+      $(this._chart.canvas).css('cursor', 'pointer');
+
+      // Set caret Position
+      tooltipEl.removeClass('above below no-transform');
+
+      if (tooltip.yAlign) {
+        tooltipEl.addClass(tooltip.yAlign);
+      } else {
+        tooltipEl.addClass('no-transform');
+      }
+      // Set Text
+      var innerHtmlTitle = tooltip.title.length > 2 ? (tooltip.title || []).join('\n') : '';
+      var innerHtmlBody = tooltip.body.length > 2 ? (tooltip.beforeBody || []).join('\n') + (tooltip.body || []).join('\n') + (tooltip.afterBody || []).join('\n') : '';
+      var innerHtmlFooter = tooltip.footer.length > 2 ? (tooltip.footer || []).join('\n') : '';
+
+      if (tooltip.body) {
+        var innerHtml = [
+          innerHtmlTitle,
+          innerHtmlBody,
+          innerHtmlFooter
+        ];
+        tooltipEl.html(innerHtml.join('\n'));
+      }
+
+      // Find Y Location on page
+      var top = 0;
+      if (tooltip.yAlign) {
+        if (tooltip.yAlign == 'above') {
+          top = tooltip.y - tooltip.caretHeight - tooltip.caretPadding;
+        } else {
+          top = tooltip.y + tooltip.caretHeight + tooltip.caretPadding;
+        }
+      }
+
+      var position = $(this._chart.canvas)[0].getBoundingClientRect();
+
+      // Display, position, and set styles for font
+      tooltipEl.css({
+        opacity: 1,
+        width: tooltip.width ? (tooltip.width + 'px') : 'auto',
+        // left: position.left + tooltip.x + 'px',
+        top: position.top + top + 'px',
+        fontFamily: tooltip._fontFamily,
+        fontSize: tooltip.fontSize,
+        fontStyle: tooltip._fontStyle,
+        padding: tooltip.yPadding + 'px ' + tooltip.xPadding + 'px',
+      });
+    },
+    callbacks: {
+      beforeTitle: function() {
+        return '<h4>';
+      }, //Text to render before the title
+      // title: function(tooltipItems, data){ /* Pick first xLabel */ }, // Text to render as the title
+      afterTitle: function() {
+        return '</h4>';
+      }, //Text to render after the ttiel
+      beforeBody: function() {
+        return "<div class=\"tooltip-body\">";
+      }, // Text to render before the body section
+      beforeLabel: function() {
+        return "<p>";
+      }, // Text to render before an individual label
+      label: function(tooltipItem, data) {
+        var label = data.labels[tooltipItem.index] !== "separator" ? data.labels[tooltipItem.index] : false;
+        var value = label ?  data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] : false ;
+        return label ? label + ': ' + value : false;
+      }, // Text to render as label
+      afterLabel: function() {
+        return "</p>";
+      }, // Text to render after an individual label
+      afterBody: function() {
+        return "</div>";
+      }, //Text to render after the body section
+      beforeFooter: function() {
+        return "<div class=\"tooltip-footer\">"
+      }, //Text to render before the footer section
+      // footer: function(){}, //Text to render as the footer
+      afterFooter: function() {
+          return "</div>"
+        } //Text to render after the footer section
+    }
+  }
+}
+
+var myDoughnutChart = new Chart(ctx, {
+  type: 'doughnut',
+  data: data,
+  options: options
+});
+
+//
+// var ctx = document.getElementById("myChart").getContext("2d");
+// gradient = ctx.createLinearGradient(0, 0, 0, 450);
+//
+// gradient.addColorStop(0, 'rgba(255, 0,0, 0.5)');
+// gradient.addColorStop(0.5, 'rgba(255, 0, 0, 0.25)');
+//
+//
+// var config = {
+//     type: 'doughnut',
+//     data: {
+//         datasets: [{
+//             data: [879, 1277, 820, 205, 190, 176, 1169, 269, 38, 74, 106, 157, 921, 841, 342, 1020, 1036, 597, 868, 1101, 1305, 376, 721, 325, 214, 79, 446, 575, 249, 1582, 792, 632, 264, 261, 36, 169, 417, 192, 236, 23, 110, 39, 434, 1327, 132, 133, 1507, 18, 51, 55, 57, 187, 1598, 38, 130, 618, 1063, 1004, 120, 1694, 548, 35, 1233, 1191, 864, 843, 1635, 990, 1175, 439, 146, 191, 573, 1018, 887, 1239, 426, 407, 298, 784, 55, 310, 890, 269, 63, 99, 77, 297, 171, 87, 12, 144, 107, 13, 30, 25, 57, 45, 80, 172, 31, 31, 298, 868, 21, 148, 98, 210, 326, 599, 117, 488, 67, 258, 996, 3, 1025, 216, 17, 675, 410, 1127, 135, 246, 371, 1250, 115, 1103, 712, 655, 1160, 330, 499, 293, 1178, 947, 235, 1254, 831, 170, 248, 19, 1155, 40, 41, 37, 465, 131, 116, 127, 1332, 1397, 83, 24, 237, 1199, 390, 1090, 1287, 590, 686, 56, 137, 1237, 1214, 1200, 1255, 316, 946, 993, 1483, 1157, 1162, 176, 1763, 306, 1303, 1376, 927, 1414, 683, 997, 218, 373, 930, 470, 460, 177, 279, 83, 82, 667, 735, 752, 350, 419, 422, 401, 43, 517, 215, 633, 415, 58, 53, 219, 172, 92, 182, 101, 329, 90, 3, 139, 59, 140, 208, 77, 21, 46, 127, 437, 88, 232, 20, 165, 219, 25, 59, 173, 9, 37, 56, 2, 129, 22, 54, 32, 28, 46, 279, 33, 245, 44, 107, 45, 299, 112, 20, 111, 25, 111, 476, 36, 317, 124, 186, 41, 73, 2, 156, 42, 26, 84, 63, 16, 65, 29, 336, 41, 52, 4, 15, 12, 4, 2, 271, 1553, 1424, 69, 439, 1008, 152, 238, 144, 179, 67, 40, 451, 906, 1262, 1317, 1392, 1641, 1596, 542, 389, 36, 50, 1446, 104, 1170, 388, 181, 1115, 740, 668, 66, 472, 109, 574, 810, 950, 382, 882, 1114, 659, 491, 69, 141, 346, 8, 44, 165, 183, 64, 46, 501, 269, 36, 185, 6, 40, 266, 1283, 1509, 1, 66, 631, 179, 1008, 641, 203, 1362, 525, 247, 1482, 931, 979, 74, 1068, 1320, 219, 147, 172, 327, 1602, 489, 1577, 1454, 778, 235, 1066, 328, 1470, 1874, 1726, 585, 1327, 1259, 1663, 458, 1745, 1544, 823, 1815, 498, 1511, 519, 184, 227, 982, 1812, 806, 1759, 402, 949, 593, 230, 188, 149, 1352, 178, 44, 44, 111, 138, 145, 41, 645, 266, 380, 178, 89, 450, 38, 524, 61, 104, 61, 40, 114, 299, 180, 2, 1148, 590, 97, 858, 326, 218, 268, 742, 216, 763, 215, 167, 1380, 927, 1128, 43, 361, 1350, 13, 77, 353, 1080, 1102, 1067, 296, 183, 171, 343, 84, 400, 308, 145, 77, 212, 19, 1, 48, 123, 5, 188, 661, 118, 114, 819, 168, 158, 365, 725, 428, 714, 280, 800, 909, 17, 126, 63, 1452, 76, 1370, 154, 181, 98, 824, 892, 594, 672, 115, 277, 1123, 327, 223, 157, 1739, 913, 388, 442, 551, 139, 190, 217, 112, 169, 59, 8, 432, 928, 106, 710, 162, 134, 90, 114, 736, 1300, 234, 292, 288, 25, 103, 68, 655, 206, 982, 740, 742, 950, 90, 115, 366, 482, 1255, 1013, 239, 171, 99, 78, 83, 242, 1209, 289, 571, 147, 49, 166, 156, 50, 99, 251, 83, 86, 43, 753, 113, 14, 798, 95, 197, 213, 193, 91, 38, 57, 1, 1469, 243, 1372, 347, 599, 72, 68, 54, 50, 206, 58, 181, 153, 176, 218, 1111, 1658, 710, 1463, 99, 455, 391, 7, 809, 264, 174, 1325, 98, 849, 1592, 271, 1085, 379, 160, 1337, 1459, 249, 1397, 636, 1379, 163, 102, 178, 631, 537, 155, 148, 55, 118, 24, 182, 177, 32, 7, 315, 178, 335, 225, 87, 236, 146, 329, 260, 97, 274, 467, 922, 414, 239, 231, 130, 465, 77, 689, 740, 407, 747, 1001, 345, 1376, 678, 825, 196, 882, 203, 652, 155, 156, 168, 277, 197, 252, 203, 128, 61, 356, 132, 1381, 181, 1122, 344, 384, 454, 93, 335, 298, 165, 259, 101, 8],
+//             backgroundColor: gradient,
+//             label:'Doughnut 3',
+//
+//             borderWidth: 1,
+//             labels: ["glam", "straight", "bling", "lips", "blonde", "rosa", "ear", "swagger", "nailpolish", "skirt", "ink", "black", "braid", "eyeshadow", "solecollector", "eyebrows", "eyeliner", "coverup", "unhas", "cosmetic", "opi", "crease", "outfitoftheday", "wiwt", "lookoftheday", "highheelshoes", "tatts", "hairdo", "fashionjewelry", "navel", "sneakerhead", "modifications", "essie", "polish", "highheels", "brown", "glitter", "man", "hairfashion", "jacket", "brunette", "curly", "bracelets", "glue", "jeans", "gorgeous", "sparkles", "tshirt", "bracelet", "shoe", "nail", "shiny", "haircolor", "lipstick", "stone", "earring", "lashes", "tats", "tattoos", "tar", "accessory", "pants", "hairstyles", "lash", "kicks", "crystals", "tat", "mascara", "tattooed", "gloss", "clothes", "longhair", "branco", "bodyart", "gem", "jewel", "wiw", "gems", "stones", "dope", "preto", "haircut", "inked", "whatiwore", "powder", "lip", "jewels", "hairstyle", "tattoo", "girly", "nailart", "shirt", "polo", "gemstone", "foundation", "earrings", "cosmetics", "sneaker", "lookbook", "nike", "tall", "makeup", "fifa", "flip", "stadium", "trip", "studio", "kickflip", "wheel", "highway", "baltimore", "exotic", "cruising", "sportscar", "skatelife", "getfit", "bases", "fitspo", "muffler", "footballplayer", "flexibility", "pads", "shredded", "shot", "gametime", "faithful", "footballseason", "bikelife", "gymnasts", "mitt", "tumbling", "niners", "rideout", "soccergame", "skateeverydamnday", "trailrunner", "sea", "stanleycup", "baltimoreravens", "driver", "hockeyplayer", "runner", "icerink", "cycle", "exercise", "bat", "dancers", "tourist", "focus", "dancer", "dancefloor", "ripped", "nola", "sweat", "travelingram", "igtravel", "skatepark", "grind", "ollie", "footballgame", "beam", "ballet", "strength", "bronco", "flex", "squat", "stretch", "tires", "vault", "supermoto", "soccerball", "exoticcars", "exoticcar", "muscle", "quarterback", "longboarding", "spoiler", "scorpion", "travelgram", "ravens", "sanfrancsico", "hockeylife", "practice", "cheering", "visiting", "seattleseahawks", "tire", "skateboard", "dancerecital", "gloves", "road", "diet", "leap", "longboard", "cruisin", "fitnessmodel", "denverbroncos", "grow", "cheerleader", "freeway", "choreography", "bball", "bars", "gymnast", "cars", "skater", "determination", "crowd", "mytravelgram", "horsepower", "puck", "hoop", "homerun", "rims", "biker", "skateboarding", "helmet", "nba", "yards", "pitcher", "board", "swing", "drive", "nhl", "cheerleading", "jersey", "sportscars", "gymnastic", "court", "fight", "rink", "strong", "skate", "gymnastique", "vehicles", "dedication", "fans", "worldcup", "futbol", "cc", "traveling", "mlb", "travelling", "engine", "basket", "speed", "tourism", "dancing", "win", "health", "motorbike", "bike", "car", "box", "motorcycle", "vehicle", "team", "player", "action", "trailrunning", "train", "motorcycles", "hockey", "baseball", "dance", "hawks", "racing", "skating", "travel", "trailrun", "bodybuilding", "gymnastics", "sunday", "marathon", "running", "race", "cinema", "dubstep", "rnb", "actress", "newsong", "beats", "book", "text", "library", "paper", "star", "jam", "bookworm", "climax", "remix", "repeat", "flick", "nook", "moviestar", "goodmusic", "gamergirl", "listentothis", "movie", "reader", "film", "kindle", "movies", "reading", "imagine", "literature", "flicks", "page", "pages", "gaming", "words", "genre", "melody", "read", "stories", "gamer", "dvd", "beat", "pop", "story", "films", "videos", "online", "amc", "books", "hiphop", "theatre", "rap", "hollywood", "author", "videogames", "plot", "actor", "old", "funtimes", "congratulations", "happythanksgiving", "smiles", "october", "born", "christmastree", "halloween", "gift", "thanks", "stuffing", "candle", "thankful", "congrats", "funtime", "costume", "weddinggown", "scared", "spooky", "foodporn", "ghost", "blessed", "jackolantern", "scary", "jolly", "chilling", "weddingcake", "trick", "unforgettable", "santa", "pumpkins", "pumpkinpatch", "trickortreat", "pumpkin", "treat", "giving", "carols", "elves", "merrychristmas", "ornaments", "santaclaus", "happynewyear", "newyearsparty", "newyearsday", "xmas", "crazy", "candles", "weddingparty", "hauntedhouse", "newyears", "newyearseve", "feast", "partying", "bridesmaids", "boo", "gifts", "haunted", "oct", "decorations", "birthdaycake", "parties", "lights", "bday", "weddingdress", "happybirthday", "thanksgiving", "carving", "newyear", "creepy", "years", "happiness", "candy", "groom", "bride", "birthday", "ceremony", "marriage", "turkey", "weddingday", "wedding", "goals", "thirsty", "thirst", "beer", "hungry", "icecream", "cafe", "dessert", "delish", "sweettooth", "foodpics", "chocolate", "glass", "teacup", "foods", "teatime", "amazing", "tasty", "beers", "can", "wine", "drinks", "caffeine", "liquor", "desserts", "pub", "tea", "cocktails", "bar", "eat", "cocktail", "delicious", "eating", "lunch", "coffee", "dinner", "rainyweather", "light", "cloud", "falltime", "blueskies", "pouring", "leaf", "white", "downpour", "rainydays", "sunnydays", "goodweather", "clearskies", "thesun", "skywatcher", "bluesky", "raining", "rainyday", "springtime", "skyline", "blossom", "wintertime", "bloom", "beautifulday", "shine", "bright", "sunlight", "cloudporn", "summertime", "umbrella", "sunrays", "trees", "autumn", "holidayseason", "foliage", "horizon", "leaves", "chilly", "snowfall", "sunnyday", "puddle", "skyporn", "frosty", "overcast", "frost", "splash", "color", "flower", "spring", "jockey", "horseshoe", "insect", "watertank", "horse", "cat", "lovecats", "ilovemycat", "catlover", "gallop", "lovedogs", "aquaria", "lovenature", "ilovemydog", "closeup", "nature_shooters", "reeftank", "dogsitting", "fishtank", "tropicalfish", "saltwater", "doglover", "farm", "wildlife", "pup", "creatures", "mane", "freshwater", "wild", "insects", "macrophotography", "macro", "aquarium", "fish", "naturelover", "ocean", "hound", "creature", "ponies", "coral", "bugs", "rider", "kittens", "kitty", "kitten", "bug", "reef", "furry", "horses", "riders", "tropical", "puppy", "cats", "pony", "earth", "dog", "swimming", "swim", "horseshow", "cuddly", "child", "cuddle", "babies", "infant", "lovely", "tiny", "toddler", "small", "kiss", "live", "portrait", "work", "face", "nighttime", "awake", "wakeup", "bedtime", "goodnight", "lady", "snooze", "xoxo", "goodfriends", "igdaily", "refreshed", "girlfriend", "kisses", "goingout", "moonlight", "knockout", "couple", "bestfriend", "lightsout", "selfie", "bestfriends", "gettingready", "morning", "hugs", "dude", "goodmorning", "dark", "moon", "rest", "selfies", "wake", "friendship", "sunrise", "ready", "early", "boyfriend", "daytime", "awesome", "funny", "earlybird", "best", "day", "artwork", "composition", "geometric", "pattern", "abstract", "perspective", "geometry", "wall", "minimal", "streetartistry", "architectureporn", "wallporn", "streetarteverywhere", "city", "streetphotography", "architecturelovers", "archidaily", "urbanwalls", "lookingup", "buildings", "graffitiporn", "architexture", "skyscraper", "stencilart", "archilovers", "stickerart", "lines", "sprayart", "streetart", "pasteup", "stencil", "cities", "mural", "urbanart", "architecture", "town", "building", "arts", "graffiti", "laptops", "mobile", "samsunggalaxy", "electronic", "gadget", "phone", "gadgets", "electronics", "device", "screen", "computers", "smartphone", "iphone", "hack", "android"],
+//             },{
+//             data: [879, 7303, 5511, 12018, 5303, 3383, 1704, 161, 7162, 2270, 2181, 146, 485, 776, 2320, 4451, 4477, 4913, 3375, 5811, 8340, 2445, 3860, 1874, 2403, 5912, 4725, 651, 2263, 4263, 1025, 721, 1659, 966, 15, 6138, 10506, 11105, 1841, 1335, 4849, 8753, 6264, 16390, 10345, 6771, 44, 6107, 6323, 1510, 2691, 96, 4506, 5489, 2037, 884, 3122, 1172, 507, 2575, 4846, 3301, 6850, 2457, 2538, 4031, 243, 3788, 3166, 1957, 8051, 5654, 99, 636, 7717, 7555, 5613],
+//             backgroundColor: gradient,
+//             label:'Doughnut 2',
+//             borderWidth: 1,
+//             labels: ["Fashion", "Hair", "Jewelry", "Makeup", "Nails", "Piercings", "Guys,Fashion", "Girls,Fashion", "Tattoos", "Sneakers", "OOTD", "High,Heels", "Bracelets", "Earrings", "Soccer", "Gymnastics", "Football", "Travel", "Dance", "Skateboarding", "Cars", "Baltimore", "Motorcycles", "Health,Fitness", "Baseball", "Bodybuilding", "Hockey", "Sports", "San", "Cheerleading", "Running", "Seattle", "Denver", "Basketball", "Super", "Movies", "Music", "Books", "Video&Games", "Birthday", "Party", "Wedding", "Thanksgiving", "Halloween", "Christmas", "New", "Holidays", "Drinks", "Dessert", "Coffee", "Tea", "General", "Raining", "Sunny", "Cloudy", "Fall", "Snowing", "Summer", "Spring", "Winter", "Horses", "Insects", "Fish", "Cats", "Dogs", "Babies", "Kids", "Love", "Friends", "Selfies", "Good,Morning", "Good", "Girls", "Guys", "StreetArt", "Architecture", "Electronics"],
+//             },{
+//             data: [49282, 66469, 29590, 54751, 16727, 20292, 19992, 4274, 23351, 15272, 5613],
+//             backgroundColor: gradient,
+//             label:'Doughnut 1',
+//             labels:["Fashion", "Travel&Active&Sports", "Entertainment", "Holiday&Celebrations", "Food", "Whether&Season", "Animal", "Family", "Social&People", "Urban", "Electronics"]
+//         }, ],
+//
+//
+//
+//     },
+//     options: {
+//         responsive: true,
+//         cutoutPercentage: 25,
+//         // tooltips: {
+//         //             callbacks: {
+//         //                 label: function (item, data) {
+//         //                     console.log(item)
+//         //                     var label = data.datasets[item.datasetIndex].labels[item.index];
+//         //                     var value = data.datasets[item.datasetIndex].data[item.index];
+//         //                     return label + ': ' + value;
+//         //                 }
+//         //             }
+//         //         }
+//         tooltips: {
+//         enabled: false,
+//         custom: function(tooltip) {
+//           if (!tooltip || (tooltip.body && !tooltip.body[1])) {
+//             return;
+//           }
+//
+//           // Tooltip Element
+//           var tooltipEl = $('#chartjs-tooltip');
+//
+//           if (!tooltipEl[0]) {
+//             $('body').append('<div id="chartjs-tooltip"></div>');
+//             tooltipEl = $('#chartjs-tooltip');
+//           }
+//
+//           // Hide if no tooltip
+//           if (!tooltip.opacity) {
+//             tooltipEl.css({
+//               opacity: 1
+//             });
+//
+//             $('.chartjs-wrap canvas')
+//               .each(function(index, el) {
+//                 $(el).css('cursor', 'default');
+//               });
+//             return;
+//           }
+//
+//           $(this._chart.canvas).css('cursor', 'pointer');
+//
+//           // Set caret Position
+//           tooltipEl.removeClass('above below no-transform');
+//
+//           if (tooltip.yAlign) {
+//             tooltipEl.addClass(tooltip.yAlign);
+//           } else {
+//             tooltipEl.addClass('no-transform');
+//           }
+//           // Set Text
+//           var innerHtmlTitle = tooltip.title.length > 2 ? (tooltip.title || []).join('\n') : '';
+//           var innerHtmlBody = tooltip.body.length > 2 ? (tooltip.beforeBody || []).join('\n') + (tooltip.body || []).join('\n') + (tooltip.afterBody || []).join('\n') : '';
+//           var innerHtmlFooter = tooltip.footer.length > 2 ? (tooltip.footer || []).join('\n') : '';
+//
+//           if (tooltip.body) {
+//             var innerHtml = [
+//
+//               innerHtmlBody,
+//               innerHtmlFooter
+//             ];
+//             tooltipEl.html(innerHtml.join('\n'));
+//           }
+//
+//           // Find Y Location on page
+//           var top = 0;
+//           if (tooltip.yAlign) {
+//             if (tooltip.yAlign == 'above') {
+//               top = tooltip.y - tooltip.caretHeight - tooltip.caretPadding;
+//             } else {
+//               top = tooltip.y + tooltip.caretHeight + tooltip.caretPadding;
+//             }
+//           }
+//
+//           var position = $(this._chart.canvas)[0].getBoundingClientRect();
+//
+//           // Display, position, and set styles for font
+//           tooltipEl.css({
+//             opacity: 1,
+//             width: tooltip.width ? (tooltip.width + 'px') : 'auto',
+//             // left: position.left + tooltip.x + 'px',
+//             top: position.top + top + 'px',
+//             fontFamily: tooltip._fontFamily,
+//             fontSize: tooltip.fontSize,
+//             fontStyle: tooltip._fontStyle,
+//             padding: tooltip.yPadding + 'px ' + tooltip.xPadding + 'px',
+//           });
+//         },
+//         callbacks: {
+//           beforeTitle: function() {
+//             return '<h4>';
+//           }, //Text to render before the title
+//           // title: function(tooltipItems, data){ /* Pick first xLabel */ }, // Text to render as the title
+//           afterTitle: function() {
+//             return '</h4>';
+//           }, //Text to render after the ttiel
+//           beforeBody: function() {
+//             return "<div class=\"tooltip-body\">";
+//           }, // Text to render before the body section
+//           beforeLabel: function() {
+//             return "<p>";
+//           }, // Text to render before an individual label
+//           label: function(tooltipItem, data) {
+//             var label = data.labels[tooltipItem.index] !== "separator" ? data.labels[tooltipItem.index] : false;
+//             var value = label ?  data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] : false ;
+//             return label ? label + ': ' + value : false;
+//           }, // Text to render as label
+//           afterLabel: function() {
+//             return "</p>";
+//           }, // Text to render after an individual label
+//           afterBody: function() {
+//             return "</div>";
+//           }, //Text to render after the body section
+//           beforeFooter: function() {
+//             return "<div class=\"tooltip-footer\">"
+//           }, //Text to render before the footer section
+//           // footer: function(){}, //Text to render as the footer
+//           afterFooter: function() {
+//               return "</div>"
+//             } //Text to render after the footer section
+//         }
+//   }
+//     },
+//
+// };
+//
+//
+// var myDoughnut = new Chart(ctx, config);
+
+
+</script>
+</body>
+</html>
