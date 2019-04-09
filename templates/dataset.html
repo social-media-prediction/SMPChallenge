@@ -4,24 +4,25 @@
     <title>SMP Challenge</title>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
     <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/prettify.css">
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/bootstrap.js"></script>
     <script src="/static/js/sprintf.js"></script>
+      <script src="/static/js/run_prettify.js"></script>
     <script src="/static/js/md5.js"></script>
     <style type="text/css">
-    #img-data{
-border:0;
-display:inline;
-height:10px;
-}
-    #chartdiv {
-      width: 80%;
-
-    }
-    .pre-scrollable {
-    max-height: 147px;
-    overflow-y: scroll;
-}
+      #img-data{
+        border:0;
+        display:inline;
+        height:10px;
+      }
+      #chartdiv {
+        width: 80%;
+      }
+      .pre-scrollable {
+        max-height: 147px;
+        overflow-y: scroll;
+      }
       #nav-first {
         border-radius: 0px;
         margin-bottom: 0px;
@@ -90,10 +91,23 @@ height:10px;
       }
 
       #block7 {
+        background-color: white;
+      }
+
+      #block8 {
+        background-color: #e8e8e8;
+      }
+
+      #block9 {
+        background-color: white;
+      }
+
+      #block106 {
+        background-color: #e8e8e8;
+      }
+
+      #block11 {
         background-color: #080808;
-        /* position: absolute; */
-        /*bottom: 0;*/
-        /*width: 100%; */
       }
 
       .p-body{
@@ -550,185 +564,172 @@ height:10px;
     <div class="container-fluid" id="maintext">
 
 
+      <div class="row" id="block1">
+        <div class="col-md-8 col-md-offset-2">
+          <!-- <h2 class="p-title"><b>Download</b></h2>
+          <p class="p-body">Each data table contains three different donwload formats in both train and test dataset.</p> -->
+
+          <h2 class="p-title">Training Set</h2>
+          <div class="row">
+            <div class="col-md-3 col-md-offset-1">
+              <h4>Label</h4>
+            </div>
+            <div class="col-md-8">
+              <a href="https://drive.google.com/open?id=1FW14l4jkTVV6hBymdrFeszq5B993axh_" class="btn btn-default btn-block" role="button">.TXT</a>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-3 col-md-offset-1">
+              <h4>Image</h4>
+            </div>
+            <div class="col-md-8">
+              <a href="https://drive.google.com/open?id=196ssXYxA6YUbrFriVUP2m9rDN8_guZLU" class="btn btn-default btn-block" role="button">.TXT</a>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-3 col-md-offset-1">
+              <h4>Category</h4>
+            </div>
+            <div class="col-md-4">
+              <a href="https://drive.google.com/open?id=1pQRC6fdFRPx48_iOlhuqt2K5TM50P5iB" class="btn btn-default btn-block" role="button">.TXT</a>
+            </div>
+            <div class="col-md-4">
+              <a href="https://drive.google.com/open?id=1dDPK4S_PV6sR-EOoKCqR39XxTeiSItqt" class="btn btn-default btn-block" role="button">.JSON</a>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-3 col-md-offset-1">
+              <h4>Tag</h4>
+            </div>
+            <div class="col-md-4">
+              <a href="https://drive.google.com/open?id=1OyrxlbCqE0qDwb9Ks6WrEYdpCacH--qA" class="btn btn-default btn-block" role="button">.TXT</a>
+            </div>
+            <div class="col-md-4">
+              <a href="https://drive.google.com/open?id=11FqpOM33Py79VR2qRd9lM7FGgwWKKGB1" class="btn btn-default btn-block" role="button">.JSON</a>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-3 col-md-offset-1">
+              <h4>Temporal-spatial</h4>
+            </div>
+            <div class="col-md-4">
+              <a href="https://drive.google.com/open?id=1LN2-4rin05TdlnKt2KN4L8irrjGJ6SpX" class="btn btn-default btn-block" role="button">.TXT</a>
+            </div>
+            <div class="col-md-4">
+              <a href="https://drive.google.com/open?id=1LJbmSE5F2SPY2i7ZZxbbdrO5WFpsbF7S" class="btn btn-default btn-block" role="button">.JSON</a>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-3 col-md-offset-1">
+              <h4>Additional</h4>
+            </div>
+            <div class="col-md-4">
+              <a href="https://drive.google.com/open?id=1c8TeShlNFE-_mdN5zYKutcVqTP_iZ3J8" class="btn btn-default btn-block" role="button">.TXT</a>
+            </div>
+            <div class="col-md-4">
+              <a href="https://drive.google.com/open?id=1jypri6RdaROwfcsUsKzyjvd1gFE08qkS" class="btn btn-default btn-block" role="button">.JSON</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="row" id="block2">
         <div class="col-md-8 col-md-offset-2">
-          <h2 class="p-title"><b>Download</b></h2>
-          <p class="p-body">Each data table contains three different donwload formats in both train and test dataset.</p>
-
-          <h3 class="p-title">Train</h3>
-          </div>
-          <div class="col-md-12 col-md-offset-2">
-              <div class="col-md-2 ">
-                  <p class="p-body"><h4>Label</h4></p>
-              </div>
-              <div class="col-md-6">
-                  <!-- <p><button type="button" class="btn btn-default btn-default btn-block">.TXT</button></p> -->
-                  <a href="https://drive.google.com/open?id=1FW14l4jkTVV6hBymdrFeszq5B993axh_" class="btn btn-default btn-default btn-block" role="button">.TXT</a>
-              </div>
-
-          </div>
-          <div class="col-md-12 col-md-offset-2">
-              <div class="col-md-2 ">
-                  <p class="p-body"><h4>Image</h4></p>
-              </div>
-              <div class="col-md-6 ">
-                  <!-- <p><button type="button" class="btn btn-default btn-default btn-block">.TXT</button></p> -->
-                  <a href="https://drive.google.com/open?id=196ssXYxA6YUbrFriVUP2m9rDN8_guZLU" class="btn btn-default btn-default btn-block" role="button">.TXT</a>
-              </div>
+          <h2 class="p-title">Test Set</h2>
+          <div class="row">
+            <div class="col-md-3 col-md-offset-1">
+              <h4>Image</h4>
+            </div>
+            <div class="col-md-8">
+              <a href="#" class="btn btn-default btn-block" role="button">.TXT</a>
+            </div>
           </div>
 
-        <div class="col-md-12 col-md-offset-2">
-            <div class="col-md-2 ">
-                <p class="p-body"><h4>Category</h4></p>
+          <div class="row">
+            <div class="col-md-3 col-md-offset-1">
+              <h4>Category</h4>
             </div>
-            <div class="col-md-3 ">
-                <!-- <p><button type="button" class="btn btn-default btn-default btn-block">.TXT</button></p> -->
-                <a href="https://drive.google.com/open?id=1pQRC6fdFRPx48_iOlhuqt2K5TM50P5iB" class="btn btn-default btn-default btn-block" role="button">.TXT</a>
+            <div class="col-md-4">
+              <a href="#" class="btn btn-default btn-block" role="button">.TXT</a>
             </div>
-            <div class="col-md-3">
-                <!-- <p><button type="button" class="btn btn-default btn-default btn-block">.JSON</button></p> -->
-                <a href="https://drive.google.com/open?id=1dDPK4S_PV6sR-EOoKCqR39XxTeiSItqt" class="btn btn-default btn-default btn-block" role="button">.JSON</a>
+            <div class="col-md-4">
+              <a href="#" class="btn btn-default btn-block" role="button">.JSON</a>
             </div>
-
-        </div>
-        <div class="col-md-12 col-md-offset-2">
-            <div class="col-md-2 ">
-                <p class="p-body"><h4>Tag</h4></p>
-            </div>
-            <div class="col-md-3 ">
-                <!-- <p><button type="button" class="btn btn-default btn-default btn-block">.TXT</button></p> -->
-                <a href="https://drive.google.com/open?id=1OyrxlbCqE0qDwb9Ks6WrEYdpCacH--qA" class="btn btn-default btn-default btn-block" role="button">.TXT</a>
-            </div>
-            <div class="col-md-3">
-                <!-- <p><button type="button" class="btn btn-default btn-default btn-block">.JSON</button></p> -->
-                <a href="https://drive.google.com/open?id=11FqpOM33Py79VR2qRd9lM7FGgwWKKGB1" class="btn btn-default btn-default btn-block" role="button">.JSON</a>
-            </div>
-
-        </div>
-        <div class="col-md-12 col-md-offset-2">
-            <div class="col-md-2 ">
-                <p class="p-body"><h4>Temporal-spatial</h4></p>
-            </div>
-            <div class="col-md-3 ">
-                <!-- <p><button type="button" class="btn btn-default btn-default btn-block">.TXT</button></p> -->
-                <a href="https://drive.google.com/open?id=1LN2-4rin05TdlnKt2KN4L8irrjGJ6SpX" class="btn btn-default btn-default btn-block" role="button">.TXT</a>
-            </div>
-            <div class="col-md-3">
-                <!-- <p><button type="button" class="btn btn-default btn-default btn-block">.JSON</button></p> -->
-                <a href="https://drive.google.com/open?id=1LJbmSE5F2SPY2i7ZZxbbdrO5WFpsbF7S" class="btn btn-default btn-default btn-block" role="button">.JSON</a>
-            </div>
-
-        </div>
-        <div class="col-md-12 col-md-offset-2">
-            <div class="col-md-2 ">
-                <p class="p-body"><h4>Additional</h4></p>
-            </div>
-            <div class="col-md-3 ">
-                <!-- <p><button type="button" class="btn btn-default btn-default btn-block">.TXT</button></p> -->
-                <a href="https://drive.google.com/open?id=1c8TeShlNFE-_mdN5zYKutcVqTP_iZ3J8" class="btn btn-default btn-default btn-block" role="button">.TXT</a>
-            </div>
-            <div class="col-md-3">
-                <!-- <p><button type="button" class="btn btn-default btn-default btn-block">.JSON</button></p> -->
-                <a href="https://drive.google.com/open?id=1jypri6RdaROwfcsUsKzyjvd1gFE08qkS" class="btn btn-default btn-default btn-block" role="button">.JSON</a>
-            </div>
-
-        </div>
-
-
-
-        <div class="col-md-8 col-md-offset-2">
-          <h3 class="p-title">Test</h3>
-          </div>
-          <div class="col-md-12 col-md-offset-2">
-              <div class="col-md-2 ">
-                  <p class="p-body"><h4>Image</h4></p>
-              </div>
-              <div class="col-md-6 ">
-                  <!-- <p><button type="button" class="btn btn-default btn-default btn-block">.TXT</button></p> -->
-                  <a href="#" class="btn btn-default btn-default btn-block" role="button">.TXT</a>
-              </div>
           </div>
 
-        <div class="col-md-12 col-md-offset-2">
-            <div class="col-md-2 ">
-                <p class="p-body"><h4>Category</h4></p>
+          <div class="row">
+            <div class="col-md-3 col-md-offset-1">
+              <h4>Tag</h4>
             </div>
-            <div class="col-md-3 ">
-                <!-- <p><button type="button" class="btn btn-default btn-default btn-block">.TXT</button></p> -->
-                <a href="#" class="btn btn-default btn-default btn-block" role="button">.TXT</a>
+            <div class="col-md-4">
+              <a href="#" class="btn btn-default btn-block" role="button">.TXT</a>
             </div>
-            <div class="col-md-3">
-                <!-- <p><button type="button" class="btn btn-default btn-default btn-block">.JSON</button></p> -->
-                <a href="#" class="btn btn-default btn-default btn-block" role="button">.JSON</a>
+            <div class="col-md-4">
+              <a href="#" class="btn btn-default btn-block" role="button">.JSON</a>
             </div>
+          </div>
 
-        </div>
-        <div class="col-md-12 col-md-offset-2">
-            <div class="col-md-2 ">
-                <p class="p-body"><h4>Tag</h4></p>
+          <div class="row">
+            <div class="col-md-3 col-md-offset-1">
+              <h4>Temporal-spatial</h4>
             </div>
-            <div class="col-md-3 ">
-                <!-- <p><button type="button" class="btn btn-default btn-default btn-block">.TXT</button></p> -->
-                <a href="#" class="btn btn-default btn-default btn-block" role="button">.TXT</a>
+            <div class="col-md-4">
+              <a href="#" class="btn btn-default btn-block" role="button">.TXT</a>
             </div>
-            <div class="col-md-3">
-                <!-- <p><button type="button" class="btn btn-default btn-default btn-block">.JSON</button></p> -->
-                <a href="#" class="btn btn-default btn-default btn-block" role="button">.JSON</a>
+            <div class="col-md-4">
+              <a href="#" class="btn btn-default btn-block" role="button">.JSON</a>
             </div>
+          </div>
 
-        </div>
-        <div class="col-md-12 col-md-offset-2">
-            <div class="col-md-2 ">
-                <p class="p-body"><h4>Temporal-spatial</h4></p>
+          <div class="row">
+            <div class="col-md-3 col-md-offset-1">
+              <h4>Additional</h4>
             </div>
-            <div class="col-md-3 ">
-                <!-- <p><button type="button" class="btn btn-default btn-default btn-block">.TXT</button></p> -->
-                <a href="#" class="btn btn-default btn-default btn-block" role="button">.TXT</a>
+            <div class="col-md-4">
+              <a href="#" class="btn btn-default btn-block" role="button">.TXT</a>
             </div>
-            <div class="col-md-3">
-                <!-- <p><button type="button" class="btn btn-default btn-default btn-block">.JSON</button></p> -->
-                <a href="#" class="btn btn-default btn-default btn-block" role="button">.JSON</a>
+            <div class="col-md-4">
+              <a href="#" class="btn btn-default btn-block" role="button">.JSON</a>
             </div>
-
-        </div>
-        <div class="col-md-12 col-md-offset-2">
-            <div class="col-md-2 ">
-                <p class="p-body"><h4>Additional</h4></p>
-            </div>
-            <div class="col-md-3 ">
-                <!-- <p><button type="button" class="btn btn-default btn-default btn-block">.TXT</button></p> -->
-                <a href="#" class="btn btn-default btn-default btn-block" role="button">.TXT</a>
-            </div>
-            <div class="col-md-3">
-                <!-- <p><button type="button" class="btn btn-default btn-default btn-block">.JSON</button></p> -->
-                <a href="#" class="btn btn-default btn-default btn-block" role="button">.JSON</a>
-            </div>
-
+          </div>
         </div>
       </div>
 
       <div class="row" id="block3">
         <div class="col-md-8 col-md-offset-2">
-          <h2 class="p-title"><b>Data Formats</b></h2>
-          <h3 class="p-title"><strong>Label</strong></h3>
+          <h2 class="p-title">Label</h2>
           <p class="p-body">Each row contains the popularity score(log-views) of the corresponding post.</p>
           <pre>Popularityscore<br>...<br>3.2<br>2.3<br>...</pre>
-          <h3 class="p-title"><strong>Image</strong></h3>
+        </div>
+      </div>
+
+      <div class="row" id="block4">
+        <div class="col-md-8 col-md-offset-2">
+          <h2 class="p-title">Image</h2>
           <p class="p-body">Each row contains the URL of the cprrsponding photo or video</p>
           <pre>...<br>"https://www.flickr.com/photos/58708830@N00/385070026"<br>"https://www.flickr.com/photos/97042891@N00/943750056"<br>...</pre>
           <img src="/static/img/1.jpg" height='130' width='210'><img src="/static/img/2.jpg" height='130'width='200'><img src="/static/img/4.jpg"  height='130' width='200'><img src="/static/img/5.jpg"  height='130'>
           <img src="/static/img/3.jpg"  height='130'><img src="/static/img/6.jpg" height='130'><img src="/static/img/7.jpg" height='130'><img src="/static/img/8.jpg" height='130'width='204'>
           <img src="/static/img/9.jpg" height='130'><img src="/static/img/10.jpg" height='130'><img src="/static/img/11.jpg" height='130'><img src="/static/img/12.jpg" height='130'><img src="/static/img/13.jpg" height='130' width='100'>
+        </div>
+      </div>
 
-          <h3 class="p-title"><strong>Category</strong></h3>
+      <div class="row" id="block5">
+        <div class="col-md-8 col-md-offset-2">
+          <h2 class="p-title">Category</h2>
           <p class="p-body">Each row in the file corresponds a category set of the post.</p>
-        </div>
-          <div class="col-md-4 col-md-offset-2">
-          <pre class="pre-scrollable">Uid, Pid, Category, Subcategory, Concept<br>...<br>"70478@N10", "564687", "Whether&Season", "Raining", "umbrella"<br>"37810@N60", "565202", "Fashion", "Girls,Fashion", "skirt"<br>"25893@N22", "565381", "Whether&Season", "Raining", "puddle"<br>...
-          </pre>
-        </div>
-        <div class="col-md-4">
-        <pre class="pre-scrollable">
+          <div class="row">
+            <div class="col-md-6">
+              <pre class="pre-scrollable">Uid, Pid, Category, Subcategory, Concept<br>...<br>"70478@N10", "564687", "Whether&Season", "Raining", "umbrella"<br>"37810@N60", "565202", "Fashion", "Girls,Fashion", "skirt"<br>"25893@N22", "565381", "Whether&Season", "Raining", "puddle"<br>...
+              </pre>
+            </div>
+            <div class="col-md-6">
+            <pre class="pre-scrollable">
 '''
   {
     "Uid":"70478@N10",
@@ -737,98 +738,109 @@ height:10px;
     "Subcategory": "Raining",
     "Concept": "umbrella"}
 '''</pre>
-      </div>
-          <div class="col-md-8 col-md-offset-2">
+            </div>
+          </div>
           <p class="p-body"><strong>Uid: </strong>the user this post belongs to.</p>
           <p class="p-body"><strong>Pid: </strong>the photo along with the post. One Pid can locate a particular post.</p>
           <p class="p-body"><strong>Category: </strong>the first category of the post.(11 classes)</p>
           <p class="p-body"><strong>Subcategory: </strong>there are 77 classes in 2nd level category.</p>
           <p class="p-body"><strong>Concept: </strong>there are 668 different description.</p>
-
-          <h3 class="p-title"><strong>Tag</strong></h3>
-          <p class="p-body">Each row represents a tag set of the post.</p>
         </div>
-          <div class="col-md-4 col-md-offset-2">
-          <pre class="pre-scrollable">Uid Pid Title Mediatype Alltags<br>...<br>"70478@N10" "564687" "Sarah Moon 3" "photo" "black hat fashion yellow umbrella"<br>"37810@N60" "565202" "2016-03-06 22.19.08" "photo" "orange sexy philadelphia hockey nhl sweater bra skirt blonde flowing cheerleader cleavage plaid flyers philadelphiaflyers icegirls"<br>"25893@N22" "565381" "Tristesse at the Federal Chancellery" "photo" "blackandwhite bw white black reflection berlin wet water rain canon germany puddle deutschland eos blackwhite wasser symmetry sw schwarzweiss puddles reflexion weiss federal schwarz regen tristesse trist reflektion kanzleramt pfuetze 6d nass bundeskanzleramt 2016 symmetrie pftze weis pftzen chancellery schwarzweis federalchancellery pfuetzen canoneos6d hoonose68 againstautotagging sgrossien grossien"<br>...</pre>
-        </div>
-        <div class="col-md-4">
-        <pre class="pre-scrollable">
-'''
-  {
-    "Uid":"70478@N10",
-    "Pid": 564687,
-    "Tile": "Sarah Moon 3",
-    "Mediatype": "photo",
-    "Alltags": "black", "hat", "fashion", "yellow", "umbrella"}
-'''</pre>
       </div>
-          <div class="col-md-8 col-md-offset-2">
+
+      <div class="row" id="block6">
+        <div class="col-md-8 col-md-offset-2">
+          <h2 class="p-title">Tag</h2>
+          <p class="p-body">Each row represents a tag set of the post.</p>
+          <div class="row">
+            <div class="col-md-6">
+              <pre class="pre-scrollable">Uid Pid Title Mediatype Alltags<br>...<br>"70478@N10" "564687" "Sarah Moon 3" "photo" "black hat fashion yellow umbrella"<br>"37810@N60" "565202" "2016-03-06 22.19.08" "photo" "orange sexy philadelphia hockey nhl sweater bra skirt blonde flowing cheerleader cleavage plaid flyers philadelphiaflyers icegirls"<br>"25893@N22" "565381" "Tristesse at the Federal Chancellery" "photo" "blackandwhite bw white black reflection berlin wet water rain canon germany puddle deutschland eos blackwhite wasser symmetry sw schwarzweiss puddles reflexion weiss federal schwarz regen tristesse trist reflektion kanzleramt pfuetze 6d nass bundeskanzleramt 2016 symmetrie pftze weis pftzen chancellery schwarzweis federalchancellery pfuetzen canoneos6d hoonose68 againstautotagging sgrossien grossien"<br>...</pre>
+              </div>
+            <div class="col-md-6">
+              <pre class="pre-scrollable prettyprint lang-json">
+{
+  "Uid": "70478@N10",
+  "Pid": 564687,
+  "Tile": "Sarah Moon 3",
+  "Mediatype": "photo",
+  "Alltags": "black", "hat", "fashion", "yellow", "umbrella"
+}
+</pre>
+            </div>
+          </div>
           <p class="p-body"><strong>Title: </strong>the tile of the post defined by the user.</p>
           <p class="p-body"><strong>Mediatype: </strong>the type of the attached media file, including 'photo' and 'video'.</p>
           <p class="p-body"><strong>Alltags: </strong>the customized tags from users.</p>
-
-          <h3 class="p-title"><strong>Temporal-spatial</strong></h3>
-          <p class="p-body">Each row offers the date and geographic information of the post.</p>
         </div>
-          <div class="col-md-4 col-md-offset-2">
-          <pre class="pre-scrollable"s>Uid Pid Postdate Latitude Longitude Geoaccuracy<br>..<br>"70478@N10" "564687" "1457068974" "0" "0" "0"<br>"37810@N60" "565202" "1457273948" "0" "0" "0"<br>"25893@N22" "565381" "1457239452" "52.520213" "13.373097" "16"<br>...
-          </pre>
-        </div>
-        <div class="col-md-4">
-        <pre class="pre-scrollable">
-'''
-  {
-    "Uid":"25893@N22",
-    "Pid": 565381,
-    "Latitude": 52.520213,
-    "Longitude": 13.373097,
-    "Geoaccuracy": 16}
-'''</pre>
       </div>
-          <div class="col-md-8 col-md-offset-2">
+
+      <div class="row" id="block7">
+        <div class="col-md-8 col-md-offset-2">
+          <h2 class="p-title">Temporal-spatial</h2>
+          <p class="p-body">Each row offers the date and geographic information of the post.</p>
+          <div class="row">
+            <div class="col-md-6">
+              <pre class="pre-scrollable"s>Uid Pid Postdate Latitude Longitude Geoaccuracy<br>..<br>"70478@N10" "564687" "1457068974" "0" "0" "0"<br>"37810@N60" "565202" "1457273948" "0" "0" "0"<br>"25893@N22" "565381" "1457239452" "52.520213" "13.373097" "16"<br>...
+              </pre>
+            </div>
+            <div class="col-md-6">
+              <pre class="pre-scrollable prettyprint lang-json">
+{
+  "Uid": "25893@N22",
+  "Pid": 565381,
+  "Latitude": 52.520213,
+  "Longitude": 13.373097,
+  "Geoaccuracy": 16
+}</pre>
+            </div>
+          </div>
           <p class="p-body"><strong>Postdate: </strong>the publish timestamp of the post. It can be converted to Datetime by following python code:</p>
-          <!-- <div class="col-md-12">
-            <div class="col-md-6 "> -->
-            <pre>import time<br>    timestamp = 1457068974<br>    timeArray = time.localtime(timestamp)<br>    datetime = time.strftime("%Y-%m-%d %H:%M:%S", timeArray)<br></pre>
-            <!-- </div >
-            </div > -->
+          <pre class="prettyprint lang-py">
+  import time
+  timestamp = 1457068974
+  timeArray = time.localtime(timestamp)
+  datetime = time.strftime("%Y-%m-%d %H:%M:%S", timeArray)</pre>
           <p class="p-body"><strong>Latitude: </strong>the latitude whose valid range is -90 to 90. Anything more than 6 decimal places will be truncated.</p>
           <p class="p-body"><strong>Longitude: </strong>the longitude whose valid range is -180 to 180. Anything more than 6 decimal places will be truncated.</p>
           <p class="p-body"><strong>Geoaccuracy: </strong>recorded accuracy level of the location information. World level is 1, Country is ~3, Region ~6, City ~11, Street ~16. The current range is 1-16. Defaults to 16 if not specified.</p>
-          <h3 class="p-title"><strong>Additional</strong></h3>
-          <p class="p-body">Each row offers the supplimental information of the post.</p>
         </div>
-          <div class="col-md-4 col-md-offset-2">
-          <pre class="pre-scrollable">Uid Pid Pathalias Ispublic Mediastatus<br>...<br>"70478@N10" "564687" "None" "1" "ready"<br>"37810@N60" "565202" "None" "1" "ready"<br>"25893@N22" "565381" "hoo_nose_68" "1" "ready"<br>...
-          </pre>
-        </div>
-        <div class="col-md-4">
-        <pre class="pre-scrollable">
-'''
-  {
-    "Uid":"25893@N22",
-    "Pid": 565381,
-    "Pathalias": "hoo_nose_68",
-    "Ispublic": 1,
-    "Mediastatus": "ready"}
-'''</pre>
       </div>
-          <div class="col-md-8 col-md-offset-2">
+
+      <div class="row" id="block8">
+        <div class="col-md-8 col-md-offset-2">
+          <h2 class="p-title">Additional</h2>
+          <p class="p-body">Each row offers the supplimental information of the post.</p>
+          <div class="row">
+            <div class="col-md-6">
+              <pre class="pre-scrollable">Uid Pid Pathalias Ispublic Mediastatus<br>...<br>"70478@N10" "564687" "None" "1" "ready"<br>"37810@N60" "565202" "None" "1" "ready"<br>"25893@N22" "565381" "hoo_nose_68" "1" "ready"<br>...
+              </pre>
+            </div>
+            <div class="col-md-6">
+              <pre class="pre-scrollable prettyprint lang-json">
+{
+  "Uid": "25893@N22",
+  "Pid": 565381,
+  "Pathalias": "hoo_nose_68",
+  "Ispublic": 1,
+  "Mediastatus": "ready"
+}
+</pre>
+            </div>
+          </div>
           <p class="p-body"><strong>Pathalias: </strong>the path alias provided by the user.</p>
           <p class="p-body"><strong>Ispublic: </strong>indicates that the post is authenticated with 'read' permissions.</p>
           <p class="p-body"><strong>Mediastatus: </strong>indicates that the attached media is ready to access by others.</p>
-
+          <br>
         </div>
-        <br><br>
       </div>
-      <div class="row" id="block7">
+      <div class="row" id="block11">
         <div class="col-md-10 col-md-offset-1">
-          <center><h5 style="color:white;">Copyright © 2018. SMP Challeng Committee All rights reserved</h5></center>
+          <center><h5 style="color:white;">Copyright © 2019. SMP Challenge Organization Committee. All rights reserved.</h5></center>
         </div>
       </div>
+    </div>
 
-
-        <div class="modal fade" id="modal-register">
+    <div class="modal fade" id="modal-register">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
