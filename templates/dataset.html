@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>SMPD Challenge</title>
+    <title>SMP Challenge</title>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
     <link rel="stylesheet" href="/static/css/bootstrap.css">
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/bootstrap.js"></script>
     <script src="/static/js/sprintf.js"></script>
     <script src="/static/js/md5.js"></script>
-    <script type="text/javascript" src="/static/js/tagcloud.jquery.js"></script>
-    <script src="/static/js/Chart.min.js"></script>
-    <script src="/static/js/Chart.bundle.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script> -->
     <style type="text/css">
     #img-data{
 border:0;
@@ -96,8 +92,8 @@ height:10px;
       #block7 {
         background-color: #080808;
         /* position: absolute; */
-        bottom: 0;
-        width: 100%; */
+        /*bottom: 0;*/
+        /*width: 100%; */
       }
 
       .p-body{
@@ -195,9 +191,8 @@ height:10px;
         };
 
       $(document).ready(function(){
-          $('#tagcloud').tagoSphere(settings);
 
-                $("#href-register").click(function(e){
+        $("#href-register").click(function(e){
           e.preventDefault();
           $("#modal-register").modal("show");
         });
@@ -710,8 +705,6 @@ height:10px;
             </div>
 
         </div>
-
-
       </div>
 
       <div class="row" id="block3">
@@ -825,13 +818,12 @@ height:10px;
           <p class="p-body"><strong>Ispublic: </strong>indicates that the post is authenticated with 'read' permissions.</p>
           <p class="p-body"><strong>Mediastatus: </strong>indicates that the attached media is ready to access by others.</p>
 
-
         </div>
-
+        <br><br>
       </div>
       <div class="row" id="block7">
         <div class="col-md-10 col-md-offset-1">
-          <center><h5 style="color:white;">Copyright © 2018.Company name All rights reserved</h5></center>
+          <center><h5 style="color:white;">Copyright © 2018. SMP Challeng Committee All rights reserved</h5></center>
         </div>
       </div>
 

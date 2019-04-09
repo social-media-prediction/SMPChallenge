@@ -350,16 +350,12 @@
         })
       });
 
-      {
-        %
-        if register_success %
-      }
+      {% if register_success %}
       $("#modal-register-success").modal("show");
       $("#modal-register-success").on("hidden.bs.modal", function(e) {
         window.location.href = "/"
-      }) {
-        % endif %
-      }
+      }) 
+      {% endif %}
 
       $("#editteam").click(function(e) {
         e.preventDefault();
@@ -834,7 +830,7 @@
     <div class="row" id="block7">
       <div class="col-md-10 col-md-offset-1">
         <center>
-          <h5 style="color:white;">Copyright © 2018.Company name All rights reserved</h5>
+          <h5 style="color:white;">Copyright © 2018. SMP Challeng Committee All rights reserved</h5>
         </center>
       </div>
     </div>
