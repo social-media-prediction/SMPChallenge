@@ -993,6 +993,14 @@
           </div>
           <div class="row" id="block3">
             <div class="col-md-8 col-md-offset-2">
+              <h2 class="p-title"><b>Histogram of the Labels: </b></h2>
+              <p class="p-body"></p>
+              </div>
+              <canvas id="mybar" width="1000" style="margin-left:300px"></canvas>
+            <br>
+      </div>
+          <div class="row" id="block4">
+            <div class="col-md-8 col-md-offset-2">
               <h2 class="p-title"><b>Hierarchy for 756 category classes: </b></h2>
               <p class="p-body">The inner circle denotes the first level categories, including 11 different classes. The second circle denotes the second level categories, including 77 different classes. And the last circle denotes the third level categories, including 668 different classes. </p>
               </div>
@@ -1206,6 +1214,69 @@
     };
 
     var myDoughnut = new Chart(ctx, config);
+    var bar = document.getElementById("mybar");
+    var mybar = new Chart(bar, {
+      type: 'bar',
+      data: {
+        labels: ["1.0", "1.5", "2.0", "2.5", "3.0", "3.5", "4.0", "4.5", "5.0", "5.5", "6.0", "6.5", "7.0", "7.5", "8.0", "8.5", "9.0", "9.5", "10.0", "10.5", "11.0", "11.5", "12.0", "12.5", "13.0", "13.5", "14.0", "14.5", "15.0", "15.5", "16.0", "16.5"],
+        datasets: [{
+          label: '# of Posts',
+          data: [4099, 3539, 6416, 7007, 12664, 13160, 19869, 22349, 27355, 25252, 24333, 23234, 21424, 19330, 16596, 13829, 10568, 8909, 7622, 5560, 4104, 2962, 1735, 1020, 811, 629, 483, 310, 255, 118, 66, 5],
+          backgroundColor: [
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+          ],
+
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: false,
+        scales: {
+          xAxes: [{
+            ticks: {
+              maxRotation: 90,
+              minRotation: 80
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
 
     </script>
   </body>
