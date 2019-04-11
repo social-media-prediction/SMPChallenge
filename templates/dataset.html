@@ -1,461 +1,370 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>SMP Challenge</title>
-    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
-    <link rel="stylesheet" href="/static/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/prettify.css">
-    <script src="/static/js/jquery.min.js"></script>
-    <script src="/static/js/bootstrap.js"></script>
-    <script src="/static/js/sprintf.js"></script>
-      <script src="/static/js/run_prettify.js"></script>
-    <script src="/static/js/md5.js"></script>
-    <style type="text/css">
-      #img-data{
-        border:0;
-        display:inline;
-        height:10px;
-      }
-      #chartdiv {
-        width: 80%;
-      }
-      .pre-scrollable {
-        max-height: 147px;
-        overflow-y: scroll;
-      }
-      #nav-first {
-        border-radius: 0px;
-        margin-bottom: 0px;
-        min-height: 80px;
+
+<head>
+  <title>SMP Challenge</title>
+  <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+  <link rel="stylesheet" href="/static/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/prettify.css">
+  <script src="/static/js/jquery.min.js"></script>
+  <script src="/static/js/bootstrap.js"></script>
+  <script src="/static/js/sprintf.js"></script>
+  <script src="/static/js/run_prettify.js"></script>
+  <script src="/static/js/md5.js"></script>
+  <style type="text/css">
+    #img-data {
+      border: 0;
+      display: inline;
+      height: 10px;
+    }
+
+    #chartdiv {
+      width: 80%;
+    }
+
+    .pre-scrollable {
+      max-height: 147px;
+      overflow-y: scroll;
+    }
+
+    #nav-first {
+      border-radius: 0px;
+      margin-bottom: 0px;
+      min-height: 80px;
+    }
+
+    #nav-second {
+      border-radius: 0px;
+      margin-bottom: 0px;
+      top: 80px;
+    }
+
+    #nav-first-main {
+      margin: 0 0;
+      height: 80px;
+    }
+
+    #nav-first-main>li {
+      height: 80px;
+    }
+
+    #nav-first-main>li>a {
+      height: 80px;
+      padding-top: 0;
+      padding-bottom: 0;
+      line-height: 80px;
+    }
+
+    #nav-second-main {
+      margin: 0 80px;
+    }
+
+    .nav-second-li {
+      font-size: 120%;
+    }
+
+    #wc {
+      width: 500;
+      height: 500;
+      border: 2px red solid;
+      position: relative;
+      left: 100px;
+      top: 50px;
+    }
+
+    #block1 {
+      background-color: white;
+    }
+
+    #block2 {
+      /*background-color: #f8f8f8;*/
+      background-color: #e8e8e8;
+    }
+
+    #block3 {
+      background-color: white;
+    }
+
+    #block4 {
+      background-color: #e8e8e8;
+    }
+
+    #block5 {
+      background-color: white;
+    }
+
+    #block6 {
+      background-color: #e8e8e8;
+    }
+
+    #block7 {
+      background-color: white;
+    }
+
+    #block8 {
+      background-color: #e8e8e8;
+    }
+
+    #block9 {
+      background-color: white;
+    }
+
+    #block106 {
+      background-color: #e8e8e8;
+    }
+
+    #block11 {
+      background-color: #080808;
+    }
+
+    .p-body {
+      text-align: justify;
+      font-family: "Arial", sans-serif;
+      font-size: 120%;
+    }
+
+    h1,
+    h2 {
+      font-family: "Arial", serif;
+      /*font-size: 150%;*/
+    }
+
+    .timeline-li {
+      font-family: "Arial", sans-serif;
+      font-size: 120%;
+    }
+
+    #logo {
+      padding-left: 100px;
+      padding-top: 10px;
+    }
+
+    .thumbnail {
+      border-color: transparent;
+      background-color: transparent;
+    }
+
+    .avatar {
+      border-radius: 50%;
+    }
+
+    .nav-li {
+      font-size: 120%;
+    }
+
+    td,
+    th {
+      text-align: center;
+    }
+
+    .orange {
+      color: rgb(241, 156, 55) !important;
+    }
+
+    .help-block {
+      display: none;
+    }
+
+    .member-title {
+      padding-top: 10px;
+    }
+
+    .p-title {
+      color: rgb(241, 156, 55) !important;
+    }
+
+    .container-fluid {
+      padding-top: 130px;
+    }
+
+    #forget {
+      cursor: pointer;
+    }
+  </style>
+  <script type="text/javascript">
+    var settings = {
+      //height of sphere container
+      height: 500,
+      //width of sphere container
+      width: 500,
+      //radius of sphere
+      radius: 170,
+      //rotation speed
+      speed: 5,
+      //sphere rotations slower
+      slower: 0.9,
+      //delay between update position
+      timer: 5,
+      //dependence of a font size on axis Z
+      fontMultiplier: 15,
+      left: 1000,
+      top: 50,
+      //tag css stylies on mouse over
+      hoverStyle: {
+        border: 'none',
+        color: '#0b2e6f'
+      },
+      //tag css stylies on mouse out
+      mouseOutStyle: {
+        border: '',
+        color: ''
       }
 
-      #nav-second {
-        border-radius: 0px;
-        margin-bottom: 0px;
-        top: 80px;
-      }
+    };
 
-      #nav-first-main {
-        margin: 0 0;
-        height: 80px;
-      }
+    $(document).ready(function() {
 
-      #nav-first-main>li {
-        height: 80px;
-      }
-      #nav-first-main>li>a {
-        height: 80px;
-        padding-top: 0;
-        padding-bottom: 0;
-        line-height: 80px;
-      }
+      $("#href-register").click(function(e) {
+        e.preventDefault();
+        $("#modal-register").modal("show");
+      });
 
-      #nav-second-main {
-        margin: 0 80px;
-      }
 
-      .nav-second-li {
-        font-size: 120%;
-      }
-      #wc{
-            width:500;
-            height:500;
-            border:2px red solid;
-            position:relative;
-            left:100px;
-            top:50px;
+      $("#href-login").click(function(e) {
+        e.preventDefault();
+        $("#modal-login").modal("show");
+      });
+
+      $("input").focus(function() {
+        $(".form-group").removeClass("has-error");
+        $(".help-block").hide();
+      });
+
+      $("#register").click(function(e) {
+        var email = $("#email").val();
+        var username = $("#username").val();
+        var password = $("#password").val();
+        var repeat_password = $("#repeat-password").val();
+
+        var flag = true;
+        if (email == "") {
+          $("#email").parent().addClass("has-error");
+          $("#email-warn").text("email can not be empty").show();
+          flag = false;
         }
-      #block1 {
-        background-color: white;
-      }
 
-      #block2 {
-        /*background-color: #f8f8f8;*/
-        background-color: #e8e8e8;
-      }
-
-      #block3 {
-        background-color: white;
-      }
-
-      #block4 {
-        background-color: #e8e8e8;
-      }
-
-      #block5 {
-        background-color: white;
-      }
-
-      #block6 {
-        background-color: #e8e8e8;
-      }
-
-      #block7 {
-        background-color: white;
-      }
-
-      #block8 {
-        background-color: #e8e8e8;
-      }
-
-      #block9 {
-        background-color: white;
-      }
-
-      #block106 {
-        background-color: #e8e8e8;
-      }
-
-      #block11 {
-        background-color: #080808;
-      }
-
-      .p-body{
-        text-align: justify;
-        font-family: "Arial", sans-serif;
-        font-size: 120%;
-      }
-
-      h1,h2{
-        font-family: "Arial", serif;
-        /*font-size: 150%;*/
-      }
-
-      .timeline-li {
-        font-family: "Arial", sans-serif;
-        font-size: 120%;
-      }
-
-      #logo {
-        padding-left:100px;
-        padding-top: 10px;
-      }
-
-      .thumbnail {
-        border-color: transparent;
-        background-color: transparent;
-      }
-
-      .avatar {
-        border-radius: 50%;
-      }
-
-      .nav-li {
-        font-size: 120%;
-      }
-
-      td,th {
-        text-align: center;
-      }
-
-      .orange {
-        color: rgb(241,156,55) !important;
-      }
-
-      .help-block {
-        display: none;
-      }
-
-      .member-title {
-        padding-top: 10px;
-      }
-
-      .p-title {
-        color: rgb(241,156,55) !important;
-      }
-
-      .container-fluid {
-        padding-top: 130px;
-      }
-
-      #forget {
-        cursor: pointer;
-      }
-
-    </style>
-    <script type="text/javascript">
-        var settings = {
-        //height of sphere container
-        height: 500,
-        //width of sphere container
-        width: 500,
-        //radius of sphere
-        radius: 170,
-        //rotation speed
-        speed: 5,
-        //sphere rotations slower
-        slower:0.9,
-        //delay between update position
-        timer: 5,
-        //dependence of a font size on axis Z
-        fontMultiplier: 15,
-        left:1000,
-        top:50,
-        //tag css stylies on mouse over
-        hoverStyle: {
-            border: 'none',
-            color: '#0b2e6f'
-        },
-        //tag css stylies on mouse out
-        mouseOutStyle: {
-            border: '',
-            color: ''
+        if (username == "") {
+          $("#username").parent().addClass("has-error");
+          $("#username-warn").text("username can not be empty").show();
+          flag = false;
         }
 
-        };
+        if (password == "") {
+          $("#password").parent().addClass("has-error");
+          $("#password-warn").text("password can not be empty").show();
+          flag = false;
+        }
 
-      $(document).ready(function(){
+        if (repeat_password == "") {
+          $("#repeat-password").parent().addClass("has-error");
+          $("#repeat-password-warn").text("repeat-password can not be empty").show();
+          flag = false;
+        }
 
-        $("#href-register").click(function(e){
-          e.preventDefault();
-          $("#modal-register").modal("show");
-        });
+        if (password.length > 0 && password.length < 8) {
+          $("#password").parent().addClass("has-error");
+          $("#password-warn").text("password too short").show();
+          flag = false;
+        }
 
+        if (repeat_password.length > 0 && password != repeat_password) {
+          $("#repeat-password").parent().addClass("has-error");
+          $("#repeat-password-warn").text("Two input password must be consistent").show();
+          flag = false;
+        }
 
-        $("#href-login").click(function(e){
-          e.preventDefault();
-          $("#modal-login").modal("show");
-        });
+        if (flag == false) {
+          return;
+        }
 
-        $("input").focus(function(){
-          $(".form-group").removeClass("has-error");
-          $(".help-block").hide();
-        });
-
-        $("#register").click(function(e){
-          var email = $("#email").val();
-          var username = $("#username").val();
-          var password = $("#password").val();
-          var repeat_password = $("#repeat-password").val();
-
-          var flag = true;
-          if (email == "") {
-            $("#email").parent().addClass("has-error");
-            $("#email-warn").text("email can not be empty").show();
-            flag = false;
-          }
-
-          if (username == "") {
-            $("#username").parent().addClass("has-error");
-            $("#username-warn").text("username can not be empty").show();
-            flag = false;
-          }
-
-          if (password == "") {
-            $("#password").parent().addClass("has-error");
-            $("#password-warn").text("password can not be empty").show();
-            flag = false;
-          }
-
-          if (repeat_password == "") {
-            $("#repeat-password").parent().addClass("has-error");
-            $("#repeat-password-warn").text("repeat-password can not be empty").show();
-            flag = false;
-          }
-
-          if (password.length > 0 && password.length < 8) {
-            $("#password").parent().addClass("has-error");
-            $("#password-warn").text("password too short").show();
-            flag = false;
-          }
-
-          if (repeat_password.length > 0 && password != repeat_password) {
-            $("#repeat-password").parent().addClass("has-error");
-            $("#repeat-password-warn").text("Two input password must be consistent").show();
-            flag = false;
-          }
-
-          if (flag == false) {
-            return;
-          }
-
-          password = md5(password);
-          var data = {
-            "email": email,
-            "username": username,
-            "password": password
-          }
-          $.post("/register", data, function(data, status) {
-            if (data.code == "00000") {
-              $("#modal-body").html(sprintf('<h4 id="register-notice">We have send a verification email to <a>%s</a>, please check it in two hours</h4>', email));
-              $("#modal-footer").hide();
-            }
-            else if (data.code == "10002") {
-              $("#username").parent().addClass("has-error");
-              $("#username-warn").text("username exists").show();
-            }
-            else if (data.code == "10004") {
-              $("#email").parent().addClass("has-error");
-              $("#email-warn").text("email exists").show();
-            }
-          });
-
-        });
-
-        $("#login").click(function(e){
-          var email = $("#login-email").val();
-          var password = $("#login-password").val();
-
-          var flag = true;
-          if (email == "") {
-            $("#login-email").parent().addClass("has-error");
-            $("#login-email-warn").text("email can not be empty").show();
-            flag = false;
-          }
-          if (password == "") {
-            $("#login-password").parent().addClass("has-error");
-            $("#login-password-warn").text("password can not be empty").show();
-            flag = false;
-          }
-
-          if (flag == false) {
-            return;
-          }
-
-          password = md5(password);
-          var data = {
-            "email": email,
-            "password": password
-          }
-
-          $.post("/login", data, function(data, status) {
-            if (data.code == "00000") {
-              window.location.reload();
-            }
-            else if (data.code == "10006") {
-              $("#login-email").parent().addClass("has-error");
-              $("#login-email-warn").text("email not exists").show();
-            }
-            else if (data.code == "10007") {
-              $("#login-password").parent().addClass("has-error");
-              $("#login-password-warn").text("password error").show();
-            }
-          });
-
-        });
-
-        $("#logout").click(function(e) {
-          e.preventDefault();
-          $.post("/logout", function(data, status) {
-            window.location.reload();
-          })
-        });
-
-        {% if register_success %}
-        $("#modal-register-success").modal("show");
-        $("#modal-register-success").on("hidden.bs.modal", function(e) {
-          window.location.href = "/"
-        })
-        {% endif %}
-
-        $("#editteam").click(function(e) {
-          e.preventDefault();
-          $("#modal-team").modal("show");
-        });
-
-        var nownum = 1;
-        $("#addmember").click(function(e) {
-          e.preventDefault();
-          var html = '<div class="row">\
-                <div class="col-md-2">\
-                  <br>\
-                  <label class="member-title" id="member%d-title">Member %d</label>\
-                </div>\
-                <div class="col-md-3">\
-                  <div class="form-group">\
-                    <label for="member%d-name sr-only"></label>\
-                    <input type="text" class="form-control team-input" id="member%d-name">\
-                    <span class="help-block"></span>\
-                  </div>\
-                </div>\
-                <div class="col-md-3">\
-                  <div class="form-group">\
-                    <label for="member%d-email sr-only"></label>\
-                    <input type="email" class="form-control team-input" id="member%d-email">\
-                    <span class="help-block"></span>\
-                  </div>\
-                </div>\
-                <div class="col-md-3">\
-                  <div class="form-group">\
-                    <label for="member%d-organization sr-only"></label>\
-                    <input type="text" class="form-control team-input" id="member%d-organization">\
-                    <span class="help-block"></span>\
-                  </div>\
-                </div>\
-                <div class="col-md-1">\
-                  <br>\
-                  <button class="btn btn-danger delete-member" id="delete-member%d" deleteid="%d"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>\
-                </div>\
-              </div>';
-
-          $("#team-form").append(sprintf(html, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum));
-          nownum += 1;
-        });
-
-        $(document).on("click", ".delete-member", function(e) {
-          e.preventDefault();
-          $(this).parent().parent().remove();
-          var deleteid=parseInt($(this).attr("deleteid"));
-          for (var i = deleteid+1; i <= nownum; i++) {
-            $(sprintf("#member%d-title", i)).text(sprintf("Member %d", i-1)).attr("id", sprintf("member%d-title", i-1));
-            $(sprintf("#delete-member%d", i)).attr("id", sprintf("delete-member%d", i-1)).attr("deleteid", sprintf("%d", i-1))
-          }
-
-          nownum -= 1;
-        });
-
-        $("#save").click(function(e) {
-          e.preventDefault();
-
-          var team_input = $(".team-input");
-          var flag=true;
-          for (var i = 0; i < team_input.length; i++) {
-            if ($(team_input[i]).val() == "") {
-              $(team_input[i]).parent().find("span").show().text("can not be empty");
-              $(team_input[i]).parent().addClass("has-error");
-              flag=false;
-            }
-          }
-          if (flag == false) {
-            return;
-          }
-
-          var data = {
-            'teamname': $("#team-name").val(),
-            'caption-name': $("#caption-name").val(),
-            'caption-email': $("#caption-email").val(),
-            'caption-organization': $("#caption-organization").val(),
-            'member-num': nownum
-          }
-
-          for (var i = 1; i < nownum; i++) {
-            data[sprintf("member%d-name", i)] = $(sprintf("#member%d-name", i)).val();
-            data[sprintf("member%d-email", i)] = $(sprintf("#member%d-email", i)).val();
-            data[sprintf("member%d-organization", i)] = $(sprintf("#member%d-organization", i)).val();
-          }
-
-          $.post("/update_team", data, function(data, status) {
-            if (data.code == "00000") {
-              alert("update success");
-              $("#modal-team").modal("hide");
-            }
-            else if (data.code == "10009") {
-              $("#team-name").parent().addClass("has-error");
-              $("#team-name").parent().find("span").text("team name exists").show();
-            }
-          });
-
-        });
-
-        $.getJSON("/get_team", function(data, status) {
+        password = md5(password);
+        var data = {
+          "email": email,
+          "username": username,
+          "password": password
+        }
+        $.post("/register", data, function(data, status) {
           if (data.code == "00000") {
-            $("#team-name").val(data.teamname);
-            $("#caption-name").val(data.members[0].name);
-            $("#caption-email").val(data.members[0].email);
-            $("#caption-organization").val(data.members[0].organization);
-            nownum = data.members.length;
-            for (var i = 1; i < nownum; i++) {
-              var html = '<div class="row">\
+            $("#modal-body").html(sprintf('<h4 id="register-notice">We have send a verification email to <a>%s</a>, please check it in two hours</h4>', email));
+            $("#modal-footer").hide();
+          } else if (data.code == "10002") {
+            $("#username").parent().addClass("has-error");
+            $("#username-warn").text("username exists").show();
+          } else if (data.code == "10004") {
+            $("#email").parent().addClass("has-error");
+            $("#email-warn").text("email exists").show();
+          }
+        });
+
+      });
+
+      $("#login").click(function(e) {
+        var email = $("#login-email").val();
+        var password = $("#login-password").val();
+
+        var flag = true;
+        if (email == "") {
+          $("#login-email").parent().addClass("has-error");
+          $("#login-email-warn").text("email can not be empty").show();
+          flag = false;
+        }
+        if (password == "") {
+          $("#login-password").parent().addClass("has-error");
+          $("#login-password-warn").text("password can not be empty").show();
+          flag = false;
+        }
+
+        if (flag == false) {
+          return;
+        }
+
+        password = md5(password);
+        var data = {
+          "email": email,
+          "password": password
+        }
+
+        $.post("/login", data, function(data, status) {
+          if (data.code == "00000") {
+            window.location.reload();
+          } else if (data.code == "10006") {
+            $("#login-email").parent().addClass("has-error");
+            $("#login-email-warn").text("email not exists").show();
+          } else if (data.code == "10007") {
+            $("#login-password").parent().addClass("has-error");
+            $("#login-password-warn").text("password error").show();
+          }
+        });
+
+      });
+
+      $("#logout").click(function(e) {
+        e.preventDefault();
+        $.post("/logout", function(data, status) {
+          window.location.reload();
+        })
+      });
+
+      {
+        %
+        if register_success %
+      }
+      $("#modal-register-success").modal("show");
+      $("#modal-register-success").on("hidden.bs.modal", function(e) {
+        window.location.href = "/"
+      }) {
+        % endif %
+      }
+
+      $("#editteam").click(function(e) {
+        e.preventDefault();
+        $("#modal-team").modal("show");
+      });
+
+      var nownum = 1;
+      $("#addmember").click(function(e) {
+        e.preventDefault();
+        var html = '<div class="row">\
                 <div class="col-md-2">\
                   <br>\
                   <label class="member-title" id="member%d-title">Member %d</label>\
@@ -487,89 +396,377 @@
                 </div>\
               </div>';
 
-              $("#team-form").append(sprintf(html, i,i,i,i,i,i,i,i,i,i));
-              $(sprintf("#member%d-name", i)).val(data.members[i].name);
-              $(sprintf("#member%d-email", i)).val(data.members[i].email);
-              $(sprintf("#member%d-organization", i)).val(data.members[i].organization);
-            }
+        $("#team-form").append(sprintf(html, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum));
+        nownum += 1;
+      });
+
+      $(document).on("click", ".delete-member", function(e) {
+        e.preventDefault();
+        $(this).parent().parent().remove();
+        var deleteid = parseInt($(this).attr("deleteid"));
+        for (var i = deleteid + 1; i <= nownum; i++) {
+          $(sprintf("#member%d-title", i)).text(sprintf("Member %d", i - 1)).attr("id", sprintf("member%d-title", i - 1));
+          $(sprintf("#delete-member%d", i)).attr("id", sprintf("delete-member%d", i - 1)).attr("deleteid", sprintf("%d", i - 1))
+        }
+
+        nownum -= 1;
+      });
+
+      $("#save").click(function(e) {
+        e.preventDefault();
+
+        var team_input = $(".team-input");
+        var flag = true;
+        for (var i = 0; i < team_input.length; i++) {
+          if ($(team_input[i]).val() == "") {
+            $(team_input[i]).parent().find("span").show().text("can not be empty");
+            $(team_input[i]).parent().addClass("has-error");
+            flag = false;
+          }
+        }
+        if (flag == false) {
+          return;
+        }
+
+        var data = {
+          'teamname': $("#team-name").val(),
+          'caption-name': $("#caption-name").val(),
+          'caption-email': $("#caption-email").val(),
+          'caption-organization': $("#caption-organization").val(),
+          'member-num': nownum
+        }
+
+        for (var i = 1; i < nownum; i++) {
+          data[sprintf("member%d-name", i)] = $(sprintf("#member%d-name", i)).val();
+          data[sprintf("member%d-email", i)] = $(sprintf("#member%d-email", i)).val();
+          data[sprintf("member%d-organization", i)] = $(sprintf("#member%d-organization", i)).val();
+        }
+
+        $.post("/update_team", data, function(data, status) {
+          if (data.code == "00000") {
+            alert("update success");
+            $("#modal-team").modal("hide");
+          } else if (data.code == "10009") {
+            $("#team-name").parent().addClass("has-error");
+            $("#team-name").parent().find("span").text("team name exists").show();
           }
         });
-        $("#forget").click(function(){
-          var email = $("#login-email").val();
-          if (email == "") {
-            alert("please enter your email address");
+
+      });
+
+      $.getJSON("/get_team", function(data, status) {
+        if (data.code == "00000") {
+          $("#team-name").val(data.teamname);
+          $("#caption-name").val(data.members[0].name);
+          $("#caption-email").val(data.members[0].email);
+          $("#caption-organization").val(data.members[0].organization);
+          nownum = data.members.length;
+          for (var i = 1; i < nownum; i++) {
+            var html = '<div class="row">\
+                <div class="col-md-2">\
+                  <br>\
+                  <label class="member-title" id="member%d-title">Member %d</label>\
+                </div>\
+                <div class="col-md-3">\
+                  <div class="form-group">\
+                    <label for="member%d-name sr-only"></label>\
+                    <input type="text" class="form-control team-input" id="member%d-name">\
+                    <span class="help-block"></span>\
+                  </div>\
+                </div>\
+                <div class="col-md-3">\
+                  <div class="form-group">\
+                    <label for="member%d-email sr-only"></label>\
+                    <input type="email" class="form-control team-input" id="member%d-email">\
+                    <span class="help-block"></span>\
+                  </div>\
+                </div>\
+                <div class="col-md-3">\
+                  <div class="form-group">\
+                    <label for="member%d-organization sr-only"></label>\
+                    <input type="text" class="form-control team-input" id="member%d-organization">\
+                    <span class="help-block"></span>\
+                  </div>\
+                </div>\
+                <div class="col-md-1">\
+                  <br>\
+                  <button class="btn btn-danger delete-member" id="delete-member%d" deleteid="%d"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>\
+                </div>\
+              </div>';
+
+            $("#team-form").append(sprintf(html, i, i, i, i, i, i, i, i, i, i));
+            $(sprintf("#member%d-name", i)).val(data.members[i].name);
+            $(sprintf("#member%d-email", i)).val(data.members[i].email);
+            $(sprintf("#member%d-organization", i)).val(data.members[i].organization);
+          }
+        }
+      });
+      $("#forget").click(function() {
+        var email = $("#login-email").val();
+        if (email == "") {
+          alert("please enter your email address");
+          return;
+        }
+        var data = {
+          "email": email
+        }
+        $("#login").attr("disabled", "disabled")
+        $.post("/forget_password", data, function(data, status) {
+          if (data.code == "00000") {
+            alert(sprintf("We have sent an password reset email to %s, please have a check.", email))
+            $("#login").removeAttr("disabled");
+          } else {
+            alert("email does not exist");
             return;
           }
-          var data = {
-            "email": email
-          }
-          $("#login").attr("disabled", "disabled")
-          $.post("/forget_password", data, function(data, status) {
-            if (data.code == "00000") {
-              alert(sprintf("We have sent an password reset email to %s, please have a check.", email))
-              $("#login").removeAttr("disabled");
-            }
-            else {
-              alert("email does not exist");
-              return;
-            }
-          });
         });
       });
-    </script>
-  </head>
-  <body>
+    });
+  </script>
+</head>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top" id="nav-second">
-      <div class="container">
-        <ul class="nav navbar-nav" id="nav-second-main">
-          <li class="nav-li"><a class="nav-second-li" href="/" id="href-home"><b>Home</b></a></li>
-          <li class="nav-li"><a class="nav-second-li" href="/description" id="href-description"><b>Dataset</b></a></li>
-          <li class="nav-li active"><a class="nav-second-li" href="#" id="href-dataset"><b>Download</b></a></li>
-          <li class="nav-li"><a class="nav-second-li" href="/challenge" id="href-challenge"><b>Challenge</b></a></li>
-          <li class="nav-li"><a class="nav-second-li" href="/leaderboard" id="href-leaderboard"><b>Leaderboard</b></a></li>
-        </ul>
+<body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top" id="nav-second">
+    <div class="container">
+      <ul class="nav navbar-nav" id="nav-second-main">
+        <li class="nav-li"><a class="nav-second-li" href="/" id="href-home"><b>Home</b></a></li>
+        <li class="nav-li"><a class="nav-second-li" href="/description" id="href-description"><b>Dataset</b></a></li>
+        <li class="nav-li active"><a class="nav-second-li" href="#" id="href-dataset"><b>Download</b></a></li>
+        <li class="nav-li"><a class="nav-second-li" href="/challenge" id="href-challenge"><b>Challenge</b></a></li>
+        <li class="nav-li"><a class="nav-second-li" href="/leaderboard" id="href-leaderboard"><b>Leaderboard</b></a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-default navbar-fixed-top" id="nav-first">
+    <div class="container">
+      <div class="navbar-header">
+        <img src="/static/img/logo.png" width="400px" id="logo">
       </div>
-    </nav>
 
-    <nav class="navbar navbar-default navbar-fixed-top" id="nav-first">
-      <div class="container">
-        <div class="navbar-header">
-          <img src="/static/img/logo.png" width="400px" id="logo">
-        </div>
-
-        {% if not login %}
-        <ul class="nav navbar-nav navbar-right" id="nav-first-main">
-          <li class="nav-li"><a href="#" id="href-register"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Register</a></li>
-          <li class="nav-li"><a href="#" id="href-login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login</a></li>
-          <li class="nav-li"><a href="mailto:social.media.prediction@gmail.com" id="href-contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
-        </ul>
-        {% else %}
-        <ul class="nav navbar-nav navbar-right" id="nav-first-main">
-          <li class="nav-li dropdown">
-            <a href="#" id="user" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{username}}</a>
-            <ul class="dropdown-menu">
-              <li><a href="#" id="editteam">Edit Team</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#" id="logout">Logout</a></li>
-            </ul>
-          </li>
-          <li class="nav-li"><a href="mailto:social.media.prediction@gmail.com" id="href-contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
-        </ul>
-        {% endif %}
-      </div>
-    </nav>
+      {% if not login %}
+      <ul class="nav navbar-nav navbar-right" id="nav-first-main">
+        <li class="nav-li"><a href="#" id="href-register"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Register</a></li>
+        <li class="nav-li"><a href="#" id="href-login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login</a></li>
+        <li class="nav-li"><a href="mailto:social.media.prediction@gmail.com" id="href-contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
+      </ul>
+      {% else %}
+      <ul class="nav navbar-nav navbar-right" id="nav-first-main">
+        <li class="nav-li dropdown">
+          <a href="#" id="user" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{username}}</a>
+          <ul class="dropdown-menu">
+            <li><a href="#" id="editteam">Edit Team</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#" id="logout">Logout</a></li>
+          </ul>
+        </li>
+        <li class="nav-li"><a href="mailto:social.media.prediction@gmail.com" id="href-contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
+      </ul>
+      {% endif %}
+    </div>
+  </nav>
 
 
-    <div class="container-fluid" id="maintext">
+  <div class="container-fluid" id="maintext">
 
 
-      <div class="row" id="block1">
-        <div class="col-md-8 col-md-offset-2">
-          <!-- <h2 class="p-title"><b>Download</b></h2>
+    <div class="row" id="block1">
+      <div class="col-md-8 col-md-offset-2">
+        <!-- <h2 class="p-title"><b>Download</b></h2>
           <p class="p-body">Each data table contains three different donwload formats in both train and test dataset.</p> -->
 
-          <h2 class="p-title"><b>Training Set</b></h2>
+        <h2 class="p-title"><b>SMPD 2019</b></h2>
+        <div class="row">
+          <ul id="myTab" class="nav nav-tabs" style="margin-left:20px">
+            <li><a href="#json" data-toggle="tab">.JSON</a></li>
+            <li><a href="#txt" data-toggle="tab">.TXT</a></li>
+
+          </ul>
+          <br>
+            <div id="myTabContent" class="tab-content">
+              <div class="tab-pane fade" id="txt">
+                <div class="row">
+                  <div class="col-md-3 col-md-offset-1">
+                    <h4>All data</h4>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="https://drive.google.com/open?id=1_n4Mb9GwwcjxSo4JW2Xay8aRaei6dy8t" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3 col-md-offset-1">
+                    <h4>Label</h4>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="https://drive.google.com/open?id=1FW14l4jkTVV6hBymdrFeszq5B993axh_" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-3 col-md-offset-1">
+                    <h4>Image</h4>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="https://drive.google.com/open?id=196ssXYxA6YUbrFriVUP2m9rDN8_guZLU" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-3 col-md-offset-1">
+                    <h4>Category</h4>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="https://drive.google.com/open?id=1pQRC6fdFRPx48_iOlhuqt2K5TM50P5iB" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-3 col-md-offset-1">
+                    <h4>Tag</h4>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="https://drive.google.com/open?id=1OyrxlbCqE0qDwb9Ks6WrEYdpCacH--qA" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-3 col-md-offset-1">
+                    <h4>Temporal-spatial</h4>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="https://drive.google.com/open?id=1LN2-4rin05TdlnKt2KN4L8irrjGJ6SpX" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-3 col-md-offset-1">
+                    <h4>Additional</h4>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="https://drive.google.com/open?id=1c8TeShlNFE-_mdN5zYKutcVqTP_iZ3J8" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="json">
+                <div class="row">
+                  <div class="col-md-3 col-md-offset-1">
+                    <h4>All data</h4>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="https://drive.google.com/open?id=1W-BGVQ5Xi-eIxTC7ZvnpLptlvIDW4giQ" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  </div>
+                </div>
+                <!-- <div class="row">
+                  <div class="col-md-3 col-md-offset-1">
+                    <h4>Label</h4>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-3 col-md-offset-1">
+                    <h4>Image</h4>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  </div>
+                </div> -->
+
+                <div class="row">
+                  <div class="col-md-3 col-md-offset-1">
+                    <h4>Category</h4>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="https://drive.google.com/open?id=1dDPK4S_PV6sR-EOoKCqR39XxTeiSItqt" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-3 col-md-offset-1">
+                    <h4>Tag</h4>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="https://drive.google.com/open?id=11FqpOM33Py79VR2qRd9lM7FGgwWKKGB1" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-3 col-md-offset-1">
+                    <h4>Temporal-spatial</h4>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="https://drive.google.com/open?id=1LJbmSE5F2SPY2i7ZZxbbdrO5WFpsbF7S" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-3 col-md-offset-1">
+                    <h4>Additional</h4>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="https://drive.google.com/open?id=1jypri6RdaROwfcsUsKzyjvd1gFE08qkS" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+        </div>
+
+
+        <!-- <h2 class="p-title"><b>Training Set</b></h2>
+          <div class="row">
+            <div class="col-md-3 col-md-offset-1">
+              <h4>All data</h4>
+            </div>
+            <div class="col-md-8">
+              <a href="https://drive.google.com/open?id=1FW14l4jkTVV6hBymdrFeszq5B993axh_" class="btn btn-default btn-block" role="button">.TXT</a>
+            </div>
+          </div>
           <div class="row">
             <div class="col-md-3 col-md-offset-1">
               <h4>Label</h4>
@@ -634,100 +831,101 @@
             <div class="col-md-4">
               <a href="https://drive.google.com/open?id=1jypri6RdaROwfcsUsKzyjvd1gFE08qkS" class="btn btn-default btn-block" role="button">.JSON</a>
             </div>
+          </div> -->
+      </div>
+    </div>
+
+    <!-- <div class="row" id="block2">
+      <div class="col-md-8 col-md-offset-2">
+        <h2 class="p-title"><b>Test Set</b></h2>
+        <div class="row">
+          <div class="col-md-3 col-md-offset-1">
+            <h4>Image</h4>
+          </div>
+          <div class="col-md-8">
+            <a href="#" class="btn btn-default btn-block" role="button">.TXT</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3 col-md-offset-1">
+            <h4>Category</h4>
+          </div>
+          <div class="col-md-4">
+            <a href="#" class="btn btn-default btn-block" role="button">.TXT</a>
+          </div>
+          <div class="col-md-4">
+            <a href="#" class="btn btn-default btn-block" role="button">.JSON</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3 col-md-offset-1">
+            <h4>Tag</h4>
+          </div>
+          <div class="col-md-4">
+            <a href="#" class="btn btn-default btn-block" role="button">.TXT</a>
+          </div>
+          <div class="col-md-4">
+            <a href="#" class="btn btn-default btn-block" role="button">.JSON</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3 col-md-offset-1">
+            <h4>Temporal-spatial</h4>
+          </div>
+          <div class="col-md-4">
+            <a href="#" class="btn btn-default btn-block" role="button">.TXT</a>
+          </div>
+          <div class="col-md-4">
+            <a href="#" class="btn btn-default btn-block" role="button">.JSON</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3 col-md-offset-1">
+            <h4>Additional</h4>
+          </div>
+          <div class="col-md-4">
+            <a href="#" class="btn btn-default btn-block" role="button">.TXT</a>
+          </div>
+          <div class="col-md-4">
+            <a href="#" class="btn btn-default btn-block" role="button">.JSON</a>
           </div>
         </div>
       </div>
+    </div> -->
 
-      <div class="row" id="block2">
-        <div class="col-md-8 col-md-offset-2">
-          <h2 class="p-title"><b>Test Set</b></h2>
-          <div class="row">
-            <div class="col-md-3 col-md-offset-1">
-              <h4>Image</h4>
-            </div>
-            <div class="col-md-8">
-              <a href="#" class="btn btn-default btn-block" role="button">.TXT</a>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-3 col-md-offset-1">
-              <h4>Category</h4>
-            </div>
-            <div class="col-md-4">
-              <a href="#" class="btn btn-default btn-block" role="button">.TXT</a>
-            </div>
-            <div class="col-md-4">
-              <a href="#" class="btn btn-default btn-block" role="button">.JSON</a>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-3 col-md-offset-1">
-              <h4>Tag</h4>
-            </div>
-            <div class="col-md-4">
-              <a href="#" class="btn btn-default btn-block" role="button">.TXT</a>
-            </div>
-            <div class="col-md-4">
-              <a href="#" class="btn btn-default btn-block" role="button">.JSON</a>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-3 col-md-offset-1">
-              <h4>Temporal-spatial</h4>
-            </div>
-            <div class="col-md-4">
-              <a href="#" class="btn btn-default btn-block" role="button">.TXT</a>
-            </div>
-            <div class="col-md-4">
-              <a href="#" class="btn btn-default btn-block" role="button">.JSON</a>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-3 col-md-offset-1">
-              <h4>Additional</h4>
-            </div>
-            <div class="col-md-4">
-              <a href="#" class="btn btn-default btn-block" role="button">.TXT</a>
-            </div>
-            <div class="col-md-4">
-              <a href="#" class="btn btn-default btn-block" role="button">.JSON</a>
-            </div>
-          </div>
-        </div>
+    <div class="row" id="block2">
+      <div class="col-md-8 col-md-offset-2">
+        <h2 class="p-title"><b>Label</b></h2>
+        <p class="p-body">Each row contains the popularity score(log-views) of the corresponding post.</p>
+        <pre>Popularityscore<br>...<br>3.2<br>2.3<br>...</pre>
       </div>
+    </div>
 
-      <div class="row" id="block3">
-        <div class="col-md-8 col-md-offset-2">
-          <h2 class="p-title"><b>Label</b></h2>
-          <p class="p-body">Each row contains the popularity score(log-views) of the corresponding post.</p>
-          <pre>Popularityscore<br>...<br>3.2<br>2.3<br>...</pre>
-        </div>
+    <div class="row" id="block3">
+      <div class="col-md-8 col-md-offset-2">
+        <h2 class="p-title"><b>Image</b></h2>
+        <p class="p-body">Each row contains the URL of the cprrsponding photo or video</p>
+        <pre>...<br>"https://www.flickr.com/photos/58708830@N00/385070026"<br>"https://www.flickr.com/photos/97042891@N00/943750056"<br>...</pre>
+        <img src="/static/img/1.jpg" height='130' width='210'><img src="/static/img/2.jpg" height='130' width='200'><img src="/static/img/4.jpg" height='130' width='200'><img src="/static/img/5.jpg" height='130'><img src="/static/img/3.jpg"
+          height='130'><img src="/static/img/6.jpg" height='130'>
+        <!-- <img src="/static/img/7.jpg" height='130'><img src="/static/img/8.jpg" height='130'width='204'><img src="/static/img/13.jpg" height='130' width='100'><img src="/static/img/9.jpg" height='130'><img src="/static/img/10.jpg" height='130' width='169'> -->
       </div>
+    </div>
 
-      <div class="row" id="block4">
-        <div class="col-md-8 col-md-offset-2">
-          <h2 class="p-title"><b>Image</b></h2>
-          <p class="p-body">Each row contains the URL of the cprrsponding photo or video</p>
-          <pre>...<br>"https://www.flickr.com/photos/58708830@N00/385070026"<br>"https://www.flickr.com/photos/97042891@N00/943750056"<br>...</pre>
-          <img src="/static/img/1.jpg" height='130' width='210'><img src="/static/img/2.jpg" height='130'width='200'><img src="/static/img/4.jpg"  height='130' width='200'><img src="/static/img/5.jpg"  height='130'><img src="/static/img/3.jpg"  height='130'><img src="/static/img/6.jpg" height='130'>
-          <!-- <img src="/static/img/7.jpg" height='130'><img src="/static/img/8.jpg" height='130'width='204'><img src="/static/img/13.jpg" height='130' width='100'><img src="/static/img/9.jpg" height='130'><img src="/static/img/10.jpg" height='130' width='169'> -->
-        </div>
-      </div>
-
-      <div class="row" id="block5">
-        <div class="col-md-8 col-md-offset-2">
-          <h2 class="p-title"><b>Category</b></h2>
-          <p class="p-body">Each row in the file corresponds a category set of the post.</p>
-          <div class="row">
-            <div class="col-md-6">
-              <pre class="pre-scrollable">Uid, Pid, Category, Subcategory, Concept<br>...<br>"70478@N10", "564687", "Whether&Season", "Raining", "umbrella"<br>"37810@N60", "565202", "Fashion", "Girls,Fashion", "skirt"<br>"25893@N22", "565381", "Whether&Season", "Raining", "puddle"<br>...
+    <div class="row" id="block4">
+      <div class="col-md-8 col-md-offset-2">
+        <h2 class="p-title"><b>Category</b></h2>
+        <p class="p-body">Each row in the file corresponds a category set of the post.</p>
+        <div class="row">
+          <div class="col-md-6">
+            <pre class="pre-scrollable">Uid  Pid  Category  Subcategory  Concept<br>...<br>"70478@N10"  "564687"  "Whether&Season"  "Raining"  "umbrella"<br>"37810@N60"  "565202"  "Fashion"  "Girls,Fashion"  "skirt"<br>"25893@N22"  "565381"  "Whether&Season"  "Raining"  "puddle"<br>...
               </pre>
-            </div>
-            <div class="col-md-6">
+          </div>
+          <div class="col-md-6">
             <pre class="pre-scrollable">
 '''
   {
@@ -737,246 +935,256 @@
     "Subcategory": "Raining",
     "Concept": "umbrella"}
 '''</pre>
-            </div>
           </div>
-          <p class="p-body"><strong>Uid: </strong>the user this post belongs to.</p>
-          <p class="p-body"><strong>Pid: </strong>the photo along with the post. One Pid can locate a particular post.</p>
-          <p class="p-body"><strong>Category: </strong>the first category of the post.(11 classes)</p>
-          <p class="p-body"><strong>Subcategory: </strong>there are 77 classes in 2nd level category.</p>
-          <p class="p-body"><strong>Concept: </strong>there are 668 different description.</p>
         </div>
+        <p class="p-body"><strong>Uid: </strong>the user this post belongs to.</p>
+        <p class="p-body"><strong>Pid: </strong>the photo along with the post. One Pid can locate a particular post.</p>
+        <p class="p-body"><strong>Category: </strong>the first category of the post.(11 classes)</p>
+        <p class="p-body"><strong>Subcategory: </strong>there are 77 classes in 2nd level category.</p>
+        <p class="p-body"><strong>Concept: </strong>there are 668 different description.</p>
       </div>
+    </div>
 
-      <div class="row" id="block6">
-        <div class="col-md-8 col-md-offset-2">
-          <h2 class="p-title"><b>Tag</b></h2>
-          <p class="p-body">Each row represents a tag set of the post.</p>
-          <div class="row">
-            <div class="col-md-6">
-              <pre class="pre-scrollable">Uid Pid Title Mediatype Alltags<br>...<br>"70478@N10" "564687" "Sarah Moon 3" "photo" "black hat fashion yellow umbrella"<br>"37810@N60" "565202" "2016-03-06 22.19.08" "photo" "orange sexy philadelphia hockey nhl sweater bra skirt blonde flowing cheerleader cleavage plaid flyers philadelphiaflyers icegirls"<br>"25893@N22" "565381" "Tristesse at the Federal Chancellery" "photo" "blackandwhite bw white black reflection berlin wet water rain canon germany puddle deutschland eos blackwhite wasser symmetry sw schwarzweiss puddles reflexion weiss federal schwarz regen tristesse trist reflektion kanzleramt pfuetze 6d nass bundeskanzleramt 2016 symmetrie pftze weis pftzen chancellery schwarzweis federalchancellery pfuetzen canoneos6d hoonose68 againstautotagging sgrossien grossien"<br>...</pre>
-              </div>
-            <div class="col-md-6">
-              <pre class="pre-scrollable prettyprint lang-json">
+    <div class="row" id="block5">
+      <div class="col-md-8 col-md-offset-2">
+        <h2 class="p-title"><b>Tag</b></h2>
+        <p class="p-body">Each row represents a tag set of the post.</p>
+        <div class="row">
+          <div class="col-md-6">
+            <pre
+              class="pre-scrollable">Uid Pid Title Mediatype Alltags<br>...<br>"70478@N10" "564687" "Sarah Moon 3" "photo" "black hat fashion yellow umbrella"<br>"37810@N60" "565202" "2016-03-06 22.19.08" "photo" "orange sexy philadelphia hockey nhl sweater bra skirt blonde flowing cheerleader cleavage plaid flyers philadelphiaflyers icegirls"<br>"25893@N22" "565381" "Tristesse at the Federal Chancellery" "photo" "blackandwhite bw white black reflection berlin wet water rain canon germany puddle deutschland eos blackwhite wasser symmetry sw schwarzweiss puddles reflexion weiss federal schwarz regen tristesse trist reflektion kanzleramt pfuetze 6d nass bundeskanzleramt 2016 symmetrie pftze weis pftzen chancellery schwarzweis federalchancellery pfuetzen canoneos6d hoonose68 againstautotagging sgrossien grossien"<br>...</pre>
+          </div>
+          <div class="col-md-6">
+            <pre class="pre-scrollable prettyprint lang-json">
 {
   "Uid": "70478@N10",
-  "Pid": 564687,
+  "Pid": "564687",
   "Tile": "Sarah Moon 3",
   "Mediatype": "photo",
-  "Alltags": "black", "hat", "fashion", "yellow", "umbrella"
+  "Alltags": "black" "hat" "fashion" "yellow" "umbrella"
 }
 </pre>
-            </div>
           </div>
-          <p class="p-body"><strong>Title: </strong>the tile of the post defined by the user.</p>
-          <p class="p-body"><strong>Mediatype: </strong>the type of the attached media file, including 'photo' and 'video'.</p>
-          <p class="p-body"><strong>Alltags: </strong>the customized tags from users.</p>
         </div>
+        <p class="p-body"><strong>Title: </strong>the tile of the post defined by the user.</p>
+        <p class="p-body"><strong>Mediatype: </strong>the type of the attached media file, including 'photo' and 'video'.</p>
+        <p class="p-body"><strong>Alltags: </strong>the customized tags from users.</p>
       </div>
+    </div>
 
-      <div class="row" id="block7">
-        <div class="col-md-8 col-md-offset-2">
-          <h2 class="p-title"><b>Temporal-spatial</b></h2>
-          <p class="p-body">Each row offers the date and geographic information of the post.</p>
-          <div class="row">
-            <div class="col-md-6">
-              <pre class="pre-scrollable"s>Uid Pid Postdate Latitude Longitude Geoaccuracy<br>..<br>"70478@N10" "564687" "1457068974" "0" "0" "0"<br>"37810@N60" "565202" "1457273948" "0" "0" "0"<br>"25893@N22" "565381" "1457239452" "52.520213" "13.373097" "16"<br>...
+    <div class="row" id="block6">
+      <div class="col-md-8 col-md-offset-2">
+        <h2 class="p-title"><b>Temporal-spatial</b></h2>
+        <p class="p-body">Each row offers the date and geographic information of the post.</p>
+        <div class="row">
+          <div class="col-md-6">
+            <pre class="pre-scrollable" s>Uid Pid Postdate Latitude Longitude Geoaccuracy<br>..<br>"70478@N10" "564687" "1457068974" "0" "0" "0"<br>"37810@N60" "565202" "1457273948" "0" "0" "0"<br>"25893@N22" "565381" "1457239452" "52.520213" "13.373097" "16"<br>...
               </pre>
-            </div>
-            <div class="col-md-6">
-              <pre class="pre-scrollable prettyprint lang-json">
+          </div>
+          <div class="col-md-6">
+            <pre class="pre-scrollable prettyprint lang-json">
 {
   "Uid": "25893@N22",
-  "Pid": 565381,
-  "Latitude": 52.520213,
-  "Longitude": 13.373097,
-  "Geoaccuracy": 16
+  "Pid": "565381",
+  "Latitude": "52.520213",
+  "Longitude": "13.373097",
+  "Geoaccuracy": "16"
 }</pre>
-            </div>
           </div>
-          <p class="p-body"><strong>Postdate: </strong>the publish timestamp of the post. It can be converted to Datetime by following python code:</p>
-          <pre class="prettyprint lang-py">
+        </div>
+        <p class="p-body"><strong>Postdate: </strong>the publish timestamp of the post. It can be converted to Datetime by following python code:</p>
+        <pre class="prettyprint lang-py">
   import time
   timestamp = 1457068974
   timeArray = time.localtime(timestamp)
   datetime = time.strftime("%Y-%m-%d %H:%M:%S", timeArray)</pre>
-          <p class="p-body"><strong>Latitude: </strong>the latitude whose valid range is -90 to 90. Anything more than 6 decimal places will be truncated.</p>
-          <p class="p-body"><strong>Longitude: </strong>the longitude whose valid range is -180 to 180. Anything more than 6 decimal places will be truncated.</p>
-          <p class="p-body"><strong>Geoaccuracy: </strong>recorded accuracy level of the location information. World level is 1, Country is ~3, Region ~6, City ~11, Street ~16. The current range is 1-16. Defaults to 16 if not specified.</p>
-        </div>
+        <p class="p-body"><strong>Latitude: </strong>the latitude whose valid range is -90 to 90. Anything more than 6 decimal places will be truncated.</p>
+        <p class="p-body"><strong>Longitude: </strong>the longitude whose valid range is -180 to 180. Anything more than 6 decimal places will be truncated.</p>
+        <p class="p-body"><strong>Geoaccuracy: </strong>recorded accuracy level of the location information. World level is 1, Country is ~3, Region ~6, City ~11, Street ~16. The current range is 1-16. Defaults to 16 if not specified.</p>
       </div>
+    </div>
 
-      <div class="row" id="block8">
-        <div class="col-md-8 col-md-offset-2">
-          <h2 class="p-title"><b>Additional</b></h2>
-          <p class="p-body">Each row offers the supplimental information of the post.</p>
-          <div class="row">
-            <div class="col-md-6">
-              <pre class="pre-scrollable">Uid Pid Pathalias Ispublic Mediastatus<br>...<br>"70478@N10" "564687" "None" "1" "ready"<br>"37810@N60" "565202" "None" "1" "ready"<br>"25893@N22" "565381" "hoo_nose_68" "1" "ready"<br>...
+    <div class="row" id="block7">
+      <div class="col-md-8 col-md-offset-2">
+        <h2 class="p-title"><b>Additional</b></h2>
+        <p class="p-body">Each row offers the supplimental information of the post.</p>
+        <div class="row">
+          <div class="col-md-6">
+            <pre class="pre-scrollable">Uid Pid Pathalias Ispublic Mediastatus<br>...<br>"70478@N10" "564687" "None" "1" "ready"<br>"37810@N60" "565202" "None" "1" "ready"<br>"25893@N22" "565381" "hoo_nose_68" "1" "ready"<br>...
               </pre>
-            </div>
-            <div class="col-md-6">
-              <pre class="pre-scrollable prettyprint lang-json">
+          </div>
+          <div class="col-md-6">
+            <pre class="pre-scrollable prettyprint lang-json">
 {
   "Uid": "25893@N22",
-  "Pid": 565381,
+  "Pid": "565381",
   "Pathalias": "hoo_nose_68",
-  "Ispublic": 1,
+  "Ispublic": "1",
   "Mediastatus": "ready"
 }
 </pre>
+          </div>
+        </div>
+        <p class="p-body"><strong>Pathalias: </strong>the path alias provided by the user.</p>
+        <p class="p-body"><strong>Ispublic: </strong>indicates that the post is authenticated with 'read' permissions.</p>
+        <p class="p-body"><strong>Mediastatus: </strong>indicates that the attached media is ready to access by others.</p>
+        <br>
+      </div>
+    </div>
+    <div class="row" id="block11">
+      <div class="col-md-10 col-md-offset-1">
+        <center>
+          <h5 style="color:white;">Copyright © 2019. SMP Challenge Organization Committee. All rights reserved.</h5>
+        </center>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-register">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="modal-title">Register</h4>
+        </div>
+        <div class="modal-body" id="modal-body">
+          <form id="form">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email">
+              <span id="email-warn" class="help-block"></span>
             </div>
-          </div>
-          <p class="p-body"><strong>Pathalias: </strong>the path alias provided by the user.</p>
-          <p class="p-body"><strong>Ispublic: </strong>indicates that the post is authenticated with 'read' permissions.</p>
-          <p class="p-body"><strong>Mediastatus: </strong>indicates that the attached media is ready to access by others.</p>
-          <br>
+
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" class="form-control" id="username">
+              <span id="username-warn" class="help-block"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password">
+              <span id="password-warn" class="help-block"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="repeat-password">Repeat Password</label>
+              <input type="password" class="form-control" id="repeat-password">
+              <span id="repeat-password-warn" class="help-block"></span>
+            </div>
+
+          </form>
+
         </div>
-      </div>
-      <div class="row" id="block11">
-        <div class="col-md-10 col-md-offset-1">
-          <center><h5 style="color:white;">Copyright © 2019. SMP Challenge Organization Committee. All rights reserved.</h5></center>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal fade" id="modal-register">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="modal-title">Register</h4>
-          </div>
-          <div class="modal-body" id="modal-body">
-            <form id="form">
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email">
-                <span id="email-warn" class="help-block"></span>
-              </div>
-
-              <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" class="form-control" id="username">
-                <span id="username-warn" class="help-block"></span>
-              </div>
-
-              <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password">
-                <span id="password-warn" class="help-block"></span>
-              </div>
-
-              <div class="form-group">
-                <label for="repeat-password">Repeat Password</label>
-                <input type="password" class="form-control" id="repeat-password">
-                <span id="repeat-password-warn" class="help-block"></span>
-              </div>
-
-            </form>
-
-          </div>
-          <div class="modal-footer" id="modal-footer">
-            <center><button type="button" class="btn btn-primary" id="register">Register</button></center>
-          </div>
+        <div class="modal-footer" id="modal-footer">
+          <center><button type="button" class="btn btn-primary" id="register">Register</button></center>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="modal fade" id="modal-login">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Login</h4>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <label for="login-email">Email</label>
-                <input type="email" class="form-control" id="login-email">
-                <span id="login-email-warn" class="help-block"></span>
-              </div>
+  <div class="modal fade" id="modal-login">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Login</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="login-email">Email</label>
+              <input type="email" class="form-control" id="login-email">
+              <span id="login-email-warn" class="help-block"></span>
+            </div>
 
-              <div class="form-group">
-                <label for="login-password">Password</label>
-                <input type="password" class="form-control" id="login-password">
-                <span id="login-password-warn" class="help-block"></span>
-              </div>
+            <div class="form-group">
+              <label for="login-password">Password</label>
+              <input type="password" class="form-control" id="login-password">
+              <span id="login-password-warn" class="help-block"></span>
+            </div>
 
-              <a id="forget">Forget password?</a>
-            </form>
+            <a id="forget">Forget password?</a>
+          </form>
 
-          </div>
-          <div class="modal-footer">
-            <center><button type="button" class="btn btn-primary" id="login">Login</button></center>
-          </div>
+        </div>
+        <div class="modal-footer">
+          <center><button type="button" class="btn btn-primary" id="login">Login</button></center>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="modal fade" id="modal-team">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">My Team</h4>
-          </div>
-          <div class="modal-body">
-            <form id="team-form">
-              <div class="form-group">
-                <label for="team-name">Team Name</label>
-                <input type="text" class="form-control team-input" id="team-name">
-                <span id="team-name-warn" class="help-block"></span>
+  <div class="modal fade" id="modal-team">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">My Team</h4>
+        </div>
+        <div class="modal-body">
+          <form id="team-form">
+            <div class="form-group">
+              <label for="team-name">Team Name</label>
+              <input type="text" class="form-control team-input" id="team-name">
+              <span id="team-name-warn" class="help-block"></span>
+            </div>
+
+            <div class="row">
+              <div class="col-md-2">
+                <br>
+                <label class="member-title">Caption</label>
               </div>
-
-              <div class="row">
-                <div class="col-md-2">
-                  <br>
-                  <label class="member-title">Caption</label>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="caption-name">Name</label>
+                  <input type="text" class="form-control team-input" id="caption-name">
+                  <span class="help-block"></span>
                 </div>
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label for="caption-name">Name</label>
-                    <input type="text" class="form-control team-input" id="caption-name">
-                    <span class="help-block"></span>
-                  </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="caption-email">Email</label>
+                  <input type="email" class="form-control team-input" id="caption-email">
+                  <span class="help-block"></span>
                 </div>
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label for="caption-email">Email</label>
-                    <input type="email" class="form-control team-input" id="caption-email">
-                    <span class="help-block"></span>
-                  </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="caption-organization">Organization</label>
+                  <input type="text" class="form-control team-input" id="caption-organization">
+                  <span class="help-block"></span>
                 </div>
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label for="caption-organization">Organization</label>
-                    <input type="text" class="form-control team-input" id="caption-organization">
-                    <span class="help-block"></span>
-                  </div>
-                </div>
-                <!-- <div class="col-md-1">
+              </div>
+              <!-- <div class="col-md-1">
                   <button class="btn btn-danger"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
                 </div> -->
-              </div>
-
-
-
-            </form>
-            <div class="row">
-              <div class="col-md-1 col-md-offset-2">
-                <br>
-                <button class="btn btn-default"><span class="glyphicon glyphicon-plus" id="addmember"></span></button>
-              </div>
             </div>
 
+
+
+          </form>
+          <div class="row">
+            <div class="col-md-1 col-md-offset-2">
+              <br>
+              <button class="btn btn-default"><span class="glyphicon glyphicon-plus" id="addmember"></span></button>
+            </div>
           </div>
-          <div class="modal-footer">
-            <center><button type="button" class="btn btn-primary" id="save">Save</button></center>
-          </div>
+
+        </div>
+        <div class="modal-footer">
+          <center><button type="button" class="btn btn-primary" id="save">Save</button></center>
         </div>
       </div>
     </div>
+  </div>
 
-  </body>
- </html>
+  <script>
+    $(function() {
+      $('#myTab a:last').tab('show')
+    })
+  </script>
+
+</body>
+
+</html>
