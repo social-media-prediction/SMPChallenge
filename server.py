@@ -238,28 +238,28 @@ def challenge():
     res.set_cookie('token', token)
     return res
 
-@app.route('/description', methods=['GET'])
+@app.route('/download', methods=['GET'])
 def description():
 
     if 'debug' in request.args:
-        res = make_response(render_template('description.html'))
+        res = make_response(render_template('download.html'))
         res.delete_cookie('token')
         return res
 
     cookies = request.cookies
     if not 'token' in cookies:
-        return render_template('description.html')
+        return render_template('download.html')
     token = cookies['token']
 
     status, uid = token2uid(token)
     if status != SUCCESS:
-        res = make_response(render_template('description.html'))
+        res = make_response(render_template('download.html'))
         res.delete_cookie('token')
         return res
 
     status, username = uid2username(uid)
     if status != SUCCESS:
-        res = make_response(render_template('description.html'))
+        res = make_response(render_template('download.html'))
         res.delete_cookie('token')
         return res
 
