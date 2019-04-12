@@ -12,6 +12,11 @@
   <script src="/static/js/run_prettify.js"></script>
   <script src="/static/js/md5.js"></script>
   <style type="text/css">
+  .black-background {background-color:	#696969	;}
+  .btn.active.focus {
+    outline: none;
+}
+  .white {color:#ffffff;}
     #img-data {
       border: 0;
       display: inline;
@@ -349,7 +354,7 @@
       $("#modal-register-success").modal("show");
       $("#modal-register-success").on("hidden.bs.modal", function(e) {
         window.location.href = "/"
-      }) 
+      })
       {% endif %}
 
       $("#editteam").click(function(e) {
@@ -577,8 +582,8 @@
         <h2 class="p-title"><b>SMPD 2019</b></h2>
         <div class="row">
           <ul id="myTab" class="nav nav-tabs" style="margin-left:20px">
-            <li><a href="#json" data-toggle="tab">.JSON</a></li>
             <li><a href="#txt" data-toggle="tab">.TXT</a></li>
+            <li><a href="#json" data-toggle="tab">.JSON</a></li>
           </ul>
 
           <div id="myTabContent" class="tab-content">
@@ -588,10 +593,10 @@
                   <h4>All data</h4>
                 </div>
                 <div class="col-md-3">
-                  <a href="https://drive.google.com/open?id=1_n4Mb9GwwcjxSo4JW2Xay8aRaei6dy8t" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  <a href="https://drive.google.com/open?id=1_n4Mb9GwwcjxSo4JW2Xay8aRaei6dy8t" class="btn btn-default  btn-block black-background white" role="button">TRAIN</a>
                 </div>
                 <div class="col-md-3">
-                  <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  <a href="" class="btn btn-default btn-block black-background  " role="button" disabled="disabled">TEST</a>
                 </div>
               </div>
               <div class="row">
@@ -599,10 +604,10 @@
                   <h4>Label</h4>
                 </div>
                 <div class="col-md-3">
-                  <a href="https://drive.google.com/open?id=1FW14l4jkTVV6hBymdrFeszq5B993axh_" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  <a href="https://drive.google.com/open?id=1FW14l4jkTVV6hBymdrFeszq5B993axh_" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
                 </div>
                 <div class="col-md-3">
-                  <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  <a href="" class="btn btn-default btn-block black-background " role="button" disabled="disabled">TEST</a>
                 </div>
               </div>
 
@@ -611,10 +616,10 @@
                   <h4>Image</h4>
                 </div>
                 <div class="col-md-3">
-                  <a href="https://drive.google.com/open?id=196ssXYxA6YUbrFriVUP2m9rDN8_guZLU" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  <a href="https://drive.google.com/open?id=196ssXYxA6YUbrFriVUP2m9rDN8_guZLU" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
                 </div>
                 <div class="col-md-3">
-                  <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  <a href="" class="btn btn-default btn-block black-background " role="button" disabled="disabled">TEST</a>
                 </div>
               </div>
 
@@ -623,10 +628,10 @@
                   <h4>Category</h4>
                 </div>
                 <div class="col-md-3">
-                  <a href="https://drive.google.com/open?id=1pQRC6fdFRPx48_iOlhuqt2K5TM50P5iB" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  <a href="https://drive.google.com/open?id=1pQRC6fdFRPx48_iOlhuqt2K5TM50P5iB" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
                 </div>
                 <div class="col-md-3">
-                  <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  <a href="" class="btn btn-default btn-block black-background " role="button" disabled="disabled">TEST</a>
                 </div>
               </div>
 
@@ -635,10 +640,10 @@
                   <h4>Tag</h4>
                 </div>
                 <div class="col-md-3">
-                  <a href="https://drive.google.com/open?id=1OyrxlbCqE0qDwb9Ks6WrEYdpCacH--qA" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  <a href="https://drive.google.com/open?id=1OyrxlbCqE0qDwb9Ks6WrEYdpCacH--qA" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
                 </div>
                 <div class="col-md-3">
-                  <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  <a href="" class="btn btn-default btn-block black-background " role="button" disabled="disabled">TEST</a>
                 </div>
               </div>
 
@@ -647,10 +652,10 @@
                   <h4>Temporal-spatial</h4>
                 </div>
                 <div class="col-md-3">
-                  <a href="https://drive.google.com/open?id=1LN2-4rin05TdlnKt2KN4L8irrjGJ6SpX" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  <a href="https://drive.google.com/open?id=1LN2-4rin05TdlnKt2KN4L8irrjGJ6SpX" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
                 </div>
                 <div class="col-md-3">
-                  <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  <a href="" class="btn btn-default btn-block black-background " role="button" disabled="disabled">TEST</a>
                 </div>
               </div>
 
@@ -659,10 +664,10 @@
                   <h4>Additional</h4>
                 </div>
                 <div class="col-md-3">
-                  <a href="https://drive.google.com/open?id=1c8TeShlNFE-_mdN5zYKutcVqTP_iZ3J8" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  <a href="https://drive.google.com/open?id=1c8TeShlNFE-_mdN5zYKutcVqTP_iZ3J8" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
                 </div>
                 <div class="col-md-3">
-                  <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  <a href="" class="btn btn-default btn-block black-background " role="button" disabled="disabled">TEST</a>
                 </div>
               </div>
             </div>
@@ -672,21 +677,21 @@
                   <h4>All data</h4>
                 </div>
                 <div class="col-md-3">
-                  <a href="https://drive.google.com/open?id=1W-BGVQ5Xi-eIxTC7ZvnpLptlvIDW4giQ" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  <a href="https://drive.google.com/open?id=1W-BGVQ5Xi-eIxTC7ZvnpLptlvIDW4giQ" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
                 </div>
                 <div class="col-md-3">
-                  <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  <a href="" class="btn btn-default btn-block black-background " role="button" disabled="disabled">TEST</a>
                 </div>
               </div>
-              <!-- <div class="row">
+              <div class="row">
                 <div class="col-md-3 col-md-offset-1">
                   <h4>Label</h4>
                 </div>
                 <div class="col-md-3">
-                  <a href="" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  <a href="https://drive.google.com/open?id=1FW14l4jkTVV6hBymdrFeszq5B993axh_" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
                 </div>
                 <div class="col-md-3">
-                  <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  <a href="" class="btn btn-default btn-block black-background " role="button" disabled="disabled">TEST</a>
                 </div>
               </div>
 
@@ -695,22 +700,22 @@
                   <h4>Image</h4>
                 </div>
                 <div class="col-md-3">
-                  <a href="" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  <a href="https://drive.google.com/open?id=196ssXYxA6YUbrFriVUP2m9rDN8_guZLU" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
                 </div>
                 <div class="col-md-3">
-                  <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  <a href="" class="btn btn-default btn-block black-background " role="button" disabled="disabled">TEST</a>
                 </div>
-              </div> -->
+              </div>
 
               <div class="row">
                 <div class="col-md-3 col-md-offset-1">
                   <h4>Category</h4>
                 </div>
                 <div class="col-md-3">
-                  <a href="https://drive.google.com/open?id=1dDPK4S_PV6sR-EOoKCqR39XxTeiSItqt" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  <a href="https://drive.google.com/open?id=1dDPK4S_PV6sR-EOoKCqR39XxTeiSItqt" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
                 </div>
                 <div class="col-md-3">
-                  <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  <a href="" class="btn btn-default btn-block black-background " role="button" disabled="disabled">TEST</a>
                 </div>
               </div>
 
@@ -719,10 +724,10 @@
                   <h4>Tag</h4>
                 </div>
                 <div class="col-md-3">
-                  <a href="https://drive.google.com/open?id=11FqpOM33Py79VR2qRd9lM7FGgwWKKGB1" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  <a href="https://drive.google.com/open?id=11FqpOM33Py79VR2qRd9lM7FGgwWKKGB1" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
                 </div>
                 <div class="col-md-3">
-                  <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  <a href="" class="btn btn-default btn-block black-background " role="button" disabled="disabled">TEST</a>
                 </div>
               </div>
 
@@ -731,10 +736,10 @@
                   <h4>Temporal-spatial</h4>
                 </div>
                 <div class="col-md-3">
-                  <a href="https://drive.google.com/open?id=1LJbmSE5F2SPY2i7ZZxbbdrO5WFpsbF7S" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  <a href="https://drive.google.com/open?id=1LJbmSE5F2SPY2i7ZZxbbdrO5WFpsbF7S" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
                 </div>
                 <div class="col-md-3">
-                  <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  <a href="" class="btn btn-default btn-block black-background " role="button" disabled="disabled">TEST</a>
                 </div>
               </div>
 
@@ -743,10 +748,10 @@
                   <h4>Additional</h4>
                 </div>
                 <div class="col-md-3">
-                  <a href="https://drive.google.com/open?id=1jypri6RdaROwfcsUsKzyjvd1gFE08qkS" class="btn btn-default btn-block" role="button">TRAIN</a>
+                  <a href="https://drive.google.com/open?id=1jypri6RdaROwfcsUsKzyjvd1gFE08qkS" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
                 </div>
                 <div class="col-md-3">
-                  <a href="" class="btn btn-default btn-block" role="button">TEST</a>
+                  <a href="" class="btn btn-default btn-block black-background " role="button" disabled="disabled">TEST</a>
                 </div>
               </div>
             </div>
@@ -898,7 +903,9 @@
       <div class="col-md-8 col-md-offset-2">
         <h2 class="p-title"><b>Label</b></h2>
         <p class="p-body">Each row contains the popularity score(log-views) of the corresponding post.</p>
+        <div class="col-md-6">
         <pre>Popularityscore<br>...<br>3.2<br>2.3<br>...</pre>
+      </div>
       </div>
     </div>
 
@@ -906,10 +913,15 @@
       <div class="col-md-8 col-md-offset-2">
         <h2 class="p-title"><b>Image</b></h2>
         <p class="p-body">Each row contains the URL of the cprrsponding photo or video</p>
+        <div class="col-md-6">
         <pre>...<br>"https://www.flickr.com/photos/58708830@N00/385070026"<br>"https://www.flickr.com/photos/97042891@N00/943750056"<br>...</pre>
-        <img src="/static/img/1.jpg" height='130' width='210'><img src="/static/img/2.jpg" height='130' width='200'><img src="/static/img/4.jpg" height='130' width='200'><img src="/static/img/5.jpg" height='130'><img src="/static/img/3.jpg"
-          height='130'><img src="/static/img/6.jpg" height='130'>
-        <!-- <img src="/static/img/7.jpg" height='130'><img src="/static/img/8.jpg" height='130'width='204'><img src="/static/img/13.jpg" height='130' width='100'><img src="/static/img/9.jpg" height='130'><img src="/static/img/10.jpg" height='130' width='169'> -->
+      </div>
+      <div class="col-md-12 ">
+        <img src="/static/img/1.jpg" height='130' ><img src="/static/img/2.jpg" height='130'><img src="/static/img/4.jpg" height='130'><img src="/static/img/5.jpg" height='130'><img src="/static/img/7.jpg" height='130'>
+        <!-- <img src="/static/img/3.jpg"height='130'><img src="/static/img/13.jpg" height='130' width='130'> -->
+        </div>
+
+        <!-- <img src="/static/img/7.jpg" height='130'><img src="/static/img/6.jpg" height='130'><img src="/static/img/8.jpg" height='130'width='204'><img src="/static/img/13.jpg" height='130' width='100'><img src="/static/img/9.jpg" height='130'><img src="/static/img/10.jpg" height='130' width='169'> -->
       </div>
     </div>
 
