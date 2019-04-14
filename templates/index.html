@@ -298,6 +298,9 @@
           } else if (data.code == "10004") {
             $("#email").parent().addClass("has-error");
             $("#email-warn").text("email exists").show();
+          } else if (data.code == "10010") {
+            $("#email").parent().addClass("has-error");
+            $("#email-warn").text("invalid email").show();
           }
         });
 

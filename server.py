@@ -23,6 +23,7 @@ EMAIL_NOT_EXIST = '10006'
 PASSWORD_ERROR = '10007'
 UID_ERROR = '10008'
 TEAM_NAME_EXIST = '10009'
+INVALID_EMAIL = '10010'
 
 conn = sqlite3.connect('smp.db', check_same_thread=False)
 cursor = conn.cursor()
@@ -91,9 +92,11 @@ def send_verify_email(username, password, email):
 
     verify_url = 'http://smp-challenge.com/verify/%s'%verify_token
 
-    send_verify_email_tool(verify_url, email)
-
-    return SUCCESS
+    try:
+        send_verify_email_tool(verify_url, email)
+        return SUCCESS
+    except:
+        return INVALID_EMAIL
 
 def check_verify(code):
     user_info = r.get(code)
@@ -512,4 +515,4 @@ def logout():
     return res
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', 5000)
+    app.run('127.0.0.1', 5000)

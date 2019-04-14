@@ -300,6 +300,9 @@
           } else if (data.code == "10004") {
             $("#email").parent().addClass("has-error");
             $("#email-warn").text("email exists").show();
+          } else if (data.code == "10010") {
+            $("#email").parent().addClass("has-error");
+            $("#email-warn").text("invalid email").show();
           }
         });
 
@@ -937,15 +940,15 @@
               </pre>
           </div>
           <div class="col-md-6">
-            <pre class="pre-scrollable">
-'''
-  {
-    "Uid":"70478@N10",
-    "Pid": 564687,
-    "Category": "Whether&Season",
-    "Subcategory": "Raining",
-    "Concept": "umbrella"}
-'''</pre>
+            <pre class="pre-scrollable prettyprint lang-json">
+{
+  "Uid": "70478@N10",
+  "Pid": 564687,
+  "Category": "Whether&Season",
+  "Subcategory": "Raining",
+  "Concept": "umbrella"
+}
+</pre>
           </div>
         </div>
         <p class="p-body"><strong>Uid: </strong>the user this post belongs to.</p>
