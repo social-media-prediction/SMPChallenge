@@ -1,472 +1,347 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>SMP Challenge</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/sprintf.js"></script>
+    <script src="/static/js/md5.js"></script>
+    <script type="text/javascript" src="/static/js/tagcloud.jquery.js"></script>
+    <script src="/static/js/Chart.min.js"></script>
+    <script src="/static/js/Chart.bundle.min.js"></script>
+    <style type="text/css">
+    #chartdiv {
+      width: 80%;
 
-<head>
-  <title>SMP Challenge</title>
-  <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
-  <link rel="stylesheet" href="/static/css/bootstrap.css">
-  <link rel="stylesheet" type="text/css" href="/static/css/prettify.css">
-  <script src="/static/js/jquery.min.js"></script>
-  <script src="/static/js/bootstrap.js"></script>
-  <script src="/static/js/sprintf.js"></script>
-  <script src="/static/js/run_prettify.js"></script>
-  <script src="/static/js/md5.js"></script>
-  <style type="text/css">
-    #nav-first {
-      border-radius: 0px;
-      margin-bottom: 0px;
-      min-height: 80px;
     }
+    .pre-scrollable {
+    max-height: 147px;
+    overflow-y: scroll;
+}
+      #nav-first {
+        border-radius: 0px;
+        margin-bottom: 0px;
+        min-height: 80px;
+      }
 
-    #nav-second {
-      border-radius: 0px;
-      margin-bottom: 0px;
-      top: 80px;
-    }
+      #nav-second {
+        border-radius: 0px;
+        margin-bottom: 0px;
+        top: 80px;
+      }
 
-    #nav-first-main {
-      margin: 0 0;
-      height: 80px;
-    }
+      #nav-first-main {
+        margin: 0 0;
+        height: 80px;
+      }
 
-    #nav-first-main>li {
-      height: 80px;
-    }
+      #nav-first-main>li {
+        height: 80px;
+      }
+      #nav-first-main>li>a {
+        height: 80px;
+        padding-top: 0;
+        padding-bottom: 0;
+        line-height: 80px;
+      }
 
-    #nav-first-main>li>a {
-      height: 80px;
-      padding-top: 0;
-      padding-bottom: 0;
-      line-height: 80px;
-    }
+      #nav-second-main {
+        margin: 0 80px;
+      }
 
-    #nav-second-main {
-      margin: 0 80px;
-    }
+      .nav-second-li {
+        font-size: 120%;
+      }
+      #wc{
+            width:500;
+            height:500;
+            border:2px red solid;
+            position:relative;
+            left:100px;
+            top:50px;
+        }
+      #block1 {
+        background-color: white;
+      }
 
-    .nav-second-li {
-      font-size: 120%;
-    }
+      #block2 {
+        /*background-color: #f8f8f8;*/
+        background-color: #e8e8e8;
+      }
 
+      #block3 {
+        background-color: white;
+      }
 
-    #jumbotron {
-      height: 600px;
-      background-image: url(/static/img/QJ6548296700.jpg);
-      background-size: cover;
-      margin-top: 130px;
-      margin-bottom: 0px;
-      background-position: 80% 50%;
-      padding: 0;
-    }
+      #block4 {
+        background-color: #e8e8e8;
+      }
 
-    #block1 {
-      background-color: white;
-    }
+      #block5 {
+        background-color: white;
+      }
 
-    #block2 {
-      /*background-color: #f8f8f8;*/
-      background-color: #e8e8e8;
-    }
+      #block6 {
+        background-color: #e8e8e8;
+      }
 
-    #block3 {
-      background-color: white;
-    }
+      #block7 {
+        background-color: #080808;
+        /* position: absolute; */
+        /*bottom: 0;*/
+        /*width: 100%; */
+      }
 
-    #block4 {
-      background-color: #e8e8e8;
-    }
+      .p-body{
+        text-align: justify;
+        font-family: "Arial", sans-serif;
+        font-size: 120%;
+      }
 
-    #block5 {
-      background-color: white;
-    }
+      h1,h2{
+        font-family: "Arial", serif;
+        /*font-size: 150%;*/
+      }
 
-    #block6 {
-      background-color: #e8e8e8;
-    }
+      .timeline-li {
+        font-family: "Arial", sans-serif;
+        font-size: 120%;
+      }
 
-    #block7 {
-      background-color: #080808;
-    }
+      #logo {
+        padding-left:100px;
+        padding-top: 10px;
+      }
 
-    .p-body {
-      text-align: justify;
-      font-family: "Arial", sans-serif;
-      font-size: 120%;
-    }
+      .thumbnail {
+        border-color: transparent;
+        background-color: transparent;
+      }
 
-    h1,
-    h2 {
-      font-family: "Arial", serif;
-      /*font-size: 150%;*/
-    }
+      .avatar {
+        border-radius: 50%;
+      }
 
-    .timeline-li {
-      font-family: "Arial", sans-serif;
-      font-size: 120%;
-    }
+      .nav-li {
+        font-size: 120%;
+      }
 
-    #logo {
-      padding-left: 100px;
-      padding-top: 10px;
-    }
+      td,th {
+        text-align: center;
+      }
 
-    .thumbnail {
-      border-color: transparent;
-      background-color: transparent;
-    }
+      .orange {
+        color: rgb(241,156,55) !important;
+      }
 
-    .avatar {
-      border-radius: 50%;
-    }
+      .help-block {
+        display: none;
+      }
 
-    .nav-li {
-      font-size: 120%;
-    }
+      .member-title {
+        padding-top: 10px;
+      }
 
-    td,
-    th {
-      text-align: center;
-    }
+      .p-title {
+        color: rgb(241,156,55) !important;
+      }
 
-    .mengban {
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-    }
+      .container-fluid {
+        padding-top: 130px;
+      }
 
-    #morning {
-      /*color: rgb(248,206,69);*/
-      padding-top: 200px;
-    }
+      #forget {
+        cursor: pointer;
+      }
 
-    .orange {
-      color: rgb(241, 156, 55) !important;
-    }
-
-    .white {
-      color: white !important;
-    }
-
-    .red {
-      color: red !important;
-    }
-
-    .help-block {
-      display: none;
-    }
-
-    .member-title {
-      padding-top: 10px;
-    }
-
-    .p-title {
-      color: rgb(241, 156, 55) !important;
-    }
-
-    .timeline {
-      display: block;
-      margin: 15px 0
-    }
-
-    .timeline ul {
-      margin-left: 25px;
-      margin-top: 30px;
-      border-left: 2px solid #ddd;
-      list-style: none;
-    }
-
-    .timeline ul li {
-      width: 100%;
-      margin-left: -51px;
-      line-height: 20px;
-      margin-bottom: 20px
-    }
-
-    .timeline ul li b {
-      width: 10px;
-      height: 10px;
-      background: #fff;
-      border: 2px solid rgb(241, 156, 55);
-      margin: 0 5px;
-      border-radius: 6px;
-      -webkit-border-radius: 10px;
-      -moz-border-radius: 10px;
-      overflow: hidden;
-      display: inline-block;
-      float: left
-    }
-
-    .timeline ul li span {
-      padding-left: 7px;
-      font-size: 16px;
-      line-height: 20px;
-      color: rgb(241, 156, 55);
-      font-weight: bold
-    }
-
-    .timeline ul li p {
-      padding-left: 25px;
-      font-size: 13px;
-      line-height: 25px;
-      color: #666
-    }
-
-    #forget {
-      cursor: pointer;
-    }
-  </style>
-  <script type="text/javascript">
-    $(document).ready(function() {
-
-      $("#href-register").click(function(e) {
-        e.preventDefault();
-        $("#modal-register").modal("show");
-      });
-
-      $("#href-login").click(function(e) {
-        e.preventDefault();
-        $("#modal-login").modal("show");
-      });
-
-      $("input").focus(function() {
-        $(".form-group").removeClass("has-error");
-        $(".help-block").hide();
-      });
-
-      $("#register").click(function(e) {
-        var email = $("#email").val();
-        var username = $("#username").val();
-        var password = $("#password").val();
-        var repeat_password = $("#repeat-password").val();
-
-        var flag = true;
-        if (email == "") {
-          $("#email").parent().addClass("has-error");
-          $("#email-warn").text("email can not be empty").show();
-          flag = false;
+    </style>
+    <script type="text/javascript">
+        var settings = {
+        //height of sphere container
+        height: 500,
+        //width of sphere container
+        width: 500,
+        //radius of sphere
+        radius: 170,
+        //rotation speed
+        speed: 3,
+        //sphere rotations slower
+        slower:0.9,
+        //delay between update position
+        timer: 5,
+        //dependence of a font size on axis Z
+        fontMultiplier: 15,
+        left:1000,
+        top:50,
+        //tag css stylies on mouse over
+        hoverStyle: {
+            border: 'none',
+            color: '#0b2e6f'
+        },
+        //tag css stylies on mouse out
+        mouseOutStyle: {
+            border: '',
+            color: ''
         }
 
-        if (username == "") {
-          $("#username").parent().addClass("has-error");
-          $("#username-warn").text("username can not be empty").show();
-          flag = false;
-        }
+        };
 
-        if (password == "") {
-          $("#password").parent().addClass("has-error");
-          $("#password-warn").text("password can not be empty").show();
-          flag = false;
-        }
+      $(document).ready(function(){
+          $('#tagcloud').tagoSphere(settings);
 
-        if (repeat_password == "") {
-          $("#repeat-password").parent().addClass("has-error");
-          $("#repeat-password-warn").text("repeat-password can not be empty").show();
-          flag = false;
-        }
-
-        if (password.length > 0 && password.length < 8) {
-          $("#password").parent().addClass("has-error");
-          $("#password-warn").text("password too short").show();
-          flag = false;
-        }
-
-        if (repeat_password.length > 0 && password != repeat_password) {
-          $("#repeat-password").parent().addClass("has-error");
-          $("#repeat-password-warn").text("Two input password must be consistent").show();
-          flag = false;
-        }
-
-        if (flag == false) {
-          return;
-        }
-
-        password = md5(password);
-        var data = {
-          "email": email,
-          "username": username,
-          "password": password
-        }
-        $(this).attr("disabled", "disabled");
-        $.post("/register", data, function(data, status) {
-          if (data.code == "00000") {
-            $("#modal-body").html(sprintf('<h4 id="register-notice">We have send a verification email to <a>%s</a>, please check it in two hours</h4>', email));
-            $("#modal-footer").hide();
-            $(this).removeAttr("disabled");
-          } else if (data.code == "10002") {
-            $("#username").parent().addClass("has-error");
-            $("#username-warn").text("username exists").show();
-          } else if (data.code == "10004") {
-            $("#email").parent().addClass("has-error");
-            $("#email-warn").text("email exists").show();
-          } else if (data.code == "10010") {
-            $("#email").parent().addClass("has-error");
-            $("#email-warn").text("invalid email").show();
-          }
+                $("#href-register").click(function(e){
+          e.preventDefault();
+          $("#modal-register").modal("show");
         });
 
-      });
 
-      $("#login").click(function(e) {
-        var email = $("#login-email").val();
-        var password = $("#login-password").val();
-
-        var flag = true;
-        if (email == "") {
-          $("#login-email").parent().addClass("has-error");
-          $("#login-email-warn").text("email can not be empty").show();
-          flag = false;
-        }
-        if (password == "") {
-          $("#login-password").parent().addClass("has-error");
-          $("#login-password-warn").text("password can not be empty").show();
-          flag = false;
-        }
-
-        if (flag == false) {
-          return;
-        }
-
-        password = md5(password);
-        var data = {
-          "email": email,
-          "password": password
-        }
-
-        $.post("/login", data, function(data, status) {
-          if (data.code == "00000") {
-            window.location.reload();
-          } else if (data.code == "10006") {
-            $("#login-email").parent().addClass("has-error");
-            $("#login-email-warn").text("email not exists").show();
-          } else if (data.code == "10007") {
-            $("#login-password").parent().addClass("has-error");
-            $("#login-password-warn").text("password error").show();
-          }
+        $("#href-login").click(function(e){
+          e.preventDefault();
+          $("#modal-login").modal("show");
         });
 
-      });
+        $("input").focus(function(){
+          $(".form-group").removeClass("has-error");
+          $(".help-block").hide();
+        });
 
-      $("#logout").click(function(e) {
-        e.preventDefault();
-        $.post("/logout", function(data, status) {
-          window.location.reload();
-        })
-      });
+        $("#register").click(function(e){
+          var email = $("#email").val();
+          var username = $("#username").val();
+          var password = $("#password").val();
+          var repeat_password = $("#repeat-password").val();
 
-      {% if register_success %}
-      $("#modal-register-success").modal("show");
-      $("#modal-register-success").on("hidden.bs.modal", function(e) {
-        window.location.href = "/"
-      })
-      {% endif %}
-
-      $("#editteam").click(function(e) {
-        e.preventDefault();
-        $("#modal-team").modal("show");
-      });
-
-      var nownum = 1;
-      $("#addmember").click(function(e) {
-        e.preventDefault();
-        var html = '<div class="row">\
-                <div class="col-md-2">\
-                  <br>\
-                  <label class="member-title" id="member%d-title">Member %d</label>\
-                </div>\
-                <div class="col-md-3">\
-                  <div class="form-group">\
-                    <label for="member%d-name sr-only"></label>\
-                    <input type="text" class="form-control team-input" id="member%d-name">\
-                    <span class="help-block"></span>\
-                  </div>\
-                </div>\
-                <div class="col-md-3">\
-                  <div class="form-group">\
-                    <label for="member%d-email sr-only"></label>\
-                    <input type="email" class="form-control team-input" id="member%d-email">\
-                    <span class="help-block"></span>\
-                  </div>\
-                </div>\
-                <div class="col-md-3">\
-                  <div class="form-group">\
-                    <label for="member%d-organization sr-only"></label>\
-                    <input type="text" class="form-control team-input" id="member%d-organization">\
-                    <span class="help-block"></span>\
-                  </div>\
-                </div>\
-                <div class="col-md-1">\
-                  <br>\
-                  <button class="btn btn-danger delete-member" id="delete-member%d" deleteid="%d"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>\
-                </div>\
-              </div>';
-
-        $("#team-form").append(sprintf(html, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum));
-        nownum += 1;
-      });
-
-      $(document).on("click", ".delete-member", function(e) {
-        e.preventDefault();
-        $(this).parent().parent().remove();
-        var deleteid = parseInt($(this).attr("deleteid"));
-        for (var i = deleteid + 1; i <= nownum; i++) {
-          $(sprintf("#member%d-title", i)).text(sprintf("Member %d", i - 1)).attr("id", sprintf("member%d-title", i - 1));
-          $(sprintf("#delete-member%d", i)).attr("id", sprintf("delete-member%d", i - 1)).attr("deleteid", sprintf("%d", i - 1))
-        }
-
-        nownum -= 1;
-      });
-
-      $("#save").click(function(e) {
-        e.preventDefault();
-
-        var team_input = $(".team-input");
-        var flag = true;
-        for (var i = 0; i < team_input.length; i++) {
-          if ($(team_input[i]).val() == "") {
-            $(team_input[i]).parent().find("span").show().text("can not be empty");
-            $(team_input[i]).parent().addClass("has-error");
+          var flag = true;
+          if (email == "") {
+            $("#email").parent().addClass("has-error");
+            $("#email-warn").text("email can not be empty").show();
             flag = false;
           }
-        }
-        if (flag == false) {
-          return;
-        }
 
-        var data = {
-          'teamname': $("#team-name").val(),
-          'caption-name': $("#caption-name").val(),
-          'caption-email': $("#caption-email").val(),
-          'caption-organization': $("#caption-organization").val(),
-          'member-num': nownum
-        }
-
-        for (var i = 1; i < nownum; i++) {
-          data[sprintf("member%d-name", i)] = $(sprintf("#member%d-name", i)).val();
-          data[sprintf("member%d-email", i)] = $(sprintf("#member%d-email", i)).val();
-          data[sprintf("member%d-organization", i)] = $(sprintf("#member%d-organization", i)).val();
-        }
-
-        $.post("/update_team", data, function(data, status) {
-          if (data.code == "00000") {
-            alert("update success");
-            $("#modal-team").modal("hide");
-          } else if (data.code == "10009") {
-            $("#team-name").parent().addClass("has-error");
-            $("#team-name").parent().find("span").text("team name exists").show();
+          if (username == "") {
+            $("#username").parent().addClass("has-error");
+            $("#username-warn").text("username can not be empty").show();
+            flag = false;
           }
+
+          if (password == "") {
+            $("#password").parent().addClass("has-error");
+            $("#password-warn").text("password can not be empty").show();
+            flag = false;
+          }
+
+          if (repeat_password == "") {
+            $("#repeat-password").parent().addClass("has-error");
+            $("#repeat-password-warn").text("repeat-password can not be empty").show();
+            flag = false;
+          }
+
+          if (password.length > 0 && password.length < 8) {
+            $("#password").parent().addClass("has-error");
+            $("#password-warn").text("password too short").show();
+            flag = false;
+          }
+
+          if (repeat_password.length > 0 && password != repeat_password) {
+            $("#repeat-password").parent().addClass("has-error");
+            $("#repeat-password-warn").text("Two input password must be consistent").show();
+            flag = false;
+          }
+
+          if (flag == false) {
+            return;
+          }
+
+          password = md5(password);
+          var data = {
+            "email": email,
+            "username": username,
+            "password": password
+          }
+          $.post("/register", data, function(data, status) {
+            if (data.code == "00000") {
+              $("#modal-body").html(sprintf('<h4 id="register-notice">We have send a verification email to <a>%s</a>, please check it in two hours</h4>', email));
+              $("#modal-footer").hide();
+            }
+            else if (data.code == "10002") {
+              $("#username").parent().addClass("has-error");
+              $("#username-warn").text("username exists").show();
+            }
+            else if (data.code == "10004") {
+              $("#email").parent().addClass("has-error");
+              $("#email-warn").text("email exists").show();
+            }
+          });
+
         });
 
-      });
+        $("#login").click(function(e){
+          var email = $("#login-email").val();
+          var password = $("#login-password").val();
 
-      $.getJSON("/get_team", function(data, status) {
-        if (data.code == "00000") {
-          $("#team-name").val(data.teamname);
-          $("#caption-name").val(data.members[0].name);
-          $("#caption-email").val(data.members[0].email);
-          $("#caption-organization").val(data.members[0].organization);
-          nownum = data.members.length;
-          for (var i = 1; i < nownum; i++) {
-            var html = '<div class="row">\
+          var flag = true;
+          if (email == "") {
+            $("#login-email").parent().addClass("has-error");
+            $("#login-email-warn").text("email can not be empty").show();
+            flag = false;
+          }
+          if (password == "") {
+            $("#login-password").parent().addClass("has-error");
+            $("#login-password-warn").text("password can not be empty").show();
+            flag = false;
+          }
+
+          if (flag == false) {
+            return;
+          }
+
+          password = md5(password);
+          var data = {
+            "email": email,
+            "password": password
+          }
+
+          $.post("/login", data, function(data, status) {
+            if (data.code == "00000") {
+              window.location.reload();
+            }
+            else if (data.code == "10006") {
+              $("#login-email").parent().addClass("has-error");
+              $("#login-email-warn").text("email not exists").show();
+            }
+            else if (data.code == "10007") {
+              $("#login-password").parent().addClass("has-error");
+              $("#login-password-warn").text("password error").show();
+            }
+          });
+
+        });
+
+        $("#logout").click(function(e) {
+          e.preventDefault();
+          $.post("/logout", function(data, status) {
+            window.location.reload();
+          })
+        });
+
+        {% if register_success %}
+        $("#modal-register-success").modal("show");
+        $("#modal-register-success").on("hidden.bs.modal", function(e) {
+          window.location.href = "/"
+        })
+        {% endif %}
+
+        $("#editteam").click(function(e) {
+          e.preventDefault();
+          $("#modal-team").modal("show");
+        });
+
+        var nownum = 1;
+        $("#addmember").click(function(e) {
+          e.preventDefault();
+          var html = '<div class="row">\
                 <div class="col-md-2">\
                   <br>\
                   <label class="member-title" id="member%d-title">Member %d</label>\
@@ -498,508 +373,912 @@
                 </div>\
               </div>';
 
-            $("#team-form").append(sprintf(html, i, i, i, i, i, i, i, i, i, i));
-            $(sprintf("#member%d-name", i)).val(data.members[i].name);
-            $(sprintf("#member%d-email", i)).val(data.members[i].email);
-            $(sprintf("#member%d-organization", i)).val(data.members[i].organization);
-          }
-        }
-      });
+          $("#team-form").append(sprintf(html, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum));
+          nownum += 1;
+        });
 
-      $("#forget").click(function() {
-        var email = $("#login-email").val();
-        if (email == "") {
-          alert("please enter your email address");
-          return;
-        }
-        var data = {
-          "email": email
-        }
-        $("#login").attr("disabled", "disabled")
-        $.post("/forget_password", data, function(data, status) {
-          if (data.code == "00000") {
-            alert(sprintf("We have sent an password reset email to %s, please have a check.", email))
-            $("#login").removeAttr("disabled");
-          } else {
-            alert("email does not exist");
+        $(document).on("click", ".delete-member", function(e) {
+          e.preventDefault();
+          $(this).parent().parent().remove();
+          var deleteid=parseInt($(this).attr("deleteid"));
+          for (var i = deleteid+1; i <= nownum; i++) {
+            $(sprintf("#member%d-title", i)).text(sprintf("Member %d", i-1)).attr("id", sprintf("member%d-title", i-1));
+            $(sprintf("#delete-member%d", i)).attr("id", sprintf("delete-member%d", i-1)).attr("deleteid", sprintf("%d", i-1))
+          }
+
+          nownum -= 1;
+        });
+
+        $("#save").click(function(e) {
+          e.preventDefault();
+
+          var team_input = $(".team-input");
+          var flag=true;
+          for (var i = 0; i < team_input.length; i++) {
+            if ($(team_input[i]).val() == "") {
+              $(team_input[i]).parent().find("span").show().text("can not be empty");
+              $(team_input[i]).parent().addClass("has-error");
+              flag=false;
+            }
+          }
+          if (flag == false) {
             return;
           }
+
+          var data = {
+            'teamname': $("#team-name").val(),
+            'caption-name': $("#caption-name").val(),
+            'caption-email': $("#caption-email").val(),
+            'caption-organization': $("#caption-organization").val(),
+            'member-num': nownum
+          }
+
+          for (var i = 1; i < nownum; i++) {
+            data[sprintf("member%d-name", i)] = $(sprintf("#member%d-name", i)).val();
+            data[sprintf("member%d-email", i)] = $(sprintf("#member%d-email", i)).val();
+            data[sprintf("member%d-organization", i)] = $(sprintf("#member%d-organization", i)).val();
+          }
+
+          $.post("/update_team", data, function(data, status) {
+            if (data.code == "00000") {
+              alert("update success");
+              $("#modal-team").modal("hide");
+            }
+            else if (data.code == "10009") {
+              $("#team-name").parent().addClass("has-error");
+              $("#team-name").parent().find("span").text("team name exists").show();
+            }
+          });
+
+        });
+
+        $.getJSON("/get_team", function(data, status) {
+          if (data.code == "00000") {
+            $("#team-name").val(data.teamname);
+            $("#caption-name").val(data.members[0].name);
+            $("#caption-email").val(data.members[0].email);
+            $("#caption-organization").val(data.members[0].organization);
+            nownum = data.members.length;
+            for (var i = 1; i < nownum; i++) {
+              var html = '<div class="row">\
+                <div class="col-md-2">\
+                  <br>\
+                  <label class="member-title" id="member%d-title">Member %d</label>\
+                </div>\
+                <div class="col-md-3">\
+                  <div class="form-group">\
+                    <label for="member%d-name sr-only"></label>\
+                    <input type="text" class="form-control team-input" id="member%d-name">\
+                    <span class="help-block"></span>\
+                  </div>\
+                </div>\
+                <div class="col-md-3">\
+                  <div class="form-group">\
+                    <label for="member%d-email sr-only"></label>\
+                    <input type="email" class="form-control team-input" id="member%d-email">\
+                    <span class="help-block"></span>\
+                  </div>\
+                </div>\
+                <div class="col-md-3">\
+                  <div class="form-group">\
+                    <label for="member%d-organization sr-only"></label>\
+                    <input type="text" class="form-control team-input" id="member%d-organization">\
+                    <span class="help-block"></span>\
+                  </div>\
+                </div>\
+                <div class="col-md-1">\
+                  <br>\
+                  <button class="btn btn-danger delete-member" id="delete-member%d" deleteid="%d"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>\
+                </div>\
+              </div>';
+
+              $("#team-form").append(sprintf(html, i,i,i,i,i,i,i,i,i,i));
+              $(sprintf("#member%d-name", i)).val(data.members[i].name);
+              $(sprintf("#member%d-email", i)).val(data.members[i].email);
+              $(sprintf("#member%d-organization", i)).val(data.members[i].organization);
+            }
+          }
+        });
+        $("#forget").click(function(){
+          var email = $("#login-email").val();
+          if (email == "") {
+            alert("please enter your email address");
+            return;
+          }
+          var data = {
+            "email": email
+          }
+          $("#login").attr("disabled", "disabled")
+          $.post("/forget_password", data, function(data, status) {
+            if (data.code == "00000") {
+              alert(sprintf("We have sent an password reset email to %s, please have a check.", email))
+              $("#login").removeAttr("disabled");
+            }
+            else {
+              alert("email does not exist");
+              return;
+            }
+          });
         });
       });
+    </script>
+  </head>
+  <body>
 
-    });
-  </script>
-</head>
-
-<body>
-
-  <nav class="navbar navbar-inverse navbar-fixed-top" id="nav-second">
-    <div class="container">
-      <ul class="nav navbar-nav" id="nav-second-main">
-        <li class="nav-li active"><a class="nav-second-li" href="#" id="href-home"><b>Home</b></a></li>
-        <li class="nav-li"><a class="nav-second-li" href="/dataset" id="href-description"><b>Dataset</b></a></li>
-        <li class="nav-li"><a class="nav-second-li" href="/download" id="href-dataset"><b>Download</b></a></li>
-        <li class="nav-li"><a class="nav-second-li" href="/challenge" id="href-challenge"><b>Challenge</b></a></li>
-        <li class="nav-li"><a class="nav-second-li" href="/leaderboard" id="href-leaderboard"><b>Leaderboard</b></a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <nav class="navbar navbar-default navbar-fixed-top" id="nav-first">
-    <div class="container">
-      <div class="navbar-header">
-        <img src="/static/img/logo.png" width="400px" id="logo">
-      </div>
-
-      {% if not login %}
-      <ul class="nav navbar-nav navbar-right" id="nav-first-main">
-        <li class="nav-li"><a href="#" id="href-register"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Register</a></li>
-        <li class="nav-li"><a href="#" id="href-login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login</a></li>
-        <li class="nav-li"><a href="mailto:social.media.prediction@gmail.com" id="href-contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
-      </ul>
-      {% else %}
-      <ul class="nav navbar-nav navbar-right" id="nav-first-main">
-        <li class="nav-li dropdown">
-          <a href="#" id="user" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{username}}</a>
-          <ul class="dropdown-menu">
-            <li><a href="#" id="editteam">Edit Team</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#" id="logout">Logout</a></li>
-          </ul>
-        </li>
-        <li class="nav-li"><a href="mailto:social.media.prediction@gmail.com" id="href-contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
-      </ul>
-      {% endif %}
-    </div>
-  </nav>
-
-  <div class="jumbotron" id="jumbotron">
-    <div class="mengban">
-      <center>
-        <h1 id="morning"><span class="orange">S</span><span class="white">ocial</span> <span class="orange">M</span><span class="white">edia</span> <span class="orange">P</span><span class="white">rediction</span> <span class="white">Challenge</span>
-        </h1>
-      </center>
-      <center>
-        <h2 class="white">ACM Multimedia 2019</h2>
-      </center>
-      <center>
-        <h3 class="white">21 - 25 October 2019, Nice, France</h3>
-      </center>
-    </div>
-  </div>
-
-  <div class="container-fluid" id="maintext">
-
-    <div class="row" id="block1">
-
-      <div class="col-md-8 col-md-offset-2">
-        <h2 class="p-title"><b>News</b></h2>
-        <ul>
-          <li class="timeline-li red"><b>[04-16-2019]</b>: We have released the training data.</li>
-          <li class="timeline-li"><b>[03-25-2019]</b>: We are hosting Social Media Prediction Challenge (ACM Multimedia 2019).</li>
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="nav-second">
+      <div class="container">
+        <ul class="nav navbar-nav" id="nav-second-main">
+          <li class="nav-li"><a class="nav-second-li" href="/" id="href-home"><b>Home</b></a></li>
+          <li class="nav-li active"><a class="nav-second-li" href="#" id="href-description"><b>Dataset</b></a></li>
+          <li class="nav-li"><a class="nav-second-li" href="/download" id="href-dataset"><b>Download</b></a></li>
+          <li class="nav-li"><a class="nav-second-li" href="/challenge" id="href-challenge"><b>Challenge</b></a></li>
+          <li class="nav-li"><a class="nav-second-li" href="/leaderboard" id="href-leaderboard"><b>Leaderboard</b></a></li>
         </ul>
-        <br>
       </div>
-    </div>
+    </nav>
 
-    <div class="row" id="block2">
-
-      <div class="col-md-8 col-md-offset-2">
-        <h2 class="p-title"><b>Overview</b></h2>
-        <p class="p-body">
-          <b class="orange">SMP Challenge</b> (Social Media Prediction Challenge) is a annual prediction challenge to seek excellent research teams for prediction and discover novel and emerging challenges based on numerous resources of social multimedia. Making predictions via social multimedia (photos, video or news) is not only helps us to make better strategic decisions for future, but also explore advanced predictive learning and analytics methods for various of problems and scenarios in several areas, such as multimedia advertising, recommendation system, user engagement, and trend analysis etc.   
-        </p>
-        <p class="p-body">
-          As a joint activity with the research teams from multiple organizations, we are holding on the SMP Challenge 2019 continuously. In this year, the open task of SMP Challenge is <b class="orange">Temporal Popularity Prediction</b>, which focused on predicting future clicks of new social media posts before they were posted in social feeds. The participated teams need to design new algorithm based on understanding and learning techniques, and automatically predict popularity (formulated by clicks or visits etc.) to achieve better performances.
-          </p>
-
-
-        <p class="p-body">
-          SMPD2019 is a large social multimedia dataset, which contains over 486K records from 69K users. And each of social media posts has rich contextual information and annotations (e.g. image, text, temporal-spatial information, user profile, etc.). 
-        </p>
-        <br>
-      </div>
-    </div>
-
-
-
-    <div class="row" id="block3">
-      <div class="col-md-8 col-md-offset-2">
-        <h2 class="p-title"><b>Dataset Statistics</b></h2>
-        <p class="p-body">The SMPD2019 (Social Media Prediction Dataset) contain 486K social multimedia posts with web images, text and contextual data and rich annotations, which collected from Flickr (one of the largest photo-sharing platform) and corresponding anonymized photo-sharing records. SMPD2019 is a multi-faced data collection, which contains user profile, post category, customize tag, geography information, photo image, and photo metadata. For the headline prediction task, we split the data with time-order, resulting in train and test ratio is 2:1. The tables below show the statistics of the dataset.
-        </p>
-        <table class="table table-bordered table-striped">
-          <tr>
-            <th>Dataset</th>
-            <th>#Post</th>
-            <th>#User</th>
-            <th>#Categories</th>
-            <th>Temporal Range (Months)</th>
-            <th>Avg. Title Length</th>
-            <th>#Customize Tags</th>
-          </tr>
-          <tr>
-            <td>SMPD2019</td>
-            <td>486k</td>
-            <td>69k</td>
-            <td>756</td>
-            <td>16</td>
-            <td>29</td>
-            <td>250k</td>
-          </tr>
-
-        </table>
-        <br>
-      </div>
-    </div>
-
-    <div class="row" id="block4">
-      <div class="col-md-8 col-md-offset-2">
-        <h2 class="p-title"><b>Important dates</b></h2>
-        <div class="timeline">
-          <ul>
-            <li><b></b><span>April 15, 2019</span>
-              <p>Dataset available for download (training set)</p>
-            </li>
-            <li><b></b><span>May 25, 2019</span>
-              <p>Test set available for download</p>
-            </li>
-            <li><b></b><span>June 5, 2019</span>
-              <p>Results submission</p>
-            </li>
-            <li><b></b><span>June 6, 2019</span>
-              <p>Objective evaluation and human evaluation</p>
-            </li>
-            <li><b></b><span>June 15, 2019</span>
-              <p>Evaluation results announce</p>
-            </li>
-            <li><b></b><span>July 8, 2019</span>
-              <p>Paper submission deadline (please follow the instructions on the main conference website)</p>
-            </li>
-          </ul>
+    <nav class="navbar navbar-default navbar-fixed-top" id="nav-first">
+      <div class="container">
+        <div class="navbar-header">
+          <img src="/static/img/logo.png" width="400px" id="logo">
         </div>
-        <br>
+
+        {% if not login %}
+        <ul class="nav navbar-nav navbar-right" id="nav-first-main">
+          <li class="nav-li"><a href="#" id="href-register"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Register</a></li>
+          <li class="nav-li"><a href="#" id="href-login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login</a></li>
+          <li class="nav-li"><a href="mailto:social.media.prediction@gmail.com" id="href-contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
+        </ul>
+        {% else %}
+        <ul class="nav navbar-nav navbar-right" id="nav-first-main">
+          <li class="nav-li dropdown">
+            <a href="#" id="user" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{username}}</a>
+            <ul class="dropdown-menu">
+              <li><a href="#" id="editteam">Edit Team</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#" id="logout">Logout</a></li>
+            </ul>
+          </li>
+          <li class="nav-li"><a href="mailto:social.media.prediction@gmail.com" id="href-contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
+        </ul>
+        {% endif %}
       </div>
-    </div>
+    </nav>
 
-    <div class="row" id="block5">
-      <div class="col-md-8 col-md-offset-2">
-        <h2 class="p-title"><b>Citation</b></h2>
-        <p class="p-body">If you intend to publish results that use the information and resources provided by this challenge, please include the following references:</p>
-        <pre class="prettyprint lang-cv">
-@inproceedings{Wu2017DTCN,
-  title={Sequential Prediction of Social Media Popularity with Deep Temporal Context Networks},
-  author={Wu, Bo and Cheng, Wen-Huang and Zhang, Yongdong and Qiushi, Huang and Jintao, Li and Mei, Tao},
-  booktitle={International Joint Conference on Artificial Intelligence (IJCAI)},
-  year={2017},
-  location = {Melbourne, Australia}}
 
-@inproceedings{Wu2016TemporalPrediction,
-  author = {Wu, Bo and Mei, Tao and Cheng, Wen-Huang and Zhang, Yongdong},
-  title = {Unfolding Temporal Dynamics: Predicting Social Media Popularity Using Multi-scale Temporal Decomposition},
-  booktitle = {Proceedings of the Thirtieth AAAI Conference on Artificial Intelligence (AAAI)}
-  year = {2016},
-  location = {Phoenix, Arizona}}
+    <div class="container-fluid" id="maintext">
 
-@inproceedings{Wu2016TimeMatters,
-  author = {Wu, Bo and Cheng, Wen-Huang and Zhang, Yongdong and Mei, Tao},
-  title = {Time Matters: Multi-scale Temporalization of Social Media Popularity},
-  booktitle = {Proceedings of the 2016 ACM on Multimedia Conference (ACM MM)},
-  year = {2016},
-  location = {Amsterdam, The Netherlands}}
+      <div class="row" id="block1">
+        <div class="col-md-8 col-md-offset-2">
+          <h2 class="p-title"><b>Dataset Overview</b></h2>
 
-          </pre>
-        <br>
+          <p class="p-body">The SMP datasets SMPD2019 contain 486K posts, which collected from Flickr(a photo-sharing platform) and corresponding anonymized photo-sharing records. SMPD is a multi-faced data collection, which contains user profile, post category, customize tag, geography information, photo image, and photo metadata. For the headline prediction task, we split the data with time-order, resulting in train and test ratio is 2:1. The tables below show the statistics of SMPD2019.</p>
+          <table class="table table-striped table-bordered">
+            <tr>
+              <th>Dataset</th>
+              <th>#Post</th>
+              <th>#User</th>
+              <th>#Categories</th>
+              <th>Temporal Range (Months)</th>
+              <th>Avg. Title Length</th>
+              <th>#Customize Tags</th>
+            </tr>
+            <tr>
+              <td>SMPD2019</td>
+              <td>486k</td>
+              <td>69k</td>
+              <td>756</td>
+              <td>16</td>
+              <td>29</td>
+              <td>250k</td>
+            </tr>
+
+          </table>
+          <br>
+        </div>
       </div>
-    </div>
 
-    <div class="row" id="block6">
-      <div class="col-md-8 col-md-offset-2">
-        <h2 class="p-title"><b>Our Teams</b></h2>
-        <br>
-        <div class="row">
-          <div class="col-md-3">
-            <div class="thumbnail">
-              <img src="/static/img/bowu.jpg" width="100%" class="avatar">
-              <div class="caption">
-                <center>
-                  <h4>Bo Wu</h4>
-                </center>
-                <p>
-                  <center>Columbia University</center><br>
-                </p>
-                <p>
-                  <center><a href="mailto:bo.wu@columbia.edu">bo.wu@columbia.edu</a></center>
-                </p>
-              </div>
-            </div>
+
+      <div class="row" id="block2">
+        <div class="col-md-8 col-md-offset-2">
+        <h2 class="p-title"><b>Customize Tags Cloud: </b></h2>
+        <p class="p-body">This tag cloud denotes all of the customize tags provided by users, including 250k different words. </p>
+        </div>
+       <div  id="tagcloud" style="margin-left:300px">
+            <ul>
+                <li><a href="#">glam</a></li>
+                <li><a href="#">fifa</a></li>
+                <li><a href="#">cinema</a></li>
+                <li><a href="#">old</a></li>
+                <li><a href="#">thirsty</a></li>
+                <li><a href="#">flip</a></li>
+                <li><a href="#">dubstep</a></li>
+                <li><a href="#">funtimes</a></li>
+                <li><a href="#">congratulations</a></li>
+                <li><a href="#">rnb</a></li>
+                <li><a href="#">stadium</a></li>
+                <li><a href="#">straight</a></li>
+                <li><a href="#">thirst</a></li>
+                <li><a href="#">actress</a></li>
+                <li><a href="#">rainyweather</a></li>
+                <li><a href="#">jockey</a></li>
+                <li><a href="#">horseshoe</a></li>
+                <li><a href="#">happythanksgiving</a></li>
+                <li><a href="#">bling</a></li>
+                <li><a href="#">smiles</a></li>
+                <li><a href="#">cuddly</a></li>
+                <li><a href="#">kiss</a></li>
+                <li><a href="#">artwork</a></li>
+                <li><a href="#">light</a></li>
+                <li><a href="#">live</a></li>
+                <li><a href="#">composition</a></li>
+                <li><a href="#">portrait</a></li>
+                <li><a href="#">work</a></li>
+                <li><a href="#">trip</a></li>
+                <li><a href="#">beer</a></li>
+                <li><a href="#">cloud</a></li>
+                <li><a href="#">insect</a></li>
+                <li><a href="#">studio</a></li>
+                <li><a href="#">falltime</a></li>
+                <li><a href="#">october</a></li>
+                <li><a href="#">born</a></li>
+                <li><a href="#">newsong</a></li>
+                <li><a href="#">lips</a></li>
+                <li><a href="#">blonde</a></li>
+                <li><a href="#">rosa</a></li>
+                <li><a href="#">hungry</a></li>
+                <li><a href="#">ear</a></li>
+                <li><a href="#">christmastree</a></li>
+                <li><a href="#">beats</a></li>
+                <li><a href="#">blueskies</a></li>
+                <li><a href="#">icecream</a></li>
+                <li><a href="#">book</a></li>
+                <li><a href="#">geometric</a></li>
+                <li><a href="#">child</a></li>
+                <li><a href="#">swagger</a></li>
+                <li><a href="#">pattern</a></li>
+                <li><a href="#">kickflip</a></li>
+                <li><a href="#">watertank</a></li>
+                <li><a href="#">abstract</a></li>
+                <li><a href="#">perspective</a></li>
+                <li><a href="#">geometry</a></li>
+                <li><a href="#">wheel</a></li>
+                <li><a href="#">halloween</a></li>
+                <li><a href="#">horse</a></li>
+                <li><a href="#">text</a></li>
+                <li><a href="#">gift</a></li>
+                <li><a href="#">wall</a></li>
+                <li><a href="#">nailpolish</a></li>
+                <li><a href="#">thanks</a></li>
+                <li><a href="#">skirt</a></li>
+                <li><a href="#">stuffing</a></li>
+                <li><a href="#">cafe</a></li>
+                <li><a href="#">dessert</a></li>
+                <li><a href="#">highway</a></li>
+                <li><a href="#">face</a></li>
+                <li><a href="#">pouring</a></li>
+                <li><a href="#">leaf</a></li>
+                <li><a href="#">baltimore</a></li>
+                <li><a href="#">library</a></li>
+                <li><a href="#">nighttime</a></li>
+                <li><a href="#">ink</a></li>
+                <li><a href="#">exotic</a></li>
+                <li><a href="#">paper</a></li>
+                <li><a href="#">minimal</a></li>
+                <li><a href="#">white</a></li>
+                <li><a href="#">cat</a></li>
+                <li><a href="#">candle</a></li>
+                <li><a href="#">black</a></li>
+                <li><a href="#">star</a></li>
+                <li><a href="#">cruising</a></li>
+                <li><a href="#">braid</a></li>
+                <li><a href="#">jam</a></li>
+                <li><a href="#">eyeshadow</a></li>
+                <li><a href="#">bookworm</a></li>
+                <li><a href="#">sportscar</a></li>
+                <li><a href="#">laptops</a></li>
+                <li><a href="#">skatelife</a></li>
+                <li><a href="#">climax</a></li>
+                <li><a href="#">delish</a></li>
+                <li><a href="#">thankful</a></li>
+                <li><a href="#">solecollector</a></li>
+                <li><a href="#">lovecats</a></li>
+                <li><a href="#">ilovemycat</a></li>
+                <li><a href="#">eyebrows</a></li>
+                <li><a href="#">streetartistry</a></li>
+                <li><a href="#">architectureporn</a></li>
+                <li><a href="#">remix</a></li>
+                <li><a href="#">eyeliner</a></li>
+                <li><a href="#">sweettooth</a></li>
+                <li><a href="#">repeat</a></li>
+                <li><a href="#">getfit</a></li>
+                <li><a href="#">awake</a></li>
+                <li><a href="#">coverup</a></li>
+                <li><a href="#">unhas</a></li>
+                <li><a href="#">bases</a></li>
+                <li><a href="#">cosmetic</a></li>
+                <li><a href="#">opi</a></li>
+                <li><a href="#">fitspo</a></li>
+                <li><a href="#">downpour</a></li>
+                <li><a href="#">wakeup</a></li>
+                <li><a href="#">rainydays</a></li>
+                <li><a href="#">bedtime</a></li>
+                <li><a href="#">catlover</a></li>
+                <li><a href="#">goodnight</a></li>
+                <li><a href="#">muffler</a></li>
+                <li><a href="#">sunnydays</a></li>
+                <li><a href="#">gallop</a></li>
+                <li><a href="#">foodpics</a></li>
+                <li><a href="#">crease</a></li>
+                <li><a href="#">footballplayer</a></li>
+                <li><a href="#">outfitoftheday</a></li>
+                <li><a href="#">lovedogs</a></li>
+                <li><a href="#">aquaria</a></li>
+                <li><a href="#">wiwt</a></li>
+                <li><a href="#">flexibility</a></li>
+                <li><a href="#">pads</a></li>
+                <li><a href="#">congrats</a></li>
+                <li><a href="#">shredded</a></li>
+                <li><a href="#">lookoftheday</a></li>
+                <li><a href="#">wallporn</a></li>
+                <li><a href="#">streetarteverywhere</a></li>
+                <li><a href="#">lovenature</a></li>
+                <li><a href="#">highheelshoes</a></li>
+                <li><a href="#">shot</a></li>
+                <li><a href="#">lady</a></li>
+                <li><a href="#">city</a></li>
+                <li><a href="#">streetphotography</a></li>
+                <li><a href="#">goodweather</a></li>
+                <li><a href="#">tatts</a></li>
+                <li><a href="#">ilovemydog</a></li>
+                <li><a href="#">funtime</a></li>
+                <li><a href="#">snooze</a></li>
+                <li><a href="#">xoxo</a></li>
+                <li><a href="#">costume</a></li>
+                <li><a href="#">closeup</a></li>
+                <li><a href="#">hairdo</a></li>
+                <li><a href="#">architecturelovers</a></li>
+                <li><a href="#">fashionjewelry</a></li>
+                <li><a href="#">flick</a></li>
+                <li><a href="#">gametime</a></li>
+                <li><a href="#">nook</a></li>
+                <li><a href="#">nature_shooters</a></li>
+                <li><a href="#">faithful</a></li>
+                <li><a href="#">moviestar</a></li>
+                <li><a href="#">weddinggown</a></li>
+                <li><a href="#">clearskies</a></li>
+                <li><a href="#">navel</a></li>
+                <li><a href="#">footballseason</a></li>
+                <li><a href="#">bikelife</a></li>
+                <li><a href="#">gymnasts</a></li>
+                <li><a href="#">goodmusic</a></li>
+                <li><a href="#">mitt</a></li>
+                <li><a href="#">thesun</a></li>
+                <li><a href="#">tumbling</a></li>
+                <li><a href="#">sneakerhead</a></li>
+                <li><a href="#">niners</a></li>
+                <li><a href="#">rideout</a></li>
+                <li><a href="#">soccergame</a></li>
+                <li><a href="#">skateeverydamnday</a></li>
+                <li><a href="#">modifications</a></li>
+                <li><a href="#">goodfriends</a></li>
+                <li><a href="#">chocolate</a></li>
+                <li><a href="#">skywatcher</a></li>
+                <li><a href="#">essie</a></li>
+                <li><a href="#">reeftank</a></li>
+                <li><a href="#">trailrunner</a></li>
+                <li><a href="#">archidaily</a></li>
+                <li><a href="#">polish</a></li>
+                <li><a href="#">dogsitting</a></li>
+                <li><a href="#">highheels</a></li>
+                <li><a href="#">urbanwalls</a></li>
+                <li><a href="#">igdaily</a></li>
+                <li><a href="#">mobile</a></li>
+                <li><a href="#">brown</a></li>
+                <li><a href="#">sea</a></li>
+                <li><a href="#">stanleycup</a></li>
+                <li><a href="#">glitter</a></li>
+                <li><a href="#">baltimoreravens</a></li>
+                <li><a href="#">refreshed</a></li>
+                <li><a href="#">man</a></li>
+                <li><a href="#">gamergirl</a></li>
+                <li><a href="#">girlfriend</a></li>
+                <li><a href="#">glass</a></li>
+                <li><a href="#">kisses</a></li>
+                <li><a href="#">driver</a></li>
+                <li><a href="#">hairfashion</a></li>
+                <li><a href="#">bluesky</a></li>
+                <li><a href="#">hockeyplayer</a></li>
+                <li><a href="#">samsunggalaxy</a></li>
+                <!-- <li><a href="#">electronic</a></li>
+                <li><a href="#">jacket</a></li>
+                <li><a href="#">raining</a></li>
+                <li><a href="#">goingout</a></li>
+                <li><a href="#">cuddle</a></li>
+                <li><a href="#">fishtank</a></li>
+                <li><a href="#">tropicalfish</a></li>
+                <li><a href="#">saltwater</a></li>
+                <li><a href="#">lookingup</a></li>
+                <li><a href="#">teacup</a></li>
+                <li><a href="#">listentothis</a></li>
+                <li><a href="#">runner</a></li>
+                <li><a href="#">movie</a></li>
+                <li><a href="#">icerink</a></li>
+                <li><a href="#">foods</a></li>
+                <li><a href="#">brunette</a></li>
+                <li><a href="#">curly</a></li>
+                <li><a href="#">rainyday</a></li>
+                <li><a href="#">cycle</a></li>
+                <li><a href="#">bracelets</a></li>
+                <li><a href="#">exercise</a></li>
+                <li><a href="#">glue</a></li>
+                <li><a href="#">scared</a></li>
+                <li><a href="#">springtime</a></li>
+                <li><a href="#">skyline</a></li>
+                <li><a href="#">jeans</a></li>
+                <li><a href="#">moonlight</a></li>
+                <li><a href="#">buildings</a></li>
+                <li><a href="#">bat</a></li>
+                <li><a href="#">gorgeous</a></li>
+                <li><a href="#">blossom</a></li>
+                <li><a href="#">babies</a></li>
+                <li><a href="#">dancers</a></li>
+                <li><a href="#">doglover</a></li>
+                <li><a href="#">sparkles</a></li>
+                <li><a href="#">spooky</a></li>
+                <li><a href="#">wintertime</a></li>
+                <li><a href="#">farm</a></li>
+                <li><a href="#">infant</a></li>
+                <li><a href="#">reader</a></li>
+                <li><a href="#">tshirt</a></li>
+                <li><a href="#">knockout</a></li>
+                <li><a href="#">bloom</a></li>
+                <li><a href="#">bracelet</a></li>
+                <li><a href="#">beautifulday</a></li>
+                <li><a href="#">teatime</a></li>
+                <li><a href="#">graffitiporn</a></li>
+                <li><a href="#">film</a></li>
+                <li><a href="#">kindle</a></li>
+                <li><a href="#">shoe</a></li>
+                <li><a href="#">tourist</a></li>
+                <li><a href="#">lovely</a></li>
+                <li><a href="#">focus</a></li>
+                <li><a href="#">foodporn</a></li>
+                <li><a href="#">couple</a></li>
+                <li><a href="#">dancer</a></li>
+                <li><a href="#">dancefloor</a></li>
+                <li><a href="#">nail</a></li>
+                <li><a href="#">ripped</a></li>
+                <li><a href="#">shiny</a></li>
+                <li><a href="#">nola</a></li>
+                <li><a href="#">haircolor</a></li>
+                <li><a href="#">sweat</a></li>
+                <li><a href="#">wildlife</a></li>
+                <li><a href="#">ghost</a></li>
+                <li><a href="#">pup</a></li>
+                <li><a href="#">lipstick</a></li>
+                <li><a href="#">architexture</a></li>
+                <li><a href="#">blessed</a></li>
+                <li><a href="#">travelingram</a></li>
+                <li><a href="#">igtravel</a></li>
+                <li><a href="#">amazing</a></li>
+                <li><a href="#">jackolantern</a></li>
+                <li><a href="#">stone</a></li>
+                <li><a href="#">tasty</a></li>
+                <li><a href="#">earring</a></li>
+                <li><a href="#">movies</a></li>
+                <li><a href="#">creatures</a></li>
+                <li><a href="#">shine</a></li>
+                <li><a href="#">lashes</a></li>
+                <li><a href="#">mane</a></li>
+                <li><a href="#">tats</a></li>
+                <li><a href="#">tattoos</a></li>
+                <li><a href="#">skatepark</a></li>
+                <li><a href="#">tar</a></li>
+                <li><a href="#">reading</a></li>
+                <li><a href="#">freshwater</a></li>
+                <li><a href="#">wild</a></li>
+                <li><a href="#">grind</a></li>
+                <li><a href="#">ollie</a></li>
+                <li><a href="#">insects</a></li> -->
+<!--
+                <li><a href="#">bestfriends</a></li>
+                <li><a href="#">weddingcake</a></li>
+                <li><a href="#">wine</a></li>
+                <li><a href="#">literature</a></li>
+                <li><a href="#">stretch</a></li>
+                <li><a href="#">gettingready</a></li>
+                <li><a href="#">tires</a></li>
+                <li><a href="#">stencilart</a></li>
+                <li><a href="#">vault</a></li>
+                <li><a href="#">sunrays</a></li>
+                <li><a href="#">flicks</a></li>
+                <li><a href="#">morning</a></li>
+                <li><a href="#">supermoto</a></li>
+                <li><a href="#">hugs</a></li>
+                <li><a href="#">gadget</a></li>
+                <li><a href="#">dude</a></li>
+                <li><a href="#">page</a></li>
+                <li><a href="#">soccerball</a></li>
+                <li><a href="#">goodmorning</a></li>
+                <li><a href="#">pages</a></li>
+                <li><a href="#">exoticcars</a></li>
+                <li><a href="#">exoticcar</a></li>
+                <li><a href="#">kicks</a></li>
+                <li><a href="#">muscle</a></li>
+                <li><a href="#">quarterback</a></li>
+                <li><a href="#">crystals</a></li>
+                <li><a href="#">trick</a></li>
+                <li><a href="#">tat</a></li>
+                <li><a href="#">longboarding</a></li>
+                <li><a href="#">unforgettable</a></li>
+                <li><a href="#">trees</a></li>
+                <li><a href="#">spoiler</a></li>
+                <li><a href="#">scorpion</a></li>
+                <li><a href="#">travelgram</a></li>
+                <li><a href="#">santa</a></li>
+                <li><a href="#">mascara</a></li>
+                <li><a href="#">tattooed</a></li>
+                <li><a href="#">gloss</a></li>
+                <li><a href="#">archilovers</a></li>
+                <li><a href="#">phone</a></li>
+                <li><a href="#">pumpkins</a></li>
+                <li><a href="#">ravens</a></li>
+                <li><a href="#">drinks</a></li>
+                <li><a href="#">sanfrancsico</a></li>
+                <li><a href="#">clothes</a></li>
+                <li><a href="#">caffeine</a></li>
+                <li><a href="#">stickerart</a></li>
+                <li><a href="#">hockeylife</a></li>
+                <li><a href="#">pumpkinpatch</a></li>
+                <li><a href="#">longhair</a></li>
+                <li><a href="#">liquor</a></li>
+                <li><a href="#">dark</a></li>
+                <li><a href="#">branco</a></li>
+                <li><a href="#">trickortreat</a></li>
+                <li><a href="#">pumpkin</a></li>
+                <li><a href="#">gaming</a></li>
+                <li><a href="#">treat</a></li>
+                <li><a href="#">practice</a></li>
+                <li><a href="#">cheering</a></li>
+                <li><a href="#">aquarium</a></li>
+                <li><a href="#">bodyart</a></li>
+                <li><a href="#">autumn</a></li>
+                <li><a href="#">giving</a></li>
+                <li><a href="#">words</a></li>
+                <li><a href="#">visiting</a></li>
+                <li><a href="#">seattleseahawks</a></li>
+                <li><a href="#">genre</a></li>
+                <li><a href="#">tire</a></li>
+                <li><a href="#">melody</a></li>
+                <li><a href="#">gem</a></li>
+                <li><a href="#">holidayseason</a></li>
+                <li><a href="#">carols</a></li>
+                <li><a href="#">skateboard</a></li>
+                <li><a href="#">elves</a></li>
+                <li><a href="#">fish</a></li>
+                <li><a href="#">lines</a></li>
+                <li><a href="#">dancerecital</a></li>
+                <li><a href="#">jewel</a></li>
+                <li><a href="#">gloves</a></li>
+                <li><a href="#">wiw</a></li>
+                <li><a href="#">foliage</a></li>
+                <li><a href="#">desserts</a></li>
+                <li><a href="#">sprayart</a></li>
+                <li><a href="#">merrychristmas</a></li>
+                <li><a href="#">ornaments</a></li>
+                <li><a href="#">read</a></li>
+                <li><a href="#">horizon</a></li>
+                <li><a href="#">santaclaus</a></li>
+                <li><a href="#">happynewyear</a></li>
+                <li><a href="#">gems</a></li>
+                <li><a href="#">road</a></li>
+                <li><a href="#">moon</a></li>
+                <li><a href="#">leaves</a></li>
+                <li><a href="#">diet</a></li>
+                <li><a href="#">newyearsparty</a></li>
+                <li><a href="#">newyearsday</a></li>
+                <li><a href="#">chilly</a></li>
+                <li><a href="#">rest</a></li>
+                <li><a href="#">stories</a></li>
+                <li><a href="#">leap</a></li>
+                <li><a href="#">pub</a></li>
+                <li><a href="#">xmas</a></li>
+                <li><a href="#">tea</a></li>
+                <li><a href="#">longboard</a></li> -->
+
+            </ul>
+        </div>
+
           </div>
-
-          <div class="col-md-3">
-            <div class="thumbnail">
-              <img src="/static/img/wenhuangcheng.jpg" width="100%" class="avatar">
-              <div class="caption">
-                <center>
-                  <h4>Wen-Huang Cheng</h4>
-                </center>
-                <p>
-                  <center>National Chiao Tung University</center>
-                </p>
-                <p>
-                  <center><a href="mailto:whcheng@nctu.edu.tw">whcheng@nctu.edu.tw</a></center>
-                </p>
+          <div class="row" id="block3">
+            <div class="col-md-8 col-md-offset-2">
+              <h2 class="p-title"><b>Histogram of the Labels: </b></h2>
+              <!-- <p class="p-body"></p> -->
+              <canvas id="mybar" width="800"></canvas>
               </div>
-            </div>
+              
+            <br>
+      </div>
+          <div class="row" id="block4">
+            <div class="col-md-8 col-md-offset-2">
+              <h2 class="p-title"><b>Hierarchy for 756 category classes: </b></h2>
+              <p class="p-body">The inner circle denotes the first level categories, including 11 different classes. The second circle denotes the second level categories, including 77 different classes. And the last circle denotes the third level categories, including 668 different classes. </p>
+              </div>
+            <canvas id="chart-area" >
+            </canvas>
+            <br>
+      </div>
+      <div class="row" id="block7">
+        <div class="col-md-10 col-md-offset-1">
+          <center><h5 style="color:white;">Copyright © 2019. SMP Challenge Organization Committee. All rights reserved.</h5></center>
+        </div>
+      </div>
+
+
+        <div class="modal fade" id="modal-register">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="modal-title">Register</h4>
           </div>
-
-          <div class="col-md-3">
-            <div class="thumbnail">
-              <img src="/static/img/jieboluo.jpg" width="100%" class="avatar">
-              <div class="caption">
-                <center>
-                  <h4>Jiebo Luo</h4>
-                </center>
-                <p>
-                  <center>University of Rochester</center><br>
-                </p>
-                <p>
-                  <center><a href="mailto:jluo@cs.rochester.edu">jluo@cs.rochester.edu</a></center>
-                </p>
+          <div class="modal-body" id="modal-body">
+            <form id="form">
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email">
+                <span id="email-warn" class="help-block"></span>
               </div>
-            </div>
+
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username">
+                <span id="username-warn" class="help-block"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password">
+                <span id="password-warn" class="help-block"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="repeat-password">Repeat Password</label>
+                <input type="password" class="form-control" id="repeat-password">
+                <span id="repeat-password-warn" class="help-block"></span>
+              </div>
+
+            </form>
+
           </div>
-
-          <div class="col-md-3">
-            <div class="thumbnail">
-              <img src="/static/img/beiliu.jpg" width="100%" class="avatar">
-              <div class="caption">
-                <center>
-                  <h4>Bei Liu</h4>
-                </center>
-                <p>
-                  <center>Microsoft Research Asia</center><br>
-                </p>
-                <p>
-                  <center><a href="mailto:bei.liu@microsoft.com">bei.liu@microsoft.com</a></center>
-                </p>
-              </div>
-            </div>
+          <div class="modal-footer" id="modal-footer">
+            <center><button type="button" class="btn btn-primary" id="register">Register</button></center>
           </div>
         </div>
+      </div>
+    </div>
 
-        <!--           <h1><b>Webmaster</b></h1> -->
-        <div class="row">
-          <div class="col-md-3">
-            <div class="thumbnail">
-              <img src="/static/img/zhaoyangzeng.jpg" width="100%" class="avatar">
-              <div class="caption">
-                <center>
-                  <h4>Zhaoyang Zeng</h4>
-                  </h2>
-                  <p>
-                    <center>Sun Yat-sen University</center><br>
-                  </p>
-                  <p>
-                    <center><a href="mailto:zengzhy5@mail2.sysu.edu.cn">zengzhy5@mail2.sysu.edu.cn</a></center>
-                  </p>
-              </div>
-            </div>
+    <div class="modal fade" id="modal-login">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Login</h4>
           </div>
-
-          <div class="col-md-3">
-            <div class="thumbnail">
-              <img src="/static/img/peiyeli.jpg" width="100%" class="avatar">
-              <div class="caption">
-                <center>
-                  <h4>Peiye Liu</h4>
-                  </h2>
-                  <p>
-                    <center>Beijing University of Posts and Telecommunications</center>
-                  </p>
-                  <p>
-                    <center><a href="mailto:liupeiye@bupt.edu.cn">liupeiye@bupt.edu.cn</a></center>
-                  </p>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="login-email">Email</label>
+                <input type="email" class="form-control" id="login-email">
+                <span id="login-email-warn" class="help-block"></span>
               </div>
-            </div>
+
+              <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" class="form-control" id="login-password">
+                <span id="login-password-warn" class="help-block"></span>
+              </div>
+
+              <a id="forget">Forget password?</a>
+            </form>
+
           </div>
-
+          <div class="modal-footer">
+            <center><button type="button" class="btn btn-primary" id="login">Login</button></center>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="row" id="block7">
-      <div class="col-md-10 col-md-offset-1">
-        <center>
-          <h5 style="color:white;">Copyright © 2019. SMP Challenge Organization Committee. All rights reserved.</h5>
-        </center>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="modal fade" id="modal-register">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="modal-title">Register</h4>
-        </div>
-        <div class="modal-body" id="modal-body">
-          <form id="form">
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" class="form-control" id="email">
-              <span id="email-warn" class="help-block"></span>
-            </div>
-
-            <div class="form-group">
-              <label for="username">Username</label>
-              <input type="text" class="form-control" id="username">
-              <span id="username-warn" class="help-block"></span>
-            </div>
-
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" class="form-control" id="password">
-              <span id="password-warn" class="help-block"></span>
-            </div>
-
-            <div class="form-group">
-              <label for="repeat-password">Repeat Password</label>
-              <input type="password" class="form-control" id="repeat-password">
-              <span id="repeat-password-warn" class="help-block"></span>
-            </div>
-
-          </form>
-
-        </div>
-        <div class="modal-footer" id="modal-footer">
-          <center><button type="button" class="btn btn-primary" id="register">Register</button></center>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="modal-login">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Login</h4>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label for="login-email">Email</label>
-              <input type="email" class="form-control" id="login-email">
-              <span id="login-email-warn" class="help-block"></span>
-            </div>
-
-            <div class="form-group">
-              <label for="login-password">Password</label>
-              <input type="password" class="form-control" id="login-password">
-              <span id="login-password-warn" class="help-block"></span>
-            </div>
-
-            <a id="forget">Forget password?</a>
-          </form>
-
-        </div>
-        <div class="modal-footer">
-          <center><button type="button" class="btn btn-primary" id="login">Login</button></center>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  {% if register_success %}
-  <div class="modal fade" id="modal-register-success">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body">
-          <h4>Register Success</h4>
-        </div>
-      </div>
-    </div>
-  </div>
-  {% endif %}
-
-  {% if register_fail %}
-  <div class="modal fade" id="modal-register-success">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body">
-          <h4>Verification link expires. Please register again.</h4>
-        </div>
-      </div>
-    </div>
-  </div>
-  {% endif %}
-
-  <div class="modal fade" id="modal-team">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">My Team</h4>
-        </div>
-        <div class="modal-body">
-          <form id="team-form">
-            <div class="form-group">
-              <label for="team-name">Team Name</label>
-              <input type="text" class="form-control team-input" id="team-name">
-              <span id="team-name-warn" class="help-block"></span>
-            </div>
-
-            <div class="row">
-              <div class="col-md-2">
-                <br>
-                <label class="member-title">Caption</label>
+    <div class="modal fade" id="modal-team">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">My Team</h4>
+          </div>
+          <div class="modal-body">
+            <form id="team-form">
+              <div class="form-group">
+                <label for="team-name">Team Name</label>
+                <input type="text" class="form-control team-input" id="team-name">
+                <span id="team-name-warn" class="help-block"></span>
               </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="caption-name">Name</label>
-                  <input type="text" class="form-control team-input" id="caption-name">
-                  <span class="help-block"></span>
+
+              <div class="row">
+                <div class="col-md-2">
+                  <br>
+                  <label class="member-title">Caption</label>
                 </div>
-              </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="caption-email">Email</label>
-                  <input type="email" class="form-control team-input" id="caption-email">
-                  <span class="help-block"></span>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="caption-name">Name</label>
+                    <input type="text" class="form-control team-input" id="caption-name">
+                    <span class="help-block"></span>
+                  </div>
                 </div>
-              </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="caption-organization">Organization</label>
-                  <input type="text" class="form-control team-input" id="caption-organization">
-                  <span class="help-block"></span>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="caption-email">Email</label>
+                    <input type="email" class="form-control team-input" id="caption-email">
+                    <span class="help-block"></span>
+                  </div>
                 </div>
-              </div>
-              <!-- <div class="col-md-1">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="caption-organization">Organization</label>
+                    <input type="text" class="form-control team-input" id="caption-organization">
+                    <span class="help-block"></span>
+                  </div>
+                </div>
+                <!-- <div class="col-md-1">
                   <button class="btn btn-danger"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
                 </div> -->
+              </div>
+
+
+
+            </form>
+            <div class="row">
+              <div class="col-md-1 col-md-offset-2">
+                <br>
+                <button class="btn btn-default"><span class="glyphicon glyphicon-plus" id="addmember"></span></button>
+              </div>
             </div>
 
-
-
-          </form>
-          <div class="row">
-            <div class="col-md-1 col-md-offset-2">
-              <br>
-              <button class="btn btn-default"><span class="glyphicon glyphicon-plus" id="addmember"></span></button>
-            </div>
           </div>
-
-        </div>
-        <div class="modal-footer">
-          <center><button type="button" class="btn btn-primary" id="save">Save</button></center>
+          <div class="modal-footer">
+            <center><button type="button" class="btn btn-primary" id="save">Save</button></center>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+    <script>
 
-</body>
+    var ctx = document.getElementById("chart-area").getContext("2d");
+    gradient = ctx.createLinearGradient(0, 0, 0, 450);
 
-</html>
+    gradient.addColorStop(1, 'rgba(121, 193,102, 1)');
+    gradient.addColorStop(1, 'rgba(70, 140,0, 1)');
+    gradient.addColorStop(1, 'rgba(133, 174,83, 1)');
+    gradient.addColorStop(1, 'rgba(187, 225,154, 1)');
+    gradient.addColorStop(1, 'rgba(142, 212,197, 1)');
+    gradient.addColorStop(1, 'rgba(229, 237,245, 1)');
+
+    // gradient.addColorStop(0.8, 'rgba(255, 0, 0, 0.25)');
+
+
+    var config = {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [879, 1277, 820, 205, 190, 176, 1169, 269, 38, 74, 106, 157, 921, 841, 342, 1020, 1036, 597, 868, 1101, 1305, 376, 721, 325, 214, 79, 446, 575, 249, 1582, 792, 632, 264, 261, 36, 169, 417, 192, 236, 23, 110, 39, 434, 1327, 132, 133, 1507, 18, 51, 55, 57, 187, 1598, 38, 130, 618, 1063, 1004, 120, 1694, 548, 35, 1233, 1191, 864, 843, 1635, 990, 1175, 439, 146, 191, 573, 1018, 887, 1239, 426, 407, 298, 784, 55, 310, 890, 269, 63, 99, 77, 297, 171, 87, 12, 144, 107, 13, 30, 25, 57, 45, 80, 172, 31, 31, 298, 868, 21, 148, 98, 210, 326, 599, 117, 488, 67, 258, 996, 3, 1025, 216, 17, 675, 410, 1127, 135, 246, 371, 1250, 115, 1103, 712, 655, 1160, 330, 499, 293, 1178, 947, 235, 1254, 831, 170, 248, 19, 1155, 40, 41, 37, 465, 131, 116, 127, 1332, 1397, 83, 24, 237, 1199, 390, 1090, 1287, 590, 686, 56, 137, 1237, 1214, 1200, 1255, 316, 946, 993, 1483, 1157, 1162, 176, 1763, 306, 1303, 1376, 927, 1414, 683, 997, 218, 373, 930, 470, 460, 177, 279, 83, 82, 667, 735, 752, 350, 419, 422, 401, 43, 517, 215, 633, 415, 58, 53, 219, 172, 92, 182, 101, 329, 90, 3, 139, 59, 140, 208, 77, 21, 46, 127, 437, 88, 232, 20, 165, 219, 25, 59, 173, 9, 37, 56, 2, 129, 22, 54, 32, 28, 46, 279, 33, 245, 44, 107, 45, 299, 112, 20, 111, 25, 111, 476, 36, 317, 124, 186, 41, 73, 2, 156, 42, 26, 84, 63, 16, 65, 29, 336, 41, 52, 4, 15, 12, 4, 2, 271, 1553, 1424, 69, 439, 1008, 152, 238, 144, 179, 67, 40, 451, 906, 1262, 1317, 1392, 1641, 1596, 542, 389, 36, 50, 1446, 104, 1170, 388, 181, 1115, 740, 668, 66, 472, 109, 574, 810, 950, 382, 882, 1114, 659, 491, 69, 141, 346, 8, 44, 165, 183, 64, 46, 501, 269, 36, 185, 6, 40, 266, 1283, 1509, 1, 66, 631, 179, 1008, 641, 203, 1362, 525, 247, 1482, 931, 979, 74, 1068, 1320, 219, 147, 172, 327, 1602, 489, 1577, 1454, 778, 235, 1066, 328, 1470, 1874, 1726, 585, 1327, 1259, 1663, 458, 1745, 1544, 823, 1815, 498, 1511, 519, 184, 227, 982, 1812, 806, 1759, 402, 949, 593, 230, 188, 149, 1352, 178, 44, 44, 111, 138, 145, 41, 645, 266, 380, 178, 89, 450, 38, 524, 61, 104, 61, 40, 114, 299, 180, 2, 1148, 590, 97, 858, 326, 218, 268, 742, 216, 763, 215, 167, 1380, 927, 1128, 43, 361, 1350, 13, 77, 353, 1080, 1102, 1067, 296, 183, 171, 343, 84, 400, 308, 145, 77, 212, 19, 1, 48, 123, 5, 188, 661, 118, 114, 819, 168, 158, 365, 725, 428, 714, 280, 800, 909, 17, 126, 63, 1452, 76, 1370, 154, 181, 98, 824, 892, 594, 672, 115, 277, 1123, 327, 223, 157, 1739, 913, 388, 442, 551, 139, 190, 217, 112, 169, 59, 8, 432, 928, 106, 710, 162, 134, 90, 114, 736, 1300, 234, 292, 288, 25, 103, 68, 655, 206, 982, 740, 742, 950, 90, 115, 366, 482, 1255, 1013, 239, 171, 99, 78, 83, 242, 1209, 289, 571, 147, 49, 166, 156, 50, 99, 251, 83, 86, 43, 753, 113, 14, 798, 95, 197, 213, 193, 91, 38, 57, 1, 1469, 243, 1372, 347, 599, 72, 68, 54, 50, 206, 58, 181, 153, 176, 218, 1111, 1658, 710, 1463, 99, 455, 391, 7, 809, 264, 174, 1325, 98, 849, 1592, 271, 1085, 379, 160, 1337, 1459, 249, 1397, 636, 1379, 163, 102, 178, 631, 537, 155, 148, 55, 118, 24, 182, 177, 32, 7, 315, 178, 335, 225, 87, 236, 146, 329, 260, 97, 274, 467, 922, 414, 239, 231, 130, 465, 77, 689, 740, 407, 747, 1001, 345, 1376, 678, 825, 196, 882, 203, 652, 155, 156, 168, 277, 197, 252, 203, 128, 61, 356, 132, 1381, 181, 1122, 344, 384, 454, 93, 335, 298, 165, 259, 101, 8],
+                backgroundColor:['rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 0.8)', 'rgba(187, 225,154, 0.8)', 'rgba(187, 225,154, 0.8)', 'rgba(187, 225,154, 0.8)', 'rgba(187, 225,154, 0.8)', 'rgba(187, 225,154, 0.8)', 'rgba(187, 225,154, 0.8)', 'rgba(187, 225,154, 0.8)', 'rgba(187, 225,154, 0.8)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(229, 237,245, 1)', 'rgba(229, 237,245, 1)', 'rgba(229, 237,245, 1)', 'rgba(229, 237,245, 1)', 'rgba(229, 237,245, 1)', 'rgba(229, 237,245, 1)', 'rgba(229, 237,245, 1)', 'rgba(229, 237,245, 1)', 'rgba(229, 237,245, 1)', 'rgba(229, 237,245, 1)', 'rgba(229, 237,245, 1)', 'rgba(229, 237,245, 1)', 'rgba(229, 237,245, 1)', 'rgba(229, 237,245, 1)', 'rgba(229, 237,245, 1)'],
+                label:'Doughnut 3',
+                weight:1.5,
+                borderWidth: 0.7,
+                labels: ["glam", "straight", "bling", "lips", "blonde", "rosa", "ear", "swagger", "nailpolish", "skirt", "ink", "black", "braid", "eyeshadow", "solecollector", "eyebrows", "eyeliner", "coverup", "unhas", "cosmetic", "opi", "crease", "outfitoftheday", "wiwt", "lookoftheday", "highheelshoes", "tatts", "hairdo", "fashionjewelry", "navel", "sneakerhead", "modifications", "essie", "polish", "highheels", "brown", "glitter", "man", "hairfashion", "jacket", "brunette", "curly", "bracelets", "glue", "jeans", "gorgeous", "sparkles", "tshirt", "bracelet", "shoe", "nail", "shiny", "haircolor", "lipstick", "stone", "earring", "lashes", "tats", "tattoos", "tar", "accessory", "pants", "hairstyles", "lash", "kicks", "crystals", "tat", "mascara", "tattooed", "gloss", "clothes", "longhair", "branco", "bodyart", "gem", "jewel", "wiw", "gems", "stones", "dope", "preto", "haircut", "inked", "whatiwore", "powder", "lip", "jewels", "hairstyle", "tattoo", "girly", "nailart", "shirt", "polo", "gemstone", "foundation", "earrings", "cosmetics", "sneaker", "lookbook", "nike", "tall", "makeup", "fifa", "flip", "stadium", "trip", "studio", "kickflip", "wheel", "highway", "baltimore", "exotic", "cruising", "sportscar", "skatelife", "getfit", "bases", "fitspo", "muffler", "footballplayer", "flexibility", "pads", "shredded", "shot", "gametime", "faithful", "footballseason", "bikelife", "gymnasts", "mitt", "tumbling", "niners", "rideout", "soccergame", "skateeverydamnday", "trailrunner", "sea", "stanleycup", "baltimoreravens", "driver", "hockeyplayer", "runner", "icerink", "cycle", "exercise", "bat", "dancers", "tourist", "focus", "dancer", "dancefloor", "ripped", "nola", "sweat", "travelingram", "igtravel", "skatepark", "grind", "ollie", "footballgame", "beam", "ballet", "strength", "bronco", "flex", "squat", "stretch", "tires", "vault", "supermoto", "soccerball", "exoticcars", "exoticcar", "muscle", "quarterback", "longboarding", "spoiler", "scorpion", "travelgram", "ravens", "sanfrancsico", "hockeylife", "practice", "cheering", "visiting", "seattleseahawks", "tire", "skateboard", "dancerecital", "gloves", "road", "diet", "leap", "longboard", "cruisin", "fitnessmodel", "denverbroncos", "grow", "cheerleader", "freeway", "choreography", "bball", "bars", "gymnast", "cars", "skater", "determination", "crowd", "mytravelgram", "horsepower", "puck", "hoop", "homerun", "rims", "biker", "skateboarding", "helmet", "nba", "yards", "pitcher", "board", "swing", "drive", "nhl", "cheerleading", "jersey", "sportscars", "gymnastic", "court", "fight", "rink", "strong", "skate", "gymnastique", "vehicles", "dedication", "fans", "worldcup", "futbol", "cc", "traveling", "mlb", "travelling", "engine", "basket", "speed", "tourism", "dancing", "win", "health", "motorbike", "bike", "car", "box", "motorcycle", "vehicle", "team", "player", "action", "trailrunning", "train", "motorcycles", "hockey", "baseball", "dance", "hawks", "racing", "skating", "travel", "trailrun", "bodybuilding", "gymnastics", "sunday", "marathon", "running", "race", "cinema", "dubstep", "rnb", "actress", "newsong", "beats", "book", "text", "library", "paper", "star", "jam", "bookworm", "climax", "remix", "repeat", "flick", "nook", "moviestar", "goodmusic", "gamergirl", "listentothis", "movie", "reader", "film", "kindle", "movies", "reading", "imagine", "literature", "flicks", "page", "pages", "gaming", "words", "genre", "melody", "read", "stories", "gamer", "dvd", "beat", "pop", "story", "films", "videos", "online", "amc", "books", "hiphop", "theatre", "rap", "hollywood", "author", "videogames", "plot", "actor", "old", "funtimes", "congratulations", "happythanksgiving", "smiles", "october", "born", "christmastree", "halloween", "gift", "thanks", "stuffing", "candle", "thankful", "congrats", "funtime", "costume", "weddinggown", "scared", "spooky", "foodporn", "ghost", "blessed", "jackolantern", "scary", "jolly", "chilling", "weddingcake", "trick", "unforgettable", "santa", "pumpkins", "pumpkinpatch", "trickortreat", "pumpkin", "treat", "giving", "carols", "elves", "merrychristmas", "ornaments", "santaclaus", "happynewyear", "newyearsparty", "newyearsday", "xmas", "crazy", "candles", "weddingparty", "hauntedhouse", "newyears", "newyearseve", "feast", "partying", "bridesmaids", "boo", "gifts", "haunted", "oct", "decorations", "birthdaycake", "parties", "lights", "bday", "weddingdress", "happybirthday", "thanksgiving", "carving", "newyear", "creepy", "years", "happiness", "candy", "groom", "bride", "birthday", "ceremony", "marriage", "turkey", "weddingday", "wedding", "goals", "thirsty", "thirst", "beer", "hungry", "icecream", "cafe", "dessert", "delish", "sweettooth", "foodpics", "chocolate", "glass", "teacup", "foods", "teatime", "amazing", "tasty", "beers", "can", "wine", "drinks", "caffeine", "liquor", "desserts", "pub", "tea", "cocktails", "bar", "eat", "cocktail", "delicious", "eating", "lunch", "coffee", "dinner", "rainyweather", "light", "cloud", "falltime", "blueskies", "pouring", "leaf", "white", "downpour", "rainydays", "sunnydays", "goodweather", "clearskies", "thesun", "skywatcher", "bluesky", "raining", "rainyday", "springtime", "skyline", "blossom", "wintertime", "bloom", "beautifulday", "shine", "bright", "sunlight", "cloudporn", "summertime", "umbrella", "sunrays", "trees", "autumn", "holidayseason", "foliage", "horizon", "leaves", "chilly", "snowfall", "sunnyday", "puddle", "skyporn", "frosty", "overcast", "frost", "splash", "color", "flower", "spring", "jockey", "horseshoe", "insect", "watertank", "horse", "cat", "lovecats", "ilovemycat", "catlover", "gallop", "lovedogs", "aquaria", "lovenature", "ilovemydog", "closeup", "nature_shooters", "reeftank", "dogsitting", "fishtank", "tropicalfish", "saltwater", "doglover", "farm", "wildlife", "pup", "creatures", "mane", "freshwater", "wild", "insects", "macrophotography", "macro", "aquarium", "fish", "naturelover", "ocean", "hound", "creature", "ponies", "coral", "bugs", "rider", "kittens", "kitty", "kitten", "bug", "reef", "furry", "horses", "riders", "tropical", "puppy", "cats", "pony", "earth", "dog", "swimming", "swim", "horseshow", "cuddly", "child", "cuddle", "babies", "infant", "lovely", "tiny", "toddler", "small", "kiss", "live", "portrait", "work", "face", "nighttime", "awake", "wakeup", "bedtime", "goodnight", "lady", "snooze", "xoxo", "goodfriends", "igdaily", "refreshed", "girlfriend", "kisses", "goingout", "moonlight", "knockout", "couple", "bestfriend", "lightsout", "selfie", "bestfriends", "gettingready", "morning", "hugs", "dude", "goodmorning", "dark", "moon", "rest", "selfies", "wake", "friendship", "sunrise", "ready", "early", "boyfriend", "daytime", "awesome", "funny", "earlybird", "best", "day", "artwork", "composition", "geometric", "pattern", "abstract", "perspective", "geometry", "wall", "minimal", "streetartistry", "architectureporn", "wallporn", "streetarteverywhere", "city", "streetphotography", "architecturelovers", "archidaily", "urbanwalls", "lookingup", "buildings", "graffitiporn", "architexture", "skyscraper", "stencilart", "archilovers", "stickerart", "lines", "sprayart", "streetart", "pasteup", "stencil", "cities", "mural", "urbanart", "architecture", "town", "building", "arts", "graffiti", "laptops", "mobile", "samsunggalaxy", "electronic", "gadget", "phone", "gadgets", "electronics", "device", "screen", "computers", "smartphone", "iphone", "hack", "android"],
+                },{
+                data: [879, 7303, 5511, 12018, 5303, 3383, 1704, 161, 7162, 2270, 2181, 146, 485, 776, 2320, 4451, 4477, 4913, 3375, 5811, 8340, 2445, 3860, 1874, 2403, 5912, 4725, 651, 2263, 4263, 1025, 721, 1659, 966, 15, 6138, 10506, 11105, 1841, 1335, 4849, 8753, 6264, 16390, 10345, 6771, 44, 6107, 6323, 1510, 2691, 96, 4506, 5489, 2037, 884, 3122, 1172, 507, 2575, 4846, 3301, 6850, 2457, 2538, 4031, 243, 3788, 3166, 1957, 8051, 5654, 99, 636, 7717, 7555, 5613],
+                backgroundColor: ['rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 1)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(121, 193,102, 0.8)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 1)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(70, 140,0, 0.8)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 1)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(133, 174,83, 0.8)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 1)', 'rgba(187, 225,154, 0.8)', 'rgba(187, 225,154, 0.8)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 1)', 'rgba(142, 212,197, 0.8)', 'rgba(142, 212,197, 0.8)', 'rgba(229, 237,245, 1)'],
+
+                label:'Doughnut 2',
+                weight:1.2,
+                borderWidth: 1,
+                labels: ["Fashion", "Hair", "Jewelry", "Makeup", "Nails", "Piercings", "Guys,Fashion", "Girls,Fashion", "Tattoos", "Sneakers", "OOTD", "High,Heels", "Bracelets", "Earrings", "Soccer", "Gymnastics", "Football", "Travel", "Dance", "Skateboarding", "Cars", "Baltimore", "Motorcycles", "Health,Fitness", "Baseball", "Bodybuilding", "Hockey", "Sports", "San", "Cheerleading", "Running", "Seattle", "Denver", "Basketball", "Super", "Movies", "Music", "Books", "Video&Games", "Birthday", "Party", "Wedding", "Thanksgiving", "Halloween", "Christmas", "New", "Holidays", "Drinks", "Dessert", "Coffee", "Tea", "General", "Raining", "Sunny", "Cloudy", "Fall", "Snowing", "Summer", "Spring", "Winter", "Horses", "Insects", "Fish", "Cats", "Dogs", "Babies", "Kids", "Love", "Friends", "Selfies", "Good,Morning", "Good", "Girls", "Guys", "StreetArt", "Architecture", "Electronics"],
+                },{
+                data: [49282, 66469, 29590, 54751, 16727, 20292, 19992, 4274, 23351, 15272, 5613],
+                backgroundColor: ['rgba(121, 193,102, 1)','rgba(121, 193,102, 0.8)','rgba(70, 140,0, 1)','rgba(70, 140,0, 0.8)','rgba(133, 174,83, 1)','rgba(133, 174,83, 0.8)','rgba(187, 225,154, 1)','rgba(187, 225,154, 0.8)','rgba(142, 212,197, 1)','rgba(142, 212,197, 0.8)','rgba(229, 237,245, 1)'],
+                weight:1,
+
+                label:'Doughnut 1',
+                labels:["Fashion", "Travel&Active&Sports", "Entertainment", "Holiday&Celebrations", "Food", "Whether&Season", "Animal", "Family", "Social&People", "Urban", "Electronics"]
+            }, ],
+        },
+        options: {
+            responsive: true,
+            cutoutPercentage: 25,
+            tooltips: {
+                        callbacks: {
+                            label: function (item, data) {
+                                console.log(item)
+                                var label = data.datasets[item.datasetIndex].labels[item.index];
+                                var value = data.datasets[item.datasetIndex].data[item.index];
+                                return label + ': ' + value;
+                            }
+                        }
+                    }
+
+        },
+
+    };
+
+    var myDoughnut = new Chart(ctx, config);
+    var bar = document.getElementById("mybar");
+    var mybar = new Chart(bar, {
+      type: 'bar',
+      data: {
+        labels: ["1.0", "1.5", "2.0", "2.5", "3.0", "3.5", "4.0", "4.5", "5.0", "5.5", "6.0", "6.5", "7.0", "7.5", "8.0", "8.5", "9.0", "9.5", "10.0", "10.5", "11.0", "11.5", "12.0", "12.5", "13.0", "13.5", "14.0", "14.5", "15.0", "15.5", "16.0", "16.5"],
+        datasets: [{
+          label: '# of Posts',
+          data: [4099, 3539, 6416, 7007, 12664, 13160, 19869, 22349, 27355, 25252, 24333, 23234, 21424, 19330, 16596, 13829, 10568, 8909, 7622, 5560, 4104, 2962, 1735, 1020, 811, 629, 483, 310, 255, 118, 66, 5],
+          backgroundColor: [
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+            'rgba(245,245,245 1)',
+          ],
+
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: false,
+        scales: {
+          xAxes: [{
+            ticks: {
+              maxRotation: 90,
+              minRotation: 80
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+
+    </script>
+  </body>
+ </html>
