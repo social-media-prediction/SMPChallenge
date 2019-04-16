@@ -242,7 +242,7 @@ def challenge():
     return res
 
 @app.route('/download', methods=['GET'])
-def description():
+def download():
 
     if 'debug' in request.args:
         res = make_response(render_template('download.html'))
@@ -266,7 +266,7 @@ def description():
         res.delete_cookie('token')
         return res
 
-    res = make_response(render_template('description.html', login=True, username=username))
+    res = make_response(render_template('download.html', login=True, username=username))
     res.set_cookie('token', token)
     return res
 
