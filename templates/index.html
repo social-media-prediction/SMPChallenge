@@ -313,7 +313,7 @@
         var flag = true;
         if (email == "") {
           $("#login-email").parent().addClass("has-error");
-          $("#login-email-warn").text("email can not be empty").show();
+          $("#login-email-warn").text("email/username can not be empty").show();
           flag = false;
         }
         if (password == "") {
@@ -337,7 +337,7 @@
             window.location.reload();
           } else if (data.code == "10006") {
             $("#login-email").parent().addClass("has-error");
-            $("#login-email-warn").text("email not exists").show();
+            $("#login-email-warn").text("user not exists").show();
           } else if (data.code == "10007") {
             $("#login-password").parent().addClass("has-error");
             $("#login-password-warn").text("password error").show();
@@ -523,8 +523,13 @@
         }
       });
 
-      $("#forget").click(function() {
-        var email = $("#login-email").val();
+      $("#forget").click(function(){
+        $("#modal-login").modal("hide");
+        $("#modal-forget").modal("show");
+      });
+
+      $("#send-reset-email").click(function() {
+        var email = $("#forget-email").val();
         if (email == "") {
           alert("please enter your email address");
           return;
@@ -532,11 +537,11 @@
         var data = {
           "email": email
         }
-        $("#login").attr("disabled", "disabled")
+        $("#send-reset-email").attr("disabled", "disabled")
         $.post("/forget_password", data, function(data, status) {
           if (data.code == "00000") {
             alert(sprintf("We have sent a password reset email to %s, please have a check. *Note to check your spam mails in case it is misclassified.", email))
-            $("#login").removeAttr("disabled");
+            $("#send-reset-email").removeAttr("disabled");
           } else {
             alert("email does not exist");
             return;
@@ -907,7 +912,7 @@
         <div class="modal-body">
           <form>
             <div class="form-group">
-              <label for="login-email">Email</label>
+              <label for="login-email">Email / Username</label>
               <input type="email" class="form-control" id="login-email">
               <span id="login-email-warn" class="help-block"></span>
             </div>
@@ -924,6 +929,30 @@
         </div>
         <div class="modal-footer">
           <center><button type="button" class="btn btn-primary" id="login">Login</button></center>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-forget">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Reset Password</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="forget-email">Email</label>
+              <input type="email" class="form-control" id="forget-email">
+              <span id="login-email-warn" class="help-block"></span>
+            </div>
+          </form>
+
+        </div>
+        <div class="modal-footer">
+          <center><button type="button" class="btn btn-primary" id="send-reset-email">Send reset email</button></center>
         </div>
       </div>
     </div>

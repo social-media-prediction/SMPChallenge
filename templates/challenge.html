@@ -387,73 +387,77 @@
 
         });
 
-        $.getJSON("/get_team", function(data, status) {
-          if (data.code == "00000") {
-            $("#team-name").val(data.teamname);
-            $("#caption-name").val(data.members[0].name);
-            $("#caption-email").val(data.members[0].email);
-            $("#caption-organization").val(data.members[0].organization);
-            nownum = data.members.length;
-            for (var i = 1; i < nownum; i++) {
-              var html = '<div class="row">\
-                  <div class="col-md-2">\
-                    <label class="member-title" id="member%d-title">Member %d</label>\
-                  </div>\
-                  <div class="col-md-3">\
-                    <div class="form-group">\
-                      <label for="member%d-name" class="sr-only"></label>\
-                      <input type="text" class="form-control team-input" id="member%d-name">\
-                      <span class="help-block"></span>\
-                    </div>\
-                  </div>\
-                  <div class="col-md-3">\
-                    <div class="form-group">\
-                      <label for="member%d-email" class="sr-only"></label>\
-                      <input type="email" class="form-control team-input" id="member%d-email">\
-                      <span class="help-block"></span>\
-                    </div>\
-                  </div>\
-                  <div class="col-md-3">\
-                    <div class="form-group">\
-                      <label for="member%d-organization" class="sr-only"></label>\
-                      <input type="text" class="form-control team-input" id="member%d-organization">\
-                      <span class="help-block"></span>\
-                    </div>\
-                  </div>\
-                  <div class="col-md-1">\
-                    <button class="btn btn-danger delete-member" id="delete-member%d" deleteid="%d"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>\
-                  </div>\
-                </div>';
-
-              $("#team-form").append(sprintf(html, i, i, i, i, i, i, i, i, i, i));
-              $(sprintf("#member%d-name", i)).val(data.members[i].name);
-              $(sprintf("#member%d-email", i)).val(data.members[i].email);
-              $(sprintf("#member%d-organization", i)).val(data.members[i].organization);
-            }
-          }
-        });
-
-        $("#forget").click(function(){
-          var email = $("#login-email").val();
-          if (email == "") {
-            alert("please enter your email address");
-            return;
-          }
-          var data = {
-            "email": email
-          }
-          $("#login").attr("disabled", "disabled")
-          $.post("/forget_password", data, function(data, status) {
+          $.getJSON("/get_team", function(data, status) {
             if (data.code == "00000") {
-              alert(sprintf("We have sent a password reset email to %s, please have a check. *Note to check your spam mails in case it is misclassified.", email))
-              $("#login").removeAttr("disabled");
-            }
-            else {
-              alert("email does not exist");
-              return;
+              $("#team-name").val(data.teamname);
+              $("#caption-name").val(data.members[0].name);
+              $("#caption-email").val(data.members[0].email);
+              $("#caption-organization").val(data.members[0].organization);
+              nownum = data.members.length;
+              for (var i = 1; i < nownum; i++) {
+                var html = '<div class="row">\
+                    <div class="col-md-2">\
+                      <label class="member-title" id="member%d-title">Member %d</label>\
+                    </div>\
+                    <div class="col-md-3">\
+                      <div class="form-group">\
+                        <label for="member%d-name" class="sr-only"></label>\
+                        <input type="text" class="form-control team-input" id="member%d-name">\
+                        <span class="help-block"></span>\
+                      </div>\
+                    </div>\
+                    <div class="col-md-3">\
+                      <div class="form-group">\
+                        <label for="member%d-email" class="sr-only"></label>\
+                        <input type="email" class="form-control team-input" id="member%d-email">\
+                        <span class="help-block"></span>\
+                      </div>\
+                    </div>\
+                    <div class="col-md-3">\
+                      <div class="form-group">\
+                        <label for="member%d-organization" class="sr-only"></label>\
+                        <input type="text" class="form-control team-input" id="member%d-organization">\
+                        <span class="help-block"></span>\
+                      </div>\
+                    </div>\
+                    <div class="col-md-1">\
+                      <button class="btn btn-danger delete-member" id="delete-member%d" deleteid="%d"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>\
+                    </div>\
+                  </div>';
+
+                $("#team-form").append(sprintf(html, i, i, i, i, i, i, i, i, i, i));
+                $(sprintf("#member%d-name", i)).val(data.members[i].name);
+                $(sprintf("#member%d-email", i)).val(data.members[i].email);
+                $(sprintf("#member%d-organization", i)).val(data.members[i].organization);
+              }
             }
           });
+
+      $("#forget").click(function(){
+        $("#modal-login").modal("hide");
+        $("#modal-forget").modal("show");
+      });
+
+      $("#send-reset-email").click(function() {
+        var email = $("#forget-email").val();
+        if (email == "") {
+          alert("please enter your email address");
+          return;
+        }
+        var data = {
+          "email": email
+        }
+        $("#send-reset-email").attr("disabled", "disabled")
+        $.post("/forget_password", data, function(data, status) {
+          if (data.code == "00000") {
+            alert(sprintf("We have sent a password reset email to %s, please have a check. *Note to check your spam mails in case it is misclassified.", email))
+            $("#send-reset-email").removeAttr("disabled");
+          } else {
+            alert("email does not exist");
+            return;
+          }
         });
+      });
 
       });
     </script>
@@ -616,7 +620,7 @@
           <div class="modal-body">
             <form>
               <div class="form-group">
-                <label for="login-email">Email</label>
+                <label for="login-email">Email / Username</label>
                 <input type="email" class="form-control" id="login-email">
                 <span id="login-email-warn" class="help-block"></span>
               </div>
@@ -637,6 +641,30 @@
         </div>
       </div>
     </div>
+
+  <div class="modal fade" id="modal-forget">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Reset Password</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="forget-email">Email</label>
+              <input type="email" class="form-control" id="forget-email">
+              <span id="login-email-warn" class="help-block"></span>
+            </div>
+          </form>
+
+        </div>
+        <div class="modal-footer">
+          <center><button type="button" class="btn btn-primary" id="send-reset-email">Send reset email</button></center>
+        </div>
+      </div>
+    </div>
+  </div>
 
     <div class="modal fade" id="modal-team">
       <div class="modal-dialog modal-lg">

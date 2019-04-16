@@ -124,9 +124,14 @@ def add_user(username, password, email):
 
 def check_login(email, password):
     tmp = cursor.execute('select * from user where email="%s" and password="%s"'%(email, password)).fetchall()
+    tmp2 = cursor.execute('select * from user where username="%s" and password="%s"'%(email, password)).fetchall()
     if len(tmp) != 0:
         token = generate_token()
         r.set('smptoken:'+token, tmp[0][0], 7200)
+        return SUCCESS, token
+    elif len(tmp2) != 0:
+        token = generate_token()
+        r.set('smptoken:'+token, tmp2[0][0], 7200)
         return SUCCESS, token
     else:
         return PASSWORD_ERROR, None
