@@ -289,7 +289,7 @@
         $(this).attr("disabled", "disabled");
         $.post("/register", data, function(data, status) {
           if (data.code == "00000") {
-            $("#modal-body").html(sprintf('<h4 id="register-notice">We have send a verification email to <a>%s</a>, please check it in two hours</h4>', email));
+            $("#modal-body").html(sprintf('<h4 id="register-notice">We have sent a verification email to <a>%s</a>, please check it in two hours. *Note to check your spam mails in case it is misclassified.</h4>', email));
             $("#modal-footer").hide();
             $(this).removeAttr("disabled");
           } else if (data.code == "10002") {
@@ -518,7 +518,7 @@
         $("#login").attr("disabled", "disabled")
         $.post("/forget_password", data, function(data, status) {
           if (data.code == "00000") {
-            alert(sprintf("We have sent an password reset email to %s, please have a check.", email))
+            alert(sprintf("We have sent a password reset email to %s, please have a check. *Note to check your spam mails in case it is misclassified.", email))
             $("#login").removeAttr("disabled");
           } else {
             alert("email does not exist");
