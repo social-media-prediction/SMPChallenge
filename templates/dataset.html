@@ -338,31 +338,31 @@
             return;
           }
           var html = '<div class="row">\
-                  <div class="col-md-2">\
+                  <div class="col-xs-2">\
                     <label class="member-title" id="member%d-title">Member %d</label>\
                   </div>\
-                  <div class="col-md-3">\
+                  <div class="col-xs-3">\
                     <div class="form-group">\
                       <label id="member%d-name-label" for="member%d-name" class="sr-only"></label>\
                       <input type="text" class="form-control team-input" id="member%d-name">\
                       <span class="help-block"></span>\
                     </div>\
                   </div>\
-                  <div class="col-md-3">\
+                  <div class="col-xs-3">\
                     <div class="form-group">\
                       <label id="member%d-email-label" for="member%d-email" class="sr-only"></label>\
                       <input type="email" class="form-control team-input" id="member%d-email">\
                       <span class="help-block"></span>\
                     </div>\
                   </div>\
-                  <div class="col-md-3">\
+                  <div class="col-xs-3">\
                     <div class="form-group">\
                       <label id="member%d-organization-label" for="member%d-organization" class="sr-only"></label>\
                       <input type="text" class="form-control team-input" id="member%d-organization">\
                       <span class="help-block"></span>\
                     </div>\
                   </div>\
-                  <div class="col-md-1">\
+                  <div class="col-xs-1">\
                     <button class="btn btn-danger delete-member" id="delete-member%d" deleteid="%d"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>\
                   </div>\
                 </div>';
@@ -436,51 +436,50 @@
         });
 
         $.getJSON("/get_team", function(data, status) {
-          if (data.code == "00000") {
-            $("#team-name").val(data.teamname);
-            $("#caption-name").val(data.members[0].name);
-            $("#caption-email").val(data.members[0].email);
-            $("#caption-organization").val(data.members[0].organization);
-            nownum = data.members.length;
-            for (var i = 1; i < nownum; i++) {
-              var html = '<div class="row">\
-                  <div class="col-md-2">\
-                    <label class="member-title" id="member%d-title">Member %d</label>\
-                  </div>\
-                  <div class="col-md-3">\
-                    <div class="form-group">\
-                      <label for="member%d-name" class="sr-only"></label>\
-                      <input type="text" class="form-control team-input" id="member%d-name">\
-                      <span class="help-block"></span>\
+            if (data.code == "00000") {
+              $("#team-name").val(data.teamname);
+              $("#caption-name").val(data.members[0].name);
+              $("#caption-email").val(data.members[0].email);
+              $("#caption-organization").val(data.members[0].organization);
+              nownum = data.members.length;
+              for (var i = 1; i < nownum; i++) {
+                var html = '<div class="row">\
+                    <div class="col-xs-2">\
+                      <label class="member-title" id="member%d-title">Member %d</label>\
                     </div>\
-                  </div>\
-                  <div class="col-md-3">\
-                    <div class="form-group">\
-                      <label for="member%d-email" class="sr-only"></label>\
-                      <input type="email" class="form-control team-input" id="member%d-email">\
-                      <span class="help-block"></span>\
+                    <div class="col-xs-3">\
+                      <div class="form-group">\
+                        <label for="member%d-name" class="sr-only"></label>\
+                        <input type="text" class="form-control team-input" id="member%d-name">\
+                        <span class="help-block"></span>\
+                      </div>\
                     </div>\
-                  </div>\
-                  <div class="col-md-3">\
-                    <div class="form-group">\
-                      <label for="member%d-organization" class="sr-only"></label>\
-                      <input type="text" class="form-control team-input" id="member%d-organization">\
-                      <span class="help-block"></span>\
+                    <div class="col-xs-3">\
+                      <div class="form-group">\
+                        <label for="member%d-email" class="sr-only"></label>\
+                        <input type="email" class="form-control team-input" id="member%d-email">\
+                        <span class="help-block"></span>\
+                      </div>\
                     </div>\
-                  </div>\
-                  <div class="col-md-1">\
-                    <button class="btn btn-danger delete-member" id="delete-member%d" deleteid="%d"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>\
-                  </div>\
-                </div>';
+                    <div class="col-xs-3">\
+                      <div class="form-group">\
+                        <label for="member%d-organization" class="sr-only"></label>\
+                        <input type="text" class="form-control team-input" id="member%d-organization">\
+                        <span class="help-block"></span>\
+                      </div>\
+                    </div>\
+                    <div class="col-xs-1">\
+                      <button class="btn btn-danger delete-member" id="delete-member%d" deleteid="%d"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>\
+                    </div>\
+                  </div>';
 
-              $("#team-form").append(sprintf(html, i, i, i, i, i, i, i, i, i, i));
-              $(sprintf("#member%d-name", i)).val(data.members[i].name);
-              $(sprintf("#member%d-email", i)).val(data.members[i].email);
-              $(sprintf("#member%d-organization", i)).val(data.members[i].organization);
+                $("#team-form").append(sprintf(html, i, i, i, i, i, i, i, i, i, i));
+                $(sprintf("#member%d-name", i)).val(data.members[i].name);
+                $(sprintf("#member%d-email", i)).val(data.members[i].email);
+                $(sprintf("#member%d-organization", i)).val(data.members[i].organization);
+              }
             }
-          }
-        });
-
+          });
 
       $("#forget").click(function(){
         $("#modal-login").modal("hide");
@@ -556,475 +555,284 @@
     <div class="container-fluid" id="maintext">
 
       <div class="row" id="block1">
-        <div class="col-md-8 col-md-offset-2">
-          <h2 class="p-title"><b>Dataset Overview</b></h2>
+        <div class="container">
+          <div class="col-xs-10 col-xs-offset-1">
+            <h2 class="p-title"><b>Dataset Overview</b></h2>
 
-          <p class="p-body">The SMP datasets SMPD2019 contain 486K posts with images, which collected from Flickr (one of the largest photo-sharing website). SMPD is a multi-faced data collection, which contains rich contextual information and annotations (such as user profile, post category, customize tag, geography information, photo image, and photo metadata). For the prediction task in this year, we split the data with time-order, resulting in train and test ratio is 2:1. The tables below show the statistics of SMPD2019.</p>
-          <table class="table table-striped table-bordered">
-            <tr>
-              <th>Dataset</th>
-              <th>#Post</th>
-              <th>#User</th>
-              <th>#Categories</th>
-              <th>Temporal Range (Months)</th>
-              <th>Avg. Title Length</th>
-              <th>#Customize Tags</th>
-            </tr>
-            <tr>
-              <td>SMPD2019</td>
-              <td>486k</td>
-              <td>69k</td>
-              <td>756</td>
-              <td>16</td>
-              <td>29</td>
-              <td>250k</td>
-            </tr>
+            <p class="p-body">The SMP datasets SMPD2019 contain 486K posts with images, which collected from Flickr (one of the largest photo-sharing website). SMPD is a multi-faced data collection, which contains rich contextual information and annotations (such as user profile, post category, customize tag, geography information, photo image, and photo metadata). For the prediction task in this year, we split the data with time-order, resulting in train and test ratio is 2:1. The tables below show the statistics of SMPD2019.</p>
+            <table class="table table-striped table-bordered">
+              <tr>
+                <th>Dataset</th>
+                <th>#Post</th>
+                <th>#User</th>
+                <th>#Categories</th>
+                <th>Temporal Range (Months)</th>
+                <th>Avg. Title Length</th>
+                <th>#Customize Tags</th>
+              </tr>
+              <tr>
+                <td>SMPD2019</td>
+                <td>486k</td>
+                <td>69k</td>
+                <td>756</td>
+                <td>16</td>
+                <td>29</td>
+                <td>250k</td>
+              </tr>
 
-          </table>
-          <br>
+            </table>
+            <br>
+          </div>
         </div>
       </div>
 
       <div class="row" id="block2">
-            <div class="col-md-8 col-md-offset-2">
-              <h2 class="p-title"><b>Histogram of Labels: </b></h2>
-              <!-- <p class="p-body"></p> -->
-              <canvas id="mybar" width="800"></canvas>
-              </div>
-              
-            <br>
+        <div class="container">
+          <div class="col-xs-10 col-xs-offset-1">
+            <h2 class="p-title"><b>Histogram of Labels: </b></h2>
+            <canvas id="mybar" width="800"></canvas>
+          </div>
+          <br>
+        </div>
       </div>
       
       <div class="row" id="block3">
-        <div class="col-md-8 col-md-offset-2">
-        <h2 class="p-title"><b>Photo Tag Cloud: </b></h2>
-        <p class="p-body">This tag cloud denotes all of the customize tags provided by users, including 250k different words. </p>
-        </div>
-       <div  id="tagcloud" style="margin-left:400px">
-            <ul>
-                <li><a href="#">glam</a></li>
-                <li><a href="#">fifa</a></li>
-                <li><a href="#">cinema</a></li>
-                <li><a href="#">old</a></li>
-                <li><a href="#">thirsty</a></li>
-                <li><a href="#">flip</a></li>
-                <li><a href="#">dubstep</a></li>
-                <li><a href="#">funtimes</a></li>
-                <li><a href="#">congratulations</a></li>
-                <li><a href="#">rnb</a></li>
-                <li><a href="#">stadium</a></li>
-                <li><a href="#">straight</a></li>
-                <li><a href="#">thirst</a></li>
-                <li><a href="#">actress</a></li>
-                <li><a href="#">rainyweather</a></li>
-                <li><a href="#">jockey</a></li>
-                <li><a href="#">horseshoe</a></li>
-                <li><a href="#">happythanksgiving</a></li>
-                <li><a href="#">bling</a></li>
-                <li><a href="#">smiles</a></li>
-                <li><a href="#">cuddly</a></li>
-                <li><a href="#">kiss</a></li>
-                <li><a href="#">artwork</a></li>
-                <li><a href="#">light</a></li>
-                <li><a href="#">live</a></li>
-                <li><a href="#">composition</a></li>
-                <li><a href="#">portrait</a></li>
-                <li><a href="#">work</a></li>
-                <li><a href="#">trip</a></li>
-                <li><a href="#">beer</a></li>
-                <li><a href="#">cloud</a></li>
-                <li><a href="#">insect</a></li>
-                <li><a href="#">studio</a></li>
-                <li><a href="#">falltime</a></li>
-                <li><a href="#">october</a></li>
-                <li><a href="#">born</a></li>
-                <li><a href="#">newsong</a></li>
-                <li><a href="#">lips</a></li>
-                <li><a href="#">blonde</a></li>
-                <li><a href="#">rosa</a></li>
-                <li><a href="#">hungry</a></li>
-                <li><a href="#">ear</a></li>
-                <li><a href="#">christmastree</a></li>
-                <li><a href="#">beats</a></li>
-                <li><a href="#">blueskies</a></li>
-                <li><a href="#">icecream</a></li>
-                <li><a href="#">book</a></li>
-                <li><a href="#">geometric</a></li>
-                <li><a href="#">child</a></li>
-                <li><a href="#">swagger</a></li>
-                <li><a href="#">pattern</a></li>
-                <li><a href="#">kickflip</a></li>
-                <li><a href="#">watertank</a></li>
-                <li><a href="#">abstract</a></li>
-                <li><a href="#">perspective</a></li>
-                <li><a href="#">geometry</a></li>
-                <li><a href="#">wheel</a></li>
-                <li><a href="#">halloween</a></li>
-                <li><a href="#">horse</a></li>
-                <li><a href="#">text</a></li>
-                <li><a href="#">gift</a></li>
-                <li><a href="#">wall</a></li>
-                <li><a href="#">nailpolish</a></li>
-                <li><a href="#">thanks</a></li>
-                <li><a href="#">skirt</a></li>
-                <li><a href="#">stuffing</a></li>
-                <li><a href="#">cafe</a></li>
-                <li><a href="#">dessert</a></li>
-                <li><a href="#">highway</a></li>
-                <li><a href="#">face</a></li>
-                <li><a href="#">pouring</a></li>
-                <li><a href="#">leaf</a></li>
-                <li><a href="#">baltimore</a></li>
-                <li><a href="#">library</a></li>
-                <li><a href="#">nighttime</a></li>
-                <li><a href="#">ink</a></li>
-                <li><a href="#">exotic</a></li>
-                <li><a href="#">paper</a></li>
-                <li><a href="#">minimal</a></li>
-                <li><a href="#">white</a></li>
-                <li><a href="#">cat</a></li>
-                <li><a href="#">candle</a></li>
-                <li><a href="#">black</a></li>
-                <li><a href="#">star</a></li>
-                <li><a href="#">cruising</a></li>
-                <li><a href="#">braid</a></li>
-                <li><a href="#">jam</a></li>
-                <li><a href="#">eyeshadow</a></li>
-                <li><a href="#">bookworm</a></li>
-                <li><a href="#">sportscar</a></li>
-                <li><a href="#">laptops</a></li>
-                <li><a href="#">skatelife</a></li>
-                <li><a href="#">climax</a></li>
-                <li><a href="#">delish</a></li>
-                <li><a href="#">thankful</a></li>
-                <li><a href="#">solecollector</a></li>
-                <li><a href="#">lovecats</a></li>
-                <li><a href="#">ilovemycat</a></li>
-                <li><a href="#">eyebrows</a></li>
-                <li><a href="#">streetartistry</a></li>
-                <li><a href="#">architectureporn</a></li>
-                <li><a href="#">remix</a></li>
-                <li><a href="#">eyeliner</a></li>
-                <li><a href="#">sweettooth</a></li>
-                <li><a href="#">repeat</a></li>
-                <li><a href="#">getfit</a></li>
-                <li><a href="#">awake</a></li>
-                <li><a href="#">coverup</a></li>
-                <li><a href="#">unhas</a></li>
-                <li><a href="#">bases</a></li>
-                <li><a href="#">cosmetic</a></li>
-                <li><a href="#">opi</a></li>
-                <li><a href="#">fitspo</a></li>
-                <li><a href="#">downpour</a></li>
-                <li><a href="#">wakeup</a></li>
-                <li><a href="#">rainydays</a></li>
-                <li><a href="#">bedtime</a></li>
-                <li><a href="#">catlover</a></li>
-                <li><a href="#">goodnight</a></li>
-                <li><a href="#">muffler</a></li>
-                <li><a href="#">sunnydays</a></li>
-                <li><a href="#">gallop</a></li>
-                <li><a href="#">foodpics</a></li>
-                <li><a href="#">crease</a></li>
-                <li><a href="#">footballplayer</a></li>
-                <li><a href="#">outfitoftheday</a></li>
-                <li><a href="#">lovedogs</a></li>
-                <li><a href="#">aquaria</a></li>
-                <li><a href="#">wiwt</a></li>
-                <li><a href="#">flexibility</a></li>
-                <li><a href="#">pads</a></li>
-                <li><a href="#">congrats</a></li>
-                <li><a href="#">shredded</a></li>
-                <li><a href="#">lookoftheday</a></li>
-                <li><a href="#">wallporn</a></li>
-                <li><a href="#">streetarteverywhere</a></li>
-                <li><a href="#">lovenature</a></li>
-                <li><a href="#">highheelshoes</a></li>
-                <li><a href="#">shot</a></li>
-                <li><a href="#">lady</a></li>
-                <li><a href="#">city</a></li>
-                <li><a href="#">streetphotography</a></li>
-                <li><a href="#">goodweather</a></li>
-                <li><a href="#">tatts</a></li>
-                <li><a href="#">ilovemydog</a></li>
-                <li><a href="#">funtime</a></li>
-                <li><a href="#">snooze</a></li>
-                <li><a href="#">xoxo</a></li>
-                <li><a href="#">costume</a></li>
-                <li><a href="#">closeup</a></li>
-                <li><a href="#">hairdo</a></li>
-                <li><a href="#">architecturelovers</a></li>
-                <li><a href="#">fashionjewelry</a></li>
-                <li><a href="#">flick</a></li>
-                <li><a href="#">gametime</a></li>
-                <li><a href="#">nook</a></li>
-                <li><a href="#">nature_shooters</a></li>
-                <li><a href="#">faithful</a></li>
-                <li><a href="#">moviestar</a></li>
-                <li><a href="#">weddinggown</a></li>
-                <li><a href="#">clearskies</a></li>
-                <li><a href="#">navel</a></li>
-                <li><a href="#">footballseason</a></li>
-                <li><a href="#">bikelife</a></li>
-                <li><a href="#">gymnasts</a></li>
-                <li><a href="#">goodmusic</a></li>
-                <li><a href="#">mitt</a></li>
-                <li><a href="#">thesun</a></li>
-                <li><a href="#">tumbling</a></li>
-                <li><a href="#">sneakerhead</a></li>
-                <li><a href="#">niners</a></li>
-                <li><a href="#">rideout</a></li>
-                <li><a href="#">soccergame</a></li>
-                <li><a href="#">skateeverydamnday</a></li>
-                <li><a href="#">modifications</a></li>
-                <li><a href="#">goodfriends</a></li>
-                <li><a href="#">chocolate</a></li>
-                <li><a href="#">skywatcher</a></li>
-                <li><a href="#">essie</a></li>
-                <li><a href="#">reeftank</a></li>
-                <li><a href="#">trailrunner</a></li>
-                <li><a href="#">archidaily</a></li>
-                <li><a href="#">polish</a></li>
-                <li><a href="#">dogsitting</a></li>
-                <li><a href="#">highheels</a></li>
-                <li><a href="#">urbanwalls</a></li>
-                <li><a href="#">igdaily</a></li>
-                <li><a href="#">mobile</a></li>
-                <li><a href="#">brown</a></li>
-                <li><a href="#">sea</a></li>
-                <li><a href="#">stanleycup</a></li>
-                <li><a href="#">glitter</a></li>
-                <li><a href="#">baltimoreravens</a></li>
-                <li><a href="#">refreshed</a></li>
-                <li><a href="#">man</a></li>
-                <li><a href="#">gamergirl</a></li>
-                <li><a href="#">girlfriend</a></li>
-                <li><a href="#">glass</a></li>
-                <li><a href="#">kisses</a></li>
-                <li><a href="#">driver</a></li>
-                <li><a href="#">hairfashion</a></li>
-                <li><a href="#">bluesky</a></li>
-                <li><a href="#">hockeyplayer</a></li>
-                <li><a href="#">samsunggalaxy</a></li>
-                <!-- <li><a href="#">electronic</a></li>
-                <li><a href="#">jacket</a></li>
-                <li><a href="#">raining</a></li>
-                <li><a href="#">goingout</a></li>
-                <li><a href="#">cuddle</a></li>
-                <li><a href="#">fishtank</a></li>
-                <li><a href="#">tropicalfish</a></li>
-                <li><a href="#">saltwater</a></li>
-                <li><a href="#">lookingup</a></li>
-                <li><a href="#">teacup</a></li>
-                <li><a href="#">listentothis</a></li>
-                <li><a href="#">runner</a></li>
-                <li><a href="#">movie</a></li>
-                <li><a href="#">icerink</a></li>
-                <li><a href="#">foods</a></li>
-                <li><a href="#">brunette</a></li>
-                <li><a href="#">curly</a></li>
-                <li><a href="#">rainyday</a></li>
-                <li><a href="#">cycle</a></li>
-                <li><a href="#">bracelets</a></li>
-                <li><a href="#">exercise</a></li>
-                <li><a href="#">glue</a></li>
-                <li><a href="#">scared</a></li>
-                <li><a href="#">springtime</a></li>
-                <li><a href="#">skyline</a></li>
-                <li><a href="#">jeans</a></li>
-                <li><a href="#">moonlight</a></li>
-                <li><a href="#">buildings</a></li>
-                <li><a href="#">bat</a></li>
-                <li><a href="#">gorgeous</a></li>
-                <li><a href="#">blossom</a></li>
-                <li><a href="#">babies</a></li>
-                <li><a href="#">dancers</a></li>
-                <li><a href="#">doglover</a></li>
-                <li><a href="#">sparkles</a></li>
-                <li><a href="#">spooky</a></li>
-                <li><a href="#">wintertime</a></li>
-                <li><a href="#">farm</a></li>
-                <li><a href="#">infant</a></li>
-                <li><a href="#">reader</a></li>
-                <li><a href="#">tshirt</a></li>
-                <li><a href="#">knockout</a></li>
-                <li><a href="#">bloom</a></li>
-                <li><a href="#">bracelet</a></li>
-                <li><a href="#">beautifulday</a></li>
-                <li><a href="#">teatime</a></li>
-                <li><a href="#">graffitiporn</a></li>
-                <li><a href="#">film</a></li>
-                <li><a href="#">kindle</a></li>
-                <li><a href="#">shoe</a></li>
-                <li><a href="#">tourist</a></li>
-                <li><a href="#">lovely</a></li>
-                <li><a href="#">focus</a></li>
-                <li><a href="#">foodporn</a></li>
-                <li><a href="#">couple</a></li>
-                <li><a href="#">dancer</a></li>
-                <li><a href="#">dancefloor</a></li>
-                <li><a href="#">nail</a></li>
-                <li><a href="#">ripped</a></li>
-                <li><a href="#">shiny</a></li>
-                <li><a href="#">nola</a></li>
-                <li><a href="#">haircolor</a></li>
-                <li><a href="#">sweat</a></li>
-                <li><a href="#">wildlife</a></li>
-                <li><a href="#">ghost</a></li>
-                <li><a href="#">pup</a></li>
-                <li><a href="#">lipstick</a></li>
-                <li><a href="#">architexture</a></li>
-                <li><a href="#">blessed</a></li>
-                <li><a href="#">travelingram</a></li>
-                <li><a href="#">igtravel</a></li>
-                <li><a href="#">amazing</a></li>
-                <li><a href="#">jackolantern</a></li>
-                <li><a href="#">stone</a></li>
-                <li><a href="#">tasty</a></li>
-                <li><a href="#">earring</a></li>
-                <li><a href="#">movies</a></li>
-                <li><a href="#">creatures</a></li>
-                <li><a href="#">shine</a></li>
-                <li><a href="#">lashes</a></li>
-                <li><a href="#">mane</a></li>
-                <li><a href="#">tats</a></li>
-                <li><a href="#">tattoos</a></li>
-                <li><a href="#">skatepark</a></li>
-                <li><a href="#">tar</a></li>
-                <li><a href="#">reading</a></li>
-                <li><a href="#">freshwater</a></li>
-                <li><a href="#">wild</a></li>
-                <li><a href="#">grind</a></li>
-                <li><a href="#">ollie</a></li>
-                <li><a href="#">insects</a></li> -->
-<!--
-                <li><a href="#">bestfriends</a></li>
-                <li><a href="#">weddingcake</a></li>
-                <li><a href="#">wine</a></li>
-                <li><a href="#">literature</a></li>
-                <li><a href="#">stretch</a></li>
-                <li><a href="#">gettingready</a></li>
-                <li><a href="#">tires</a></li>
-                <li><a href="#">stencilart</a></li>
-                <li><a href="#">vault</a></li>
-                <li><a href="#">sunrays</a></li>
-                <li><a href="#">flicks</a></li>
-                <li><a href="#">morning</a></li>
-                <li><a href="#">supermoto</a></li>
-                <li><a href="#">hugs</a></li>
-                <li><a href="#">gadget</a></li>
-                <li><a href="#">dude</a></li>
-                <li><a href="#">page</a></li>
-                <li><a href="#">soccerball</a></li>
-                <li><a href="#">goodmorning</a></li>
-                <li><a href="#">pages</a></li>
-                <li><a href="#">exoticcars</a></li>
-                <li><a href="#">exoticcar</a></li>
-                <li><a href="#">kicks</a></li>
-                <li><a href="#">muscle</a></li>
-                <li><a href="#">quarterback</a></li>
-                <li><a href="#">crystals</a></li>
-                <li><a href="#">trick</a></li>
-                <li><a href="#">tat</a></li>
-                <li><a href="#">longboarding</a></li>
-                <li><a href="#">unforgettable</a></li>
-                <li><a href="#">trees</a></li>
-                <li><a href="#">spoiler</a></li>
-                <li><a href="#">scorpion</a></li>
-                <li><a href="#">travelgram</a></li>
-                <li><a href="#">santa</a></li>
-                <li><a href="#">mascara</a></li>
-                <li><a href="#">tattooed</a></li>
-                <li><a href="#">gloss</a></li>
-                <li><a href="#">archilovers</a></li>
-                <li><a href="#">phone</a></li>
-                <li><a href="#">pumpkins</a></li>
-                <li><a href="#">ravens</a></li>
-                <li><a href="#">drinks</a></li>
-                <li><a href="#">sanfrancsico</a></li>
-                <li><a href="#">clothes</a></li>
-                <li><a href="#">caffeine</a></li>
-                <li><a href="#">stickerart</a></li>
-                <li><a href="#">hockeylife</a></li>
-                <li><a href="#">pumpkinpatch</a></li>
-                <li><a href="#">longhair</a></li>
-                <li><a href="#">liquor</a></li>
-                <li><a href="#">dark</a></li>
-                <li><a href="#">branco</a></li>
-                <li><a href="#">trickortreat</a></li>
-                <li><a href="#">pumpkin</a></li>
-                <li><a href="#">gaming</a></li>
-                <li><a href="#">treat</a></li>
-                <li><a href="#">practice</a></li>
-                <li><a href="#">cheering</a></li>
-                <li><a href="#">aquarium</a></li>
-                <li><a href="#">bodyart</a></li>
-                <li><a href="#">autumn</a></li>
-                <li><a href="#">giving</a></li>
-                <li><a href="#">words</a></li>
-                <li><a href="#">visiting</a></li>
-                <li><a href="#">seattleseahawks</a></li>
-                <li><a href="#">genre</a></li>
-                <li><a href="#">tire</a></li>
-                <li><a href="#">melody</a></li>
-                <li><a href="#">gem</a></li>
-                <li><a href="#">holidayseason</a></li>
-                <li><a href="#">carols</a></li>
-                <li><a href="#">skateboard</a></li>
-                <li><a href="#">elves</a></li>
-                <li><a href="#">fish</a></li>
-                <li><a href="#">lines</a></li>
-                <li><a href="#">dancerecital</a></li>
-                <li><a href="#">jewel</a></li>
-                <li><a href="#">gloves</a></li>
-                <li><a href="#">wiw</a></li>
-                <li><a href="#">foliage</a></li>
-                <li><a href="#">desserts</a></li>
-                <li><a href="#">sprayart</a></li>
-                <li><a href="#">merrychristmas</a></li>
-                <li><a href="#">ornaments</a></li>
-                <li><a href="#">read</a></li>
-                <li><a href="#">horizon</a></li>
-                <li><a href="#">santaclaus</a></li>
-                <li><a href="#">happynewyear</a></li>
-                <li><a href="#">gems</a></li>
-                <li><a href="#">road</a></li>
-                <li><a href="#">moon</a></li>
-                <li><a href="#">leaves</a></li>
-                <li><a href="#">diet</a></li>
-                <li><a href="#">newyearsparty</a></li>
-                <li><a href="#">newyearsday</a></li>
-                <li><a href="#">chilly</a></li>
-                <li><a href="#">rest</a></li>
-                <li><a href="#">stories</a></li>
-                <li><a href="#">leap</a></li>
-                <li><a href="#">pub</a></li>
-                <li><a href="#">xmas</a></li>
-                <li><a href="#">tea</a></li>
-                <li><a href="#">longboard</a></li> -->
-
-            </ul>
-        </div>
+        <div class="container">
+          <div class="col-xs-10 col-xs-offset-1">
+            <h2 class="p-title"><b>Photo Tag Cloud: </b></h2>
+              <p class="p-body">This tag cloud denotes all of the customize tags provided by users, including 250k different words. </p>
+            <center><div id="tagcloud" style="">
+              <ul>
+                  <li><a href="#">glam</a></li>
+                  <li><a href="#">fifa</a></li>
+                  <li><a href="#">cinema</a></li>
+                  <li><a href="#">old</a></li>
+                  <li><a href="#">thirsty</a></li>
+                  <li><a href="#">flip</a></li>
+                  <li><a href="#">dubstep</a></li>
+                  <li><a href="#">funtimes</a></li>
+                  <li><a href="#">congratulations</a></li>
+                  <li><a href="#">rnb</a></li>
+                  <li><a href="#">stadium</a></li>
+                  <li><a href="#">straight</a></li>
+                  <li><a href="#">thirst</a></li>
+                  <li><a href="#">actress</a></li>
+                  <li><a href="#">rainyweather</a></li>
+                  <li><a href="#">jockey</a></li>
+                  <li><a href="#">horseshoe</a></li>
+                  <li><a href="#">happythanksgiving</a></li>
+                  <li><a href="#">bling</a></li>
+                  <li><a href="#">smiles</a></li>
+                  <li><a href="#">cuddly</a></li>
+                  <li><a href="#">kiss</a></li>
+                  <li><a href="#">artwork</a></li>
+                  <li><a href="#">light</a></li>
+                  <li><a href="#">live</a></li>
+                  <li><a href="#">composition</a></li>
+                  <li><a href="#">portrait</a></li>
+                  <li><a href="#">work</a></li>
+                  <li><a href="#">trip</a></li>
+                  <li><a href="#">beer</a></li>
+                  <li><a href="#">cloud</a></li>
+                  <li><a href="#">insect</a></li>
+                  <li><a href="#">studio</a></li>
+                  <li><a href="#">falltime</a></li>
+                  <li><a href="#">october</a></li>
+                  <li><a href="#">born</a></li>
+                  <li><a href="#">newsong</a></li>
+                  <li><a href="#">lips</a></li>
+                  <li><a href="#">blonde</a></li>
+                  <li><a href="#">rosa</a></li>
+                  <li><a href="#">hungry</a></li>
+                  <li><a href="#">ear</a></li>
+                  <li><a href="#">christmastree</a></li>
+                  <li><a href="#">beats</a></li>
+                  <li><a href="#">blueskies</a></li>
+                  <li><a href="#">icecream</a></li>
+                  <li><a href="#">book</a></li>
+                  <li><a href="#">geometric</a></li>
+                  <li><a href="#">child</a></li>
+                  <li><a href="#">swagger</a></li>
+                  <li><a href="#">pattern</a></li>
+                  <li><a href="#">kickflip</a></li>
+                  <li><a href="#">watertank</a></li>
+                  <li><a href="#">abstract</a></li>
+                  <li><a href="#">perspective</a></li>
+                  <li><a href="#">geometry</a></li>
+                  <li><a href="#">wheel</a></li>
+                  <li><a href="#">halloween</a></li>
+                  <li><a href="#">horse</a></li>
+                  <li><a href="#">text</a></li>
+                  <li><a href="#">gift</a></li>
+                  <li><a href="#">wall</a></li>
+                  <li><a href="#">nailpolish</a></li>
+                  <li><a href="#">thanks</a></li>
+                  <li><a href="#">skirt</a></li>
+                  <li><a href="#">stuffing</a></li>
+                  <li><a href="#">cafe</a></li>
+                  <li><a href="#">dessert</a></li>
+                  <li><a href="#">highway</a></li>
+                  <li><a href="#">face</a></li>
+                  <li><a href="#">pouring</a></li>
+                  <li><a href="#">leaf</a></li>
+                  <li><a href="#">baltimore</a></li>
+                  <li><a href="#">library</a></li>
+                  <li><a href="#">nighttime</a></li>
+                  <li><a href="#">ink</a></li>
+                  <li><a href="#">exotic</a></li>
+                  <li><a href="#">paper</a></li>
+                  <li><a href="#">minimal</a></li>
+                  <li><a href="#">white</a></li>
+                  <li><a href="#">cat</a></li>
+                  <li><a href="#">candle</a></li>
+                  <li><a href="#">black</a></li>
+                  <li><a href="#">star</a></li>
+                  <li><a href="#">cruising</a></li>
+                  <li><a href="#">braid</a></li>
+                  <li><a href="#">jam</a></li>
+                  <li><a href="#">eyeshadow</a></li>
+                  <li><a href="#">bookworm</a></li>
+                  <li><a href="#">sportscar</a></li>
+                  <li><a href="#">laptops</a></li>
+                  <li><a href="#">skatelife</a></li>
+                  <li><a href="#">climax</a></li>
+                  <li><a href="#">delish</a></li>
+                  <li><a href="#">thankful</a></li>
+                  <li><a href="#">solecollector</a></li>
+                  <li><a href="#">lovecats</a></li>
+                  <li><a href="#">ilovemycat</a></li>
+                  <li><a href="#">eyebrows</a></li>
+                  <li><a href="#">streetartistry</a></li>
+                  <li><a href="#">architectureporn</a></li>
+                  <li><a href="#">remix</a></li>
+                  <li><a href="#">eyeliner</a></li>
+                  <li><a href="#">sweettooth</a></li>
+                  <li><a href="#">repeat</a></li>
+                  <li><a href="#">getfit</a></li>
+                  <li><a href="#">awake</a></li>
+                  <li><a href="#">coverup</a></li>
+                  <li><a href="#">unhas</a></li>
+                  <li><a href="#">bases</a></li>
+                  <li><a href="#">cosmetic</a></li>
+                  <li><a href="#">opi</a></li>
+                  <li><a href="#">fitspo</a></li>
+                  <li><a href="#">downpour</a></li>
+                  <li><a href="#">wakeup</a></li>
+                  <li><a href="#">rainydays</a></li>
+                  <li><a href="#">bedtime</a></li>
+                  <li><a href="#">catlover</a></li>
+                  <li><a href="#">goodnight</a></li>
+                  <li><a href="#">muffler</a></li>
+                  <li><a href="#">sunnydays</a></li>
+                  <li><a href="#">gallop</a></li>
+                  <li><a href="#">foodpics</a></li>
+                  <li><a href="#">crease</a></li>
+                  <li><a href="#">footballplayer</a></li>
+                  <li><a href="#">outfitoftheday</a></li>
+                  <li><a href="#">lovedogs</a></li>
+                  <li><a href="#">aquaria</a></li>
+                  <li><a href="#">wiwt</a></li>
+                  <li><a href="#">flexibility</a></li>
+                  <li><a href="#">pads</a></li>
+                  <li><a href="#">congrats</a></li>
+                  <li><a href="#">shredded</a></li>
+                  <li><a href="#">lookoftheday</a></li>
+                  <li><a href="#">wallporn</a></li>
+                  <li><a href="#">streetarteverywhere</a></li>
+                  <li><a href="#">lovenature</a></li>
+                  <li><a href="#">highheelshoes</a></li>
+                  <li><a href="#">shot</a></li>
+                  <li><a href="#">lady</a></li>
+                  <li><a href="#">city</a></li>
+                  <li><a href="#">streetphotography</a></li>
+                  <li><a href="#">goodweather</a></li>
+                  <li><a href="#">tatts</a></li>
+                  <li><a href="#">ilovemydog</a></li>
+                  <li><a href="#">funtime</a></li>
+                  <li><a href="#">snooze</a></li>
+                  <li><a href="#">xoxo</a></li>
+                  <li><a href="#">costume</a></li>
+                  <li><a href="#">closeup</a></li>
+                  <li><a href="#">hairdo</a></li>
+                  <li><a href="#">architecturelovers</a></li>
+                  <li><a href="#">fashionjewelry</a></li>
+                  <li><a href="#">flick</a></li>
+                  <li><a href="#">gametime</a></li>
+                  <li><a href="#">nook</a></li>
+                  <li><a href="#">nature_shooters</a></li>
+                  <li><a href="#">faithful</a></li>
+                  <li><a href="#">moviestar</a></li>
+                  <li><a href="#">weddinggown</a></li>
+                  <li><a href="#">clearskies</a></li>
+                  <li><a href="#">navel</a></li>
+                  <li><a href="#">footballseason</a></li>
+                  <li><a href="#">bikelife</a></li>
+                  <li><a href="#">gymnasts</a></li>
+                  <li><a href="#">goodmusic</a></li>
+                  <li><a href="#">mitt</a></li>
+                  <li><a href="#">thesun</a></li>
+                  <li><a href="#">tumbling</a></li>
+                  <li><a href="#">sneakerhead</a></li>
+                  <li><a href="#">niners</a></li>
+                  <li><a href="#">rideout</a></li>
+                  <li><a href="#">soccergame</a></li>
+                  <li><a href="#">skateeverydamnday</a></li>
+                  <li><a href="#">modifications</a></li>
+                  <li><a href="#">goodfriends</a></li>
+                  <li><a href="#">chocolate</a></li>
+                  <li><a href="#">skywatcher</a></li>
+                  <li><a href="#">essie</a></li>
+                  <li><a href="#">reeftank</a></li>
+                  <li><a href="#">trailrunner</a></li>
+                  <li><a href="#">archidaily</a></li>
+                  <li><a href="#">polish</a></li>
+                  <li><a href="#">dogsitting</a></li>
+                  <li><a href="#">highheels</a></li>
+                  <li><a href="#">urbanwalls</a></li>
+                  <li><a href="#">igdaily</a></li>
+                  <li><a href="#">mobile</a></li>
+                  <li><a href="#">brown</a></li>
+                  <li><a href="#">sea</a></li>
+                  <li><a href="#">stanleycup</a></li>
+                  <li><a href="#">glitter</a></li>
+                  <li><a href="#">baltimoreravens</a></li>
+                  <li><a href="#">refreshed</a></li>
+                  <li><a href="#">man</a></li>
+                  <li><a href="#">gamergirl</a></li>
+                  <li><a href="#">girlfriend</a></li>
+                  <li><a href="#">glass</a></li>
+                  <li><a href="#">kisses</a></li>
+                  <li><a href="#">driver</a></li>
+                  <li><a href="#">hairfashion</a></li>
+                  <li><a href="#">bluesky</a></li>
+                  <li><a href="#">hockeyplayer</a></li>
+                  <li><a href="#">samsunggalaxy</a></li>
+              </ul>
+            </div></center>
 
           </div>
+        </div>
+      </div>
 
-          <div class="row" id="block4">
-            <div class="col-md-8 col-md-offset-2">
-              <h2 class="p-title"><b>Hierarchy for 756 Category Classes: </b></h2>
-              <p class="p-body">The inner circle denotes the first level categories, including 11 different classes. The second circle denotes the second level categories, including 77 different classes. And the last circle denotes the third level categories, including 668 different classes. </p>
-              </div>
+      <div class="row" id="block4">
+        <div class="container">
+          <div class="col-xs-10 col-xs-offset-1">
+            <h2 class="p-title"><b>Hierarchy for 756 Category Classes: </b></h2>
+            <p class="p-body">The inner circle denotes the first level categories, including 11 different classes. The second circle denotes the second level categories, including 77 different classes. And the last circle denotes the third level categories, including 668 different classes. </p>
             <canvas id="chart-area" >
             </canvas>
             <br>
+          </div>
+        </div>
       </div>
       <div class="row" id="block7">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-xs-10 col-xs-offset-1">
           <center><h5 style="color:white;">Copyright © 2019. SMP Challenge Organization Committee. All rights reserved.</h5></center>
         </div>
       </div>
 
 
-        <div class="modal fade" id="modal-register">
+    <div class="modal fade" id="modal-register">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -1139,32 +947,32 @@
               </div>
 
               <div class="row">
-                <div class="col-md-2">
+                <div class="col-xs-2">
                   <br>
                   <label class="member-title">Caption</label>
                 </div>
-                <div class="col-md-3">
+                <div class="col-xs-3">
                   <div class="form-group">
                     <label for="caption-name">Name</label>
                     <input type="text" class="form-control team-input" id="caption-name">
                     <span class="help-block"></span>
                   </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-xs-3">
                   <div class="form-group">
                     <label for="caption-email">Email</label>
                     <input type="email" class="form-control team-input" id="caption-email">
                     <span class="help-block"></span>
                   </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-xs-3">
                   <div class="form-group">
                     <label for="caption-organization">Organization</label>
                     <input type="text" class="form-control team-input" id="caption-organization">
                     <span class="help-block"></span>
                   </div>
                 </div>
-                <!-- <div class="col-md-1">
+                <!-- <div class="col-xs-1">
                   <button class="btn btn-danger"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
                 </div> -->
               </div>
@@ -1173,14 +981,14 @@
 
             </form>
             <div class="row">
-              <div class="col-md-1 col-md-offset-2">
+              <div class="col-xs-1 col-xs-offset-2">
                 <br>
                 <button class="btn btn-default" id="addmember"><span class="glyphicon glyphicon-plus"></span></button>
               </div>
             </div>
 
             <div class="row">
-              <div class="col-md-10 col-md-offset-2">
+              <div class="col-xs-10 col-xs-offset-2">
                 <p style="color: gray;">Your team can contain at most 8 members (including caption).</p>
               </div>
             </div>

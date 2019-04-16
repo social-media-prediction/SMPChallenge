@@ -290,31 +290,31 @@
             return;
           }
           var html = '<div class="row">\
-                  <div class="col-md-2">\
+                  <div class="col-xs-2">\
                     <label class="member-title" id="member%d-title">Member %d</label>\
                   </div>\
-                  <div class="col-md-3">\
+                  <div class="col-xs-3">\
                     <div class="form-group">\
                       <label id="member%d-name-label" for="member%d-name" class="sr-only"></label>\
                       <input type="text" class="form-control team-input" id="member%d-name">\
                       <span class="help-block"></span>\
                     </div>\
                   </div>\
-                  <div class="col-md-3">\
+                  <div class="col-xs-3">\
                     <div class="form-group">\
                       <label id="member%d-email-label" for="member%d-email" class="sr-only"></label>\
                       <input type="email" class="form-control team-input" id="member%d-email">\
                       <span class="help-block"></span>\
                     </div>\
                   </div>\
-                  <div class="col-md-3">\
+                  <div class="col-xs-3">\
                     <div class="form-group">\
                       <label id="member%d-organization-label" for="member%d-organization" class="sr-only"></label>\
                       <input type="text" class="form-control team-input" id="member%d-organization">\
                       <span class="help-block"></span>\
                     </div>\
                   </div>\
-                  <div class="col-md-1">\
+                  <div class="col-xs-1">\
                     <button class="btn btn-danger delete-member" id="delete-member%d" deleteid="%d"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>\
                   </div>\
                 </div>';
@@ -396,31 +396,31 @@
               nownum = data.members.length;
               for (var i = 1; i < nownum; i++) {
                 var html = '<div class="row">\
-                    <div class="col-md-2">\
+                    <div class="col-xs-2">\
                       <label class="member-title" id="member%d-title">Member %d</label>\
                     </div>\
-                    <div class="col-md-3">\
+                    <div class="col-xs-3">\
                       <div class="form-group">\
                         <label for="member%d-name" class="sr-only"></label>\
                         <input type="text" class="form-control team-input" id="member%d-name">\
                         <span class="help-block"></span>\
                       </div>\
                     </div>\
-                    <div class="col-md-3">\
+                    <div class="col-xs-3">\
                       <div class="form-group">\
                         <label for="member%d-email" class="sr-only"></label>\
                         <input type="email" class="form-control team-input" id="member%d-email">\
                         <span class="help-block"></span>\
                       </div>\
                     </div>\
-                    <div class="col-md-3">\
+                    <div class="col-xs-3">\
                       <div class="form-group">\
                         <label for="member%d-organization" class="sr-only"></label>\
                         <input type="text" class="form-control team-input" id="member%d-organization">\
                         <span class="help-block"></span>\
                       </div>\
                     </div>\
-                    <div class="col-md-1">\
+                    <div class="col-xs-1">\
                       <button class="btn btn-danger delete-member" id="delete-member%d" deleteid="%d"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>\
                     </div>\
                   </div>';
@@ -507,60 +507,66 @@
 
     <div class="container-fluid" id="maintext">
       <div class="row" id="block1">
-        <div class="col-md-8 col-md-offset-2">
-          <h2 class="p-title"><b>Task: Temporal Popularity Prediction</b></h2>
-          <p class="p-body">
-            The task is focused on predicting the impact of new social media posts (photos, videos or news) before they were shared on social media. Given a new post with the temporal multimedia context of a publisher, the popularity computed by the normalized score of clicks or visits of the post (e.g., tweet count for Twitter, view count for Flickr, etc).
-          </p>
-          <p class="p-body">
-            The contestants are asked to develop their temporal prediction models based on the SMP dataset provided by the Challenge (as training data), plus possibly additional public/private data, to address one or both of the given tasks. For the evaluation purpose, a contesting system is asked to produce prediction results of popularity. The accuracy will be evaluated by pre-defined quantitative evaluation. The contestants need to introduce their systems and datasets in the conference.
-          </p>
+        <div class="container">
+          <div class="col-xs-10 col-xs-offset-1">
+            <h2 class="p-title"><b>Task: Temporal Popularity Prediction</b></h2>
+            <p class="p-body">
+              The task is focused on predicting the impact of new social media posts (photos, videos or news) before they were shared on social media. Given a new post with the temporal multimedia context of a publisher, the popularity computed by the normalized score of clicks or visits of the post (e.g., tweet count for Twitter, view count for Flickr, etc).
+            </p>
+            <p class="p-body">
+              The contestants are asked to develop their temporal prediction models based on the SMP dataset provided by the Challenge (as training data), plus possibly additional public/private data, to address one or both of the given tasks. For the evaluation purpose, a contesting system is asked to produce prediction results of popularity. The accuracy will be evaluated by pre-defined quantitative evaluation. The contestants need to introduce their systems and datasets in the conference.
+            </p>
+          </div>
         </div>
       </div>
       <div class="row" id="block2">
-        <div class="col-md-8 col-md-offset-2">
-          <h2 class="p-title"><b>Evaluation Criteria</b></h2>
-          <p class="p-body">
-            The evaluation provided here can be used to obtain performances on the testing set of SMP Challenge. It contains multiple common metrics, including <i>Spearman’s Rho (SR)</i>, <i>Mean Absolute Error (MAE)</i>, <i>Mean Squared Error (MSE)</i>.
-          </p>
-       
-        </div>
-        <br>
-      </div>
-
-      <div class="row" id="block3">
-        <div class="col-md-8 col-md-offset-2">
-          <h2 class="p-title"><b>Submission</b></h2>
-          <p class="p-body">Each team is allowed to submit the results of at most three runs and selects one run as the primary run of the submission (we do not guarantee to evaluate additional runs), which will be measured for performance comparison across teams.</p>
-          <p class="p-body">Each submission is required to be formatted in a JSON File as follows. Here we also provide a <a>submission example</a> as reference.</p>
-          <pre class="prettyprint lang-json">
-{
-    "version": "VERSION 1.2",
-    "result": [
-        {
-            "post_id": "post6374637",
-            "ranking_position": 1,
-            "popularity_score": 2.1345
-        },
-        ...
-        {
-            "post_id": "post3637373",
-            "ranking_position": 5,
-            "popularity_score": 3.1415
-        }
-    ],
-    "external_data": {
-        "used": "true",
-        "details": "VGG-19 pre-trained on ImageNet training set"
-    }
-}
-          </pre>
+        <div class="container">
+          <div class="col-xs-10 col-xs-offset-1">
+            <h2 class="p-title"><b>Evaluation Criteria</b></h2>
+            <p class="p-body">
+              The evaluation provided here can be used to obtain performances on the testing set of SMP Challenge. It contains multiple common metrics, including <i>Spearman’s Rho (SR)</i>, <i>Mean Absolute Error (MAE)</i>, <i>Mean Squared Error (MSE)</i>.
+            </p>
+         
+          </div>
           <br>
         </div>
       </div>
 
+      <div class="row" id="block3">
+        <div class="container">
+          <div class="col-xs-10 col-xs-offset-1">
+            <h2 class="p-title"><b>Submission</b></h2>
+            <p class="p-body">Each team is allowed to submit the results of at most three runs and selects one run as the primary run of the submission (we do not guarantee to evaluate additional runs), which will be measured for performance comparison across teams.</p>
+            <p class="p-body">Each submission is required to be formatted in a JSON File as follows. Here we also provide a <a>submission example</a> as reference.</p>
+            <pre class="prettyprint lang-json">
+  {
+      "version": "VERSION 1.2",
+      "result": [
+          {
+              "post_id": "post6374637",
+              "ranking_position": 1,
+              "popularity_score": 2.1345
+          },
+          ...
+          {
+              "post_id": "post3637373",
+              "ranking_position": 5,
+              "popularity_score": 3.1415
+          }
+      ],
+      "external_data": {
+          "used": "true",
+          "details": "VGG-19 pre-trained on ImageNet training set"
+      }
+  }
+            </pre>
+            <br>
+          </div>
+        </div>
+      </div>
+
       <div class="row" id="block7">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-xs-10 col-xs-offset-1">
           <center><h5 style="color:white;">Copyright © 2019. SMP Challenge Organization Committee. All rights reserved.</h5></center>
         </div>
       </div>
@@ -682,32 +688,32 @@
               </div>
 
               <div class="row">
-                <div class="col-md-2">
+                <div class="col-xs-2">
                   <br>
                   <label class="member-title">Caption</label>
                 </div>
-                <div class="col-md-3">
+                <div class="col-xs-3">
                   <div class="form-group">
                     <label for="caption-name">Name</label>
                     <input type="text" class="form-control team-input" id="caption-name">
                     <span class="help-block"></span>
                   </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-xs-3">
                   <div class="form-group">
                     <label for="caption-email">Email</label>
                     <input type="email" class="form-control team-input" id="caption-email">
                     <span class="help-block"></span>
                   </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-xs-3">
                   <div class="form-group">
                     <label for="caption-organization">Organization</label>
                     <input type="text" class="form-control team-input" id="caption-organization">
                     <span class="help-block"></span>
                   </div>
                 </div>
-                <!-- <div class="col-md-1">
+                <!-- <div class="col-xs-1">
                   <button class="btn btn-danger"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
                 </div> -->
               </div>
@@ -716,14 +722,14 @@
 
             </form>
             <div class="row">
-              <div class="col-md-1 col-md-offset-2">
+              <div class="col-xs-1 col-xs-offset-2">
                 <br>
                 <button class="btn btn-default" id="addmember"><span class="glyphicon glyphicon-plus"></span></button>
               </div>
             </div>
 
             <div class="row">
-              <div class="col-md-10 col-md-offset-2">
+              <div class="col-xs-10 col-xs-offset-2">
                 <p style="color: gray;">Your team can contain at most 8 members (including caption).</p>
               </div>
             </div>

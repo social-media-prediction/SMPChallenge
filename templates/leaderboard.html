@@ -289,31 +289,31 @@ var nownum = 1;
             return;
           }
           var html = '<div class="row">\
-                  <div class="col-md-2">\
+                  <div class="col-xs-2">\
                     <label class="member-title" id="member%d-title">Member %d</label>\
                   </div>\
-                  <div class="col-md-3">\
+                  <div class="col-xs-3">\
                     <div class="form-group">\
                       <label id="member%d-name-label" for="member%d-name" class="sr-only"></label>\
                       <input type="text" class="form-control team-input" id="member%d-name">\
                       <span class="help-block"></span>\
                     </div>\
                   </div>\
-                  <div class="col-md-3">\
+                  <div class="col-xs-3">\
                     <div class="form-group">\
                       <label id="member%d-email-label" for="member%d-email" class="sr-only"></label>\
                       <input type="email" class="form-control team-input" id="member%d-email">\
                       <span class="help-block"></span>\
                     </div>\
                   </div>\
-                  <div class="col-md-3">\
+                  <div class="col-xs-3">\
                     <div class="form-group">\
                       <label id="member%d-organization-label" for="member%d-organization" class="sr-only"></label>\
                       <input type="text" class="form-control team-input" id="member%d-organization">\
                       <span class="help-block"></span>\
                     </div>\
                   </div>\
-                  <div class="col-md-1">\
+                  <div class="col-xs-1">\
                     <button class="btn btn-danger delete-member" id="delete-member%d" deleteid="%d"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>\
                   </div>\
                 </div>';
@@ -395,31 +395,31 @@ var nownum = 1;
             nownum = data.members.length;
             for (var i = 1; i < nownum; i++) {
               var html = '<div class="row">\
-                  <div class="col-md-2">\
+                  <div class="col-xs-2">\
                     <label class="member-title" id="member%d-title">Member %d</label>\
                   </div>\
-                  <div class="col-md-3">\
+                  <div class="col-xs-3">\
                     <div class="form-group">\
                       <label for="member%d-name" class="sr-only"></label>\
                       <input type="text" class="form-control team-input" id="member%d-name">\
                       <span class="help-block"></span>\
                     </div>\
                   </div>\
-                  <div class="col-md-3">\
+                  <div class="col-xs-3">\
                     <div class="form-group">\
                       <label for="member%d-email" class="sr-only"></label>\
                       <input type="email" class="form-control team-input" id="member%d-email">\
                       <span class="help-block"></span>\
                     </div>\
                   </div>\
-                  <div class="col-md-3">\
+                  <div class="col-xs-3">\
                     <div class="form-group">\
                       <label for="member%d-organization" class="sr-only"></label>\
                       <input type="text" class="form-control team-input" id="member%d-organization">\
                       <span class="help-block"></span>\
                     </div>\
                   </div>\
-                  <div class="col-md-1">\
+                  <div class="col-xs-1">\
                     <button class="btn btn-danger delete-member" id="delete-member%d" deleteid="%d"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>\
                   </div>\
                 </div>';
@@ -504,69 +504,72 @@ var nownum = 1;
 
     <div class="container-fluid" id="maintext">
       <div class="row" id="block1">
-
-        <div class="col-md-8 col-md-offset-2">
-          <h2 class="p-title"><b>Leaderboard</b></h2>
-          <table class="table table-striped table-bordered">
-            <tr>
-              <th>Rank</th>
-              <th>Team</th>
-              <th>Organization</th>
-              <th>SRC</th>
-              <th>MAE</th>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>Team1</td>
-              <td>Organization1</td>
-              <td>-</td>
-              <td>-</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Team2</td>
-              <td>Organization2</td>
-              <td>-</td>
-              <td>-</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Team3</td>
-              <td>Organization3</td>
-              <td>-</td>
-              <td>-</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>Team4</td>
-              <td>Organization4</td>
-              <td>-</td>
-              <td>-</td>
-            </tr>
-          </table>
+        <div class="container">
+          <div class="col-xs-10 col-xs-offset-1">
+            <h2 class="p-title"><b>Leaderboard</b></h2>
+            <table class="table table-striped table-bordered">
+              <tr>
+                <th>Rank</th>
+                <th>Team</th>
+                <th>Organization</th>
+                <th>SRC</th>
+                <th>MAE</th>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>Team1</td>
+                <td>Organization1</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Team2</td>
+                <td>Organization2</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Team3</td>
+                <td>Organization3</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Team4</td>
+                <td>Organization4</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
 
       <div class="row" id="block2">
-        <div class="col-md-8 col-md-offset-2">
-          <h2 class="p-title"><b>Team Ranking</b></h2>
-          <p class="p-body">
-            The ranking for the competition for each year is based on a quantitative evaluation, respectively. Specifically, a rank list of teams is produced by sorting their scores on each objective evaluation metric, respectively. The final rank of a team is measured by combining its ranking positions in the three ranking list for the respective task and defined as:
-          </p>
-          <p>
-          <center>
-            <span class="p-body"><i>R</i>(team) = <i>R</i>(team)@SR + <i>R</i>(team)@MAE + <i>R</i>(team)@MSE</span>
-          </center>
-          </p>
-          <p class="p-body">
-            where <i>R</i>(team) is the rank position of the team on a particular metric, e.g., if the team achieves the best performance in terms of <i>Spearman’s Rho</i>, then <i>R</i>(team)@SR is "1". The smaller the final ranking, the better the performance.
-          </p>
+        <div class="container">
+          <div class="col-xs-10 col-xs-offset-1">
+            <h2 class="p-title"><b>Team Ranking</b></h2>
+            <p class="p-body">
+              The ranking for the competition for each year is based on a quantitative evaluation, respectively. Specifically, a rank list of teams is produced by sorting their scores on each objective evaluation metric, respectively. The final rank of a team is measured by combining its ranking positions in the three ranking list for the respective task and defined as:
+            </p>
+            <p>
+            <center>
+              <span class="p-body"><i>R</i>(team) = <i>R</i>(team)@SR + <i>R</i>(team)@MAE + <i>R</i>(team)@MSE</span>
+            </center>
+            </p>
+            <p class="p-body">
+              where <i>R</i>(team) is the rank position of the team on a particular metric, e.g., if the team achieves the best performance in terms of <i>Spearman’s Rho</i>, then <i>R</i>(team)@SR is "1". The smaller the final ranking, the better the performance.
+            </p>
+          </div>
+          <br>
         </div>
-        <br>
       </div>
 
       <div class="row" id="block7">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-xs-10 col-xs-offset-1">
           <center><h5 style="color:white;">Copyright © 2019. SMP Challenge Organization Committee. All rights reserved.</h5></center>
         </div>
       </div>
@@ -687,32 +690,32 @@ var nownum = 1;
               </div>
 
               <div class="row">
-                <div class="col-md-2">
+                <div class="col-xs-2">
                   <br>
                   <label class="member-title">Caption</label>
                 </div>
-                <div class="col-md-3">
+                <div class="col-xs-3">
                   <div class="form-group">
                     <label for="caption-name">Name</label>
                     <input type="text" class="form-control team-input" id="caption-name">
                     <span class="help-block"></span>
                   </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-xs-3">
                   <div class="form-group">
                     <label for="caption-email">Email</label>
                     <input type="email" class="form-control team-input" id="caption-email">
                     <span class="help-block"></span>
                   </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-xs-3">
                   <div class="form-group">
                     <label for="caption-organization">Organization</label>
                     <input type="text" class="form-control team-input" id="caption-organization">
                     <span class="help-block"></span>
                   </div>
                 </div>
-                <!-- <div class="col-md-1">
+                <!-- <div class="col-xs-1">
                   <button class="btn btn-danger"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
                 </div> -->
               </div>
@@ -721,14 +724,14 @@ var nownum = 1;
 
             </form>
             <div class="row">
-              <div class="col-md-1 col-md-offset-2">
+              <div class="col-xs-1 col-xs-offset-2">
                 <br>
                 <button class="btn btn-default" id="addmember"><span class="glyphicon glyphicon-plus"></span></button>
               </div>
             </div>
 
             <div class="row">
-              <div class="col-md-10 col-md-offset-2">
+              <div class="col-xs-10 col-xs-offset-2">
                 <p style="color: gray;">Your team can contain at most 8 members (including caption).</p>
               </div>
             </div>
