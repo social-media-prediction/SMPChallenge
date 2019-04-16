@@ -140,7 +140,7 @@
     </style>
     <script type="text/javascript">
       $(document).ready(function(){
-                $("#href-register").click(function(e){
+        $("#href-register").click(function(e){
           e.preventDefault();
           $("#modal-register").modal("show");
         });
@@ -150,7 +150,7 @@
           $("#modal-login").modal("show");
         });
 
-        $("input").focus(function(){
+        $(document).on("focus", "input", function(){
           $(".form-group").removeClass("has-error");
           $(".help-block").hide();
         });
@@ -277,13 +277,6 @@
           })
         });
 
-        {% if register_success %}
-        $("#modal-register-success").modal("show");
-        $("#modal-register-success").on("hidden.bs.modal", function(e) {
-          window.location.href = "/"
-        })
-        {% endif %}
-
         $("#editteam").click(function(e) {
           e.preventDefault();
           $("#modal-team").modal("show");
@@ -292,49 +285,60 @@
         var nownum = 1;
         $("#addmember").click(function(e) {
           e.preventDefault();
+          if (nownum == 8) {
+            alert("no more than 8 members");
+            return;
+          }
           var html = '<div class="row">\
-                <div class="col-md-2">\
-                  <br>\
-                  <label class="member-title" id="member%d-title">Member %d</label>\
-                </div>\
-                <div class="col-md-3">\
-                  <div class="form-group">\
-                    <label for="member%d-name sr-only"></label>\
-                    <input type="text" class="form-control team-input" id="member%d-name">\
-                    <span class="help-block"></span>\
+                  <div class="col-md-2">\
+                    <label class="member-title" id="member%d-title">Member %d</label>\
                   </div>\
-                </div>\
-                <div class="col-md-3">\
-                  <div class="form-group">\
-                    <label for="member%d-email sr-only"></label>\
-                    <input type="email" class="form-control team-input" id="member%d-email">\
-                    <span class="help-block"></span>\
+                  <div class="col-md-3">\
+                    <div class="form-group">\
+                      <label id="member%d-name-label" for="member%d-name" class="sr-only"></label>\
+                      <input type="text" class="form-control team-input" id="member%d-name">\
+                      <span class="help-block"></span>\
+                    </div>\
                   </div>\
-                </div>\
-                <div class="col-md-3">\
-                  <div class="form-group">\
-                    <label for="member%d-organization sr-only"></label>\
-                    <input type="text" class="form-control team-input" id="member%d-organization">\
-                    <span class="help-block"></span>\
+                  <div class="col-md-3">\
+                    <div class="form-group">\
+                      <label id="member%d-email-label" for="member%d-email" class="sr-only"></label>\
+                      <input type="email" class="form-control team-input" id="member%d-email">\
+                      <span class="help-block"></span>\
+                    </div>\
                   </div>\
-                </div>\
-                <div class="col-md-1">\
-                  <br>\
-                  <button class="btn btn-danger delete-member" id="delete-member%d" deleteid="%d"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>\
-                </div>\
-              </div>';
+                  <div class="col-md-3">\
+                    <div class="form-group">\
+                      <label id="member%d-organization-label" for="member%d-organization" class="sr-only"></label>\
+                      <input type="text" class="form-control team-input" id="member%d-organization">\
+                      <span class="help-block"></span>\
+                    </div>\
+                  </div>\
+                  <div class="col-md-1">\
+                    <button class="btn btn-danger delete-member" id="delete-member%d" deleteid="%d"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>\
+                  </div>\
+                </div>';
 
-          $("#team-form").append(sprintf(html, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum));
+          $("#team-form").append(sprintf(html, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum));
           nownum += 1;
         });
 
         $(document).on("click", ".delete-member", function(e) {
           e.preventDefault();
           $(this).parent().parent().remove();
-          var deleteid=parseInt($(this).attr("deleteid"));
-          for (var i = deleteid+1; i <= nownum; i++) {
-            $(sprintf("#member%d-title", i)).text(sprintf("Member %d", i-1)).attr("id", sprintf("member%d-title", i-1));
-            $(sprintf("#delete-member%d", i)).attr("id", sprintf("delete-member%d", i-1)).attr("deleteid", sprintf("%d", i-1))
+          var deleteid = parseInt($(this).attr("deleteid"));
+          for (var i = deleteid + 1; i <= nownum; i++) {
+            $(sprintf("#member%d-title", i)).text(sprintf("Member %d", i - 1)).attr("id", sprintf("member%d-title", i - 1));
+            $(sprintf("#delete-member%d", i)).attr("id", sprintf("delete-member%d", i - 1)).attr("deleteid", sprintf("%d", i - 1));
+
+            $(sprintf("#member%d-name-label", i)).attr("for", sprintf("member%d-name", i-1)).attr("id", sprintf("member%d-name-label", i - 1));
+            $(sprintf("#member%d-email-label", i)).attr("for", sprintf("member%d-email", i-1)).attr("id", sprintf("member%d-email-label", i - 1));
+            $(sprintf("#member%d-organization-label", i)).attr("for", sprintf("member%d-organization", i-1)).attr("id", sprintf("member%d-organization-label", i - 1));
+
+            $(sprintf("#member%d-name", i)).attr("id", sprintf("member%d-name", i - 1));
+            $(sprintf("#member%d-email", i)).attr("id", sprintf("member%d-email", i - 1));
+            $(sprintf("#member%d-organization", i)).attr("id", sprintf("member%d-organization", i - 1));
+
           }
 
           nownum -= 1;
@@ -392,38 +396,36 @@
             nownum = data.members.length;
             for (var i = 1; i < nownum; i++) {
               var html = '<div class="row">\
-                <div class="col-md-2">\
-                  <br>\
-                  <label class="member-title" id="member%d-title">Member %d</label>\
-                </div>\
-                <div class="col-md-3">\
-                  <div class="form-group">\
-                    <label for="member%d-name sr-only"></label>\
-                    <input type="text" class="form-control team-input" id="member%d-name">\
-                    <span class="help-block"></span>\
+                  <div class="col-md-2">\
+                    <label class="member-title" id="member%d-title">Member %d</label>\
                   </div>\
-                </div>\
-                <div class="col-md-3">\
-                  <div class="form-group">\
-                    <label for="member%d-email sr-only"></label>\
-                    <input type="email" class="form-control team-input" id="member%d-email">\
-                    <span class="help-block"></span>\
+                  <div class="col-md-3">\
+                    <div class="form-group">\
+                      <label for="member%d-name" class="sr-only"></label>\
+                      <input type="text" class="form-control team-input" id="member%d-name">\
+                      <span class="help-block"></span>\
+                    </div>\
                   </div>\
-                </div>\
-                <div class="col-md-3">\
-                  <div class="form-group">\
-                    <label for="member%d-organization sr-only"></label>\
-                    <input type="text" class="form-control team-input" id="member%d-organization">\
-                    <span class="help-block"></span>\
+                  <div class="col-md-3">\
+                    <div class="form-group">\
+                      <label for="member%d-email" class="sr-only"></label>\
+                      <input type="email" class="form-control team-input" id="member%d-email">\
+                      <span class="help-block"></span>\
+                    </div>\
                   </div>\
-                </div>\
-                <div class="col-md-1">\
-                  <br>\
-                  <button class="btn btn-danger delete-member" id="delete-member%d" deleteid="%d"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>\
-                </div>\
-              </div>';
+                  <div class="col-md-3">\
+                    <div class="form-group">\
+                      <label for="member%d-organization" class="sr-only"></label>\
+                      <input type="text" class="form-control team-input" id="member%d-organization">\
+                      <span class="help-block"></span>\
+                    </div>\
+                  </div>\
+                  <div class="col-md-1">\
+                    <button class="btn btn-danger delete-member" id="delete-member%d" deleteid="%d"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>\
+                  </div>\
+                </div>';
 
-              $("#team-form").append(sprintf(html, i,i,i,i,i,i,i,i,i,i));
+              $("#team-form").append(sprintf(html, i, i, i, i, i, i, i, i, i, i));
               $(sprintf("#member%d-name", i)).val(data.members[i].name);
               $(sprintf("#member%d-email", i)).val(data.members[i].email);
               $(sprintf("#member%d-organization", i)).val(data.members[i].organization);
@@ -688,7 +690,13 @@
             <div class="row">
               <div class="col-md-1 col-md-offset-2">
                 <br>
-                <button class="btn btn-default"><span class="glyphicon glyphicon-plus" id="addmember"></span></button>
+                <button class="btn btn-default" id="addmember"><span class="glyphicon glyphicon-plus"></span></button>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-10 col-md-offset-2">
+                <p style="color: gray;">Your team can contain at most 8 members (including caption).</p>
               </div>
             </div>
 

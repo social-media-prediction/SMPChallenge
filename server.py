@@ -1,6 +1,6 @@
 #-*-coding:utf-8-*-
 
-from flask import Flask, render_template, request, jsonify, make_response, redirect
+from flask import Flask, render_template, request, jsonify, make_response, redirect, abort
 from hashlib import md5
 import base64
 import os
@@ -182,6 +182,26 @@ def send_reset_email(email):
     send_reset_email_tool(reset_url, email)
 
     return SUCCESS
+
+def get_all_teams():
+    tmp = cursor.execute("select teamname,members from team").fetchall()
+    res = []
+    for i in range(len(tmp)):
+        _id = i + 1
+        tname = tmp[i][0]
+        tmembers = base64.b64decode(tmp[i][1])
+        tmembers = json.loads(tmembers)
+
+        td = ''
+        for item in tmembers:
+            td += '%s&lt;<a>%s</a>&gt;, %s <br>'%(item['name'], item['email'], item['organization'])
+
+        res.append({
+            'id': _id,
+            'team_name': tname,
+            'members': td
+            })
+    return res
 
 @app.route('/', methods=['GET'])
 def index():
@@ -450,6 +470,8 @@ def update_team():
     teamname = form['teamname']
 
     member_num = int(form['member-num'])
+    if member_num > 8:
+        return jsonify(code=PARAMETER_ERROR)
     members = []
     members.append({
         'name': form['caption-name'],
@@ -513,6 +535,29 @@ def logout():
     res = make_response(jsonify(code=SUCCESS))
     res.delete_cookie("token")
     return res
+
+@app.route('/browse', methods=['GET'])
+def browse():
+    args = request.args
+    if not 'token' in args:
+        abort(404)
+    token = args['token']
+    if token != 'zengzhaoyang' and token != 'wubo' and token != 'liubei':
+        abort(404)
+
+    return render_template("browse.html")
+
+@app.route('/get_teams', methods=['GET'])
+def get_teams():
+    args = request.args
+    if not 'token' in args:
+        abort(404)
+    token = args['token']
+    if token != 'zengzhaoyang' and token != 'wubo' and token != 'liubei':
+        abort(404)
+
+    teams = get_all_teams()
+    return jsonify(teams=teams)
 
 if __name__ == '__main__':
     app.run('127.0.0.1', 5000)
