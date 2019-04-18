@@ -11,7 +11,7 @@ import smtplib
 import email.mime.text
 
 app = Flask(__name__)
-app.debug = True
+app.debug = False
 
 SUCCESS = '00000'
 PARAMETER_ERROR = '10001'
@@ -565,4 +565,4 @@ def get_teams():
     return jsonify(teams=teams)
 
 if __name__ == '__main__':
-    app.run('127.0.0.1', 5000)
+    app.run('127.0.0.1', 5000, threaded=True)
