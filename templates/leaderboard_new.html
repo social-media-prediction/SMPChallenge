@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SMP Challenge</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/sprintf.js"></script>
+    <script src="/static/js/md5.js"></script>
+    <style type="text/css">
+      #nav-first {
+        border-radius: 0px;
+        margin-bottom: 0px;
+        min-height: 80px;
+      }
+
+      #nav-second {
+        border-radius: 0px;
+        margin-bottom: 0px;
+        top: 80px;
+      }
+
+      #nav-first-main {
+        margin: 0 0;
+        height: 80px;
+      }
+
+      #nav-first-main>li {
+        height: 80px;
+      }
+      #nav-first-main>li>a {
+        height: 80px;
+        padding-top: 0;
+        padding-bottom: 0;
+        line-height: 80px;
+      }
+
+      #nav-second-main {
+        margin: 0 80px;
+      }
+
+      .nav-second-li {
+        font-size: 120%;
+      }
+
+      #block1 {
+        background-color: #02ABE0;
+      }
+
+      #block2 {
+        background-color: #121212;
+      }
+
+      #block3 {
+        background-color: #02ABE0;
+      }
+
+      #block4 {
+        background-color: #121212;
+      }
+
+      #block5 {
+        background-color: #02ABE0;
+      }
+
+      #block6 {
+        background-color: #121212;
+      }
+
+      #block7 {
+        background-color: #000000;
+      }
+
+      .p-body{
+        text-align: justify;
+        font-family: "Arial", sans-serif;
+        font-size: 120%;
+      }
+
+      h1,h2{
+        font-family: "Arial", serif;
+        /*font-size: 150%;*/
+      }
+
+      .timeline-li {
+        font-family: "Arial", sans-serif;
+        font-size: 120%;
+      }
+
+      #logo {
+        padding-left:100px;
+        padding-top: 10px;
+      }
+
+      .thumbnail {
+        border-color: transparent;
+        background-color: transparent;
+      }
+
+      .avatar {
+        border-radius: 50%;
+      }
+
+      .nav-li {
+        font-size: 120%;
+      }
+
+      td,th {
+        text-align: center;
+      }
+
+      .orange {
+        color: rgb(241,156,55) !important;
+      }
+
+      .white {
+        color: white !important;
+      }
+
+      .light-blue {
+        color: #2EA5DA !important;
+      }
+
+      .dark-blue {
+        color: #2596DC !important;
+      }
+
+      .help-block {
+        display: none;
+      }
+
+      .member-title {
+        padding-top: 10px;
+      }
+
+/*      .p-title {
+        color: rgb(241,156,55) !important;
+      }*/
+
+      .container-fluid {
+        padding-top: 130px;
+      }
+
+      #forget {
+        cursor: pointer;
+      }
+
+    </style>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $("#href-register").click(function(e){
+          e.preventDefault();
+          $("#modal-register").modal("show");
+        });
+
+        $("#href-login").click(function(e){
+          e.preventDefault();
+          $("#modal-login").modal("show");
+        });
+
+        $(document).on("focus", "input", function(){
+          $(".form-group").removeClass("has-error");
+          $(".help-block").hide();
+        });
+
+        $("#register").click(function(e){
+          var email = $("#email").val();
+          var username = $("#username").val();
+          var password = $("#password").val();
+          var repeat_password = $("#repeat-password").val();
+
+          var flag = true;
+          if (email == "") {
+            $("#email").parent().addClass("has-error");
+            $("#email-warn").text("email can not be empty").show();
+            flag = false;
+          }
+
+          if (username == "") {
+            $("#username").parent().addClass("has-error");
+            $("#username-warn").text("username can not be empty").show();
+            flag = false;
+          }
+
+          if (password == "") {
+            $("#password").parent().addClass("has-error");
+            $("#password-warn").text("password can not be empty").show();
+            flag = false;
+          }
+
+          if (repeat_password == "") {
+            $("#repeat-password").parent().addClass("has-error");
+            $("#repeat-password-warn").text("repeat-password can not be empty").show();
+            flag = false;
+          }
+
+          if (password.length > 0 && password.length < 8) {
+            $("#password").parent().addClass("has-error");
+            $("#password-warn").text("password too short").show();
+            flag = false;
+          }
+
+          if (repeat_password.length > 0 && password != repeat_password) {
+            $("#repeat-password").parent().addClass("has-error");
+            $("#repeat-password-warn").text("Two input password must be consistent").show();
+            flag = false;
+          }
+
+          if (flag == false) {
+            return;
+          }
+
+          password = md5(password);
+          var data = {
+            "email": email,
+            "username": username,
+            "password": password
+          }
+          $.post("/register", data, function(data, status) {
+            if (data.code == "00000") {
+              $("#modal-body").html(sprintf('<h4 id="register-notice">We have sent a verification email to <a>%s</a>, please check it in two hours. *Note to check your spam mails in case it is misclassified.</h4>', email));
+              $("#modal-footer").hide();
+            }
+            else if (data.code == "10002") {
+              $("#username").parent().addClass("has-error");
+              $("#username-warn").text("username exists").show();
+            }
+            else if (data.code == "10004") {
+              $("#email").parent().addClass("has-error");
+              $("#email-warn").text("email exists").show();
+            } else if (data.code == "10010") {
+              $("#email").parent().addClass("has-error");
+              $("#email-warn").text("invalid email").show();
+            }
+          });
+
+        });
+
+        $("#login").click(function(e){
+          var email = $("#login-email").val();
+          var password = $("#login-password").val();
+
+          var flag = true;
+          if (email == "") {
+            $("#login-email").parent().addClass("has-error");
+            $("#login-email-warn").text("email can not be empty").show();
+            flag = false;
+          }
+          if (password == "") {
+            $("#login-password").parent().addClass("has-error");
+            $("#login-password-warn").text("password can not be empty").show();
+            flag = false;
+          }
+
+          if (flag == false) {
+            return;
+          }
+
+          password = md5(password);
+          var data = {
+            "email": email,
+            "password": password
+          }
+
+          $.post("/login", data, function(data, status) {
+            if (data.code == "00000") {
+              window.location.reload();
+            } else if (data.code == "10006") {
+              $("#login-email").parent().addClass("has-error");
+              $("#login-email-warn").text("user not exists").show();
+            } else if (data.code == "10007") {
+              $("#login-password").parent().addClass("has-error");
+              $("#login-password-warn").text("password error").show();
+            }
+          });
+
+        });
+
+        $("#logout").click(function(e) {
+          e.preventDefault();
+          $.post("/logout", function(data, status) {
+            window.location.reload();
+          })
+        });
+
+        $("#editteam").click(function(e) {
+          e.preventDefault();
+          $("#modal-team").modal("show");
+        });
+
+var nownum = 1;
+        $("#addmember").click(function(e) {
+          e.preventDefault();
+          if (nownum == 8) {
+            alert("no more than 8 members");
+            return;
+          }
+          var html = '<div class="row">\
+                  <div class="col-xs-2">\
+                    <label class="member-title" id="member%d-title">Member %d</label>\
+                  </div>\
+                  <div class="col-xs-3">\
+                    <div class="form-group">\
+                      <label id="member%d-name-label" for="member%d-name" class="sr-only"></label>\
+                      <input type="text" class="form-control team-input" id="member%d-name">\
+                      <span class="help-block"></span>\
+                    </div>\
+                  </div>\
+                  <div class="col-xs-3">\
+                    <div class="form-group">\
+                      <label id="member%d-email-label" for="member%d-email" class="sr-only"></label>\
+                      <input type="email" class="form-control team-input" id="member%d-email">\
+                      <span class="help-block"></span>\
+                    </div>\
+                  </div>\
+                  <div class="col-xs-3">\
+                    <div class="form-group">\
+                      <label id="member%d-organization-label" for="member%d-organization" class="sr-only"></label>\
+                      <input type="text" class="form-control team-input" id="member%d-organization">\
+                      <span class="help-block"></span>\
+                    </div>\
+                  </div>\
+                  <div class="col-xs-1">\
+                    <button class="btn btn-danger delete-member" id="delete-member%d" deleteid="%d"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>\
+                  </div>\
+                </div>';
+
+          $("#team-form").append(sprintf(html, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum));
+          nownum += 1;
+        });
+
+        $(document).on("click", ".delete-member", function(e) {
+          e.preventDefault();
+          $(this).parent().parent().remove();
+          var deleteid = parseInt($(this).attr("deleteid"));
+          for (var i = deleteid + 1; i <= nownum; i++) {
+            $(sprintf("#member%d-title", i)).text(sprintf("Member %d", i - 1)).attr("id", sprintf("member%d-title", i - 1));
+            $(sprintf("#delete-member%d", i)).attr("id", sprintf("delete-member%d", i - 1)).attr("deleteid", sprintf("%d", i - 1));
+
+            $(sprintf("#member%d-name-label", i)).attr("for", sprintf("member%d-name", i-1)).attr("id", sprintf("member%d-name-label", i - 1));
+            $(sprintf("#member%d-email-label", i)).attr("for", sprintf("member%d-email", i-1)).attr("id", sprintf("member%d-email-label", i - 1));
+            $(sprintf("#member%d-organization-label", i)).attr("for", sprintf("member%d-organization", i-1)).attr("id", sprintf("member%d-organization-label", i - 1));
+
+            $(sprintf("#member%d-name", i)).attr("id", sprintf("member%d-name", i - 1));
+            $(sprintf("#member%d-email", i)).attr("id", sprintf("member%d-email", i - 1));
+            $(sprintf("#member%d-organization", i)).attr("id", sprintf("member%d-organization", i - 1));
+
+          }
+
+          nownum -= 1;
+        });
+
+        $("#save").click(function(e) {
+          e.preventDefault();
+
+          var team_input = $(".team-input");
+          var flag=true;
+          for (var i = 0; i < team_input.length; i++) {
+            if ($(team_input[i]).val() == "") {
+              $(team_input[i]).parent().find("span").show().text("can not be empty");
+              $(team_input[i]).parent().addClass("has-error");
+              flag=false;
+            }
+          }
+          if (flag == false) {
+            return;
+          }
+
+          var data = {
+            'teamname': $("#team-name").val(),
+            'caption-name': $("#caption-name").val(),
+            'caption-email': $("#caption-email").val(),
+            'caption-organization': $("#caption-organization").val(),
+            'member-num': nownum
+          }
+
+          for (var i = 1; i < nownum; i++) {
+            data[sprintf("member%d-name", i)] = $(sprintf("#member%d-name", i)).val();
+            data[sprintf("member%d-email", i)] = $(sprintf("#member%d-email", i)).val();
+            data[sprintf("member%d-organization", i)] = $(sprintf("#member%d-organization", i)).val();
+          }
+
+          $.post("/update_team", data, function(data, status) {
+            if (data.code == "00000") {
+              alert("update success");
+              $("#modal-team").modal("hide");
+            }
+            else if (data.code == "10009") {
+              $("#team-name").parent().addClass("has-error");
+              $("#team-name").parent().find("span").text("team name exists").show();
+            }
+          });
+
+        });
+
+        $.getJSON("/get_team", function(data, status) {
+          if (data.code == "00000") {
+            $("#team-name").val(data.teamname);
+            $("#caption-name").val(data.members[0].name);
+            $("#caption-email").val(data.members[0].email);
+            $("#caption-organization").val(data.members[0].organization);
+            nownum = data.members.length;
+            for (var i = 1; i < nownum; i++) {
+              var html = '<div class="row">\
+                  <div class="col-xs-2">\
+                    <label class="member-title" id="member%d-title">Member %d</label>\
+                  </div>\
+                  <div class="col-xs-3">\
+                    <div class="form-group">\
+                      <label for="member%d-name" class="sr-only"></label>\
+                      <input type="text" class="form-control team-input" id="member%d-name">\
+                      <span class="help-block"></span>\
+                    </div>\
+                  </div>\
+                  <div class="col-xs-3">\
+                    <div class="form-group">\
+                      <label for="member%d-email" class="sr-only"></label>\
+                      <input type="email" class="form-control team-input" id="member%d-email">\
+                      <span class="help-block"></span>\
+                    </div>\
+                  </div>\
+                  <div class="col-xs-3">\
+                    <div class="form-group">\
+                      <label for="member%d-organization" class="sr-only"></label>\
+                      <input type="text" class="form-control team-input" id="member%d-organization">\
+                      <span class="help-block"></span>\
+                    </div>\
+                  </div>\
+                  <div class="col-xs-1">\
+                    <button class="btn btn-danger delete-member" id="delete-member%d" deleteid="%d"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>\
+                  </div>\
+                </div>';
+
+              $("#team-form").append(sprintf(html, i, i, i, i, i, i, i, i, i, i));
+              $(sprintf("#member%d-name", i)).val(data.members[i].name);
+              $(sprintf("#member%d-email", i)).val(data.members[i].email);
+              $(sprintf("#member%d-organization", i)).val(data.members[i].organization);
+            }
+          }
+        });
+
+      $("#forget").click(function(){
+        $("#modal-login").modal("hide");
+        $("#modal-forget").modal("show");
+      });
+
+      $("#send-reset-email").click(function() {
+        var email = $("#forget-email").val();
+        if (email == "") {
+          alert("please enter your email address");
+          return;
+        }
+        var data = {
+          "email": email
+        }
+        $("#send-reset-email").attr("disabled", "disabled")
+        $.post("/forget_password", data, function(data, status) {
+          if (data.code == "00000") {
+            alert(sprintf("We have sent a password reset email to %s, please have a check. *Note to check your spam mails in case it is misclassified.", email))
+            $("#send-reset-email").removeAttr("disabled");
+          } else {
+            alert("email does not exist");
+            return;
+          }
+        });
+      });
+      });
+    </script>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="nav-second">
+      <div class="container">
+        <ul class="nav navbar-nav" id="nav-second-main">
+          <li class="nav-li"><a class="nav-second-li" href="/" id="href-home"><b>Home</b></a></li>
+          <li class="nav-li"><a class="nav-second-li" href="/dataset" id="href-description"><b>Dataset</b></a></li>
+          <li class="nav-li"><a class="nav-second-li" href="/download" id="href-dataset"><b>Download</b></a></li>
+          <li class="nav-li"><a class="nav-second-li" href="/challenge" id="href-challenge"><b>Challenge</b></a></li>
+          <li class="nav-li active"><a class="nav-second-li" href="#" id="href-leaderboard"><b>Leaderboard</b></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <nav class="navbar navbar-default navbar-fixed-top" id="nav-first">
+      <div class="container">
+        <div class="navbar-header">
+          <img src="/static/img/logo.png" width="400px" id="logo">
+        </div>
+
+        {% if not login %}
+        <ul class="nav navbar-nav navbar-right" id="nav-first-main">
+          <li class="nav-li"><a href="#" id="href-register"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Register</a></li>
+          <li class="nav-li"><a href="#" id="href-login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login</a></li>
+          <li class="nav-li"><a href="mailto:social.media.prediction@gmail.com" id="href-contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
+        </ul>
+        {% else %}
+        <ul class="nav navbar-nav navbar-right" id="nav-first-main">
+          <li class="nav-li dropdown">
+            <a href="#" id="user" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{username}}</a>
+            <ul class="dropdown-menu">
+              <li><a href="#" id="editteam">Edit Team</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#" id="logout">Logout</a></li>
+            </ul>
+          </li>
+          <li class="nav-li"><a href="mailto:social.media.prediction@gmail.com" id="href-contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
+        </ul>
+        {% endif %}
+      </div>
+    </nav>
+
+    <div class="container-fluid" id="maintext">
+      <div class="row" id="block1">
+        <div class="container">
+          <div class="col-xs-10 col-xs-offset-1">
+            <center><h2 class="white"><b>Leaderboard</b></h2></center>
+            <table class="table table-striped table-bordered">
+              <tr>
+                <th>Rank</th>
+                <th>Team</th>
+                <th>Organization</th>
+                <th>SRC</th>
+                <th>MAE</th>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>Team1</td>
+                <td>Organization1</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Team2</td>
+                <td>Organization2</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Team3</td>
+                <td>Organization3</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Team4</td>
+                <td>Organization4</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" id="block2">
+        <div class="container">
+          <div class="col-xs-10 col-xs-offset-1">
+            <center><h2 class="white"><b>Team Ranking</b></h2></center>
+            <p class="p-body dark-blue">
+              The ranking for the competition for each year is based on a quantitative evaluation, respectively. Specifically, a rank list of teams is produced by sorting their scores on each objective evaluation metric, respectively. The final rank of a team is measured by combining its ranking positions in the three ranking list for the respective task and defined as:
+            </p>
+            <p>
+            <center>
+              <span class="p-body dark-blue"><i>R</i>(team) = <i>R</i>(team)@SR + <i>R</i>(team)@MAE + <i>R</i>(team)@MSE</span>
+            </center>
+            </p>
+            <p class="p-body dark-blue">
+              where <i>R</i>(team) is the rank position of the team on a particular metric, e.g., if the team achieves the best performance in terms of <i>Spearman’s Rho</i>, then <i>R</i>(team)@SR is "1". The smaller the final ranking, the better the performance.
+            </p>
+          </div>
+          <br>
+        </div>
+      </div>
+
+      <div class="row" id="block7">
+        <div class="col-xs-10 col-xs-offset-1">
+          <center><h5 style="color:white;">Copyright © 2019. SMP Challenge Organization Committee. All rights reserved.</h5></center>
+        </div>
+      </div>
+    </div>
+
+        <div class="modal fade" id="modal-register">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="modal-title">Register</h4>
+          </div>
+          <div class="modal-body" id="modal-body">
+            <form id="form">
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email">
+                <span id="email-warn" class="help-block"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username">
+                <span id="username-warn" class="help-block"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password">
+                <span id="password-warn" class="help-block"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="repeat-password">Repeat Password</label>
+                <input type="password" class="form-control" id="repeat-password">
+                <span id="repeat-password-warn" class="help-block"></span>
+              </div>
+
+            </form>
+
+          </div>
+          <div class="modal-footer" id="modal-footer">
+            <center><button type="button" class="btn btn-primary" id="register">Register</button></center>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="modal-login">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Login</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="login-email">Email / Username</label>
+                <input type="email" class="form-control" id="login-email">
+                <span id="login-email-warn" class="help-block"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" class="form-control" id="login-password">
+                <span id="login-password-warn" class="help-block"></span>
+              </div>
+
+              <a id="forget">Forget password?</a>
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <center><button type="button" class="btn btn-primary" id="login">Login</button></center>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="modal fade" id="modal-forget">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Reset Password</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="forget-email">Email</label>
+              <input type="email" class="form-control" id="forget-email">
+              <span id="login-email-warn" class="help-block"></span>
+            </div>
+          </form>
+
+        </div>
+        <div class="modal-footer">
+          <center><button type="button" class="btn btn-primary" id="send-reset-email">Send reset email</button></center>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="modal fade" id="modal-team">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">My Team</h4>
+          </div>
+          <div class="modal-body">
+            <form id="team-form">
+              <div class="form-group">
+                <label for="team-name">Team Name</label>
+                <input type="text" class="form-control team-input" id="team-name">
+                <span id="team-name-warn" class="help-block"></span>
+              </div>
+
+              <div class="row">
+                <div class="col-xs-2">
+                  <br>
+                  <label class="member-title">Caption</label>
+                </div>
+                <div class="col-xs-3">
+                  <div class="form-group">
+                    <label for="caption-name">Name</label>
+                    <input type="text" class="form-control team-input" id="caption-name">
+                    <span class="help-block"></span>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <div class="form-group">
+                    <label for="caption-email">Email</label>
+                    <input type="email" class="form-control team-input" id="caption-email">
+                    <span class="help-block"></span>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <div class="form-group">
+                    <label for="caption-organization">Organization</label>
+                    <input type="text" class="form-control team-input" id="caption-organization">
+                    <span class="help-block"></span>
+                  </div>
+                </div>
+                <!-- <div class="col-xs-1">
+                  <button class="btn btn-danger"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+                </div> -->
+              </div>
+
+
+
+            </form>
+            <div class="row">
+              <div class="col-xs-1 col-xs-offset-2">
+                <br>
+                <button class="btn btn-default" id="addmember"><span class="glyphicon glyphicon-plus"></span></button>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-10 col-xs-offset-2">
+                <p style="color: gray;">Your team can contain at most 8 members (including caption).</p>
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <center><button type="button" class="btn btn-primary" id="save">Save</button></center>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+ </html>

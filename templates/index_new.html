@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>SMP Challenge</title>
+  <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+  <link rel="stylesheet" href="/static/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/prettify.css">
+  <script src="/static/js/jquery.min.js"></script>
+  <script src="/static/js/bootstrap.js"></script>
+  <script src="/static/js/sprintf.js"></script>
+  <script src="/static/js/run_prettify.js"></script>
+  <script src="/static/js/md5.js"></script>
+  <style type="text/css">
+    #nav-first {
+      border-radius: 0px;
+      margin-bottom: 0px;
+      min-height: 80px;
+    }
+
+    #nav-second {
+      border-radius: 0px;
+      margin-bottom: 0px;
+      top: 80px;
+    }
+
+    #nav-first-main {
+      margin: 0 0;
+      height: 80px;
+    }
+
+    #nav-first-main>li {
+      height: 80px;
+    }
+
+    #nav-first-main>li>a {
+      height: 80px;
+      padding-top: 0;
+      padding-bottom: 0;
+      line-height: 80px;
+    }
+
+    #nav-second-main {
+      margin: 0 80px;
+    }
+
+    .nav-second-li {
+      font-size: 120%;
+    }
+
+
+    #jumbotron {
+      height: 600px;
+      background-image: url(/static/img/QJ6548296700.jpg);
+      background-size: cover;
+      margin-top: 130px;
+      margin-bottom: 0px;
+      background-position: 80% 75%;
+      padding: 0;
+    }
+
+    #block1 {
+      background-color: #01B7E9;
+    }
+
+    #block2 {
+      background-color: #121212;
+    }
+
+    #block3 {
+      background-color: #02ABE0;
+    }
+
+    #block4 {
+      background-color: #121212;
+    }
+
+    #block5 {
+      background-color: #000000;
+    }
+
+    #block6 {
+      background-color: #121212;
+    }
+
+    #block7 {
+      background-color: #000000;
+    }
+
+    .p-body {
+      text-align: justify;
+      font-family: "Arial", sans-serif;
+      font-size: 120%;
+    }
+
+    h1,
+    h2 {
+      font-family: "Arial", serif;
+      /*font-size: 150%;*/
+    }
+
+    .timeline-li {
+      font-family: "Arial", sans-serif;
+      font-size: 120%;
+    }
+
+    #logo {
+      padding-left: 100px;
+      padding-top: 10px;
+    }
+
+    .thumbnail {
+      border-color: transparent;
+      background-color: transparent;
+    }
+
+    .avatar {
+      border-radius: 50%;
+    }
+
+    .nav-li {
+      font-size: 120%;
+    }
+
+    td,
+    th {
+      text-align: center;
+    }
+
+    .mengban {
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    #morning {
+      /*color: rgb(248,206,69);*/
+      padding-top: 200px;
+    }
+
+    .orange {
+      color: rgb(241, 156, 55) !important;
+    }
+
+    .white {
+      color: white !important;
+    }
+
+    .red {
+      color: red !important;
+    }
+
+    .light-blue {
+      color: #2EA5DA !important;
+    }
+
+    .dark-blue {
+      color: #2596DC !important;
+    }
+
+    .help-block {
+      display: none;
+    }
+
+    .member-title {
+      padding-top: 10px;
+    }
+
+/*    .p-title {
+      color: rgb(241, 156, 55) !important;
+    }*/
+
+    .timeline {
+      display: block;
+      margin: 15px 0
+    }
+
+    .timeline ul {
+      margin-left: 25px;
+      margin-top: 30px;
+      border-left: 2px solid #ddd;
+      list-style: none;
+    }
+
+    .timeline ul li {
+      width: 100%;
+      margin-left: -51px;
+      line-height: 20px;
+      margin-bottom: 20px
+    }
+
+    .timeline ul li b {
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      border: 2px solid #02ABE0;
+      margin: 0 5px;
+      border-radius: 6px;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      overflow: hidden;
+      display: inline-block;
+      float: left
+    }
+
+    .timeline ul li span {
+      padding-left: 7px;
+      font-size: 16px;
+      line-height: 20px;
+      color: #02ABE0;
+      font-weight: bold
+    }
+
+    .timeline ul li p {
+      padding-left: 25px;
+      font-size: 13px;
+      line-height: 25px;
+      color: white
+    }
+
+    #forget {
+      cursor: pointer;
+    }
+  </style>
+  <script type="text/javascript">
+    $(document).ready(function() {
+
+      $("#href-register").click(function(e) {
+        e.preventDefault();
+        $("#modal-register").modal("show");
+      });
+
+      $("#href-login").click(function(e) {
+        e.preventDefault();
+        $("#modal-login").modal("show");
+      });
+
+      $(document).on("focus", "input", function(){
+        $(".form-group").removeClass("has-error");
+        $(".help-block").hide();
+      });
+
+      $("#register").click(function(e) {
+        var email = $("#email").val();
+        var username = $("#username").val();
+        var password = $("#password").val();
+        var repeat_password = $("#repeat-password").val();
+
+        var flag = true;
+        if (email == "") {
+          $("#email").parent().addClass("has-error");
+          $("#email-warn").text("email can not be empty").show();
+          flag = false;
+        }
+
+        if (username == "") {
+          $("#username").parent().addClass("has-error");
+          $("#username-warn").text("username can not be empty").show();
+          flag = false;
+        }
+
+        if (password == "") {
+          $("#password").parent().addClass("has-error");
+          $("#password-warn").text("password can not be empty").show();
+          flag = false;
+        }
+
+        if (repeat_password == "") {
+          $("#repeat-password").parent().addClass("has-error");
+          $("#repeat-password-warn").text("repeat-password can not be empty").show();
+          flag = false;
+        }
+
+        if (password.length > 0 && password.length < 8) {
+          $("#password").parent().addClass("has-error");
+          $("#password-warn").text("password too short").show();
+          flag = false;
+        }
+
+        if (repeat_password.length > 0 && password != repeat_password) {
+          $("#repeat-password").parent().addClass("has-error");
+          $("#repeat-password-warn").text("Two input password must be consistent").show();
+          flag = false;
+        }
+
+        if (flag == false) {
+          return;
+        }
+
+        password = md5(password);
+        var data = {
+          "email": email,
+          "username": username,
+          "password": password
+        }
+        $(this).attr("disabled", "disabled");
+        $.post("/register", data, function(data, status) {
+          if (data.code == "00000") {
+            $("#modal-body").html(sprintf('<h4 id="register-notice">We have sent a verification email to <a>%s</a>, please check it in two hours. *Note to check your spam mails in case it is misclassified.</h4>', email));
+            $("#modal-footer").hide();
+            $(this).removeAttr("disabled");
+          } else if (data.code == "10002") {
+            $("#username").parent().addClass("has-error");
+            $("#username-warn").text("username exists").show();
+          } else if (data.code == "10004") {
+            $("#email").parent().addClass("has-error");
+            $("#email-warn").text("email exists").show();
+          } else if (data.code == "10010") {
+            $("#email").parent().addClass("has-error");
+            $("#email-warn").text("invalid email").show();
+          }
+        });
+
+      });
+
+      $("#login").click(function(e) {
+        var email = $("#login-email").val();
+        var password = $("#login-password").val();
+
+        var flag = true;
+        if (email == "") {
+          $("#login-email").parent().addClass("has-error");
+          $("#login-email-warn").text("email/username can not be empty").show();
+          flag = false;
+        }
+        if (password == "") {
+          $("#login-password").parent().addClass("has-error");
+          $("#login-password-warn").text("password can not be empty").show();
+          flag = false;
+        }
+
+        if (flag == false) {
+          return;
+        }
+
+        password = md5(password);
+        var data = {
+          "email": email,
+          "password": password
+        }
+
+        $.post("/login", data, function(data, status) {
+          if (data.code == "00000") {
+            window.location.reload();
+          } else if (data.code == "10006") {
+            $("#login-email").parent().addClass("has-error");
+            $("#login-email-warn").text("user not exists").show();
+          } else if (data.code == "10007") {
+            $("#login-password").parent().addClass("has-error");
+            $("#login-password-warn").text("password error").show();
+          }
+        });
+
+      });
+
+      $("#logout").click(function(e) {
+        e.preventDefault();
+        $.post("/logout", function(data, status) {
+          window.location.reload();
+        })
+      });
+
+      {% if register_success %}
+      $("#modal-register-success").modal("show");
+      $("#modal-register-success").on("hidden.bs.modal", function(e) {
+        window.location.href = "/"
+      })
+      {% endif %}
+
+      {% if register_fail %}
+      $("#modal-register-fail").modal("show");
+      $("#modal-register-fail").on("hidden.bs.modal", function(e) {
+        window.location.href = "/"
+      })
+      {% endif %}
+
+      $("#editteam").click(function(e) {
+        e.preventDefault();
+        $("#modal-team").modal("show");
+      });
+
+      var nownum = 1;
+      $("#addmember").click(function(e) {
+        e.preventDefault();
+        if (nownum == 8) {
+          alert("no more than 8 members");
+          return;
+        }
+        var html = '<div class="row">\
+                <div class="col-xs-2">\
+                  <label class="member-title" id="member%d-title">Member %d</label>\
+                </div>\
+                <div class="col-xs-3">\
+                  <div class="form-group">\
+                    <label id="member%d-name-label" for="member%d-name" class="sr-only"></label>\
+                    <input type="text" class="form-control team-input" id="member%d-name">\
+                    <span class="help-block"></span>\
+                  </div>\
+                </div>\
+                <div class="col-xs-3">\
+                  <div class="form-group">\
+                    <label id="member%d-email-label" for="member%d-email" class="sr-only"></label>\
+                    <input type="email" class="form-control team-input" id="member%d-email">\
+                    <span class="help-block"></span>\
+                  </div>\
+                </div>\
+                <div class="col-xs-3">\
+                  <div class="form-group">\
+                    <label id="member%d-organization-label" for="member%d-organization" class="sr-only"></label>\
+                    <input type="text" class="form-control team-input" id="member%d-organization">\
+                    <span class="help-block"></span>\
+                  </div>\
+                </div>\
+                <div class="col-xs-1">\
+                  <button class="btn btn-danger delete-member" id="delete-member%d" deleteid="%d"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>\
+                </div>\
+              </div>';
+
+        $("#team-form").append(sprintf(html, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum, nownum));
+        nownum += 1;
+      });
+
+      $(document).on("click", ".delete-member", function(e) {
+        e.preventDefault();
+        $(this).parent().parent().remove();
+        var deleteid = parseInt($(this).attr("deleteid"));
+        for (var i = deleteid + 1; i <= nownum; i++) {
+          $(sprintf("#member%d-title", i)).text(sprintf("Member %d", i - 1)).attr("id", sprintf("member%d-title", i - 1));
+          $(sprintf("#delete-member%d", i)).attr("id", sprintf("delete-member%d", i - 1)).attr("deleteid", sprintf("%d", i - 1));
+
+          $(sprintf("#member%d-name-label", i)).attr("for", sprintf("member%d-name", i-1)).attr("id", sprintf("member%d-name-label", i - 1));
+          $(sprintf("#member%d-email-label", i)).attr("for", sprintf("member%d-email", i-1)).attr("id", sprintf("member%d-email-label", i - 1));
+          $(sprintf("#member%d-organization-label", i)).attr("for", sprintf("member%d-organization", i-1)).attr("id", sprintf("member%d-organization-label", i - 1));
+
+          $(sprintf("#member%d-name", i)).attr("id", sprintf("member%d-name", i - 1));
+          $(sprintf("#member%d-email", i)).attr("id", sprintf("member%d-email", i - 1));
+          $(sprintf("#member%d-organization", i)).attr("id", sprintf("member%d-organization", i - 1));
+
+        }
+
+        nownum -= 1;
+      });
+
+      $("#save").click(function(e) {
+        e.preventDefault();
+
+        var team_input = $(".team-input");
+        var flag = true;
+        for (var i = 0; i < team_input.length; i++) {
+          if ($(team_input[i]).val() == "") {
+            $(team_input[i]).parent().find("span").show().text("can not be empty");
+            $(team_input[i]).parent().addClass("has-error");
+            flag = false;
+          }
+        }
+        if (flag == false) {
+          return;
+        }
+
+        var data = {
+          'teamname': $("#team-name").val(),
+          'caption-name': $("#caption-name").val(),
+          'caption-email': $("#caption-email").val(),
+          'caption-organization': $("#caption-organization").val(),
+          'member-num': nownum
+        }
+
+        for (var i = 1; i < nownum; i++) {
+          console.log(i)
+          data[sprintf("member%d-name", i)] = $(sprintf("#member%d-name", i)).val();
+          data[sprintf("member%d-email", i)] = $(sprintf("#member%d-email", i)).val();
+          data[sprintf("member%d-organization", i)] = $(sprintf("#member%d-organization", i)).val();
+        }
+
+        $.post("/update_team", data, function(data, status) {
+          if (data.code == "00000") {
+            alert("update success");
+            $("#modal-team").modal("hide");
+          } else if (data.code == "10009") {
+            $("#team-name").parent().addClass("has-error");
+            $("#team-name").parent().find("span").text("team name exists").show();
+          }
+        });
+
+      });
+
+      $.getJSON("/get_team", function(data, status) {
+        if (data.code == "00000") {
+          $("#team-name").val(data.teamname);
+          $("#caption-name").val(data.members[0].name);
+          $("#caption-email").val(data.members[0].email);
+          $("#caption-organization").val(data.members[0].organization);
+          nownum = data.members.length;
+          for (var i = 1; i < nownum; i++) {
+            var html = '<div class="row">\
+                <div class="col-xs-2">\
+                  <label class="member-title" id="member%d-title">Member %d</label>\
+                </div>\
+                <div class="col-xs-3">\
+                  <div class="form-group">\
+                    <label for="member%d-name" class="sr-only"></label>\
+                    <input type="text" class="form-control team-input" id="member%d-name">\
+                    <span class="help-block"></span>\
+                  </div>\
+                </div>\
+                <div class="col-xs-3">\
+                  <div class="form-group">\
+                    <label for="member%d-email" class="sr-only"></label>\
+                    <input type="email" class="form-control team-input" id="member%d-email">\
+                    <span class="help-block"></span>\
+                  </div>\
+                </div>\
+                <div class="col-xs-3">\
+                  <div class="form-group">\
+                    <label for="member%d-organization" class="sr-only"></label>\
+                    <input type="text" class="form-control team-input" id="member%d-organization">\
+                    <span class="help-block"></span>\
+                  </div>\
+                </div>\
+                <div class="col-xs-1">\
+                  <button class="btn btn-danger delete-member" id="delete-member%d" deleteid="%d"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>\
+                </div>\
+              </div>';
+
+            $("#team-form").append(sprintf(html, i, i, i, i, i, i, i, i, i, i));
+            $(sprintf("#member%d-name", i)).val(data.members[i].name);
+            $(sprintf("#member%d-email", i)).val(data.members[i].email);
+            $(sprintf("#member%d-organization", i)).val(data.members[i].organization);
+          }
+        }
+      });
+
+      $("#forget").click(function(){
+        $("#modal-login").modal("hide");
+        $("#modal-forget").modal("show");
+      });
+
+      $("#send-reset-email").click(function() {
+        var email = $("#forget-email").val();
+        if (email == "") {
+          alert("please enter your email address");
+          return;
+        }
+        var data = {
+          "email": email
+        }
+        $("#send-reset-email").attr("disabled", "disabled")
+        $.post("/forget_password", data, function(data, status) {
+          if (data.code == "00000") {
+            alert(sprintf("We have sent a password reset email to %s, please have a check. *Note to check your spam mails in case it is misclassified.", email))
+            $("#send-reset-email").removeAttr("disabled");
+          } else {
+            alert("email does not exist");
+            return;
+          }
+        });
+      });
+
+    });
+  </script>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top" id="nav-second">
+    <div class="container">
+      <ul class="nav navbar-nav" id="nav-second-main">
+        <li class="nav-li active"><a class="nav-second-li" href="#" id="href-home"><b>Home</b></a></li>
+        <li class="nav-li"><a class="nav-second-li" href="/dataset" id="href-description"><b>Dataset</b></a></li>
+        <li class="nav-li"><a class="nav-second-li" href="/download" id="href-dataset"><b>Download</b></a></li>
+        <li class="nav-li"><a class="nav-second-li" href="/challenge" id="href-challenge"><b>Challenge</b></a></li>
+        <li class="nav-li"><a class="nav-second-li" href="/leaderboard" id="href-leaderboard"><b>Leaderboard</b></a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-default navbar-fixed-top" id="nav-first">
+    <div class="container">
+      <div class="navbar-header">
+        <img src="/static/img/logo.png" width="400px" id="logo">
+      </div>
+
+      {% if not login %}
+      <ul class="nav navbar-nav navbar-right" id="nav-first-main">
+        <li class="nav-li"><a href="#" id="href-register"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Register</a></li>
+        <li class="nav-li"><a href="#" id="href-login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login</a></li>
+        <li class="nav-li"><a href="mailto:social.media.prediction@gmail.com" id="href-contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
+      </ul>
+      {% else %}
+      <ul class="nav navbar-nav navbar-right" id="nav-first-main">
+        <li class="nav-li dropdown">
+          <a href="#" id="user" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{username}}</a>
+          <ul class="dropdown-menu">
+            <li><a href="#" id="editteam">Edit Team</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#" id="logout">Logout</a></li>
+          </ul>
+        </li>
+        <li class="nav-li"><a href="mailto:social.media.prediction@gmail.com" id="href-contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
+      </ul>
+      {% endif %}
+    </div>
+  </nav>
+
+  <div class="jumbotron" id="jumbotron">
+    <div class="mengban">
+      <center>
+        <h1 id="morning" class="white">Social Media Prediction Challenge
+        </h1>
+      </center>
+      <center>
+        <h2 class="white">ACM Multimedia 2019</h2>
+      </center>
+      <center>
+        <h3 class="white">21 - 25 October 2019, Nice, France</h3>
+      </center>
+    </div>
+  </div>
+
+  <div class="container-fluid" id="maintext">
+
+    <div class="row" id="block1">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <center><h2 class="white"><b>News</b></h2></center>
+          <ul>
+            <li class="timeline-li red"><b>[04-16-2019]</b>: We have released the training data.</li>
+            <li class="timeline-li white"><b>[03-25-2019]</b>: We are hosting Social Media Prediction Challenge (ACM Multimedia 2019).</li>
+          </ul>
+          <br>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="block2">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <center><h2 class="white"><b>Overview</b></h2></center>
+          <p class="p-body dark-blue">
+            <span class="light-blue"><b>SMP Challenge</b> (Social Media Prediction Challenge)</span> is a annual prediction challenge to seek excellent research teams for prediction and discover novel and emerging challenges based on numerous resources of social multimedia. Making predictions via social multimedia (photos, video or news) is not only helps us to make better strategic decisions for future, but also explore advanced predictive learning and analytics methods for various of problems and scenarios in several areas, such as multimedia advertising, recommendation system, user engagement, and trend analysis etc.   
+          </p>
+          <p class="p-body dark-blue">
+            As a joint activity with the research teams from <span class="light-blue">multiple organizations</span>, we are holding on the SMP Challenge 2019 continuously. In this year, the open task of SMP Challenge is <b class="light-blue">Temporal Popularity Prediction</b>, which focused on predicting future clicks of new social media posts before they were posted in social feeds. The participated teams need to design new algorithm based on understanding and learning techniques, and automatically predict popularity (formulated by clicks or visits etc.) to achieve better performances.
+            </p>
+
+
+          <p class="p-body dark-blue">
+            <span class="light-blue">SMPD2019</span> is a large social multimedia dataset, which contains over 486K records from 69K users. And each of social media posts has rich contextual information and annotations (e.g. image, text, temporal-spatial information, user profile, etc.). 
+          </p>
+          <br>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="row" id="block3">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <center><h2 class="white"><b>Dataset Statistics</b></h2></center>
+          <p class="p-body white">The SMPD2019 (Social Media Prediction Dataset) contain 486K social multimedia posts with web images, text and contextual data and rich annotations, which collected from Flickr (one of the largest photo-sharing platform) and corresponding anonymized photo-sharing records. SMPD2019 is a multi-faced data collection, which contains user profile, post category, customize tag, geography information, photo image, and photo metadata. For the headline prediction task, we split the data with time-order, resulting in train and test ratio is 2:1. The tables below show the statistics of the dataset.
+          </p>
+          <table class="table table-bordered table-striped">
+            <tr>
+              <th>Dataset</th>
+              <th>#Post</th>
+              <th>#User</th>
+              <th>#Categories</th>
+              <th>Temporal Range (Months)</th>
+              <th>Avg. Title Length</th>
+              <th>#Customize Tags</th>
+            </tr>
+            <tr class="white">
+              <td>SMPD2019</td>
+              <td>486k</td>
+              <td>69k</td>
+              <td>756</td>
+              <td>16</td>
+              <td>29</td>
+              <td>250k</td>
+            </tr>
+
+          </table>
+          <br>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="block4">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <center><h2 class="white"><b>Important dates</b></h2></center>
+          <div class="timeline">
+            <ul>
+              <li><b></b><span>April 15, 2019</span>
+                <p>Dataset available for download (training set)</p>
+              </li>
+              <li><b></b><span>May 25, 2019</span>
+                <p>Test set available for download</p>
+              </li>
+              <li><b></b><span>June 5, 2019</span>
+                <p>Results submission</p>
+              </li>
+              <li><b></b><span>June 6, 2019</span>
+                <p>Objective evaluation and human evaluation</p>
+              </li>
+              <li><b></b><span>June 15, 2019</span>
+                <p>Evaluation results announce</p>
+              </li>
+              <li><b></b><span>July 8, 2019</span>
+                <p>Paper submission deadline (please follow the instructions on the main conference website)</p>
+              </li>
+            </ul>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="block5">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <center><h2 class="white"><b>Citation</b></h2></center>
+          <p class="p-body white">If you intend to publish results that use the information and resources provided by this challenge, please include the following references:</p>
+          <pre class="prettyprint lang-cv">
+  @inproceedings{Wu2017DTCN,
+    title={Sequential Prediction of Social Media Popularity with Deep Temporal Context Networks},
+    author={Wu, Bo and Cheng, Wen-Huang and Zhang, Yongdong and Qiushi, Huang and Jintao, Li and Mei, Tao},
+    booktitle={International Joint Conference on Artificial Intelligence (IJCAI)},
+    year={2017},
+    location = {Melbourne, Australia}}
+
+  @inproceedings{Wu2016TemporalPrediction,
+    author = {Wu, Bo and Mei, Tao and Cheng, Wen-Huang and Zhang, Yongdong},
+    title = {Unfolding Temporal Dynamics: Predicting Social Media Popularity Using Multi-scale Temporal Decomposition},
+    booktitle = {Proceedings of the Thirtieth AAAI Conference on Artificial Intelligence (AAAI)}
+    year = {2016},
+    location = {Phoenix, Arizona}}
+
+  @inproceedings{Wu2016TimeMatters,
+    author = {Wu, Bo and Cheng, Wen-Huang and Zhang, Yongdong and Mei, Tao},
+    title = {Time Matters: Multi-scale Temporalization of Social Media Popularity},
+    booktitle = {Proceedings of the 2016 ACM on Multimedia Conference (ACM MM)},
+    year = {2016},
+    location = {Amsterdam, The Netherlands}}
+
+            </pre>
+          <br>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="block6">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <center><h2 class="white"><b>Our Teams</b></h2></center>
+          <br>
+          <div class="row">
+            <div class="col-xs-3">
+              <div class="thumbnail">
+                <img src="/static/img/bowu.jpg" width="100%" class="avatar">
+                <div class="caption">
+                  <center>
+                    <h4 class="white">Bo Wu</h4>
+                  </center>
+                  <p>
+                    <center class="white">Columbia University</center><br>
+                  </p>
+                  <p>
+                    <center><a href="mailto:bo.wu@columbia.edu">bo.wu@columbia.edu</a></center>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-3">
+              <div class="thumbnail">
+                <img src="/static/img/wenhuangcheng.jpg" width="100%" class="avatar">
+                <div class="caption">
+                  <center>
+                    <h4 class="white">Wen-Huang Cheng</h4>
+                  </center>
+                  <p>
+                    <center class="white">National Chiao Tung University</center>
+                  </p>
+                  <p>
+                    <center><a href="mailto:whcheng@nctu.edu.tw">whcheng@nctu.edu.tw</a></center>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+             <div class="col-xs-3">
+              <div class="thumbnail">
+                <img src="/static/img/beiliu.jpg" width="100%" class="avatar">
+                <div class="caption">
+                  <center>
+                    <h4 class="white">Bei Liu</h4>
+                  </center>
+                  <p>
+                    <center class="white">Microsoft Research Asia</center><br>
+                  </p>
+                  <p>
+                    <center><a href="mailto:bei.liu@microsoft.com">bei.liu@microsoft.com</a></center>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-3">
+              <div class="thumbnail">
+                <img src="/static/img/jieboluo.jpg" width="100%" class="avatar">
+                <div class="caption">
+                  <center>
+                    <h4 class="white">Jiebo Luo</h4>
+                  </center>
+                  <p>
+                    <center class="white">University of Rochester</center><br>
+                  </p>
+                  <p>
+                    <center><a href="mailto:jluo@cs.rochester.edu">jluo@cs.rochester.edu</a></center>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!--           <h1><b>Webmaster</b></h1> -->
+          <div class="row">
+            <div class="col-xs-3">
+              <div class="thumbnail">
+                <img src="/static/img/zhaoyangzeng.jpg" width="100%" class="avatar">
+                <div class="caption">
+                  <center>
+                    <h4 class="white">Zhaoyang Zeng</h4>
+                    </h2>
+                    <p>
+                      <center class="white">Sun Yat-sen University</center><br>
+                    </p>
+                    <p>
+                      <center><a href="mailto:zengzhy5@mail2.sysu.edu.cn">zengzhy5@mail2.sysu.edu.cn</a></center>
+                    </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-3">
+              <div class="thumbnail">
+                <img src="/static/img/peiyeli.jpg" width="100%" class="avatar">
+                <div class="caption">
+                  <center>
+                    <h4 class="white">Peiye Liu</h4>
+                    </h2>
+                    <p>
+                      <center class="white">Beijing University of Posts and Telecommunications</center>
+                    </p>
+                    <p>
+                      <center><a href="mailto:liupeiye@bupt.edu.cn">liupeiye@bupt.edu.cn</a></center>
+                    </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="block7">
+      <div class="col-xs-10 col-xs-offset-1">
+        <center>
+          <h5 style="color:white;">Copyright © 2019. SMP Challenge Organization Committee. All rights reserved.</h5>
+        </center>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="modal fade" id="modal-register">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="modal-title">Register</h4>
+        </div>
+        <div class="modal-body" id="modal-body">
+          <form id="form">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email">
+              <span id="email-warn" class="help-block"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" class="form-control" id="username">
+              <span id="username-warn" class="help-block"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password">
+              <span id="password-warn" class="help-block"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="repeat-password">Repeat Password</label>
+              <input type="password" class="form-control" id="repeat-password">
+              <span id="repeat-password-warn" class="help-block"></span>
+            </div>
+
+          </form>
+
+        </div>
+        <div class="modal-footer" id="modal-footer">
+          <center><button type="button" class="btn btn-primary" id="register">Register</button></center>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-login">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Login</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="login-email">Email / Username</label>
+              <input type="email" class="form-control" id="login-email">
+              <span id="login-email-warn" class="help-block"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="login-password">Password</label>
+              <input type="password" class="form-control" id="login-password">
+              <span id="login-password-warn" class="help-block"></span>
+            </div>
+
+            <a id="forget">Forget password?</a>
+          </form>
+
+        </div>
+        <div class="modal-footer">
+          <center><button type="button" class="btn btn-primary" id="login">Login</button></center>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal-forget">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Reset Password</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="forget-email">Email</label>
+              <input type="email" class="form-control" id="forget-email">
+              <span id="login-email-warn" class="help-block"></span>
+            </div>
+          </form>
+
+        </div>
+        <div class="modal-footer">
+          <center><button type="button" class="btn btn-primary" id="send-reset-email">Send reset email</button></center>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% if register_success %}
+  <div class="modal fade" id="modal-register-success">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h4>Register Success</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if register_fail %}
+  <div class="modal fade" id="modal-register-fail">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h4>Verification link expires. Please register again.</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="modal fade" id="modal-team">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">My Team</h4>
+        </div>
+        <div class="modal-body">
+          <form id="team-form">
+            <div class="form-group">
+              <label for="team-name">Team Name</label>
+              <input type="text" class="form-control team-input" id="team-name">
+              <span id="team-name-warn" class="help-block"></span>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-2">
+                <br>
+                <label class="member-title">Caption</label>
+              </div>
+              <div class="col-xs-3">
+                <div class="form-group">
+                  <label for="caption-name">Name</label>
+                  <input type="text" class="form-control team-input" id="caption-name">
+                  <span class="help-block"></span>
+                </div>
+              </div>
+              <div class="col-xs-3">
+                <div class="form-group">
+                  <label for="caption-email">Email</label>
+                  <input type="email" class="form-control team-input" id="caption-email">
+                  <span class="help-block"></span>
+                </div>
+              </div>
+              <div class="col-xs-3">
+                <div class="form-group">
+                  <label for="caption-organization">Organization</label>
+                  <input type="text" class="form-control team-input" id="caption-organization">
+                  <span class="help-block"></span>
+                </div>
+              </div>
+            </div>
+
+
+
+          </form>
+          <div class="row">
+            <div class="col-xs-1 col-xs-offset-2">
+              <br>
+              <button class="btn btn-default" id="addmember"><span class="glyphicon glyphicon-plus"></span></button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-10 col-xs-offset-2">
+              <p style="color: gray;">Your team can contain at most 8 members (including caption).</p>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <center><button type="button" class="btn btn-primary" id="save">Save</button></center>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

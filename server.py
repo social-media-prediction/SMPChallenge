@@ -212,7 +212,7 @@ def get_all_teams():
 def index():
 
     if 'debug' in request.args:
-        res = make_response(render_template('index.html'))
+        res = make_response(render_template('index_new.html'))
         res.delete_cookie('token')
         return res
 
@@ -241,7 +241,7 @@ def index():
 def challenge():
 
     if 'debug' in request.args:
-        res = make_response(render_template('challenge.html'))
+        res = make_response(render_template('challenge_new.html'))
         res.delete_cookie('token')
         return res
 
@@ -270,7 +270,7 @@ def challenge():
 def download():
 
     if 'debug' in request.args:
-        res = make_response(render_template('download.html'))
+        res = make_response(render_template('download_new.html'))
         res.delete_cookie('token')
         return res
 
@@ -300,7 +300,7 @@ def download():
 def dataset():
 
     if 'debug' in request.args:
-        res = make_response(render_template('dataset.html'))
+        res = make_response(render_template('dataset_new.html'))
         res.delete_cookie('token')
         return res
 
@@ -359,7 +359,7 @@ def test():
 def leaderboard():
 
     if 'debug' in request.args:
-        res = make_response(render_template('leaderboard.html'))
+        res = make_response(render_template('leaderboard_new.html'))
         res.delete_cookie('token')
         return res
 
