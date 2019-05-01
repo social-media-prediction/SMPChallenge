@@ -11,7 +11,7 @@ import smtplib
 import email.mime.text
 
 app = Flask(__name__)
-app.debug = True
+app.debug = False
 
 SUCCESS = '00000'
 PARAMETER_ERROR = '10001'
