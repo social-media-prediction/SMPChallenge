@@ -609,7 +609,8 @@ def submit():
     f = files['file']
     filename = f.filename
     filetype = filename.split('.')[-1]
-    nowtime = time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(int(time.time())))
+    # nowtime = time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(int(time.time())))
+    nowtime = str(int(time.time))
     filename = nowtime + '.' + filetype
     os.system("mkdir -p submission/" + uid)
     f.save("submission/" + uid + '/' + filename)
