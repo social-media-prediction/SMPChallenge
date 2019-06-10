@@ -49,7 +49,6 @@
       }
 
       #block2 {
-        /*background-color: #f8f8f8;*/
         background-color: #e8e8e8;
       }
 
@@ -71,9 +70,9 @@
 
       #block7 {
         background-color: #080808;
-/*        position: absolute;
+        position: absolute;
         bottom: 0;
-        width: 100%;*/
+        width: 100%;
       }
 
       .p-body{
@@ -138,145 +137,31 @@
         cursor: pointer;
       }
 
+      .team-display {
+        display: none;
+      }
+
+      .no-team-display {
+        display: none;
+      }
+
     </style>
     <script type="text/javascript">
       $(document).ready(function(){
-        $("#href-register").click(function(e){
-          e.preventDefault();
-          $("#modal-register").modal("show");
-        });
-
-        $("#href-login").click(function(e){
-          e.preventDefault();
-          $("#modal-login").modal("show");
-        });
-
-        $(document).on("focus", "input", function(){
-          $(".form-group").removeClass("has-error");
-          $(".help-block").hide();
-        });
-
-        $("#register").click(function(e){
-          var email = $("#email").val();
-          var username = $("#username").val();
-          var password = $("#password").val();
-          var repeat_password = $("#repeat-password").val();
-
-          var flag = true;
-          if (email == "") {
-            $("#email").parent().addClass("has-error");
-            $("#email-warn").text("email can not be empty").show();
-            flag = false;
-          }
-
-          if (username == "") {
-            $("#username").parent().addClass("has-error");
-            $("#username-warn").text("username can not be empty").show();
-            flag = false;
-          }
-
-          if (password == "") {
-            $("#password").parent().addClass("has-error");
-            $("#password-warn").text("password can not be empty").show();
-            flag = false;
-          }
-
-          if (repeat_password == "") {
-            $("#repeat-password").parent().addClass("has-error");
-            $("#repeat-password-warn").text("repeat-password can not be empty").show();
-            flag = false;
-          }
-
-          if (password.length > 0 && password.length < 8) {
-            $("#password").parent().addClass("has-error");
-            $("#password-warn").text("password too short").show();
-            flag = false;
-          }
-
-          if (repeat_password.length > 0 && password != repeat_password) {
-            $("#repeat-password").parent().addClass("has-error");
-            $("#repeat-password-warn").text("Two input password must be consistent").show();
-            flag = false;
-          }
-
-          if (flag == false) {
-            return;
-          }
-
-          password = md5(password);
-          var data = {
-            "email": email,
-            "username": username,
-            "password": password
-          }
-          $.post("/register", data, function(data, status) {
-            if (data.code == "00000") {
-              $("#modal-body").html(sprintf('<h4 id="register-notice">We have sent a verification email to <a>%s</a>, please check it in two hours. *Note to check your spam mails in case it is misclassified.</h4>', email));
-              $("#modal-footer").hide();
-            }
-            else if (data.code == "10002") {
-              $("#username").parent().addClass("has-error");
-              $("#username-warn").text("username exists").show();
-            }
-            else if (data.code == "10004") {
-              $("#email").parent().addClass("has-error");
-              $("#email-warn").text("email exists").show();
-            } else if (data.code == "10010") {
-              $("#email").parent().addClass("has-error");
-              $("#email-warn").text("invalid email").show();
-            }
-          });
-
-        });
-
-        $("#login").click(function(e){
-          var email = $("#login-email").val();
-          var password = $("#login-password").val();
-
-          var flag = true;
-          if (email == "") {
-            $("#login-email").parent().addClass("has-error");
-            $("#login-email-warn").text("email can not be empty").show();
-            flag = false;
-          }
-          if (password == "") {
-            $("#login-password").parent().addClass("has-error");
-            $("#login-password-warn").text("password can not be empty").show();
-            flag = false;
-          }
-
-          if (flag == false) {
-            return;
-          }
-
-          password = md5(password);
-          var data = {
-            "email": email,
-            "password": password
-          }
-
-          $.post("/login", data, function(data, status) {
-            if (data.code == "00000") {
-              window.location.reload();
-            } else if (data.code == "10006") {
-              $("#login-email").parent().addClass("has-error");
-              $("#login-email-warn").text("user not exists").show();
-            } else if (data.code == "10007") {
-              $("#login-password").parent().addClass("has-error");
-              $("#login-password-warn").text("password error").show();
-            }
-          });
-
-        });
 
         $("#logout").click(function(e) {
           e.preventDefault();
           $.post("/logout", function(data, status) {
-            window.location.reload();
+            window.location.href = "/";
           })
         });
 
         $("#editteam").click(function(e) {
+          e.preventDefault();
+          $("#modal-team").modal("show");
+        });
+
+        $(".submit-edit").click(function(e) {
           e.preventDefault();
           $("#modal-team").modal("show");
         });
@@ -429,34 +314,80 @@ var nownum = 1;
               $(sprintf("#member%d-email", i)).val(data.members[i].email);
               $(sprintf("#member%d-organization", i)).val(data.members[i].organization);
             }
+
+            if (data.teamname != "" && nownum != 0) {
+              $("#submit-teamname").text(data.teamname);
+              $(".team-display").show();
+            }
+            else {
+              $(".no-team-display").show();
+            }
+            
+          }
+          else {
+            $(".no-team-display").show();
           }
         });
 
-      $("#forget").click(function(){
-        $("#modal-login").modal("hide");
-        $("#modal-forget").modal("show");
-      });
-
-      $("#send-reset-email").click(function() {
-        var email = $("#forget-email").val();
-        if (email == "") {
-          alert("please enter your email address");
-          return;
-        }
-        var data = {
-          "email": email
-        }
-        $("#send-reset-email").attr("disabled", "disabled")
-        $.post("/forget_password", data, function(data, status) {
-          if (data.code == "00000") {
-            alert(sprintf("We have sent a password reset email to %s, please have a check. *Note to check your spam mails in case it is misclassified.", email))
-            $("#send-reset-email").removeAttr("disabled");
-          } else {
-            alert("email does not exist");
-            return;
-          }
+        $("#submit-upload-btn").click(function() {
+          $("#submit-upload-real").click();
         });
-      });
+
+        $("#submit-upload-real").change(function() {
+          var name = this.files[0].name;
+          var size = parseInt(this.files[0].size);
+          var d = "B";
+          if (size > 1024) {
+            size = size * 1.0 / 1024;
+            d = "KB";
+          }
+          if (size > 1024) {
+            size = size * 1.0 / 1024;
+            d = "MB";
+          }
+          $("#submit-progress").find(".progress-bar").removeClass("progress-bar-success").attr("style","min-width:2em;width:0%").attr("aria-valuenow", "0").text("0%").show();
+
+          $("#submit-upload-btn").addClass("disabled");
+
+          var files = this.files;
+          var len = files.length;
+          var fd = new FormData();
+          fd.append('file', files[0]);
+          $.ajax({
+            url: "/submit",
+            type: "POST",
+            data: fd,
+            processData: false,
+            contentType: false,
+            xhr: function() {
+              var xhrobj = $.ajaxSettings.xhr();
+              if (xhrobj.upload) {
+                xhrobj.upload.addEventListener("progress", function(event) {
+                  var percent = 0;
+                  var position = event.loaded || event.position;
+                  var total = event.total || event.totalSize;
+                  if (event.lengthComputable) {
+                    percent = Math.ceil(position * 1.0 / total * 100);
+                  }
+                  $("#submit-progress").find(".progress-bar").attr("style",sprintf("min-width:2em;width:%d%%", percent)).attr("aria-valuenow", sprintf("%d", percent)).text(sprintf("%d%%", percent));
+                })
+              }
+              return xhrobj;
+            },
+            success: function() {
+              $("#submit-progress>.progress-bar").addClass("progress-bar-success").hide();
+              $("#submit-upload-btn").removeClass("disabled");
+              window.location.reload();
+            }
+          })
+        });
+
+        $.getJSON("/get_submit", function(data, status) {
+          if (data.submission != "") {
+            $("#latest-submission").html('<a href="/mysubmission/' + data.submission + '">' + data.submission + "</a>");
+          }
+        })
+
       });
     </script>
   </head>
@@ -469,10 +400,8 @@ var nownum = 1;
           <li class="nav-li"><a class="nav-second-li" href="/dataset" id="href-description"><b>Dataset</b></a></li>
           <li class="nav-li"><a class="nav-second-li" href="/download" id="href-dataset"><b>Download</b></a></li>
           <li class="nav-li"><a class="nav-second-li" href="/challenge" id="href-challenge"><b>Challenge</b></a></li>
-          {% if login %}
-          <li class="nav-li"><a class="nav-second-li" href="/submission" id="href-submission"><b>Submission</b></a></li>
-          {% endif %}
-          <li class="nav-li active"><a class="nav-second-li" href="#" id="href-leaderboard"><b>Leaderboard</b></a></li>
+          <li class="nav-li active"><a class="nav-second-li" href="#" id="href-submission"><b>Submission</b></a></li>
+          <li class="nav-li"><a class="nav-second-li" href="/leaderboard" id="href-leaderboard"><b>Leaderboard</b></a></li>
         </ul>
       </div>
     </nav>
@@ -482,14 +411,6 @@ var nownum = 1;
         <div class="navbar-header">
           <img src="/static/img/logo.png" width="400px" id="logo">
         </div>
-
-        {% if not login %}
-        <ul class="nav navbar-nav navbar-right" id="nav-first-main">
-          <li class="nav-li"><a href="#" id="href-register"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Register</a></li>
-          <li class="nav-li"><a href="#" id="href-login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login</a></li>
-          <li class="nav-li"><a href="mailto:social.media.prediction@gmail.com" id="href-contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
-        </ul>
-        {% else %}
         <ul class="nav navbar-nav navbar-right" id="nav-first-main">
           <li class="nav-li dropdown">
             <a href="#" id="user" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{username}}</a>
@@ -501,7 +422,6 @@ var nownum = 1;
           </li>
           <li class="nav-li"><a href="mailto:social.media.prediction@gmail.com" id="href-contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
         </ul>
-        {% endif %}
       </div>
     </nav>
 
@@ -509,67 +429,30 @@ var nownum = 1;
       <div class="row" id="block1">
         <div class="container">
           <div class="col-xs-10 col-xs-offset-1">
-            <h2 class="p-title"><b>Leaderboard</b></h2>
-            <table class="table table-striped table-bordered">
-              <tr>
-                <th>Rank</th>
-                <th>Team</th>
-                <th>Organization</th>
-                <th>SRC</th>
-                <th>MAE</th>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Team1</td>
-                <td>Organization1</td>
-                <td>-</td>
-                <td>-</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Team2</td>
-                <td>Organization2</td>
-                <td>-</td>
-                <td>-</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Team3</td>
-                <td>Organization3</td>
-                <td>-</td>
-                <td>-</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Team4</td>
-                <td>Organization4</td>
-                <td>-</td>
-                <td>-</td>
-              </tr>
-            </table>
+            <h2 class="p-title"><b>Submission</b></h2>
+            <p class="p-body no-team-display">
+            You don't have a team now. Please create a team <a class="submit-edit" style="cursor: pointer;">here</a>.
+            </p>
+            <p class="p-body team-display">
+            You are on behalf of team <b id="submit-teamname"></b>. You can edit you team information <a class="submit-edit" style="cursor: pointer;">here</a>.
+            </p>
+            <form class="team-display" onsubmit="return false;">
+              <button class="btn btn-primary btn-lg" id="submit-upload-btn">Upload File</button>
+              <input type="file" id="submit-upload-real" style="display: none;">
+              <br>
+              <br>
+              <div class="progress" id="submit-progress" style="display: none;">
+                <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                </div>
+              </div>
+            </form>
+
+            <h2 class="p-title team-display"><b>Latest Submission</b></h2>
+            <p class="p-body team-display" id="latest-submission">You don't have submission yet</p>
           </div>
         </div>
       </div>
 
-      <div class="row" id="block2">
-        <div class="container">
-          <div class="col-xs-10 col-xs-offset-1">
-            <h2 class="p-title"><b>Team Ranking</b></h2>
-            <p class="p-body">
-              The ranking for the competition for each year is based on a quantitative evaluation, respectively. Specifically, a rank list of teams is produced by sorting their scores on each objective evaluation metric, respectively. The final rank of a team is measured by combining its ranking positions in the three ranking list for the respective task and defined as:
-            </p>
-            <p>
-            <center>
-              <span class="p-body"><i>R</i>(team) = <i>R</i>(team)@SR + <i>R</i>(team)@MAE + <i>R</i>(team)@MSE</span>
-            </center>
-            </p>
-            <p class="p-body">
-              where <i>R</i>(team) is the rank position of the team on a particular metric, e.g., if the team achieves the best performance in terms of <i>Spearman’s Rho</i>, then <i>R</i>(team)@SR is "1". The smaller the final ranking, the better the performance.
-            </p>
-          </div>
-          <br>
-        </div>
-      </div>
 
       <div class="row" id="block7">
         <div class="col-xs-10 col-xs-offset-1">
@@ -577,105 +460,6 @@ var nownum = 1;
         </div>
       </div>
     </div>
-
-        <div class="modal fade" id="modal-register">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="modal-title">Register</h4>
-          </div>
-          <div class="modal-body" id="modal-body">
-            <form id="form">
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email">
-                <span id="email-warn" class="help-block"></span>
-              </div>
-
-              <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" class="form-control" id="username">
-                <span id="username-warn" class="help-block"></span>
-              </div>
-
-              <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password">
-                <span id="password-warn" class="help-block"></span>
-              </div>
-
-              <div class="form-group">
-                <label for="repeat-password">Repeat Password</label>
-                <input type="password" class="form-control" id="repeat-password">
-                <span id="repeat-password-warn" class="help-block"></span>
-              </div>
-
-            </form>
-
-          </div>
-          <div class="modal-footer" id="modal-footer">
-            <center><button type="button" class="btn btn-primary" id="register">Register</button></center>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal fade" id="modal-login">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Login</h4>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <label for="login-email">Email / Username</label>
-                <input type="email" class="form-control" id="login-email">
-                <span id="login-email-warn" class="help-block"></span>
-              </div>
-
-              <div class="form-group">
-                <label for="login-password">Password</label>
-                <input type="password" class="form-control" id="login-password">
-                <span id="login-password-warn" class="help-block"></span>
-              </div>
-
-              <a id="forget">Forget password?</a>
-            </form>
-
-          </div>
-          <div class="modal-footer">
-            <center><button type="button" class="btn btn-primary" id="login">Login</button></center>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  <div class="modal fade" id="modal-forget">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Reset Password</h4>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label for="forget-email">Email</label>
-              <input type="email" class="form-control" id="forget-email">
-              <span id="login-email-warn" class="help-block"></span>
-            </div>
-          </form>
-
-        </div>
-        <div class="modal-footer">
-          <center><button type="button" class="btn btn-primary" id="send-reset-email">Send reset email</button></center>
-        </div>
-      </div>
-    </div>
-  </div>
 
     <div class="modal fade" id="modal-team">
       <div class="modal-dialog modal-lg">

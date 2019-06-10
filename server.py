@@ -1,6 +1,6 @@
 #-*-coding:utf-8-*-
 
-from flask import Flask, render_template, request, jsonify, make_response, redirect, abort
+from flask import Flask, render_template, request, jsonify, make_response, redirect, abort, send_file
 from hashlib import md5
 import base64
 import os
@@ -9,9 +9,11 @@ import sqlite3
 import redis
 import smtplib
 import email.mime.text
+import time
+import os
 
 app = Flask(__name__)
-app.debug = False
+app.debug = True
 
 SUCCESS = '00000'
 PARAMETER_ERROR = '10001'
@@ -325,6 +327,31 @@ def dataset():
     res.set_cookie('token', token)
     return res
 
+@app.route('/submission', methods=['GET'])
+def submission():
+
+    if 'debug' in request.args:
+        res = make_response(render_template('submission_new.html'))
+        res.delete_cookie('token')
+        return res
+
+    cookies = request.cookies
+    if not 'token' in cookies:
+        abort(404)
+    token = cookies['token']
+
+    status, uid = token2uid(token)
+    if status != SUCCESS:
+        abort(404)
+
+    status, username = uid2username(uid)
+    if status != SUCCESS:
+        abort(404)
+
+    res = make_response(render_template('submission.html', login=True, username=username))
+    res.set_cookie('token', token)
+    return res
+
 @app.route('/test', methods=['GET'])
 def test():
 
@@ -563,6 +590,70 @@ def get_teams():
 
     teams = get_all_teams()
     return jsonify(teams=teams)
+
+@app.route('/submit', methods=['POST'])
+def submit():
+    cookies = request.cookies
+    if not 'token' in cookies:
+        abort(404)
+    token = cookies['token']
+    status, uid = token2uid(token)
+    if status == False:
+        abort(404)
+
+    status, teamname, members = uid2team(uid)
+    if status != SUCCESS:
+        abort(404)
+
+    files = request.files
+    f = files['file']
+    filename = f.filename
+    filetype = filename.split('.')[-1]
+    nowtime = time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(int(time.time())))
+    filename = nowtime + '.' + filetype
+    os.system("mkdir -p submission/" + uid)
+    f.save("submission/" + uid + '/' + filename)
+
+    return jsonify(code=SUCCESS)
+
+@app.route('/get_submit', methods=['GET'])
+def get_submit():
+    cookies = request.cookies
+    if not 'token' in cookies:
+        abort(404)
+    token = cookies['token']
+    status, uid = token2uid(token)
+    if status == False:
+        abort(404)
+
+    if not os.path.exists("submission/" + uid):
+        return jsonify(code=SUCCESS, submission="")
+
+    a = os.walk("submission/" + uid)
+    names = []
+    for b, c, d in a:
+        for item in d:
+            names.append(item)
+    names = sorted(names)
+    return jsonify(code=SUCCESS, submission=names[-1])
+
+@app.route('/mysubmission/<filename>', methods=['GET'])
+def mysubmission(filename):
+    cookies = request.cookies
+    if not 'token' in cookies:
+        abort(404)
+    token = cookies['token']
+    print(token)
+    status, uid = token2uid(token)
+    if status == False:
+        abort(404)
+
+    print("submission/" + uid + "/" + filename)
+    if not os.path.exists("submission/" + uid + "/" + filename):
+        abort(404)
+
+    return send_file("submission/" + uid + "/" + filename)
+    
 
 if __name__ == '__main__':
     app.run('127.0.0.1', 5000, threaded=True)
