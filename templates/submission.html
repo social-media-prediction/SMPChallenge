@@ -262,6 +262,7 @@ var nownum = 1;
             if (data.code == "00000") {
               alert("update success");
               $("#modal-team").modal("hide");
+              window.location.reload();
             }
             else if (data.code == "10009") {
               $("#team-name").parent().addClass("has-error");
@@ -345,7 +346,8 @@ var nownum = 1;
             size = size * 1.0 / 1024;
             d = "MB";
           }
-          $("#submit-progress").find(".progress-bar").removeClass("progress-bar-success").attr("style","min-width:2em;width:0%").attr("aria-valuenow", "0").text("0%").show();
+          $("#submit-progress").find(".progress-bar").removeClass("progress-bar-success").attr("style","min-width:2em;width:0%").attr("aria-valuenow", "0").text("0%");
+          $("#submit-progress").show();
 
           $("#submit-upload-btn").addClass("disabled");
 
@@ -375,7 +377,8 @@ var nownum = 1;
               return xhrobj;
             },
             success: function() {
-              $("#submit-progress>.progress-bar").addClass("progress-bar-success").hide();
+              $("#submit-progress>.progress-bar").addClass("progress-bar-success");
+              $("#submit-progress").hide();
               $("#submit-upload-btn").removeClass("disabled");
               window.location.reload();
             }
