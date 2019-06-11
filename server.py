@@ -337,16 +337,21 @@ def submission():
 
     cookies = request.cookies
     if not 'token' in cookies:
-        abort(404)
+        res = make_response(render_template('submission_nologin.html'))
+        return res
     token = cookies['token']
 
     status, uid = token2uid(token)
     if status != SUCCESS:
-        abort(404)
+        res = make_response(render_template('submission_nologin.html'))
+        res.delete_cookie('token')
+        return res
 
     status, username = uid2username(uid)
     if status != SUCCESS:
-        abort(404)
+        res = make_response(render_template('submission_nologin.html'))
+        res.delete_cookie('token')
+        return res
 
     res = make_response(render_template('submission.html', login=True, username=username))
     res.set_cookie('token', token)
