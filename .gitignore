@@ -2,3 +2,4 @@
 submission
 *.zip
 *.pdf
+.DS_Store
