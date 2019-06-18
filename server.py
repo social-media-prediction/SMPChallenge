@@ -596,31 +596,31 @@ def get_teams():
     teams = get_all_teams()
     return jsonify(teams=teams)
 
-@app.route('/submit', methods=['POST'])
-def submit():
-    cookies = request.cookies
-    if not 'token' in cookies:
-        abort(404)
-    token = cookies['token']
-    status, uid = token2uid(token)
-    if status == False:
-        abort(404)
+# @app.route('/submit', methods=['POST'])
+# def submit():
+#     cookies = request.cookies
+#     if not 'token' in cookies:
+#         abort(404)
+#     token = cookies['token']
+#     status, uid = token2uid(token)
+#     if status == False:
+#         abort(404)
 
-    status, teamname, members = uid2team(uid)
-    if status != SUCCESS:
-        abort(404)
+#     status, teamname, members = uid2team(uid)
+#     if status != SUCCESS:
+#         abort(404)
 
-    files = request.files
-    f = files['file']
-    filename = f.filename
-    filetype = filename.split('.')[-1]
-    # nowtime = time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(int(time.time())))
-    nowtime = str(int(time.time()))
-    filename = nowtime + '.' + filetype
-    os.system("mkdir -p submission/" + uid)
-    f.save("submission/" + uid + '/' + filename)
+#     files = request.files
+#     f = files['file']
+#     filename = f.filename
+#     filetype = filename.split('.')[-1]
+#     # nowtime = time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(int(time.time())))
+#     nowtime = str(int(time.time()))
+#     filename = nowtime + '.' + filetype
+#     os.system("mkdir -p submission/" + uid)
+#     f.save("submission/" + uid + '/' + filename)
 
-    return jsonify(code=SUCCESS)
+#     return jsonify(code=SUCCESS)
 
 @app.route('/get_submit', methods=['GET'])
 def get_submit():
