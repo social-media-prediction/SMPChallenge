@@ -16,6 +16,7 @@ import numpy as np
 import evaluation
 
 app = Flask(__name__)
+app.config['MAX_CONTENT_LENGTH'] = 1000 * 1024 * 1024
 app.debug = True
 
 SUCCESS = '00000'
