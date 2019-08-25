@@ -281,7 +281,7 @@
           $("#modal-team").modal("show");
         });
 
-var nownum = 1;
+        var nownum = 1;
         $("#addmember").click(function(e) {
           e.preventDefault();
           if (nownum == 8) {
@@ -432,31 +432,49 @@ var nownum = 1;
           }
         });
 
-      $("#forget").click(function(){
-        $("#modal-login").modal("hide");
-        $("#modal-forget").modal("show");
-      });
+        $("#forget").click(function(){
+          $("#modal-login").modal("hide");
+          $("#modal-forget").modal("show");
+        });
 
-      $("#send-reset-email").click(function() {
-        var email = $("#forget-email").val();
-        if (email == "") {
-          alert("please enter your email address");
-          return;
-        }
-        var data = {
-          "email": email
-        }
-        $("#send-reset-email").attr("disabled", "disabled")
-        $.post("/forget_password", data, function(data, status) {
-          if (data.code == "00000") {
-            alert(sprintf("We have sent a password reset email to %s, please have a check. *Note to check your spam mails in case it is misclassified.", email))
-            $("#send-reset-email").removeAttr("disabled");
-          } else {
-            alert("email does not exist");
+        $("#send-reset-email").click(function() {
+          var email = $("#forget-email").val();
+          if (email == "") {
+            alert("please enter your email address");
             return;
           }
+          var data = {
+            "email": email
+          }
+          $("#send-reset-email").attr("disabled", "disabled")
+          $.post("/forget_password", data, function(data, status) {
+            if (data.code == "00000") {
+              alert(sprintf("We have sent a password reset email to %s, please have a check. *Note to check your spam mails in case it is misclassified.", email))
+              $("#send-reset-email").removeAttr("disabled");
+            } else {
+              alert("email does not exist");
+              return;
+            }
+          });
         });
-      });
+
+        $.getJSON("/get_practice_leaderboard", function(data, status) {
+          var html = "";
+          var teamnames = data.teamnames;
+          var srcs = data.srcs;
+          var maes = data.maes;
+          var states = data.states;
+          var tot = teamnames.length;
+          for (var i = 0; i < tot; i++) {
+            if (states[i] == 'old') {
+              html += sprintf('<tr class="orange"><td>%d</td><td>%s</td><td>%.4f</td><td>%.4f</td></tr>', i+1, teamnames[i], srcs[i], maes[i]);
+            }
+            else {
+              html += sprintf('<tr><td>%d</td><td>%s</td><td>%.4f</td><td>%.4f</td></tr>', i+1, teamnames[i], srcs[i], maes[i]);
+            }
+          }
+          $("#practice_table").append(html);
+        })
       });
     </script>
   </head>
@@ -510,71 +528,95 @@ var nownum = 1;
         <div class="container">
           <div class="col-xs-10 col-xs-offset-1">
             <h2 class="p-title"><b>Leaderboard</b></h2>
-            <table class="table table-striped table-bordered">
-              <tr>
-                <th>Rank</th>
-                <th>Team</th>
-                <!-- <th>Organization</th> -->
-                <th>SRC</th>
-                <th>MAE</th>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Formosa.No1</td>
-                <!-- <td>National Pingtung University of Science and Technology</td> -->
-                <td>0.5904</td>
-                <td>1.4960</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>007</td>
-                <!-- <td>Guangdong University of Technology </td> -->
-                <td>0.6481</td>
-                <td>1.6494</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>I am Iron Man</td>
-                <!-- <td>Guangdong University of Technology </td> -->
-                <td>0.5756</td>
-                <td>1.5833</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>CobotVisionLab</td>
-                <!-- <td>Guangdong University of Technology </td> -->
-                <td>0.6511</td>
-                <td>1.7666</td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>SMPCityU</td>
-                <!-- <td>City University of Hong Kong </td> -->
-                <td>0.5367</td>
-                <td>1.7484</td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td>Kopen</td>
-                <!-- <td>UT</td> -->
-                <td>0.5108</td>
-                <td>1.7729</td>
-              </tr>
-              <tr>
-                <td>7</td>
-                <td>DSAI</td>
-                <!-- <td>DSAI </td> -->
-                <td>0.4522</td>
-                <td>1.8936</td>
-              </tr>
-              <tr>
-                <td>8</td>
-                <td>Area66</td>
-                <!-- <td>TCS Research </td> -->
-                <td>0.4291</td>
-                <td>2.0088</td>
-              </tr>
-            </table>
+
+            <div>
+              <ul class="nav nav-tabs" role="tablist">
+                <li role="representation" class="active"><a href="#smp_leaderboard" aria-controls="smp_leaderboard" role="tab" data-toggle="tab">SMP 2019 Leaderboard</a></li>
+                <li role="representation"><a href="#practice_leaderboard" aria-controls="practice_leaderboard" role="tab" data-toggle="tab">Practice Leaderboard</a></li>
+              </ul>
+            </div>
+
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane active" id="smp_leaderboard">
+                <table class="table table-striped table-bordered">
+                  <tr>
+                    <th>Rank</th>
+                    <th>Team</th>
+                    <!-- <th>Organization</th> -->
+                    <th>SRC</th>
+                    <th>MAE</th>
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                    <td>Formosa.No1</td>
+                    <!-- <td>National Pingtung University of Science and Technology</td> -->
+                    <td>0.5904</td>
+                    <td>1.4960</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>007</td>
+                    <!-- <td>Guangdong University of Technology </td> -->
+                    <td>0.6481</td>
+                    <td>1.6494</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>I am Iron Man</td>
+                    <!-- <td>Guangdong University of Technology </td> -->
+                    <td>0.5756</td>
+                    <td>1.5833</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>CobotVisionLab</td>
+                    <!-- <td>Guangdong University of Technology </td> -->
+                    <td>0.6511</td>
+                    <td>1.7666</td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>SMPCityU</td>
+                    <!-- <td>City University of Hong Kong </td> -->
+                    <td>0.5367</td>
+                    <td>1.7484</td>
+                  </tr>
+                  <tr>
+                    <td>6</td>
+                    <td>Kopen</td>
+                    <!-- <td>UT</td> -->
+                    <td>0.5108</td>
+                    <td>1.7729</td>
+                  </tr>
+                  <tr>
+                    <td>7</td>
+                    <td>DSAI</td>
+                    <!-- <td>DSAI </td> -->
+                    <td>0.4522</td>
+                    <td>1.8936</td>
+                  </tr>
+                  <tr>
+                    <td>8</td>
+                    <td>Area66</td>
+                    <!-- <td>TCS Research </td> -->
+                    <td>0.4291</td>
+                    <td>2.0088</td>
+                  </tr>
+                </table>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="practice_leaderboard">
+                <table class="table table-striped table-bordered" id="practice_table">
+                  <tr>
+                    <th>Rank</th>
+                    <th>Team</th>
+                    <!-- <th>Organization</th> -->
+                    <th>SRC</th>
+                    <th>MAE</th>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>

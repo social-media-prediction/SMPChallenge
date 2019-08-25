@@ -11,6 +11,9 @@ import smtplib
 import email.mime.text
 import time
 import os
+import numpy as np
+
+import evaluation
 
 app = Flask(__name__)
 app.debug = True
@@ -26,6 +29,9 @@ PASSWORD_ERROR = '10007'
 UID_ERROR = '10008'
 TEAM_NAME_EXIST = '10009'
 INVALID_EMAIL = '10010'
+INVALID_SUBMISSION_FILE_TYPE = '10011'
+EVALUATION_ERROR = '10012'
+EXTEED_SUBMISSION_LIMIT = '10013'
 
 conn = sqlite3.connect('smp.db', check_same_thread=False)
 cursor = conn.cursor()
@@ -596,31 +602,64 @@ def get_teams():
     teams = get_all_teams()
     return jsonify(teams=teams)
 
-# @app.route('/submit', methods=['POST'])
-# def submit():
-#     cookies = request.cookies
-#     if not 'token' in cookies:
-#         abort(404)
-#     token = cookies['token']
-#     status, uid = token2uid(token)
-#     if status == False:
-#         abort(404)
+@app.route('/submit', methods=['POST'])
+def submit():
+    cookies = request.cookies
+    if not 'token' in cookies:
+        abort(404)
+    token = cookies['token']
+    status, uid = token2uid(token)
+    if status == False:
+        abort(404)
 
-#     status, teamname, members = uid2team(uid)
-#     if status != SUCCESS:
-#         abort(404)
+    status, teamname, members = uid2team(uid)
+    if status != SUCCESS:
+        abort(404)
 
-#     files = request.files
-#     f = files['file']
-#     filename = f.filename
-#     filetype = filename.split('.')[-1]
-#     # nowtime = time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(int(time.time())))
-#     nowtime = str(int(time.time()))
-#     filename = nowtime + '.' + filetype
-#     os.system("mkdir -p submission/" + uid)
-#     f.save("submission/" + uid + '/' + filename)
+    files = request.files
+    f = files['file']
+    filename = f.filename
+    filetype = filename.split('.')[-1]
 
-#     return jsonify(code=SUCCESS)
+
+    nowtime = str(int(time.time()))
+    localt = time.strftime("%Y-%m-%d", time.localtime(time.time()))
+
+    a = os.walk("submission/" + uid)
+    today_num = 0
+    for b, c, d in a:
+        for item in d:
+            if item.endswith('.json') and item != 'tmp.json':
+                tmp = item.split('_')
+                stime = time.strftime("%Y-%m-%d", time.localtime(int(tmp[0])))
+                if stime == localt:
+                    today_num += 1
+
+    if today_num >= 2:
+        return jsonify(code=EXTEED_SUBMISSION_LIMIT)
+    
+    os.system("mkdir -p submission/" + uid)
+    f.save("submission/" + uid + '/tmp.json')
+
+    if filetype != 'json':
+        filename = '%s_0_0_typeerror.json'%(nowtime)
+        print("cp submission/%s/tmp.json submission/%s/%s"%(uid, uid, filename))
+        os.system("cp submission/%s/tmp.json submission/%s/%s"%(uid, uid, filename))
+        return json(code=INVALID_SUBMISSION_FILE_TYPE)
+
+    try:
+        src, mae = evaluation.evaluate("submission/" + uid + '/tmp.json', "./ground_truth/validation.json")
+        filename = '%s_%.6f_%.6f_none.json'%(nowtime, src, mae)
+        print("cp submission/%s/tmp.json submission/%s/%s"%(uid, uid, filename))
+        os.system("cp submission/%s/tmp.json submission/%s/%s"%(uid, uid, filename))
+        return jsonify(code=SUCCESS, src=src, mae=mae)
+    except:
+        filename = '%s_0_0_evaluationerror.json'%(nowtime)
+        print("cp submission/%s/tmp.json submission/%s/%s"%(uid, uid, filename))
+        os.system("cp submission/%s/tmp.json submission/%s/%s"%(uid, uid, filename))
+        return jsonify(code=EVALUATION_ERROR)
+
+    
 
 @app.route('/get_submit', methods=['GET'])
 def get_submit():
@@ -636,12 +675,31 @@ def get_submit():
         return jsonify(code=SUCCESS, submission="")
 
     a = os.walk("submission/" + uid)
+
     names = []
+    times = []
+    srcs = []
+    maes = []
+    errs = []
     for b, c, d in a:
         for item in d:
-            names.append(item)
-    names = sorted(names)
-    return jsonify(code=SUCCESS, submission=names[-1])
+            if item.endswith('.json') and item != 'tmp.json':
+                names.append(item)
+    names = sorted(names, reverse=True)
+
+    for name in names:
+        tmp = name.split('_')
+        print(name)
+        print(tmp)
+        localt = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(int(tmp[0])))
+        times.append(localt)
+        srcs.append(float(tmp[1]))
+        maes.append(float(tmp[2]))
+        errs.append(tmp[3].replace('.json', ''))
+
+    print(errs)
+
+    return jsonify(code=SUCCESS, times=times, srcs=srcs, maes=maes, errs=errs)
 
 @app.route('/mysubmission/<filename>', methods=['GET'])
 def mysubmission(filename):
@@ -659,6 +717,79 @@ def mysubmission(filename):
         abort(404)
 
     return send_file("submission/" + uid + "/" + filename)
+
+@app.route('/get_practice_leaderboard', methods=['GET'])
+def get_practice_leaderboard():
+
+    a = os.walk("submission/")
+
+    score_mapp = {}
+
+    names = []
+    for b, c, d in a:
+        for item in d:
+            if item.endswith('.json') and item != 'tmp.json':
+                names.append(b + '/' + item)
+
+    for name in names:
+        tmp = name.split('/')
+        uid = tmp[1]
+        filename = tmp[-1]
+
+        tmp = filename.split('_')
+        src = float(tmp[1])
+        mae = float(tmp[2])
+        score = src + mae
+        if not uid in score_mapp:
+            score_mapp[uid] = (src, mae, score)
+        else:
+            if score > score_mapp[uid][2]:
+                score_mapp[uid] = (src, mae, score)
+
+    allscore = [
+        ["Formosa.No1", 0.5904, 1.4960, 'old', 0],
+        ["007", 0.6481, 1.6494, 'old', 0],
+        ["I am Iron Man", 0.5756, 1.5833, 'old', 0],
+        ["CobotVisionLab", 0.6511, 1.7666, 'old', 0],
+        ["SMPCityU", 0.5367, 1.7484, 'old', 0],
+        ["Kopen", 0.5108, 1.7729, 'old', 0],
+        ["DSAI", 0.4522, 1.8936, 'old', 0],
+        ["Area66", 0.4291, 2.0088, 'old', 0],
+    ]
+    for uid in score_mapp:
+        score = score_mapp[uid]
+        _, teamname, _ = uid2team(uid)
+        allscore.append([teamname, score[0], score[1], 'new', 0])
+
+    allsrcs = []
+    allmaes = []
+    for item in allscore:
+        allsrcs.append(-item[1])
+        allmaes.append(item[2])
+
+    rank1 = np.argsort(allsrcs)
+    rank2 = np.argsort(allmaes)
+
+    print(rank1, rank2)
+    tot = len(rank1)
+    for i in range(tot):
+        allscore[rank1[i]][-1] += i
+        allscore[rank2[i]][-1] += i
+
+    allscore = sorted(allscore, key=lambda x: x[-1])
+    
+
+    teamnames = []
+    srcs = []
+    maes = []
+    states = []
+    for item in allscore:
+        teamnames.append(item[0])
+        srcs.append(item[1])
+        maes.append(item[2])
+        states.append(item[3])
+
+    return jsonify(code=SUCCESS, teamnames=teamnames, srcs=srcs, maes=maes, states=states)
     
 
 if __name__ == '__main__':

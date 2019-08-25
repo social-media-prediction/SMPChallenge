@@ -117,6 +117,10 @@
         color: rgb(241,156,55) !important;
       }
 
+      .gray {
+        color: rgb(150,150,150) !important;
+      }
+
       .help-block {
         display: none;
       }
@@ -330,65 +334,97 @@ var nownum = 1;
           }
         });
 
-        // $("#submit-upload-btn").click(function() {
-        //   $("#submit-upload-real").click();
-        // });
+        $("#submit-upload-btn").click(function() {
+          $("#submit-upload-real").click();
+        });
 
-        // $("#submit-upload-real").change(function() {
-        //   var name = this.files[0].name;
-        //   var size = parseInt(this.files[0].size);
-        //   var d = "B";
-        //   if (size > 1024) {
-        //     size = size * 1.0 / 1024;
-        //     d = "KB";
-        //   }
-        //   if (size > 1024) {
-        //     size = size * 1.0 / 1024;
-        //     d = "MB";
-        //   }
-        //   $("#submit-progress").find(".progress-bar").removeClass("progress-bar-success").attr("style","min-width:2em;width:0%").attr("aria-valuenow", "0").text("0%");
-        //   $("#submit-progress").show();
+        $("#submit-upload-real").change(function() {
+          var name = this.files[0].name;
+          var size = parseInt(this.files[0].size);
+          var d = "B";
+          if (size > 1024) {
+            size = size * 1.0 / 1024;
+            d = "KB";
+          }
+          if (size > 1024) {
+            size = size * 1.0 / 1024;
+            d = "MB";
+          }
+          $("#submit-progress").find(".progress-bar").removeClass("progress-bar-success").attr("style","min-width:2em;width:0%").attr("aria-valuenow", "0").text("0%");
+          $("#submit-progress").show();
 
-        //   $("#submit-upload-btn").addClass("disabled");
+          $("#submit-upload-btn").addClass("disabled");
 
-        //   var files = this.files;
-        //   var len = files.length;
-        //   var fd = new FormData();
-        //   fd.append('file', files[0]);
-        //   $.ajax({
-        //     url: "/submit",
-        //     type: "POST",
-        //     data: fd,
-        //     processData: false,
-        //     contentType: false,
-        //     xhr: function() {
-        //       var xhrobj = $.ajaxSettings.xhr();
-        //       if (xhrobj.upload) {
-        //         xhrobj.upload.addEventListener("progress", function(event) {
-        //           var percent = 0;
-        //           var position = event.loaded || event.position;
-        //           var total = event.total || event.totalSize;
-        //           if (event.lengthComputable) {
-        //             percent = Math.ceil(position * 1.0 / total * 100);
-        //           }
-        //           $("#submit-progress").find(".progress-bar").attr("style",sprintf("min-width:2em;width:%d%%", percent)).attr("aria-valuenow", sprintf("%d", percent)).text(sprintf("%d%%", percent));
-        //         })
-        //       }
-        //       return xhrobj;
-        //     },
-        //     success: function() {
-        //       $("#submit-progress>.progress-bar").addClass("progress-bar-success");
-        //       $("#submit-progress").hide();
-        //       $("#submit-upload-btn").removeClass("disabled");
-        //       window.location.reload();
-        //     }
-        //   })
-        // });
+          var files = this.files;
+          var len = files.length;
+          var fd = new FormData();
+          fd.append('file', files[0]);
+          $.ajax({
+            url: "/submit",
+            type: "POST",
+            data: fd,
+            processData: false,
+            contentType: false,
+            xhr: function() {
+              var xhrobj = $.ajaxSettings.xhr();
+              if (xhrobj.upload) {
+                xhrobj.upload.addEventListener("progress", function(event) {
+                  var percent = 0;
+                  var position = event.loaded || event.position;
+                  var total = event.total || event.totalSize;
+                  if (event.lengthComputable) {
+                    percent = Math.ceil(position * 1.0 / total * 100);
+                  }
+                  $("#submit-progress").find(".progress-bar").attr("style",sprintf("min-width:2em;width:%d%%", percent)).attr("aria-valuenow", sprintf("%d", percent)).text(sprintf("%d%%", percent));
+                })
+              }
+              return xhrobj;
+            },
+            success: function(data, status) {
+              $("#submit-progress>.progress-bar").addClass("progress-bar-success");
+              $("#submit-progress").hide();
+              $("#submit-upload-btn").removeClass("disabled");
+
+              if (data.code == "10013") {
+                alert("Each team can submit at most 2 results per day.");
+                return;
+              }
+
+              window.location.reload();
+            }
+          })
+        });
 
         $.getJSON("/get_submit", function(data, status) {
-          if (data.submission != "") {
-            $("#latest-submission").html('<a href="/mysubmission/' + data.submission + '">' + data.submission + "</a>");
+          var times = data.times;
+          var srcs = data.srcs;
+          var maes = data.maes;
+          var errs = data.errs;
+          //submisson_table
+
+          var table_html = "";
+          for (var i = 0; i < times.length; i++) {
+            if (errs[i] == 'none') {
+              table_html += sprintf(
+                "<tr><td>%d</td><td>%s</td><td>%.2f</td><td>%.2f</td><td></td></tr>",
+                i+1,
+                times[i],
+                srcs[i],
+                maes[i],
+              )
+            }
+            else {
+              table_html += sprintf(
+                "<tr><td>%d</td><td>%s</td><td>%.2f</td><td>%.2f</td><td>%s</td></tr>",
+                i+1,
+                times[i],
+                srcs[i],
+                maes[i],
+                errs[i]
+              )
+            }
           }
+          $("#submisson_table").append(table_html);
         })
 
       });
@@ -437,25 +473,30 @@ var nownum = 1;
             You don't have a team now. Please create a team <a class="submit-edit" style="cursor: pointer;">here</a>.
             </p>
             <p class="p-body team-display">
-            Submission system is closed.
-            </p>
-            <!-- <br>
-            <p class="p-body team-display">
             You are on behalf of team <b id="submit-teamname"></b>. You can edit you team information <a class="submit-edit" style="cursor: pointer;">here</a>.
             </p>
             <form class="team-display" onsubmit="return false;">
               <button class="btn btn-primary btn-lg" id="submit-upload-btn">Upload File</button>
+              <p class="gray">Each team can submit at most 2 results per day.</p>
               <input type="file" id="submit-upload-real" style="display: none;">
-              <br>
               <br>
               <div class="progress" id="submit-progress" style="display: none;">
                 <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                 </div>
               </div>
-            </form> -->
+            </form>
 
-            <h2 class="p-title team-display"><b>Latest Submission</b></h2>
-            <p class="p-body team-display" id="latest-submission">You don't have submission yet</p>
+            <h2 class="p-title team-display"><b>Submission History</b></h2>
+            <table class="table table-striped" id="submisson_table">
+              <tr>
+                <th>#</th>
+                <th>time</th>
+                <th>SRC</th>
+                <th>MAE</th>
+                <th>error</th>
+              </tr>
+
+            </table>
           </div>
         </div>
       </div>
