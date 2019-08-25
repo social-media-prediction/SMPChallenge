@@ -645,7 +645,7 @@ def submit():
         filename = '%s_0_0_typeerror.json'%(nowtime)
         print("cp submission/%s/tmp.json submission/%s/%s"%(uid, uid, filename))
         os.system("cp submission/%s/tmp.json submission/%s/%s"%(uid, uid, filename))
-        return json(code=INVALID_SUBMISSION_FILE_TYPE)
+        return jsonify(code=INVALID_SUBMISSION_FILE_TYPE)
 
     try:
         src, mae = evaluation.evaluate("submission/" + uid + '/tmp.json', "./ground_truth/validation.json")
