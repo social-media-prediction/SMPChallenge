@@ -672,7 +672,7 @@ def get_submit():
         abort(404)
 
     if not os.path.exists("submission/" + uid):
-        return jsonify(code=SUCCESS, times=times)
+        return jsonify(code=SUCCESS, times=[])
 
     a = os.walk("submission/" + uid)
 
