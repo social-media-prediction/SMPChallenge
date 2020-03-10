@@ -345,10 +345,10 @@
                     <h4>User data</h4>
                   </div>
                   <div class="col-xs-3">
-                    <a href="" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
+                    <a href="https://drive.google.com/open?id=1eQjmXp2x9L5EhyvEpBVpiMuiHOijuzxV" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
                   </div>
                   <div class="col-xs-3">
-                    <a href="" class="btn btn-default  btn-block black-background white" role="button">TEST</a>
+                    <a href="https://drive.google.com/open?id=1x9UOhi6dw527IjjtodIjYBjSEyS49eIU" class="btn btn-default  btn-block black-background white" role="button">TEST</a>
                   </div>
                 </div>
 
@@ -453,10 +453,10 @@
                     <h4>User data</h4>
                   </div>
                   <div class="col-xs-3">
-                    <a href="" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
+                    <a href="https://drive.google.com/open?id=1T7Xn0QjtJGaaRHVYPopUO5r8GkpA_72D" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
                   </div>
                   <div class="col-xs-3">
-                    <a href="" class="btn btn-default  btn-block black-background white" role="button">TEST</a>
+                    <a href="https://drive.google.com/open?id=1bGU3Zw85g2m1orht-Jvl9pjIO5l_9NKU" class="btn btn-default  btn-block black-background white" role="button">TEST</a>
                   </div>
                 </div>
 
@@ -730,22 +730,23 @@ datetime = time.strftime("%Y-%m-%d %H:%M:%S", timeArray)</pre>
           <div class="row">
             <div class="col-xs-6">
               <pre class=" prettyprint lang-plain">
-    Uid Pid Postdate Latitude Longitude Geoaccuracy
-    ...
-    "70478@N10" "564687" "1457068974" "0" "0" "0"
-    "37810@N60" "565202" "1457273948" "0" "0" "0"
-    "25893@N22" "565381" "1457239452" "52.520213" "13.373097" "16"
-    "3263@N23" "17776" "1445400000" "39.051935" "-94.48068 14"
-    ...</pre>
+photo_firstdate photo_count ispro canbuypro timezone_offset photo_firstdatetaken timezone_id user_description location_description
+...
+"1213743830" "6828" "1" "0" "1" "1904010100" "9" "0.0866962,-0.0752717,..." "0,0,..."
+...</pre>
             </div>
             <div class="col-xs-6">
               <pre class=" prettyprint lang-json">
     {
-    "Uid": "25893@N22",
-    "Pid": "565381",
-    "Latitude": "52.520213",
-    "Longitude": "13.373097",
-    "Geoaccuracy": "16"
+    "photo_firstdate": "1213743830",
+    "photo_count": "6828",
+    "ispro": "1",
+    "canbuypro": "0",
+    "timezone_offset": "1"
+    "photo_firstdatetaken": "1904010100"
+    "timezone_id":"9"
+    "user_description":"0.0866962,-0.0752717,..."
+    "location_description":"0,0,..."
     }</pre>
             </div>
           </div>
@@ -754,7 +755,8 @@ datetime = time.strftime("%Y-%m-%d %H:%M:%S", timeArray)</pre>
           <p class="p-body"><strong>Ispro: </strong>is the user belong to pro member.</p>
           <p class="p-body"><strong>Photo_firstdatetaken: </strong>the date of the first photo taken by the user.</p>
           <p class="p-body"><strong>Timezone_offset: </strong>the time zone of the user.</p>
-          <p class="p-body"><strong>Description: </strong>the user description.</p>
+          <p class="p-body"><strong>User description: </strong>the feature used to describe the user data.</p>
+          <p class="p-body"><strong>Location description: </strong>the feature used to describe the user location.</p>
         </div>
       </div>
     </div>
