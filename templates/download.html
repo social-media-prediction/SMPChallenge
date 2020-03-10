@@ -342,6 +342,18 @@
 
                 <div class="row">
                   <div class="col-xs-3 col-xs-offset-1">
+                    <h4>User data</h4>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="" class="btn btn-default  btn-block black-background white" role="button">TEST</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-3 col-xs-offset-1">
                     <h4>Additional</h4>
                   </div>
                   <div class="col-xs-3">
@@ -433,6 +445,18 @@
                   </div>
                   <div class="col-xs-3">
                     <a href="https://drive.google.com/open?id=16meiMqJoKeR16FBCE1euoggaPD_vUCLF" class="btn btn-default  btn-block black-background white" role="button">TEST</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-3 col-xs-offset-1">
+                    <h4>User data</h4>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="" class="btn btn-default  btn-block black-background white" role="button">TEST</a>
                   </div>
                 </div>
 
@@ -698,8 +722,43 @@ datetime = time.strftime("%Y-%m-%d %H:%M:%S", timeArray)</pre>
         </div>
       </div>
     </div>
-
     <div class="row" id="block7">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <h2 class="p-title"><b>User data</b></h2>
+          <p class="p-body">Each row contains the user data of the post.</p>
+          <div class="row">
+            <div class="col-xs-6">
+              <pre class=" prettyprint lang-plain">
+    Uid Pid Postdate Latitude Longitude Geoaccuracy
+    ...
+    "70478@N10" "564687" "1457068974" "0" "0" "0"
+    "37810@N60" "565202" "1457273948" "0" "0" "0"
+    "25893@N22" "565381" "1457239452" "52.520213" "13.373097" "16"
+    "3263@N23" "17776" "1445400000" "39.051935" "-94.48068 14"
+    ...</pre>
+            </div>
+            <div class="col-xs-6">
+              <pre class=" prettyprint lang-json">
+    {
+    "Uid": "25893@N22",
+    "Pid": "565381",
+    "Latitude": "52.520213",
+    "Longitude": "13.373097",
+    "Geoaccuracy": "16"
+    }</pre>
+            </div>
+          </div>
+          <p class="p-body"><strong>Photo_firstdate: </strong>the date of the first photo uploaded by the user.</p>
+          <p class="p-body"><strong>Photo_count: </strong>the number of posted photo by the user.</p>
+          <p class="p-body"><strong>Ispro: </strong>is the user belong to pro member.</p>
+          <p class="p-body"><strong>Photo_firstdatetaken: </strong>the date of the first photo taken by the user.</p>
+          <p class="p-body"><strong>Timezone_offset: </strong>the time zone of the user.</p>
+          <p class="p-body"><strong>Description: </strong>the user description.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="block8">
       <div class="container">
         <div class="col-xs-10 col-xs-offset-1">
           <h2 class="p-title"><b>Additional</b></h2>
