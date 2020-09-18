@@ -98,6 +98,12 @@
       font-size: 120%;
     }
 
+    .p-body-small {
+      text-align: justify;
+      font-family: "Arial", sans-serif;
+      font-size: 80%;
+    }
+
     h1,
     h2 {
       font-family: "Arial", serif;
@@ -241,13 +247,14 @@
         <li class="nav-li"><a class="nav-second-li" href="/dataset" id="href-description"><b>Dataset</b></a></li>
         <li class="nav-li"><a class="nav-second-li" href="/download" id="href-dataset"><b>Download</b></a></li>
         <li class="nav-li"><a class="nav-second-li" href="/challenge" id="href-challenge"><b>Challenge</b></a></li>
-        <li class="nav-li dropdown">
+        <!--li class="nav-li dropdown">
           <a class="nav-second-li dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="href-leaderboard"><b>Leaderboard</b> <span class="caret"></a>
           <ul class="dropdown-menu">
-            <li class="dropdown-li"><a onclick="alert('Coming Soon')">SMP 2020</a></li>
+            <li class="dropdown-li"><a href="https://evalai.cloudcv.org/web/challenges/challenge-page/543/leaderboard">SMP 2020</a></li>
             <li class="dropdown-li"><a href="/leaderboard">SMP 2019</a></li>
           </ul>
-        </li>
+        </li-->
+        <li class="nav-li"><a class="nav-second-li" href="/leaderboard" id="href-leaderboard"><b>Leaderboard</b></a></li>
       </ul>
     </div>
   </nav>
@@ -287,7 +294,16 @@
         <div class="col-xs-10 col-xs-offset-1">
           <h2 class="p-title"><b>News</b></h2>
           <ul>
-            <li class="timeline-li red"><b>[2020-04-01]</b>: <a href="https://evalai.cloudcv.org/web/challenges/challenge-page/543/overview">Evaluation Server</a> has been released.</li>
+            <li class="timeline-li red"><b>[2020-06-20]</b>:Congratulations! The leaderboard of SMP Challenge 2020 is available now. To Top-6 teams: please prepare to submit codes to <a>social.media.prediction@gmail.com</a> for final checking before June 23; the paper submission due is July 13.</li>
+          </ul>
+          <ul>
+            <li class="timeline-li"><b>[2020-05-15]</b>:The test dataset is available now, and you can evaluate your model <a href="https://evalai.cloudcv.org/web/challenges/challenge-page/543/submission">here</a>.</li>
+          </ul>
+          <ul>
+            <li class="timeline-li"><b>[2020-05-05]</b>: Please check the new deadlines (caused by COVID-19) in the following Important Dates.</li>
+          </ul>
+          <ul>
+            <li class="timeline-li"><b>[2020-04-01]</b>: <a href="https://evalai.cloudcv.org/web/challenges/challenge-page/543/overview">Evaluation Server</a> has been released.</li>
           </ul>
           <ul>
             <li class="timeline-li"><b>[2020-02-24]</b>: We are hosting Social Media Prediction Challenge 2020.</li>
@@ -302,7 +318,7 @@
         <div class="col-xs-10 col-xs-offset-1">
           <h2 class="p-title"><b>Overview</b></h2>
           <p class="p-body">
-            Continuing the series of <b class="orange">Social Media Prediction (SMP) Challenges</b>, the 2020 edition is seeking excellent research teams to provide new ways of forecasting problems and meaningfully improve people’s social lives and business scenarios. <b class="orange">Temporal Popularity Prediction</b> is a massive-scale, multimodal and time-series forecasting problem that is central to various scenarios, such as online advertising, social recommendation, demand forecasting, etc. We released a large-scale Social Media Prediction Dataset (SMPD) with over 486K posts, 70K users and rich information including user profiles, images, texts, times, locations and categories. This year the challenge will be again hosted by the joint team from multiple research organizations. 
+            Continuing the series of <b class="orange">Social Media Prediction (SMP) Challenges</b>, the 2020 edition is seeking excellent research teams to provide new ways of forecasting problems and meaningfully improve people’s social lives and business scenarios. <b class="orange">Temporal Popularity Prediction</b> is a massive-scale, multimodal and time-series forecasting problem that is central to various scenarios, such as online advertising, social recommendation, demand forecasting, etc. We released a large-scale Social Media Prediction Dataset (SMPD) with over 486K posts, 70K users and rich information including user profiles, images, texts, times, locations, and categories. This year the challenge will be again hosted by the joint team from multiple research organizations.
           </p>
           <br>
         </div>
@@ -343,42 +359,51 @@
       </div>
     </div>
 
+    <!--div class="row" id="block4">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <h2 class="p-title"><b>Competition Evaluation</b></h2>
+          <p class="p-body">Please checkout the <a href="https://evalai.cloudcv.org/web/challenges/challenge-page/543/overview">SMP page</a> on EvalAI platform.</p>
+          <p class="p-body"><b>Competition Begins:</b> March 10 2020</p>
+          <p class="p-body"><b>Paper Submission Deadline:</b> July 23 2020</p>
+        </div>
+      </div>
+    </div-->
+
     <div class="row" id="block4">
       <div class="container">
         <div class="col-xs-10 col-xs-offset-1">
-          <h2 class="p-title"><b>Competition Detail</b></h2>
-          <p class="p-body">Please checkout the <a href="https://evalai.cloudcv.org/web/challenges/challenge-page/543/overview">SMP page</a> on EvalAI platform.</p>
-          <p class="p-body"><b>Competition Begins:</b> March 10 2020</p>
-          <p class="p-body"><b>Paper Submission Deadline:</b> June 1 2020</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="row" id="block5">
-      <div class="container">
-        <div class="col-xs-10 col-xs-offset-1">
           <h2 class="p-title"><b>Important Dates</b></h2>
+          <p class="p-body-small">As you know, MM’20 has extended some deadlines to accommodate the impact caused by COVID-19. We confirmed with general chairs accordingly. As grand challenge papers will be included in the main proceedings, we need to follow the camera-ready deadline for full papers, which is updated to 8/10/2020 (<a href="https://2020.acmmm.org/call-for-paper.html">https://2020.acmmm.org/call-for-paper.html</a>). Please check the new deadlines as follows.
+          </p>
           <div class="timeline">
             <ul>
-              <li><b style="border: 2px solid rgb(255, 0, 0)"></b><span class="red">March 10 - March 15, 2020</span>
+              <li><b></b><span>March 10 - March 15, 2020</span>
                 <p>Dataset available for download (training set)</p>
               </li>
               <li><b></b><span>May 15, 2020</span>
-                <p>Test set available for download</p>
+                <p>Test set available for online evaluation</p>
               </li>
-              <li><b></b><span>June 1, 2020</span>
-                <p>Results submission</p>
+              <li><b></b><span><s>June 1, 2020</s> June 15, 2020</span>
+                <p>Results submission deadline</p>
               </li>
-              <li><b></b><span>June 1 - June 10, 2020</span>
+              <li><b></b><span><s>June 1 - June 10, 2020</s> June 15 - June 20, 2020</span>
                 <p>Objective evaluation and human evaluation</p>
               </li>
-              <li><b></b><span>June 10, 2020</span>
+              <li><b style="border: 2px solid rgb(255, 0, 0)"></b><span class="red"><s>June 10, 2020</s> June 20, 2020</span>
                 <p>Evaluation results announce</p>
               </li>
-              <li><b></b><span>June 29, 2020</span>
+              <li><b></b><span><s>June 29, 2020</s> July 13, 2020</span>
                 <p>Paper submission deadline (please follow the instructions on the main
 conference website)</p>
               </li>
+              <li><b></b><span>July 27, 2020</span>
+                <p>Acceptance notification</p>
+              </li>
+              <li><b></b><span>August 10, 2020</span>
+                <p>Camera-ready submission</p>
+              </li>
+
             </ul>
           </div>
           <br>
@@ -386,7 +411,7 @@ conference website)</p>
       </div>
     </div>
 
-    <div class="row" id="block6">
+    <div class="row" id="block5">
       <div class="container">
         <div class="col-xs-10 col-xs-offset-1">
           <h2 class="p-title"><b>Citation</b></h2>
@@ -421,7 +446,7 @@ conference website)</p>
       </div>
     </div>
 
-    <div class="row" id="block7">
+    <div class="row" id="block6">
       <div class="container">
         <div class="col-xs-10 col-xs-offset-1">
           <h2 class="p-title"><b>Our Teams</b></h2>

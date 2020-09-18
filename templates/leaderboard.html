@@ -157,13 +157,15 @@
           <li class="nav-li"><a class="nav-second-li" href="/dataset" id="href-description"><b>Dataset</b></a></li>
           <li class="nav-li"><a class="nav-second-li" href="/download" id="href-dataset"><b>Download</b></a></li>
           <li class="nav-li"><a class="nav-second-li" href="/challenge" id="href-challenge"><b>Challenge</b></a></li>
-          <li class="nav-li dropdown">
+        <!--li class="nav-li dropdown">
           <a class="nav-second-li dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="href-leaderboard"><b>Leaderboard</b> <span class="caret"></a>
           <ul class="dropdown-menu">
-            <li class="dropdown-li"><a onclick="alert('Coming Soon')">SMP 2020</a></li>
+            <li class="dropdown-li"><a href="https://evalai.cloudcv.org/web/challenges/challenge-page/543/leaderboard">SMP 2020</a></li>
             <li class="dropdown-li"><a href="/leaderboard">SMP 2019</a></li>
           </ul>
-        </li>
+        </li-->
+        <li class="nav-li"><a class="nav-second-li active" href="/leaderboard" id="href-leaderboard"><b>Leaderboard</b></a></li>
+
         </ul>
       </div>
     </nav>
@@ -189,13 +191,44 @@
 
             <div>
               <ul class="nav nav-tabs" role="tablist">
-                <li role="representation" class="active"><a href="#smp_leaderboard" aria-controls="smp_leaderboard" role="tab" data-toggle="tab">SMP 2019 Leaderboard</a></li>
-                <li role="representation"><a href="#practice_leaderboard" aria-controls="practice_leaderboard" role="tab" data-toggle="tab">SMP 2020 Leaderboard</a></li>
+                <li role="representation" class="active"><a href="#practice_leaderboard" aria-controls="practice_leaderboard" role="tab" data-toggle="tab">SMP 2020 Leaderboard</a></li>
+                <li role="representation"><a href="#smp_leaderboard" aria-controls="smp_leaderboard" role="tab" data-toggle="tab">SMP 2019 Leaderboard</a></li>
               </ul>
             </div>
 
             <div class="tab-content">
-              <div role="tabpanel" class="tab-pane active" id="smp_leaderboard">
+              <div role="tabpanel" class="tab-pane active" id="practice_leaderboard">
+                <table class="table table-striped table-bordered">
+                  <tr>
+                    <th>Rank</th>
+                    <th>Team</th>
+                    <th>SRC</th>
+                    <th>MAE</th>
+                  </tr>
+<tr><td>1</td><td>ecnu_aida</td><td>0.7040</td><td>1.3707</td></tr>
+<tr><td>1</td><td>USTC CrossModal Robot</td><td>0.6744</td><td>1.3586</td></tr>
+<tr><td>3</td><td>UESTC IntelliGame Lab</td><td>0.6506</td><td>1.3935</td></tr>
+<tr><td>4</td><td>Debut</td><td>0.6399</td><td>1.3925</td></tr>
+<tr><td></td><td><s>chizhu</s></td><td><s>0.6398</s></td><td><s>1.3911</s></td></tr>
+<tr><td>5</td><td>USTC CrossModal SeniorG</td><td>0.6404</td><td>1.3980</td></tr>
+<tr><td>6</td><td>acvlab</td><td>0.6340</td><td>1.4156</td></tr>
+<tr><td>7</td><td>hch</td><td>0.6250</td><td>1.5097</td></tr>
+<tr><td>8</td><td>RIGHT</td><td>0.5876</td><td>1.5723</td></tr>
+<tr><td>9</td><td>first competition</td><td>0.5659</td><td>1.5603</td></tr>
+<tr><td>10</td><td>littleRed</td><td>0.6107</td><td>1.6439</td></tr> 
+<tr><td>11</td><td>NTUST_VIP</td><td>0.5820</td><td>1.6144</td></tr>
+<tr><td>12</td><td>ping</td><td>0.5579</td><td>1.6073</td></tr>
+<tr><td>13</td><td>Shawn</td><td>0.5496</td><td>1.7148</td></tr>
+<tr><td>14</td><td>aoe</td><td>0.5383</td><td>1.733</td></tr>
+<tr><td>15</td><td>zhou</td><td>0.4864</td><td>1.6740</td></tr>
+<tr><td>16</td><td>fruit_yogurt</td><td>0.5127</td><td>1.8404</td></tr>
+<tr><td>17</td><td>jixiangruyi</td><td>0.5120</td><td>1.9088</td></tr>
+<tr><td>17</td><td>LCT</td><td>0.4760</td><td>1.7718</td></tr>
+<tr><td>19</td><td>deadline</td><td>0.4732</td><td>2.1507</td></tr>
+                </table>
+              </div>
+
+              <div role="tabpanel" class="tab-pane" id="smp_leaderboard">
                 <table class="table table-striped table-bordered">
                   <tr>
                     <th>Rank</th>
@@ -261,11 +294,6 @@
                     <td>2.0088</td>
                   </tr>
                 </table>
-              </div>
-              <div role="tabpanel" class="tab-pane" id="practice_leaderboard">
-                <br>
-                <h4>To be released.</h4>
-                <br>
               </div>
             </div>
 
