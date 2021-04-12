@@ -10,6 +10,3 @@
 ```bash
 python server.py
 ```
-* 编辑templates/XXX.html
-* 打开浏览器，浏览http://127.0.0.1:5000?debug=1，http://127.0.0.1:5000/challenge?debug=1 （dataset，leaderboard以此类推，debug=1必须加）
-
