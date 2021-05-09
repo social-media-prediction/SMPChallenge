@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>SMP Challenge</title>
+  <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+  <link rel="stylesheet" href="static/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="static/css/prettify.css">
+  <script src="static/js/jquery.min.js"></script>
+  <script src="static/js/bootstrap.js"></script>
+  <script src="static/js/sprintf.js"></script>
+  <script src="static/js/run_prettify.js"></script>
+  <script src="static/js/md5.js"></script>
+  <style type="text/css">
+  .black-background {background-color:	#808080	;}
+  .btn.active.focus {
+    outline: none;
+  }
+
+  .test-background {background-color:	#DCDCDC	;}
+  .white {color:#F5F5F5;}
+    #img-data {
+      border: 0;
+      display: inline;
+      height: 10px;
+    }
+
+    #chartdiv {
+      width: 80%;
+    }
+
+    .pre-scrollable {
+      height: 130px;
+      overflow-y: scroll;
+    }
+
+    #nav-first {
+      border-radius: 0px;
+      margin-bottom: 0px;
+      min-height: 80px;
+    }
+
+    #nav-second {
+      border-radius: 0px;
+      margin-bottom: 0px;
+      top: 80px;
+    }
+
+    #nav-first-main {
+      margin: 0 0;
+      height: 80px;
+    }
+
+    #nav-first-main>li {
+      height: 80px;
+    }
+
+    #nav-first-main>li>a {
+      height: 80px;
+      padding-top: 0;
+      padding-bottom: 0;
+      line-height: 80px;
+    }
+
+    #nav-second-main {
+      margin: 0 80px;
+    }
+
+    .nav-second-li {
+      font-size: 120%;
+    }
+
+    #wc {
+      width: 500;
+      height: 500;
+      border: 2px red solid;
+      position: relative;
+      left: 100px;
+      top: 50px;
+    }
+
+    #block1 {
+      background-color: white;
+    }
+
+    #block2 {
+      /*background-color: #f8f8f8;*/
+      background-color: #e8e8e8;
+    }
+
+    #block3 {
+      background-color: white;
+    }
+
+    #block4 {
+      background-color: #e8e8e8;
+    }
+
+    #block5 {
+      background-color: white;
+    }
+
+    #block6 {
+      background-color: #e8e8e8;
+    }
+
+    #block7 {
+      background-color: white;
+    }
+
+    #block8 {
+      background-color: #e8e8e8;
+    }
+
+    #block9 {
+      background-color: white;
+    }
+
+    #block106 {
+      background-color: #e8e8e8;
+    }
+
+    #block11 {
+      background-color: #080808;
+    }
+
+    .p-body {
+      text-align: justify;
+      font-family: "Arial", sans-serif;
+      font-size: 120%;
+    }
+
+    .dropdown-li {
+      background-color: #333333;
+    }
+    .dropdown-li>a {
+      color: #aaaaaa !important;
+    }
+    .dropdown-menu {
+      background-color: #333333;
+    }
+
+    h1,
+    h2 {
+      font-family: "Arial", serif;
+      /*font-size: 150%;*/
+    }
+
+    .timeline-li {
+      font-family: "Arial", sans-serif;
+      font-size: 120%;
+    }
+
+    #logo {
+      padding-left: 100px;
+      padding-top: 10px;
+    }
+
+    .thumbnail {
+      border-color: transparent;
+      background-color: transparent;
+    }
+
+    .avatar {
+      border-radius: 50%;
+    }
+
+    .nav-li {
+      font-size: 120%;
+      cursor: pointer;
+    }
+
+    td,
+    th {
+      text-align: center;
+    }
+
+    .orange {
+      color: rgb(241, 156, 55) !important;
+    }
+
+    .help-block {
+      display: none;
+    }
+
+    .member-title {
+      padding-top: 10px;
+    }
+
+    .p-title {
+      color: rgb(241, 156, 55) !important;
+    }
+
+    .container-fluid {
+      padding-top: 130px;
+    }
+
+    #forget {
+      cursor: pointer;
+    }
+  </style>
+  <script type="text/javascript">
+    var settings = {
+      //height of sphere container
+      height: 500,
+      //width of sphere container
+      width: 500,
+      //radius of sphere
+      radius: 170,
+      //rotation speed
+      speed: 5,
+      //sphere rotations slower
+      slower: 0.9,
+      //delay between update position
+      timer: 5,
+      //dependence of a font size on axis Z
+      fontMultiplier: 15,
+      left: 1000,
+      top: 50,
+      //tag css stylies on mouse over
+      hoverStyle: {
+        border: 'none',
+        color: '#0b2e6f'
+      },
+      //tag css stylies on mouse out
+      mouseOutStyle: {
+        border: '',
+        color: ''
+      }
+
+    };
+
+  </script>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top" id="nav-second">
+    <div class="container">
+      <ul class="nav navbar-nav" id="nav-second-main">
+        <li class="nav-li"><a class="nav-second-li" href="index.html" id="href-home"><b>Home</b></a></li>
+        <li class="nav-li"><a class="nav-second-li" href="dataset.html" id="href-description"><b>Dataset</b></a></li>
+        <li class="nav-li active"><a class="nav-second-li" href="#" id="href-dataset"><b>Download</b></a></li>
+        <li class="nav-li"><a class="nav-second-li" href="challenge.html" id="href-challenge"><b>Challenge</b></a></li>
+        <!--li class="nav-li dropdown">
+          <a class="nav-second-li dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="href-leaderboard"><b>Leaderboard</b> <span class="caret"></a>
+          <ul class="dropdown-menu">
+            <li class="dropdown-li"><a href="https://evalai.cloudcv.org/web/challenges/challenge-page/543/leaderboard">SMP 2020</a></li>
+            <li class="dropdown-li"><a href="/leaderboard">SMP 2019</a></li>
+          </ul>
+        </li-->
+        <li class="nav-li"><a class="nav-second-li" href="leaderboard.html" id="href-leaderboard"><b>Leaderboard</b></a></li>
+
+      </ul>
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-default navbar-fixed-top" id="nav-first">
+    <div class="container">
+      <div class="navbar-header">
+        <img src="static/img/logo.png" width="400px" id="logo">
+      </div>
+
+
+      <ul class="nav navbar-nav navbar-right" id="nav-first-main">
+        <li class="nav-li"><a href="https://evalai.cloudcv.org/web/challenges/challenge-page/543/overview" id="href-register"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Register</a></li>
+        <li class="nav-li"><a href="mailto:social.media.prediction@gmail.com" id="href-contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <div class="container-fluid" id="maintext">
+
+
+    <div class="row" id="block1">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <h2 class="p-title"><b>SMPD 2020</b></h2>
+          <div class="row">
+            <ul id="myTab" class="nav nav-tabs" role="tablist" style="margin-left:20px">
+              <li role="representation" class="active"><a href="#json" aria-controls="json" data-toggle="tab">.JSON</a></li>
+              <li role="representation" ><a href="#txt" aria-controls="txt" data-toggle="tab">.TXT</a></li>
+            </ul>
+
+            <div id="myTabContent" class="tab-content">
+              <div role="tabpanel" class="tab-pane active" id="json">
+                <div class="row">
+                  <div class="col-xs-3 col-xs-offset-1">
+                    <h4>All data</h4>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=1W-BGVQ5Xi-eIxTC7ZvnpLptlvIDW4giQ" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=1wkgzAQUjwcD94xqZzx82_KWajlfgSIW_" class="btn  btn-block black-background white" role="button">TEST</a>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-3 col-xs-offset-1">
+                    <h4>Label</h4>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=1FW14l4jkTVV6hBymdrFeszq5B993axh_" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="" class="btn  btn-block black-background white" role="button" disabled="disabled">TEST</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-3 col-xs-offset-1">
+                    <h4>Image</h4>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=196ssXYxA6YUbrFriVUP2m9rDN8_guZLU" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=1QyhI6kloakDpG6d54G47Cb2lXkEGXiDR" class="btn  btn-block black-background white" role="button">TEST</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-3 col-xs-offset-1">
+                    <h4>Category</h4>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=1dDPK4S_PV6sR-EOoKCqR39XxTeiSItqt" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=1HmJ7MKmoXgSPuBXquYz8-9clDoatpFU3" class="btn btn-block black-background white" role="button">TEST</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-3 col-xs-offset-1">
+                    <h4>Text</h4>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=11FqpOM33Py79VR2qRd9lM7FGgwWKKGB1" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=1nHti5SgOursTr3GWT8jU-RzCajZnxnfZ" class="btn btn-block black-background white" role="button">TEST</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-3 col-xs-offset-1">
+                    <h4>Temporal-Spatial Information</h4>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=1LJbmSE5F2SPY2i7ZZxbbdrO5WFpsbF7S" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=16meiMqJoKeR16FBCE1euoggaPD_vUCLF" class="btn btn-block black-background white" role="button">TEST</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-3 col-xs-offset-1">
+                    <h4>User Profile</h4>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=1T7Xn0QjtJGaaRHVYPopUO5r8GkpA_72D" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=1bGU3Zw85g2m1orht-Jvl9pjIO5l_9NKU" class="btn btn-block black-background white" role="button">TEST</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-3 col-xs-offset-1">
+                    <h4>Additional Information</h4>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=1jypri6RdaROwfcsUsKzyjvd1gFE08qkS" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=1enco5Bjgdt_MWHfaJ0lUS0VgSrr3ZtCa" class="btn btn-block black-background white" role="button">TEST</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-3 col-xs-offset-1">
+                    <h4>Image Dataset</h4>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="" class="btn  btn-block black-background white" role="button" disabled="disabled">TRAIN</a>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/uc?id=1W99A_q8JGGHwFIrzQTzRgRAwIhYsgQE1" class="btn btn-block black-background white" role="button">TEST</a>
+                  </div>
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="txt">
+                <div class="row">
+                  <div class="col-xs-3 col-xs-offset-1">
+                    <h4>All data</h4>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=1_n4Mb9GwwcjxSo4JW2Xay8aRaei6dy8t" class="btn btn-default  btn-block black-background white" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=1wkgzAQUjwcD94xqZzx82_KWajlfgSIW_" class="btn btn-block black-background white" role="button">TEST</a>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-3 col-xs-offset-1">
+                    <h4>Label</h4>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=1FW14l4jkTVV6hBymdrFeszq5B993axh_" class="btn btn-default  btn-block black-background white" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="" class="btn  btn-block black-background white" role="button" disabled="disabled">TEST</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-3 col-xs-offset-1">
+                    <h4>Image</h4>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=196ssXYxA6YUbrFriVUP2m9rDN8_guZLU" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=1QyhI6kloakDpG6d54G47Cb2lXkEGXiDR" class="btn btn-block black-background white" role="button">TEST</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-3 col-xs-offset-1">
+                    <h4>Category</h4>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=1pQRC6fdFRPx48_iOlhuqt2K5TM50P5iB" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=1gHfFiRU04SVs6zRxNOWqtHxBqw3JEWS4" class="btn btn-block black-background white" role="button">TEST</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-3 col-xs-offset-1">
+                    <h4>Text</h4>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=1OyrxlbCqE0qDwb9Ks6WrEYdpCacH--qA" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=1gw3c6aI3hWsyZSGsvjYd0l1T37mvn726" class="btn btn-block black-background white" role="button">TEST</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-3 col-xs-offset-1">
+                    <h4>Temporal-Spatial Information</h4>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=1LN2-4rin05TdlnKt2KN4L8irrjGJ6SpX" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=1tc5okCzHCAHn5SGVdJlf4Z7Mx8PaPXBH" class="btn btn-block black-background white" role="button">TEST</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-3 col-xs-offset-1">
+                    <h4>User Profile</h4>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=1eQjmXp2x9L5EhyvEpBVpiMuiHOijuzxV" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=1x9UOhi6dw527IjjtodIjYBjSEyS49eIU" class="btn btn-block black-background white" role="button">TEST</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-3 col-xs-offset-1">
+                    <h4>Additional Information</h4>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=1c8TeShlNFE-_mdN5zYKutcVqTP_iZ3J8" class="btn btn-default btn-block black-background white" role="button">TRAIN</a>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/open?id=13kfrkZd5YK1vyVDMIokDZeVOJtARdJCk" class="btn btn-block black-background white" role="button">TEST</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-3 col-xs-offset-1">
+                    <h4>Image Dataset</h4>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="" class="btn  btn-block black-background white" role="button" disabled="disabled">TRAIN</a>
+                  </div>
+                  <div class="col-xs-3">
+                    <a href="https://drive.google.com/uc?id=1W99A_q8JGGHwFIrzQTzRgRAwIhYsgQE1" class="btn btn-block black-background white" role="button">TEST</a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+          <!-- <h2 class="p-title"><b>Training Set</b></h2>
+            <div class="row">
+              <div class="col-xs-3 col-xs-offset-1">
+                <h4>All data</h4>
+              </div>
+              <div class="col-xs-8">
+                <a href="https://drive.google.com/open?id=1FW14l4jkTVV6hBymdrFeszq5B993axh_" class="btn btn-default btn-block" role="button">.TXT</a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-3 col-xs-offset-1">
+                <h4>Label</h4>
+              </div>
+              <div class="col-xs-8">
+                <a href="https://drive.google.com/open?id=1FW14l4jkTVV6hBymdrFeszq5B993axh_" class="btn btn-default btn-block" role="button">.TXT</a>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-3 col-xs-offset-1">
+                <h4>Image</h4>
+              </div>
+              <div class="col-xs-8">
+                <a href="https://drive.google.com/open?id=196ssXYxA6YUbrFriVUP2m9rDN8_guZLU" class="btn btn-default btn-block" role="button">.TXT</a>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-3 col-xs-offset-1">
+                <h4>Category</h4>
+              </div>
+              <div class="col-xs-4">
+                <a href="https://drive.google.com/open?id=1pQRC6fdFRPx48_iOlhuqt2K5TM50P5iB" class="btn btn-default btn-block" role="button">.TXT</a>
+              </div>
+              <div class="col-xs-4">
+                <a href="https://drive.google.com/open?id=1dDPK4S_PV6sR-EOoKCqR39XxTeiSItqt" class="btn btn-default btn-block" role="button">.JSON</a>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-3 col-xs-offset-1">
+                <h4>Text</h4>
+              </div>
+              <div class="col-xs-4">
+                <a href="https://drive.google.com/open?id=1OyrxlbCqE0qDwb9Ks6WrEYdpCacH--qA" class="btn btn-default btn-block" role="button">.TXT</a>
+              </div>
+              <div class="col-xs-4">
+                <a href="https://drive.google.com/open?id=11FqpOM33Py79VR2qRd9lM7FGgwWKKGB1" class="btn btn-default btn-block" role="button">.JSON</a>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-3 col-xs-offset-1">
+                <h4>Temporal-Spatial Information</h4>
+              </div>
+              <div class="col-xs-4">
+                <a href="https://drive.google.com/open?id=1LN2-4rin05TdlnKt2KN4L8irrjGJ6SpX" class="btn btn-default btn-block" role="button">.TXT</a>
+              </div>
+              <div class="col-xs-4">
+                <a href="https://drive.google.com/open?id=1LJbmSE5F2SPY2i7ZZxbbdrO5WFpsbF7S" class="btn btn-default btn-block" role="button">.JSON</a>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-3 col-xs-offset-1">
+                <h4>Additional Information</h4>
+              </div>
+              <div class="col-xs-4">
+                <a href="https://drive.google.com/open?id=1c8TeShlNFE-_mdN5zYKutcVqTP_iZ3J8" class="btn btn-default btn-block" role="button">.TXT</a>
+              </div>
+              <div class="col-xs-4">
+                <a href="https://drive.google.com/open?id=1jypri6RdaROwfcsUsKzyjvd1gFE08qkS" class="btn btn-default btn-block" role="button">.JSON</a>
+              </div>
+            </div> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="block2">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <h2 class="p-title"><b>Label</b></h2>
+          <p class="p-body">Each row contains the popularity score(log-views) of the corresponding post.</p>
+          <div class="row">
+          <div class="col-xs-6">
+            <pre class="prettyprint lang-plain">
+Popularityscore
+...
+3.2
+2.3
+...
+</pre>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="block3">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <h2 class="p-title"><b>Image</b></h2>
+          <p class="p-body">Each row contains the URL of the cprrsponding photo or video</p>
+          <!-- <div class="col-xs-12"> -->
+            <pre class="prettyprint lang-plain">
+...
+"https://www.flickr.com/photos/58708830@N00/385070026"
+"https://www.flickr.com/photos/97042891@N00/943750056"
+...
+</pre>
+          <!-- </div> -->
+          <div style="font-size: 0">
+            <img src="static/img/1_resize.jpg" width="20%">
+            <img src="static/img/2_resize.jpg" width="20%">
+            <img src="static/img/4_resize.jpg" width="20%">
+            <img src="static/img/5_resize.jpg" width="20%">
+            <img src="static/img/7_resize.jpg" width="20%">
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="block4">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <h2 class="p-title"><b>Category</b></h2>
+          <p class="p-body">Each row in the file corresponds a category set of the post.</p>
+          <div class="row">
+            <div class="col-xs-6">
+              <pre class=" prettyprint lang-plain">
+Uid  Pid  Category  Subcategory  Concept
+...
+"70478@N10" "564687" "Whether&Season" "Raining" "umbrella"
+"37810@N60" "565202" "Fashion" "Girls,Fashion" "skirt"
+"25893@N22" "565381" "Whether&Season" "Raining" "puddle"
+"3175@N73" "16603"  "Entertainment" "Music" "rnb
+...
+</pre>
+            </div>
+            <div class="col-xs-6">
+              <pre class=" prettyprint lang-json">
+{
+  "Uid": "70478@N10",
+  "Pid": 564687,
+  "Category": "Whether&Season",
+  "Subcategory": "Raining",
+  "Concept": "umbrella"
+}</pre>
+            </div>
+          </div>
+          <p class="p-body"><strong>Uid: </strong>the user this post belongs to.</p>
+          <p class="p-body"><strong>Pid: </strong>the photo along with the post. One Pid can locate a particular post.</p>
+          <p class="p-body"><strong>Category: </strong>the first category of the post.(11 classes)</p>
+          <p class="p-body"><strong>Subcategory: </strong>there are 77 classes in 2nd level category.</p>
+          <p class="p-body"><strong>Concept: </strong>there are 668 different description.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="block5">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <h2 class="p-title"><b>Text</b></h2>
+          <p class="p-body">Each row represents a text information of the post.</p>
+          <div class="row">
+            <div class="col-xs-6">
+              <pre class=" prettyprint lang-plain">
+Uid Pid Title Mediatype Alltags
+...
+"70478@N10" "564687" "Sarah Moon 3" "photo" "black hat fashion yellow umbrella"
+"37810@N60" "565202" "2016-03-06 22.19.08" "photo" "orange sexy philadelphia hockey nhl sweater bra skirt blonde flowing cheerleader cleavage plaid flyers philadelphiaflyers icegirls"
+"25893@N22" "565381" "Tristesse at the Federal Chancellery" "photo" "blackandwhite bw white black reflection berlin wet water rain canon germany puddle deutschland eos blackwhite wasser symmetry sw schwarzweiss puddles reflexion weiss federal schwarz regen tristesse trist reflektion kanzleramt pfuetze 6d nass bundeskanzleramt 2016 symmetrie pftze weis pftzen chancellery schwarzweis federalchancellery pfuetzen canoneos6d hoonose68 againstautotagging sgrossien grossien"
+"3175@N73" "16594" "Amari DJ Mona-Lisa" "photo" "newyork celebrity brooklyn radio flickr photos itunes images singer singers celebrities hiphop reggae rb songwriter recordingartists broadcaster rnb songwriters amari hiphopartists cdbaby newreleases femaleartists reverbnation soundcloud famouscelebrities reggaeartists femaleperformers mtvartists amaridjmonalisa amazonmusic newyorkperformers reverbnationartists spotifyartists soundcloudartists jamgo cdbabyartists googleplayartists"
+...</pre>
+            </div>
+            <div class="col-xs-6">
+              <pre class="prettyprint lang-json">
+{
+  "Uid": "70478@N10",
+  "Pid": "564687",
+  "Tile": "Sarah Moon 3",
+  "Mediatype": "photo",
+  "Alltags": "black" "hat" "fashion" "yellow" "umbrella"
+}</pre>
+            </div>
+          </div>
+          <p class="p-body"><strong>Title: </strong>the tile of the post defined by the user.</p>
+          <p class="p-body"><strong>Mediatype: </strong>the type of the attached media file, including 'photo' and 'video'.</p>
+          <p class="p-body"><strong>Alltags: </strong>the customized tags from users.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="block6">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <h2 class="p-title"><b>Temporal-Spatial Information</b></h2>
+          <p class="p-body">Each row offers the date and geographic information of the post.</p>
+          <div class="row">
+            <div class="col-xs-6">
+              <pre class=" prettyprint lang-plain">
+Uid Pid Postdate Latitude Longitude Geoaccuracy
+...
+"70478@N10" "564687" "1457068974" "0" "0" "0"
+"37810@N60" "565202" "1457273948" "0" "0" "0"
+"25893@N22" "565381" "1457239452" "52.520213" "13.373097" "16"
+"3263@N23" "17776" "1445400000" "39.051935" "-94.48068 14"
+...</pre>
+            </div>
+            <div class="col-xs-6">
+              <pre class=" prettyprint lang-json">
+{
+  "Uid": "25893@N22",
+  "Pid": "565381",
+  "Latitude": "52.520213",
+  "Longitude": "13.373097",
+  "Geoaccuracy": "16"
+}</pre>
+            </div>
+          </div>
+          <p class="p-body"><strong>Postdate: </strong>the publish timestamp of the post. It can be converted to Datetime by following python code:</p>
+          <pre class="prettyprint lang-py">
+import time
+timestamp = 1457068974
+timeArray = time.localtime(timestamp)
+datetime = time.strftime("%Y-%m-%d %H:%M:%S", timeArray)</pre>
+          <p class="p-body"><strong>Latitude: </strong>the latitude whose valid range is -90 to 90. Anything more than 6 decimal places will be truncated.</p>
+          <p class="p-body"><strong>Longitude: </strong>the longitude whose valid range is -180 to 180. Anything more than 6 decimal places will be truncated.</p>
+          <p class="p-body"><strong>Geoaccuracy: </strong>recorded accuracy level of the location information. World level is 1, Country is ~3, Region ~6, City ~11, Street ~16. The current range is 1-16. Defaults to 16 if not specified.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="block7">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <h2 class="p-title"><b>User Profile</b></h2>
+          <p class="p-body">Each row contains the user data of the post.</p>
+          <div class="row">
+            <div class="col-xs-6">
+              <pre class=" prettyprint lang-plain">
+photo_firstdate photo_count ispro canbuypro timezone_offset photo_firstdatetaken timezone_id user_description location_description
+...
+"1213743830" "6828" "1" "0" "1" "1904010100" "9" "0.0866962,-0.0752717,..." "0,0,..."
+...</pre>
+            </div>
+            <div class="col-xs-6">
+              <pre class=" prettyprint lang-json">
+    {
+    "photo_firstdate": "1213743830",
+    "photo_count": "6828",
+    "ispro": "1",
+    "canbuypro": "0",
+    "timezone_offset": "1"
+    "photo_firstdatetaken": "1904010100"
+    "timezone_id":"9"
+    "user_description":"0.0866962,-0.0752717,..."
+    "location_description":"0,0,..."
+    }</pre>
+            </div>
+          </div>
+          <p class="p-body"><strong>Photo_firstdate: </strong>the date of the first photo uploaded by the user.</p>
+          <p class="p-body"><strong>Photo_count: </strong>the number of posted photo by the user.</p>
+          <p class="p-body"><strong>Ispro: </strong>is the user belong to pro member.</p>
+          <p class="p-body"><strong>Photo_firstdatetaken: </strong>the date of the first photo taken by the user.</p>
+          <p class="p-body"><strong>Timezone_offset: </strong>the time zone of the user.</p>
+          <p class="p-body"><strong>User description: </strong>the feature used to describe the user data.</p>
+          <p class="p-body"><strong>Location description: </strong>the feature used to describe the user location.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="block8">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <h2 class="p-title"><b>Additional Information</b></h2>
+          <p class="p-body">Each row offers the supplimental information of the post.</p>
+          <div class="row">
+            <div class="col-xs-6">
+              <pre class="pre-scrollable prettyprint lang-plain">
+Uid Pid Pathalias Ispublic Mediastatus
+...
+"70478@N10" "564687" "None" "1" "ready"
+"37810@N60" "565202" "None" "1" "ready"
+"25893@N22" "565381" "hoo_nose_68" "1" "ready"
+"3652@N11" "19388" "angelo_nairod" "1" "ready"
+...</pre>
+            </div>
+            <div class="col-xs-6">
+              <pre class="pre-scrollable prettyprint lang-json">
+{
+  "Uid": "25893@N22",
+  "Pid": "565381",
+  "Pathalias": "hoo_nose_68",
+  "Ispublic": "1",
+  "Mediastatus": "ready"
+}</pre>
+            </div>
+          </div>
+          <p class="p-body"><strong>Pathalias: </strong>the path alias provided by the user.</p>
+          <p class="p-body"><strong>Ispublic: </strong>indicates that the post is authenticated with 'read' permissions.</p>
+          <p class="p-body"><strong>Mediastatus: </strong>indicates that the attached media is ready to access by others.</p>
+          <br>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="block11">
+      <div class="col-xs-10 col-xs-offset-1">
+        <center>
+          <h5 style="color:white;">Copyright © 2020. SMP Challenge Organization Committee. All rights reserved.</h5>
+        </center>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

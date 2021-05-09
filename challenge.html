@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SMP Challenge</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <link rel="stylesheet" href="static/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="static/css/prettify.css">
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/bootstrap.js"></script>
+    <script src="static/js/sprintf.js"></script>
+    <script src="static/js/run_prettify.js"></script>
+    <script src="static/js/md5.js"></script>
+    <style type="text/css">
+      #nav-first {
+        border-radius: 0px;
+        margin-bottom: 0px;
+        min-height: 80px;
+      }
+
+      #nav-second {
+        border-radius: 0px;
+        margin-bottom: 0px;
+        top: 80px;
+      }
+
+      #nav-first-main {
+        margin: 0 0;
+        height: 80px;
+      }
+
+      #nav-first-main>li {
+        height: 80px;
+      }
+      #nav-first-main>li>a {
+        height: 80px;
+        padding-top: 0;
+        padding-bottom: 0;
+        line-height: 80px;
+      }
+
+      #nav-second-main {
+        margin: 0 80px;
+      }
+
+      .nav-second-li {
+        font-size: 120%;
+      }
+
+      #block1 {
+        background-color: white;
+      }
+
+      #block2 {
+        /*background-color: #f8f8f8;*/
+        background-color: #e8e8e8;
+      }
+
+      #block3 {
+        background-color: white;
+      }
+
+      #block4 {
+        background-color: #e8e8e8;
+      }
+
+      #block5 {
+        background-color: white;
+      }
+
+      #block6 {
+        background-color: #e8e8e8;
+      }
+
+      #block7 {
+        background-color: black;
+      }
+
+      .p-body{
+        text-align: justify;
+        font-family: "Arial", sans-serif;
+        font-size: 120%;
+      }
+
+      h1,h2{
+        font-family: "Arial", serif;
+        /*font-size: 150%;*/
+      }
+
+      .timeline-li {
+        font-family: "Arial", sans-serif;
+        font-size: 120%;
+      }
+
+      #logo {
+        padding-left:100px;
+        padding-top: 10px;
+      }
+
+      .thumbnail {
+        border-color: transparent;
+        background-color: transparent;
+      }
+
+      .avatar {
+        border-radius: 50%;
+      }
+
+      .nav-li {
+        font-size: 120%;
+        cursor: pointer;
+      }
+
+      .dropdown-li {
+        background-color: #333333;
+      }
+      .dropdown-li>a {
+        color: #aaaaaa !important;
+      }
+      .dropdown-menu {
+        background-color: #333333;
+      }
+
+      td,th {
+        text-align: center;
+      }
+
+      .orange {
+        color: rgb(241,156,55) !important;
+      }
+
+      .help-block {
+        display: none;
+      }
+
+      .member-title {
+        padding-top: 10px;
+      }
+
+      .p-title {
+        color: rgb(241,156,55) !important;
+      }
+
+      .container-fluid {
+        padding-top: 130px;
+      }
+
+      #forget {
+        cursor: pointer;
+      }
+
+    </style>
+
+  </head>
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="nav-second">
+      <div class="container">
+        <ul class="nav navbar-nav" id="nav-second-main">
+          <li class="nav-li"><a class="nav-second-li" href="index.html" id="href-home"><b>Home</b></a></li>
+          <li class="nav-li"><a class="nav-second-li" href="dataset.html" id="href-description"><b>Dataset</b></a></li>
+          <li class="nav-li"><a class="nav-second-li" href="download.html" id="href-dataset"><b>Download</b></a></li>
+          <li class="nav-li active"><a class="nav-second-li" href="#" id="href-challenge"><b>Challenge</b></a></li>
+        <!--li class="nav-li dropdown">
+          <a class="nav-second-li dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="href-leaderboard"><b>Leaderboard</b> <span class="caret"></a>
+          <ul class="dropdown-menu">
+            <li class="dropdown-li"><a href="https://evalai.cloudcv.org/web/challenges/challenge-page/543/leaderboard">SMP 2020</a></li>
+            <li class="dropdown-li"><a href="/leaderboard">SMP 2019</a></li>
+          </ul>
+        </li-->
+        <li class="nav-li"><a class="nav-second-li" href="leaderboard.html" id="href-leaderboard"><b>Leaderboard</b></a></li>
+
+        </ul>
+      </div>
+    </nav>
+
+    <nav class="navbar navbar-default navbar-fixed-top" id="nav-first">
+      <div class="container">
+        <div class="navbar-header">
+          <img src="static/img/logo.png" width="400px" id="logo">
+        </div>
+
+        <ul class="nav navbar-nav navbar-right" id="nav-first-main">
+          <li class="nav-li"><a href="https://evalai.cloudcv.org/web/challenges/challenge-page/543/overview" id="href-register"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Register</a></li>
+          <li class="nav-li"><a href="mailto:social.media.prediction@gmail.com" id="href-contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+
+    <div class="container-fluid" id="maintext">
+      <div class="row" id="block1">
+        <div class="container">
+          <div class="col-xs-10 col-xs-offset-1">
+            <h2 class="p-title"><b>Problem Description</b></h2>
+            <p class="p-body">The <b class="orange">Social Media Popularity Prediction</b> task focuses on predicting the impact of sharing different posts for a publisher on social media. Given a photo (a.k.a. post) from a publisher, the goal is to automatically predict the popularity of the photo, e.g., view count for Flickr, Pin count for Pinterest, etc.
+            </p>
+            <p class="p-body">
+              The contestants are asked to develop their dynamic prediction models based on the SMPD dataset provided by the Challenge (as training data), plus possibly additional public/private data, to address the given tasks. For the evaluation purpose, a contesting system is asked to produce prediction results of popularity. The accuracy will be evaluated by pre-defined quantitative evaluation. The contestants need to introduce their systems and datasets in the conference.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row" id="block2">
+        <div class="container">
+          <div class="col-xs-10 col-xs-offset-1">
+            <h2 class="p-title"><b>Evaluation Criteria</b></h2>
+            <p class="p-body">By quantitative evaluation, we measure the systems submitted to this challenge on a testing set. We adopt multiple metrics including <i>Spearman’s Rho (SR)</i> and <i>Mean Absolute Error (MAE)</i>. The ranking for the competition is based on quantitative evaluation.
+            </p>
+         
+          </div>
+          <br>
+        </div>
+      </div>
+
+      <div class="row" id="block3">
+        <div class="container">
+          <div class="col-xs-10 col-xs-offset-1">
+            <h2 class="p-title"><b>Submission</b></h2>
+            <p class="p-body">Each submission is required to be formatted in a JSON File as follows. <!--Here we also provide a <a>submission example</a> as reference.--></p>
+            <pre class="prettyprint lang-json">
+  {
+      "version": "VERSION 1.2",
+      "result": [
+          {
+              "post_id": "post6374637",
+              "popularity_score": 2.1345
+          },
+          ...
+          {
+              "post_id": "post3637373",
+              "popularity_score": 3.1415
+          }
+      ],
+      "external_data": {
+          "used": "true",
+          "details": "VGG-19 pre-trained on ImageNet training set"
+      }
+  }
+            </pre>
+            <br>
+          </div>
+        </div>
+      </div>
+
+    <div class="row" id="block4">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <h2 class="p-title"><b>Competition Evaluation</b></h2>
+          <p class="p-body">Please checkout the <a href="https://evalai.cloudcv.org/web/challenges/challenge-page/543/overview">SMP page</a> on EvalAI platform.</p>
+          <p class="p-body"><b>Competition Begins:</b> March 10 2020</p>
+          <p class="p-body"><b>Paper Submission Deadline:</b> July 23 2020</p>
+        </div>
+      </div>
+    </div>
+
+
+      <div class="row" id="block7">
+        <div class="col-xs-10 col-xs-offset-1">
+          <center><h5 style="color:white;">Copyright © 2020. SMP Challenge Organization Committee. All rights reserved.</h5></center>
+        </div>
+      </div>
+
+    </div>
+
+  </body>
+ </html>
