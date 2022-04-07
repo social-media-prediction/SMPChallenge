@@ -1,4 +1,4 @@
-# SMP Challenge 2021 (Social Media Prediction)
+# The 4th SMP Challenge (Social Media Prediction)
 
 Homepage: https://smp-challenge.com
 
