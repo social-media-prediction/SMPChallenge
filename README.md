@@ -12,7 +12,7 @@ SMP Challenge is a series of annual challenges on ACM Multimedia Conference for 
 
 ## Data Download
 
-[SMPD 2019](https://smp-challenge.com/download.html)
+[SMPD](https://smp-challenge.com/download.html)
 
 
 ## Challenge Leaderboard
