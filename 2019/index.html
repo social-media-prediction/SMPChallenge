@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>SMP Challenge</title>
+  <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+  <link rel="stylesheet" href="static/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="static/css/prettify.css">
+  <script src="static/js/jquery.min.js"></script>
+  <script src="static/js/bootstrap.js"></script>
+  <script src="static/js/sprintf.js"></script>
+  <script src="static/js/run_prettify.js"></script>
+  <script src="static/js/md5.js"></script>
+  <style type="text/css">
+    #nav-first {
+      border-radius: 0px;
+      margin-bottom: 0px;
+      min-height: 80px;
+    }
+
+    #nav-second {
+      border-radius: 0px;
+      margin-bottom: 0px;
+      top: 80px;
+    }
+
+    #nav-first-main {
+      margin: 0 0;
+      height: 80px;
+    }
+
+    #nav-first-main>li {
+      height: 80px;
+    }
+
+    #nav-first-main>li>a {
+      height: 80px;
+      padding-top: 0;
+      padding-bottom: 0;
+      line-height: 80px;
+    }
+
+    #nav-second-main {
+      margin: 0 80px;
+    }
+
+    .nav-second-li {
+      font-size: 120%;
+    }
+
+
+    #jumbotron {
+      height: 600px;
+      background-image: url(static/img/front.jpeg);
+      background-size: cover;
+      margin-top: 130px;
+      margin-bottom: 0px;
+      background-position: 80% 75%;
+      padding: 0;
+    }
+
+    #block1 {
+      background-color: white;
+    }
+
+    #block2 {
+      /*background-color: #f8f8f8;*/
+      background-color: #e8e8e8;
+    }
+
+    #block3 {
+      background-color: white;
+    }
+
+    #block4 {
+      background-color: #e8e8e8;
+    }
+
+    #block5 {
+      background-color: white;
+    }
+
+    #block6 {
+      background-color: #e8e8e8;
+    }
+
+    #block7 {
+      background-color: white;
+    }
+
+    #block8 {
+      background-color: #080808;
+    }
+
+    .p-body {
+      text-align: justify;
+      font-family: "Arial", sans-serif;
+      font-size: 120%;
+    }
+
+    .p-body-small {
+      text-align: justify;
+      font-family: "Arial", sans-serif;
+      font-size: 80%;
+    }
+
+    h1,
+    h2 {
+      font-family: "Arial", serif;
+      /*font-size: 150%;*/
+    }
+
+    .timeline-li {
+      font-family: "Arial", sans-serif;
+      font-size: 120%;
+    }
+
+    #logo {
+      padding-left: 100px;
+      padding-top: 10px;
+    }
+
+    .thumbnail {
+      border-color: transparent;
+      background-color: transparent;
+    }
+
+    .avatar {
+      border-radius: 50%;
+    }
+
+    .nav-li {
+      font-size: 120%;
+      cursor: pointer;
+    }
+
+    .dropdown-li {
+      background-color: #333333;
+    }
+    .dropdown-li>a {
+      color: #aaaaaa !important;
+    }
+    .dropdown-menu {
+      background-color: #333333;
+    }
+
+    td,
+    th {
+      text-align: center;
+    }
+
+    .mengban {
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    #morning {
+      /*color: rgb(248,206,69);*/
+      padding-top: 200px;
+    }
+
+    .orange {
+      color: rgb(241, 156, 55) !important;
+    }
+
+    .white {
+      color: white !important;
+    }
+
+    .red {
+      color: red !important;
+    }
+
+    .help-block {
+      display: none;
+    }
+
+    .member-title {
+      padding-top: 10px;
+    }
+
+    .p-title {
+      color: rgb(241, 156, 55) !important;
+    }
+
+    .timeline {
+      display: block;
+      margin: 15px 0
+    }
+
+    .timeline ul {
+      margin-left: 25px;
+      margin-top: 30px;
+      border-left: 2px solid #ddd;
+      list-style: none;
+    }
+
+    .timeline ul li {
+      width: 100%;
+      margin-left: -51px;
+      line-height: 20px;
+      margin-bottom: 20px
+    }
+
+    .timeline ul li b {
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      border: 2px solid rgb(241, 156, 55);
+      margin: 0 5px;
+      border-radius: 6px;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      overflow: hidden;
+      display: inline-block;
+      float: left
+    }
+
+    .timeline ul li span {
+      padding-left: 7px;
+      font-size: 16px;
+      line-height: 20px;
+      color: rgb(241, 156, 55);
+      font-weight: bold
+    }
+
+    .timeline ul li p {
+      padding-left: 25px;
+      font-size: 13px;
+      line-height: 25px;
+      color: #666
+    }
+
+    #forget {
+      cursor: pointer;
+    }
+
+    .nav-dropdown {
+      color: white !important;
+    }
+
+    .nav-dropdown:hover {
+      background-color: #666 !important;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top" id="nav-second">
+    <div class="container">
+      <ul class="nav navbar-nav" id="nav-second-main">
+        <li class="nav-li active"><a class="nav-second-li" href="#" id="href-home"><b>Home</b></a></li>
+        <li class="nav-li"><a class="nav-second-li" href="dataset.html" id="href-description"><b>Dataset</b></a></li>
+        <li class="nav-li"><a class="nav-second-li" href="download.html" id="href-dataset"><b>Download</b></a></li>
+        <li class="nav-li"><a class="nav-second-li" href="challenge.html" id="href-dataset"><b>Challenge</b></a></li>
+        <li class="nav-li"><a class="nav-second-li" href="leaderboard.html" id="href-leaderboard"><b>Leaderboard</b></a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-default navbar-fixed-top" id="nav-first">
+    <div class="container">
+      <div class="navbar-header">
+        <img src="static/img/logo.png" width="400px" id="logo">
+      </div>
+
+      <ul class="nav navbar-nav navbar-right" id="nav-first-main">
+        <li class="nav-li"><a href="https://evalai.cloudcv.org/web/challenges/challenge-page/543/overview" id="href-register"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Register</a></li>
+        <li class="nav-li"><a href="mailto:social.media.prediction@gmail.com" id="href-contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="jumbotron" id="jumbotron">
+    <div class="mengban">
+      <center>
+        <h1 id="morning"><span class="orange">S</span><span class="white">ocial</span> <span class="orange">M</span><span class="white">edia</span> <span class="orange">P</span><span class="white">rediction</span> <span class="white">Challenge</span>
+        </h1>
+      </center>
+      <center>
+        <h2 class="white">ACM Multimedia 2019</h2>
+      </center>
+      <center>
+        <h3 class="white">21 - 25 October <b class="orange">2019</b>, Nice, France</h3>
+      </center>
+    </div>
+  </div>
+
+  <div class="container-fluid" id="maintext">
+
+    <div class="row" id="block1">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <h2 class="p-title"><b>News</b></h2>
+          <ul>
+            <li class="timeline-li red"><b>[06-16-2019]</b>: Challenge submission already closed.</li>
+            <li class="timeline-li"><b>[06-11-2019]</b>: Submission already opened, please refer to the <a href="/submission">link</a> after logged in</li>
+            <li class="timeline-li"><b>[06-08-2019]</b>: TEST SET already released now!</li>
+            <li class="timeline-li"><b>[04-16-2019]</b>: We have released the training data.</li>
+            <li class="timeline-li"><b>[03-25-2019]</b>: We are hosting Social Media Prediction Challenge (ACM Multimedia 2019).</li>
+          </ul>
+          <br>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="block2">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <h2 class="p-title"><b>Overview</b></h2>
+          <p class="p-body">
+            <b class="orange">SMP Challenge</b> (Social Media Prediction Challenge) is a annual prediction challenge to seek excellent research teams for prediction and discover novel and emerging challenges based on numerous resources of social multimedia. Making predictions via social multimedia (photos, video or news) is not only helps us to make better strategic decisions for future, but also explore advanced predictive learning and analytics methods for various of problems and scenarios in several areas, such as multimedia advertising, recommendation system, user engagement, and trend analysis etc.   
+          </p>
+          <p class="p-body">
+            As a joint activity with the research teams from multiple organizations, we are holding on the SMP Challenge 2019 continuously. In this year, the open task of SMP Challenge is <b class="orange">Temporal Popularity Prediction</b>, which focused on predicting future clicks of new social media posts before they were posted in social feeds. The participated teams need to design new algorithm based on understanding and learning techniques, and automatically predict popularity (formulated by clicks or visits etc.) to achieve better performances.
+            </p>
+
+
+          <p class="p-body">
+            SMPD2019 is a large social multimedia dataset, which contains over 486K records from 69K users. And each of social media posts has rich contextual information and annotations (e.g. image, text, temporal-spatial information, user profile, etc.). 
+          </p>
+          <br>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="row" id="block3">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <h2 class="p-title"><b>Dataset Statistics</b></h2>
+          <p class="p-body">The SMPD2019 (Social Media Prediction Dataset) contain 486K social multimedia posts with web images, text and contextual data and rich annotations, which collected from Flickr (one of the largest photo-sharing platform) and corresponding anonymized photo-sharing records. SMPD2019 is a multi-faced data collection, which contains user profile, post category, customize tag, geography information, photo image, and photo metadata. For the prediction task, we split the data with time-order, resulting in train and test ratio is 2:1. The tables below show the statistics of the dataset.
+          </p>
+          <table class="table table-bordered table-striped">
+            <tr>
+              <th>Dataset</th>
+              <th>#Post</th>
+              <th>#User</th>
+              <th>#Categories</th>
+              <th>Temporal Range (Months)</th>
+              <th>Avg. Title Length</th>
+              <th>#Customize Tags</th>
+            </tr>
+            <tr>
+              <td>SMPD2019</td>
+              <td>486k</td>
+              <td>70k</td>
+              <td>756</td>
+              <td>16</td>
+              <td>29</td>
+              <td>250k</td>
+            </tr>
+
+          </table>
+          <br>
+        </div>
+      </div>
+    </div>
+
+    <!--div class="row" id="block4">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <h2 class="p-title"><b>Competition Evaluation</b></h2>
+          <p class="p-body">Please checkout the <a href="https://evalai.cloudcv.org/web/challenges/challenge-page/543/overview">SMP page</a> on EvalAI platform.</p>
+          <p class="p-body"><b>Competition Begins:</b> March 10 2020</p>
+          <p class="p-body"><b>Paper Submission Deadline:</b> July 23 2020</p>
+        </div>
+      </div>
+    </div-->
+
+    <div class="row" id="block4">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <h2 class="p-title"><b>Important Dates</b></h2>
+          <div class="timeline">
+            <ul>
+              <li><b></b><span>April 15, 2019</span>
+                <p>Dataset available for download (training set)</p>
+              </li>
+              <li><b></b><span>June 8, 2019</span>
+                <p>Test set available for download</p>
+              </li>
+              <li><b></b><span>June 16, 2019</span>
+                <p>Results submission</p>
+              </li>
+              <li><b></b><span>June 17, 2019</span>
+                <p>Objective evaluation and human evaluation</p>
+              </li>
+              <li><b></b><span>June 20, 2019</span>
+                <p>Evaluation results announce</p>
+              </li>
+              <li><b></b><span>July 8, 2019</span>
+                <p>Paper submission deadline (please follow the instructions on the main conference website)</p>
+              </li>       
+            </ul>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="block5">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <h2 class="p-title"><b>Citation</b></h2>
+          <p class="p-body">If you intend to publish results that use the information and resources provided by this challenge, please include the following references:</p>
+          <pre class="prettyprint lang-cv">
+@inproceedings{Wu2017DTCN,
+  title={Sequential Prediction of Social Media Popularity with Deep Temporal Context Networks},
+  author={Wu, Bo and Cheng, Wen-Huang and Zhang, Yongdong and Qiushi, Huang and Jintao, Li and Mei, Tao},
+  booktitle={International Joint Conference on Artificial Intelligence (IJCAI)},
+  year={2017},
+  location = {Melbourne, Australia}}
+
+@inproceedings{Wu2016TemporalPrediction,
+  author = {Wu, Bo and Mei, Tao and Cheng, Wen-Huang and Zhang, Yongdong},
+  title = {Unfolding Temporal Dynamics: Predicting Social Media Popularity Using Multi-scale Temporal Decomposition},
+  booktitle = {Proceedings of the Thirtieth AAAI Conference on Artificial Intelligence (AAAI)}
+  year = {2016},
+  location = {Phoenix, Arizona}}
+
+@inproceedings{Wu2016TimeMatters,
+  author = {Wu, Bo and Cheng, Wen-Huang and Zhang, Yongdong and Mei, Tao},
+  title = {Time Matters: Multi-scale Temporalization of Social Media Popularity},
+  booktitle = {Proceedings of the 2016 ACM on Multimedia Conference (ACM MM)},
+  year = {2016},
+  location = {Amsterdam, The Netherlands}}
+            </pre>
+          <br>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="block6">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <h2 class="p-title"><b>Our Teams</b></h2>
+          <br>
+          <div class="row">
+            <div class="col-xs-3">
+              <div class="thumbnail">
+                <img src="static/img/bowu.jpg" width="100%" class="avatar">
+                <div class="caption">
+                  <center>
+                    <h4>Bo Wu</h4>
+                  </center>
+                  <p>
+                    <center>Columbia University</center><br>
+                  </p>
+                  <p>
+                    <center><a href="mailto:bo.wu@columbia.edu">bo.wu@columbia.edu</a></center>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-3">
+              <div class="thumbnail">
+                <img src="static/img/wenhuangcheng.jpg" width="100%" class="avatar">
+                <div class="caption">
+                  <center>
+                    <h4>Wen-Huang Cheng</h4>
+                  </center>
+                  <p>
+                    <center>National Chiao Tung University</center>
+                  </p>
+                  <p>
+                    <center><a href="mailto:whcheng@nctu.edu.tw">whcheng@nctu.edu.tw</a></center>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-3">
+              <div class="thumbnail">
+                <img src="static/img/beiliu.jpg" width="100%" class="avatar">
+                <div class="caption">
+                  <center>
+                    <h4>Bei Liu</h4>
+                  </center>
+                  <p>
+                    <center>Microsoft Research Asia</center><br>
+                  </p>
+                  <p>
+                    <center><a href="mailto:bei.liu@microsoft.com">bei.liu@microsoft.com</a></center>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-3">
+              <div class="thumbnail">
+                <img src="static/img/jieboluo.jpg" width="100%" class="avatar">
+                <div class="caption">
+                  <center>
+                    <h4>Jiebo Luo</h4>
+                  </center>
+                  <p>
+                    <center>University of Rochester</center><br>
+                  </p>
+                  <p>
+                    <center><a href="mailto:jluo@cs.rochester.edu">jluo@cs.rochester.edu</a></center>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-3">
+              <div class="thumbnail">
+                <img src="static/img/zhaoyangzeng.jpg" width="100%" class="avatar">
+                <div class="caption">
+                  <center>
+                    <h4>Zhaoyang Zeng</h4>
+                    </h2>
+                    <p>
+                      <center>Sun Yat-sen University</center><br>
+                    </p>
+                    <p>
+                      <center><a href="mailto:zengzhy5@mail2.sysu.edu.cn">zengzhy5@mail2.sysu.edu.cn</a></center>
+                    </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-3">
+              <div class="thumbnail">
+                <img src="static/img/peiyeli.jpg" width="100%" class="avatar">
+                <div class="caption">
+                  <center>
+                    <h4>Peiye Liu</h4>
+                    </h2>
+                    <p>
+                      <center>Beijing University of Posts and Telecommunications</center>
+                    </p>
+                    <p>
+                      <center><a href="mailto:liupeiye@bupt.edu.cn">liupeiye@bupt.edu.cn</a></center>
+                    </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="block8">
+      <div class="col-xs-10 col-xs-offset-1">
+        <center>
+          <h5 style="color:white;">Copyright © 2019. SMP Challenge Organization Committee. All rights reserved.</h5>
+        </center>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+
+</html>

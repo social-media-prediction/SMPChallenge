@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Social Media Headline Prediction (SMHP)</title>
+
+  <link rel="stylesheet" href="./dist/css/bootstrap.css">
+  <link rel="stylesheet" href="dist/css/reset.css">
+  <link rel="stylesheet" href="dist/css/style.css">
+  <link rel="stylesheet" href="dist/css/monokai-sublime.css">
+
+</head>
+<body>
+<div class="container wrapper">
+  <header>
+    <div class="logo column five">
+      <img src="./dist/img/website_logo.png" alt="SOCIAL MEDIA PREDICTION">
+    </div>
+    <div class="contact-box">
+      <ul>
+        <li>
+          <i class="contact-icon icon-reg"></i>
+          <a data-toggle="modal" data-target="#regModal">Register</a>
+        </li>
+        <li>
+          <i class="contact-icon icon-mail"></i>
+          <a href="mailto:social.media.prediction@gmail.com">social.media.prediction@gmail.com</a>
+        </li>
+
+      </ul>
+    </div>
+  </header>
+  <!--nav-->
+  <div class="navbar-wrapper">
+    <nav class="navbar navbar-static-top">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="index.html">Home</a></li>
+          <li class="active"><a href="challenge.html">Challenge</a></li>
+          <li><a href="leaderboard.html">Leaderboard</a></li>
+          <li><a href="datasets.html">Datasets</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <!--content-->
+  <div class="content-wrapper">
+    <section class="section">
+      <h2>TASK DESCRIPTION</h2>
+      <div class="bold-line"></div>
+      <article>
+        <p>
+          This year we will focus on the task <b>Headline Popularity Prediction</b>.
+          Meanwhile, we are open for innovative self-proposed topics.
+          The contestants are asked to develop their prediction algorithm based on the SMHP dataset provided by the Challenge (as training data), plus possibly additional public/private data, to address one or both of the given tasks. For the evaluation purpose, a contesting system is asked to produce prediction results of popularity. The accuracy will be evaluated by pre-defined quantitative evaluation. The contestants need to introduce their algorithms and datasets in the conference.
+
+        </p>
+      </article>
+      <div class="task-box">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+              <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Headline Popularity Prediction
+                </a>
+              </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+              <div class="panel-body">
+                The task is designed to discover top-k popular posts on social media. Suppose to have a set of candidate photos and the history data of past photo sharing, the goal is to automatically predict which will be the most popular photos in the next day.<br>
+                
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+              <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Additional Task: Open Topics
+                </a>
+              </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+              <div class="panel-body">
+                To encourage the exploration of the SMHP application scope, we also accept innovative topics proposed by the participants themselves, e.g., behavior prediction, interest mining, etc. For open topics, the participants need to clearly define the topic, demonstrate the technical advancement of their proposed solutions, specify the evaluation protocols, and provide introduction based experimental results.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>RESULT SUBMISSION</h2>
+      <div class="bold-line"></div>
+     
+  
+      Closed.
+  <!-- 
+<a href="mailto:social.media.prediction@gmail.com"> <button class="submit-button" id="submit" >Result Submit</button></a>
+       <article>          
+        <p>
+        <b>After registration on challenge website and submission buttion opened (June 22, 2018). Please send your prediction result by Submission Mail. The mail title is "Submission Mail-(teamname)", and JSON file of results are attached in the mail with particular task name ("SMHP18.json").</b>
+        </p>    
+        <p class="notice-txt">We will take the last Submission Mail of each team as the final submission before submission deadline.</p>
+      </article>
+         -->
+    </section>
+
+    <section class="section">
+      <h2>SUBMISSION FORMAT</h2>
+      <div class="bold-line"></div>
+      <article>
+        <p>
+          Each team is allowed to submit the results of at most three runs and selects one run as the primary run of the submission (we do not guarantee to evaluate additional runs), which will be measured for performance comparison across teams.<br>
+          Each submission is required to be formatted in a <b>JSON File</b> as follows. Here we also provide a <a href="https://github.com/social-media-prediction/PredictionChallenge/blob/master/JsonExample2018.zip">submission example</a> as reference.
+        </p>
+      </article>
+      <div class="task-box">
+        <div class="panel-group" id="submission" role="tablist" aria-multiselectable="true">
+          
+          
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="submissionTwo">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#submission" href="#submissionCollapseTwo" aria-expanded="true" aria-controls="submissionCollapseOne">
+                  Submission Format (ascending by post_id):
+                </a>
+              </h4>
+            </div>
+            <div id="submissionCollapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="submissionTwo">
+              <div class="panel-body">
+                <pre>
+                  <code>
+{
+    "version": "VERSION 1.2",
+    "result": [
+        {
+            "post_id": "post6374637",
+            "ranking_position": 1,
+            "popularity_score": 2.1345
+        },
+        ...
+        {
+            "post_id": "post3637373",
+            "ranking_position": 5,
+            "popularity_score": 3.1415
+        }
+    ],
+    "external_data": {
+        "used": "true",
+        "details": "VGG-19 pre-trained on ImageNet training set"
+    }
+}
+                  </code>
+
+                </pre>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!--footer-->
+<footer>
+  <div class="container">
+    @SOCIAL MEDIA PREDICTION
+  </div>
+</footer>
+
+<!--register modal-->
+<div class="modal fade" id="regModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <img src="./dist/img/reg-modal.png" alt="register">
+        <a class="typeform-share register-btn" href="https://prediction.typeform.com/to/R2OsrO" data-mode="popup" target="_blank">REGISTER</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="./dist/js/jquery-2.1.4.min.js"></script>
+<script src="./dist/js/bootstrap.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+<script>(function(){var qs,js,q,s,d=document,gi=d.getElementById,ce=d.createElement,gt=d.getElementsByTagName,id="typef_orm_share",b="https://s3-eu-west-1.amazonaws.com/share.typeform.com/";if(!gi.call(d,id)){js=ce.call(d,"script");js.id=id;js.src=b+"share.js";q=gt.call(d,"script")[0];q.parentNode.insertBefore(js,q)}})()</script>
+</body>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+
+</body>
+</html>

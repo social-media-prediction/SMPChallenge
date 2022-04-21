@@ -198,6 +198,15 @@
     #forget {
       cursor: pointer;
     }
+
+    .nav-dropdown {
+      color: white !important;
+    }
+
+    .nav-dropdown:hover {
+      background-color: #666 !important;
+    }
+      
   </style>
   <script type="text/javascript">
     var settings = {
@@ -241,14 +250,16 @@
         <li class="nav-li"><a class="nav-second-li" href="index.html" id="href-home"><b>Home</b></a></li>
         <li class="nav-li"><a class="nav-second-li" href="dataset.html" id="href-description"><b>Dataset</b></a></li>
         <li class="nav-li active"><a class="nav-second-li" href="#" id="href-dataset"><b>Download</b></a></li>
-        <li class="nav-li"><a class="nav-second-li" href="challenge.html" id="href-challenge"><b>Challenge</b></a></li>
-        <!--li class="nav-li dropdown">
-          <a class="nav-second-li dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="href-leaderboard"><b>Leaderboard</b> <span class="caret"></a>
+        <li class="nav-li dropdown">
+          <a href='#' class="dropdown-toggle nav-second-li" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Challenge</b> <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li class="dropdown-li"><a href="https://evalai.cloudcv.org/web/challenges/challenge-page/543/leaderboard">SMP 2020</a></li>
-            <li class="dropdown-li"><a href="/leaderboard">SMP 2019</a></li>
+            <li><a class="nav-dropdown" href="challenge.html" id="href-challenge">2022</a></li>
+            <li><a class="nav-dropdown" href="2020/index.html" id="href-challenge">2020</a></li>
+            <li><a class="nav-dropdown" href="2019/index.html" id="href-challenge">2019</a></li>
+            <li><a class="nav-dropdown" href="2018/index.html" id="href-challenge">2018</a></li>
+            <li><a class="nav-dropdown" href="2017/index.html" id="href-challenge">2017</a></li>
           </ul>
-        </li-->
+        </li>
         <li class="nav-li"><a class="nav-second-li" href="leaderboard.html" id="href-leaderboard"><b>Leaderboard</b></a></li>
 
       </ul>

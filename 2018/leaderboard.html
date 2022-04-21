@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Social Media Headline Prediction (SMHP)</title>
+
+  <link rel="stylesheet" href="./dist/css/bootstrap.css">
+  <link rel="stylesheet" href="dist/css/reset.css">
+  <link rel="stylesheet" href="dist/css/style.css">
+  <style>
+    .section{
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+<div class="container wrapper">
+  <header>
+    <div class="logo column five">
+      <img src="./dist/img/website_logo.png" alt="SOCIAL MEDIA PREDICTION">
+    </div>
+    <div class="contact-box">
+      <ul>
+        <li>
+          <i class="contact-icon icon-reg"></i>
+          <a data-toggle="modal" data-target="#regModal">Register</a>
+        </li>
+        <li>
+          <i class="contact-icon icon-mail"></i>
+          <a href="mailto:social.media.prediction@gmail.com">social.media.prediction@gmail.com</a>
+        </li>
+
+      </ul>
+    </div>
+  </header>
+  <!--nav-->
+  <div class="navbar-wrapper">
+    <nav class="navbar navbar-static-top">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="challenge.html">Challenge</a></li>
+          <li class="active"><a href="leaderboard.html">Leaderboard</a></li>
+          <li><a href="datasets.html">Datasets</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <!--content-->
+  <div class="content-wrapper">
+    <section class="section">
+      <h2>LEADERBOARD</h2>
+      <div class="bold-line"></div>
+      <article>
+
+        <p>
+          Ranking list of top participants.
+        </p>
+      </article>
+      <div class="col-md-10">
+        <table class="table table-striped leaderboard-table">
+          <thead>
+          <tr>
+            <th colspan="6" style="text-align: center">SMHP Challenge</th>
+          </tr>
+          
+          <tr>
+          <td>Ranking</td>
+          <td>Team Name</td>
+          <td>MAE</td>
+          <td>Spearmanr's Rho</td>
+          </tr>
+            
+          <tr>
+          <td>1</td>
+          <td>hmjmf</td>
+          <td>1.7837</td>
+          <td>0.6516</td>
+          </tr>
+            
+                      
+          <tr>
+          <td>2</td>
+          <td>Southern Taiwan Club</td>
+          <td>1.9089</td>
+          <td>0.4631</td>
+          </tr>
+             
+            
+          <tr>
+          <td>3</td>
+          <td>Kun</td>
+          <td>1.9797</td>
+          <td>0.4559</td>
+          </tr>
+              
+            
+          <tr>
+          <td>4</td>
+          <td>GAN</td>
+          <td>2.0023</td>
+          <td>0.4316</td>
+          </tr>
+           
+                      
+          <tr>
+          <td>5</td>
+          <td>midas</td>
+          <td>4.0376</td>
+          <td>0.0738</td>
+          </tr>
+            
+
+            
+
+          </tbody>
+        </table>
+      </div>
+      
+    </section>
+
+    <section class="section">
+      <h2>RANKING</h2>
+      <div class="bold-line"></div>
+      <article>
+
+        <p>
+          The ranking for the competition is based on the results from challenge task, respectively. Specifically, a rank list of teams is produced by sorting their scores on evaluation metrics, respectively.
+        </p>
+      </article>
+    </section>
+
+    <section class="section">
+      <h2>EVALUATION METRIC</h2>
+      <div class="bold-line"></div>
+   <article>
+     <div class="col-md-6">
+       <table class="table table-striped leaderboard-table">
+         <thead>
+         <tr>
+           <th>Task</th>
+           <th>Metrics</th>
+
+         </tr>
+         </thead>
+         <tbody>
+         <tr>
+           <td>SMHP Challenge</td>
+           <td>MAE, Spearmanr's Rho and HR</td>
+         </tr>
+         </tbody>
+       </table>
+     </div>
+     <div style="float: none;clear: both">
+       <p>
+         The evaluation provided here can be used to obtain performances on the testing set of SMP. It contains multiple common metrics, including <b>Spearman Ranking Correlation (Spearmanr's Rho)</b>, <b>Mean Absolute Error (MAE)</b>, <b>Mean Squared Error (MSE)</b>, and <b>Hit Ratio (HR)</b>.
+         <br>By quantitative evaluation, we measure the systems submitted to this challenge on a testing set. Our evaluation protocol is applied on the following criteria:
+         <br>
+         <i class="green-dot"></i><b>Prediction Correlation:</b> whether the predicted popularity more correlates with the actual value of the popularity?<br>
+         <i class="green-dot"></i><b>Prediction Error:</b> to judge the error of the score prediction<br>
+         <i class="green-dot"></i><b>Ranking Relevance:</b> to measure the ranking relevance between top-k groundtruths and predicted items.
+       </p>
+     </div>
+   </article>
+    </section>
+    
+
+    
+  </div>
+</div>
+
+<!--footer-->
+<footer>
+  <div class="container">
+    @SOCIAL MEDIA PREDICTION
+  </div>
+</footer>
+
+<!--register modal-->
+<div class="modal fade" id="regModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <img src="./dist/img/reg-modal.png" alt="register">
+        <a class="typeform-share register-btn" href="https://prediction.typeform.com/to/R2OsrO" data-mode="popup" target="_blank">REGISTER</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="./dist/js/jquery-2.1.4.min.js"></script>
+<script src="./dist/js/bootstrap.js"></script>
+<script>(function(){var qs,js,q,s,d=document,gi=d.getElementById,ce=d.createElement,gt=d.getElementsByTagName,id="typef_orm_share",b="https://s3-eu-west-1.amazonaws.com/share.typeform.com/";if(!gi.call(d,id)){js=ce.call(d,"script");js.id=id;js.src=b+"share.js";q=gt.call(d,"script")[0];q.parentNode.insertBefore(js,q)}})()</script>
+</body>
+</body>
+</html>

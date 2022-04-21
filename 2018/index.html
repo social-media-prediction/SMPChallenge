@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title> Social Media Headline Prediction (SMHP)</title>
+
+  <link rel="stylesheet" href="./dist/css/bootstrap.css">
+  <link rel="stylesheet" href="dist/css/reset.css">
+  <link rel="stylesheet" href="dist/css/style.css">
+  <link rel="stylesheet" href="dist/css/arduino-light.css">
+  <style>
+    pre {
+      font-family: "Courier New", monospace;
+      font-size: 13px;
+      margin: 0;
+      background-color: #f1f1f1;
+      overflow: hidden;
+      padding: 10px;
+    }
+    pre code{
+      display: block;
+      line-height: 1.4;
+      background-color: #f1f1f1;
+      padding: 0;
+      /*padding: 1em 1.5em;*/
+      /*overflow-x: auto;*/
+    }
+    .hljs{
+      background: #F1F1F1;
+      padding: 0 0.5em;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+<div class="container wrapper">
+  <header>
+    <div class="logo column five">
+      <img src="./dist/img/website_logo.png" alt="SOCIAL MEDIA PREDICTION"> <!--logo-black-v-->
+    </div>
+    <div class="contact-box">
+      <ul>
+        <li>
+          <i class="contact-icon icon-reg"></i>
+          <a data-toggle="modal" data-target="#regModal">Register</a>
+        </li>
+        <li>
+          <i class="contact-icon icon-mail"></i>
+          <a href="mailto:social.media.prediction@gmail.com">social.media.prediction@gmail.com</a>
+        </li>
+
+      </ul>
+    </div>
+  </header>
+  <!--nav-->
+  <div class="navbar-wrapper">
+    <nav class="navbar navbar-static-top">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="index.html">Home</a></li>
+          <li><a href="challenge.html">Challenge</a></li>
+          <li><a href="leaderboard.html">Leaderboard</a></li>
+          <li><a href="datasets.html">Datasets</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <!--content-->
+  <div class="content-wrapper">
+
+    <p class="notice-txt"><b>SMHP Challenge 2018 News: </b>The SMHP Challenge for ACM MM 2018 already finished. SMP Challenge 2019 will come soon. Please care the information on https://github.com/social-media-prediction. </p>
+
+    <section class="section">
+      <h2>OVERVIEW</h2>
+      <div class="bold-line"></div>
+      <article>
+        
+        <p>
+          On social media, authors often want to see their information shared more widely, potentially reaching thousands of readers in a short amount of time. For examples, Washington Post in 2017 started to look for ways to predict which stories will become popular and help editors to more efficiently allocate resources to support a better reading experience. Headline prediction is thus one of the most desired and powerful tools to crack the secret of popular social media content.
+        </p>
+
+        <p>
+        Social media today, with plenty of recorded user preferences and social behaviors, offers a rich online source for learning and predicting future headlines from the history data. Therefore, our challenge task is designed to get a deeper understanding of the temporal evolution of social media headlines. Given sequential and continuous post sharing data before a specific date from social media, the problem is to predict how popular of new posts will be for the near future and which would be the headlines?
+       </p>
+
+        <p>
+          As a continuous activity of the <b>Social Media Prediction (SMP) Challenge</b> in ACM Multimedia 2017, the joint research team from the <b>Academia Sinica (AS)</b> and <b>JD.com</b> is running a new edition of the prediction challenge for social multimedia understanding and predictions, namely <b>Social Media Headline Prediction (SMHP) Challenge</b> in ACM Multimedia 2018, with over 340K posts and 80K users data in total. Different from existing social media datasets in the literature, ours is a time-ordering dataset to particularly capture the temporal dynamics of social media data over time to thoroughly represent the social media “world”. 
+        </p>
+
+      </article>
+    </section>
+
+    <section class="section">
+      <h2>PARTICIPATION</h2>
+      <div class="bold-line"></div>
+      <article>
+        <p>
+          The Challenge is a team-based contest. Each team can have one or more members, and an individual can not be a member of multiple teams. At the end of the Challenge, all teams will be ranked based on both objective evaluation and human evaluation. The top performing teams will receive award certificates and/or cash prizes. At the same time, all accepted submissions are qualified for the conference’s grand challenge award competition.
+        </p>
+      </article>
+    </section>
+
+    <section class="section">
+      <h2>CITATION</h2>
+      <div class="bold-line"></div>
+      <article>
+        <p style="margin-bottom: 15px">
+          If you intend to publish results that use the information and resources provided by this challenge, please include the following references:
+        </p>
+      </article>
+      <pre>
+      <code><span class="hljs-keyword">@inproceedings</span>{<span class="hljs-built_in">Wu2017DTCN</span>,
+  title={<span class="hljs-built_in">Sequential Prediction of Social Media Popularity with Deep Temporal Context Networks</span>},
+  author={<span class="hljs-built_in">Wu, Bo and Cheng, Wen-Huang and Zhang, Yongdong and Qiushi, Huang and Jintao, Li and Mei, Tao</span>},
+  booktitle={<span class="hljs-built_in">International Joint Conference on Artificial Intelligence (IJCAI)</span>},
+  year={<span class="hljs-built_in">2017</span>},
+  location = {<span class="hljs-built_in">Melbourne, Australia</span>}}</code>
+  <code><span class="hljs-keyword">@inproceedings</span>{<span class="hljs-built_in">Wu2016TemporalPrediction</span>,
+  author = {<span class="hljs-built_in">Wu, Bo and Mei, Tao and Cheng, Wen-Huang and Zhang, Yongdong</span>},
+  title = {<span class="hljs-built_in">Unfolding Temporal Dynamics: Predicting Social Media Popularity Using Multi-scale Temporal Decomposition</span>},
+  booktitle = {<span class="hljs-built_in">Proceedings of the Thirtieth AAAI Conference on Artificial Intelligence (AAAI)</span>}
+  year = {<span class="hljs-built_in">2016</span>},
+  location = {<span class="hljs-built_in">Phoenix, Arizona</span>}}</code>
+  <code><span class="hljs-keyword">@inproceedings</span>{<span class="hljs-built_in">Wu2016TimeMatters</span>,
+  author = {<span class="hljs-built_in">Wu, Bo and Cheng, Wen-Huang and Zhang, Yongdong and Mei, Tao</span>},
+  title = {<span class="hljs-built_in">Time Matters: Multi-scale Temporalization of Social Media Popularity</span>},
+  booktitle = {<span class="hljs-built_in">Proceedings of the 2016 ACM on Multimedia Conference (ACM MM)</span>},
+  year = {<span class="hljs-built_in">2016</span>},
+  location = {<span class="hljs-built_in">Amsterdam, The Netherlands</span>}}</code>
+      </pre>
+    </section>
+
+    <section class="section">
+      <h2>TIMELINE</h2>
+      <div class="bold-line"></div>
+      <div class="timeline">
+        Unless otherwise stated, all deadlines are at 23:59 Anywhere on Earth (AoE), UTC-12.
+        <ul>
+           
+          <li>
+            <b></b>
+            <span>April 15, 2018</span>
+            <p>Dataset available for download (training set)</p>
+          </li>
+          <li>
+            <b></b>
+            <span>June 14, 2018</span>
+            <p>Test set available for download</p>
+          </li>
+          <li>
+            <b></b>
+            <span>June 22, 2018</span>
+            <p>Results submission</p>
+          </li>
+          <li>
+            <b></b>
+            <span>June 22 - 25, 2018</span>
+            <p>Objective evaluation and human evaluation</p>
+          </li>
+          <li>
+            <b></b>
+            <span>June 25, 2018</span>
+            <p>Evaluation results announce</p>
+          </li>
+          <li>
+            <b></b>
+            <span>July 8, 2018</span>
+            <p>Paper (all tasks) submission deadline (please follow the instructions on the main conference website)</p>
+          </li>
+          <li>
+            <b></b>
+            <span>September 5, 2018</span>
+            <p>Dataset released (training and testing dataset)</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+     
+    <section class="section">
+      <h2>CONTACTS</h2>
+      <div class="bold-line"></div>
+      <ul class="row contact-box">
+        <li class="col-lg-2 col-md-3 col-sm-3">
+          <div class="contact-card">
+            <img src="./dist/img/photo-wenhuangcheng.jpg" alt="wenhuangcheng">
+            <aside>
+              <h3>Wen-Huang Cheng</h3>
+              <!--<a href="mailto:whcheng@citi.sinica.edu.tw">whcheng@citi.sinica.edu.tw</a>-->
+              <p>Academia Sinica</p>
+            </aside>
+          </div>
+        </li>
+        <li class="col-lg-2 col-md-3 col-sm-3">
+          <div class="contact-card">
+            <img src="./dist/img/photo-wubo.jpg" alt="wubo">
+            <aside>
+              <h3>Bo Wu</h3>
+              <!--<a href="mailto:wubo@ict.ac.cn">wubo@ict.ac.cn</a>-->
+              <p>JD AI Research</p>
+            </aside>
+          </div>
+        </li>
+         <!-- Yongdong Zhang
+        <li class="col-lg-2 col-md-3 col-sm-3">
+          <div class="contact-card">
+            <img src="./dist/img/photo-zyd.png" alt="YongdongZhang">
+            <aside>
+              <h3>Yongdong Zhang</h3>
+             
+              <p>Chinese Academy of Sciences</p>
+            </aside>
+          </div>
+        </li> -->
+        <li class="col-lg-2 col-md-3 col-sm-3">
+          <div class="contact-card">
+            <img src="./dist/img/photo-meitao.jpg" alt="meitao">
+            <aside>
+              <h3>Tao Mei</h3>
+              <!--<a href="mailto:tmei@microsoft.com">tmei@microsoft.com</a>-->
+              <p>JD AI Research</p>
+            </aside>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!--Sponsor-->
+         
+    <section class="section">
+      <h2>SPONSOR</h2>
+      <div class="bold-line"></div>
+      <div class="sponsor-info row">
+        <div class="col-md-2 col-sm-3 col-xs-3">
+          <a href="http://corporate.jd.com"><img src="./dist/img/jd_logo.jpg" alt="JD.com"></a>
+        </div>
+<!--         <div class="col-md-2 col-sm-3 col-xs-3">
+          <img src="./dist/img/jd_logo.jpg" alt="JD.com">
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-7">
+          <a href="http://corporate.jd.com">JD.com</a>
+        </div> -->
+      </div>
+    </section>
+  </div>
+</div>
+
+<!--footer-->
+<footer>
+  <div class="container">
+    @SOCIAL MEDIA PREDICTION
+  </div>
+</footer>
+
+
+<!--register modal-->
+<div class="modal fade" id="regModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <img src="./dist/img/reg-modal.png" alt="register">
+        <a class="typeform-share register-btn" href="https://prediction.typeform.com/to/QFdrPr" data-mode="popup" target="_blank">REGISTER</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="./dist/js/jquery-2.1.4.min.js"></script>
+<script src="./dist/js/bootstrap.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+<script>
+  (function(){var qs,js,q,s,d=document,gi=d.getElementById,ce=d.createElement,gt=d.getElementsByTagName,id="typef_orm_share",b="https://s3-eu-west-1.amazonaws.com/share.typeform.com/";if(!gi.call(d,id)){js=ce.call(d,"script");js.id=id;js.src=b+"share.js";q=gt.call(d,"script")[0];q.parentNode.insertBefore(js,q)}})()
+
+  hljs.initHighlightingOnLoad();
+</script>
+</body>
+</html>

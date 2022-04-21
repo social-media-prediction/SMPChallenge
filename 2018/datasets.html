@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Social Media Headline Prediction (SMHP)</title>
+
+  <link rel="stylesheet" href="./dist/css/bootstrap.css">
+  <link rel="stylesheet" href="dist/css/reset.css">
+  <link rel="stylesheet" href="dist/css/style.css">
+</head>
+<body>
+<div class="container wrapper">
+  <header>
+    <div class="logo column five">
+      <img src="./dist/img/website_logo.png" alt="SOCIAL MEDIA PREDICTION">
+    </div>
+    <div class="contact-box">
+      <ul>
+        <li>
+          <i class="contact-icon icon-reg"></i>
+          <a data-toggle="modal" data-target="#regModal">Register</a>
+        </li>
+        <li>
+          <i class="contact-icon icon-mail"></i>
+          <a href="mailto:social.media.prediction@gmail.com">social.media.prediction@gmail.com</a>
+        </li>
+
+      </ul>
+    </div>
+  </header>
+  <!--nav-->
+  <div class="navbar-wrapper">
+    <nav class="navbar navbar-static-top">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="challenge.html">Challenge</a></li>
+          <li><a href="leaderboard.html">Leaderboard</a></li>
+          <li class="active"><a href="datasets.html">Datasets</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <!--content-->
+  <div class="content-wrapper">
+    <section class="section">
+      <h2>DATASET</h2>
+      <div class="bold-line"></div>
+      <article>
+        <p>
+          The SMHP dataset collected from <a href="https://www.flickr.com/">Flickr</a> (a photo sharing platform) for headline prediction task. We split the data with time-order, resulting in train and test data ratio is 10:1.The tables below show the statistics of dataset.
+      </article>
+    </section>
+    
+    <section class="section">
+      <h2>DOWNLOAD LINK</h2>
+      <div class="bold-line"></div>
+      <article>
+        
+          You can download image URLs and their associated meta data here. The training data (including popularity labels) is available now. 
+          <p>
+          <b><a href="https://github.com/social-media-prediction/MM17PredictionChallenge/blob/master/README.md">Readme Document</a></b>
+          <br>
+ 
+          <br>
+          <a href="https://drive.google.com/open?id=0B7CzfJRX7ZuzU3AxbTVsRE9pUEE"><b>Download Link for Train Image Urls</b></a>
+          (Path Sample: train/77@N93/551891.jpg)
+          <!--https://drive.google.com/open?id=0B6MvFOM_AGXNY1FEZGlFd3FWMXM-->
+          <br>
+          <a href="https://drive.google.com/open?id=0B7CzfJRX7ZuzWFRQUnlKTGJYUWM"><b>Download Link for Train Data</b></a>
+          (include image paths, meta data and labels)
+           <br>
+            <a href="https://drive.google.com/open?id=0B5DNzEjbQhUZdnp2cUFwQmNLbTQ"><b>Download Link for Time Zone of Train Data</b></a>
+            
+             <br>
+         
+          <a href="https://drive.google.com/open?id=0B5DNzEjbQhUZUXQtRjRpbkQwSE0"><b>Download Link for Test Data</b></a>
+          (include image paths, meta data and without labels)
+           <br>
+            <a href="https://drive.google.com/open?id=0B5DNzEjbQhUZVEJTclN5NWlGX2M"><b>Download Link for Time Zone of Test Data</b></a>
+          </p>
+        
+          <p class="notice-txt">Note that the datasets will ONLY be released to participants who have registered the challenge during the competition. Until the challenge completes, we will make the data publically available to the whole research community.</p>
+          
+      </article>
+    </section>
+    
+    
+    <div class="smp-box">
+      <h3>Dataset Statistics</h3>
+      <table class="table table-striped leaderboard-table">
+        <thead>
+        <tr>
+          <th>#Post</th>
+          <th>#User</th>
+          <th>#Categories</th>
+          <th>Temporal Range (Months)</th>
+          <th>Avg. Title Length</th>
+          <th>#Tags</th>
+          <th>#POIs</th>
+          <th>Avg. Views</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th scope="row">340K</th>
+          <td>80K</td>
+          <td>11</td>
+          <td>16</td>
+          <td>26</td>
+          <td>669</td>
+          <td>103K</td>
+          <td>306</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tip-txt">*In the dataset, we provide the category information for each photo.</p>
+      
+    
+    
+
+  </div>
+</div>
+
+<!--footer-->
+<footer>
+  <div class="container">
+    @SOCIAL MEDIA PREDICTION
+  </div>
+</footer>
+
+<!--register modal-->
+<div class="modal fade" id="regModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <img src="./dist/img/reg-modal.png" alt="register">
+        <a class="typeform-share register-btn" href="https://prediction.typeform.com/to/R2OsrO" data-mode="popup" target="_blank">REGISTER</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="./dist/js/jquery-2.1.4.min.js"></script>
+<script src="./dist/js/bootstrap.js"></script>
+<script>(function(){var qs,js,q,s,d=document,gi=d.getElementById,ce=d.createElement,gt=d.getElementsByTagName,id="typef_orm_share",b="https://s3-eu-west-1.amazonaws.com/share.typeform.com/";if(!gi.call(d,id)){js=ce.call(d,"script");js.id=id;js.src=b+"share.js";q=gt.call(d,"script")[0];q.parentNode.insertBefore(js,q)}})()</script>
+</body>
+</body>
+</html>
