@@ -10,7 +10,19 @@
   <link rel="stylesheet" href="dist/css/reset.css">
   <link rel="stylesheet" href="dist/css/style.css">
   <link rel="stylesheet" href="dist/css/monokai-sublime.css">
+  <style type="text/css">
+    .dropdown-menu>li>a {
+      background-color: black !important;
+    }
 
+    .nav-dropdown {
+      color: white !important;
+    }
+
+    .nav-dropdown:hover {
+      background-color: #666 !important;
+    }
+  </style>
 </head>
 <body>
 <div class="container wrapper">
@@ -49,6 +61,18 @@
           <li class="active"><a href="challenge.html">Challenge</a></li>
           <li><a href="leaderboard.html">Leaderboard</a></li>
           <li><a href="datasets.html">Datasets</a></li>
+
+          <li>
+            <a href='#' class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>History</b> <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a class="nav-dropdown" href="/index.html" id="href-challenge">2022</a></li>
+              <li><a class="nav-dropdown" href="/2020/index.html" id="href-challenge">2020</a></li>
+              <li><a class="nav-dropdown" href="/2019/index.html" id="href-challenge">2019</a></li>
+              <li><a class="nav-dropdown" href="/2018/index.html" id="href-challenge">2018</a></li>
+              <li><a class="nav-dropdown" href="/2017/index.html" id="href-challenge">2017</a></li>
+            </ul>
+          </li>
+
         </ul>
       </div>
     </nav>
