@@ -8,11 +8,11 @@ SMP Challenge is a series of annual challenges on ACM Multimedia Conference for 
 ## Dataset Overview
 | Dataset | Posts |  Users |  Categories  |  Time Range (Months) | Tags |
 | :----:  |    :----:   |    :----:   |    :----:   |    :----:   |    :----:   |
-| SMPD  |	486K  |	70K | 756	| 16  | 29  | 250K  |
+| SMPD  | 486K  | 70K | 756 | 16  | 29  | 250K  |
 
 ## Data Download
 
-[SMPD Dataset](https://smp-challenge.com/download.html)
+[SMPD](https://smp-challenge.com/download.html)
 
 
 ## Challenge Leaderboard
