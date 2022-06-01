@@ -19,7 +19,7 @@ SMP Challenge is a series of annual challenges on ACM Multimedia Conference for 
 
 [SMP Challenge Leaderboard](https://smp-challenge.com/leaderboard.html)
 
-## Citation
+## Reference
 ```BibTeX
 @inproceedings{Wu2019SMP,
   title={SMP Challenge: An Overview of Social Media Prediction Challenge 2019},
