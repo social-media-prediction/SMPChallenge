@@ -17,7 +17,7 @@ Social Media Prediction Dataset (SMPD) is a massive-scale, multimodal, and tempo
 
 ## Reference
 ```BibTeX
-@inproceedings{Wu2019SMP,
+@inproceedings{SMP2019,
   title={SMP Challenge: An Overview of Social Media Prediction Challenge 2019},
   author={Wu, Bo and Cheng, Wen-Huang and Liu, Peiye and Liu, Bei and Zeng, Zhaoyang and Luo,
   Jiebo},
