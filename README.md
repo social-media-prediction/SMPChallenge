@@ -2,7 +2,7 @@
 
 Home: [https://smp-challenge.com](https://smp-challenge.com)  
 Download: [SMPD Dataset](https://smp-challenge.com/download.html)  
-Evaluation: [SMP Eval Server](https://eval.ai/web/challenges/challenge-page/543/overview)
+Evaluation: [SMP Eval Server](https://eval.ai/web/challenges/challenge-page/543/overview)  
 Leadearboard: [SMP Challenge](https://smp-challenge.com/leaderboard.html)
 
 ## Overview
