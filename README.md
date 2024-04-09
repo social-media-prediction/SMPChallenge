@@ -1,12 +1,12 @@
 # SMP Challenge
 
-Home: [https://smp-challenge.com](https://smp-challenge.com)  
+Home: [www.smp-challenge.com](https://smp-challenge.com)  
 Download: [SMPD Dataset](https://smp-challenge.com/download.html)  
 Evaluation: [SMP Eval Server](https://eval.ai/web/challenges/challenge-page/543/overview)  
 Leadearboard: [SMP Challenge](https://smp-challenge.com/leaderboard.html)
 
-## Overview
-Social Media Prediction Challenge (SMP Challenge) is an annual challenge that seeks excellent research teams on new ways of forecasting problems and meaningfully improving people’s social lives and business scenarios. The enormous amounts of online content lead to overconsumption, online word-of-mouth helps us to efficiently discover interesting news, emerging topics, the latest stories, or amazing products from the information ocean. Therefore, predicting online popularity became an emerging and significant task for online media, brand marketing, social influencers, or our individuals. We formulated this task as the Social Media Popularity Prediction. It focuses on predicting the impact of online post sharing on social media. It is central to various scenarios, such as online advertising, social recommendation, demand forecasting, etc.
+## [Social Media Prediction Challenge](https://smp-challenge.com)
+SMP Challenge is an annual challenge that seeks excellent research teams on new ways of forecasting problems and meaningfully improving people’s social lives and business scenarios. The enormous amounts of online content lead to overconsumption, online word-of-mouth helps us to efficiently discover interesting news, emerging topics, the latest stories, or amazing products from the information ocean. Therefore, predicting online popularity became an emerging and significant task for online media, brand marketing, social influencers, or our individuals. We formulated this task as the Social Media Popularity Prediction. It focuses on predicting the impact of online post sharing on social media. It is central to various scenarios, such as online advertising, social recommendation, demand forecasting, etc.
 
 
 ## [SMPD Dataset](https://smp-challenge.com/download.html)  
