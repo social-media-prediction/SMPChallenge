@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>SMP Challenge</title>
+  <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+  <link rel="stylesheet" href="static/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="static/css/prettify.css">
+  <script src="static/js/jquery.min.js"></script>
+  <script src="static/js/bootstrap.js"></script>
+  <script src="static/js/sprintf.js"></script>
+  <script src="static/js/run_prettify.js"></script>
+  <script src="static/js/md5.js"></script>
+  <style type="text/css">
+  .black-background {background-color:	#808080	;}
+  .btn.active.focus {
+    outline: none;
+  }
+
+  .test-background {background-color:	#DCDCDC	;}
+  .white {color:#F5F5F5;}
+    #img-data {
+      border: 0;
+      display: inline;
+      height: 10px;
+    }
+
+    #chartdiv {
+      width: 80%;
+    }
+
+    .pre-scrollable {
+      height: 130px;
+      overflow-y: scroll;
+    }
+
+    #nav-first {
+      border-radius: 0px;
+      margin-bottom: 0px;
+      min-height: 80px;
+    }
+
+    #nav-second {
+      border-radius: 0px;
+      margin-bottom: 0px;
+      top: 80px;
+    }
+
+    #nav-first-main {
+      margin: 0 0;
+      height: 80px;
+    }
+
+    #nav-first-main>li {
+      height: 80px;
+    }
+
+    #nav-first-main>li>a {
+      height: 80px;
+      padding-top: 0;
+      padding-bottom: 0;
+      line-height: 80px;
+    }
+
+    #nav-second-main {
+      margin: 0 80px;
+    }
+
+    .nav-second-li {
+      font-size: 120%;
+    }
+
+    #wc {
+      width: 500;
+      height: 500;
+      border: 2px red solid;
+      position: relative;
+      left: 100px;
+      top: 50px;
+    }
+
+    #block1 {
+      background-color: white;
+    }
+
+    #block2 {
+      /*background-color: #f8f8f8;*/
+      background-color: #e8e8e8;
+    }
+
+    #block3 {
+      background-color: white;
+    }
+
+    #block4 {
+      background-color: #e8e8e8;
+    }
+
+    #block5 {
+      background-color: white;
+    }
+
+    #block6 {
+      background-color: #e8e8e8;
+    }
+
+    #block7 {
+      background-color: white;
+    }
+
+    #block8 {
+      background-color: #e8e8e8;
+    }
+
+    #block9 {
+      background-color: white;
+    }
+
+    #block106 {
+      background-color: #e8e8e8;
+    }
+
+    #block11 {
+      background-color: #080808;
+    }
+
+    .p-body {
+      text-align: justify;
+      font-family: "Arial", sans-serif;
+      font-size: 120%;
+    }
+
+    .dropdown-li {
+      background-color: #333333;
+    }
+    .dropdown-li>a {
+      color: #aaaaaa !important;
+    }
+    .dropdown-menu {
+      background-color: #333333;
+    }
+
+    h1,
+    h2 {
+      font-family: "Arial", serif;
+      /*font-size: 150%;*/
+    }
+
+    .timeline-li {
+      font-family: "Arial", sans-serif;
+      font-size: 120%;
+    }
+
+    #logo {
+      padding-left: 100px;
+      padding-top: 10px;
+    }
+
+    .thumbnail {
+      border-color: transparent;
+      background-color: transparent;
+    }
+
+    .avatar {
+      border-radius: 50%;
+    }
+
+    .nav-li {
+      font-size: 120%;
+      cursor: pointer;
+    }
+
+    td,
+    th {
+      text-align: center;
+    }
+
+    .orange {
+      color: rgb(241, 156, 55) !important;
+    }
+
+    .help-block {
+      display: none;
+    }
+
+    .member-title {
+      padding-top: 10px;
+    }
+
+    .p-title {
+      color: rgb(241, 156, 55) !important;
+    }
+
+    .container-fluid {
+      padding-top: 130px;
+    }
+
+    #forget {
+      cursor: pointer;
+    }
+
+    .nav-dropdown {
+      color: white !important;
+    }
+
+    .nav-dropdown:hover {
+      background-color: #666 !important;
+    }
+      
+  </style>
+  <script type="text/javascript">
+    var settings = {
+      //height of sphere container
+      height: 500,
+      //width of sphere container
+      width: 500,
+      //radius of sphere
+      radius: 170,
+      //rotation speed
+      speed: 5,
+      //sphere rotations slower
+      slower: 0.9,
+      //delay between update position
+      timer: 5,
+      //dependence of a font size on axis Z
+      fontMultiplier: 15,
+      left: 1000,
+      top: 50,
+      //tag css stylies on mouse over
+      hoverStyle: {
+        border: 'none',
+        color: '#0b2e6f'
+      },
+      //tag css stylies on mouse out
+      mouseOutStyle: {
+        border: '',
+        color: ''
+      }
+
+    };
+
+  </script>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top" id="nav-second">
+    <div class="container">
+      <ul class="nav navbar-nav" id="nav-second-main">
+        <li class="nav-li"><a class="nav-second-li" href="index.html" id="href-home"><b>Home</b></a></li>
+        <li class="nav-li"><a class="nav-second-li" href="dataset.html" id="href-description"><b>Dataset</b></a></li>
+        <li class="nav-li dropdown active">
+          <a href='#' class="dropdown-toggle nav-second-li" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Download</b> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a class="nav-dropdown" href="/download_image.html" id="href-challenge">SMPD-Image</a></li>
+            <li><a class="nav-dropdown" href="/download_video.html" id="href-challenge">SMPD-Video</a></li>
+          </ul>
+        </li>
+        <li class="nav-li"><a class="nav-second-li" href="challenge.html" id="href-challenge"><b>Task</b></a></li>
+        <li class="nav-li dropdown">
+          <a href='#' class="dropdown-toggle nav-second-li" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Challenges</b> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a class="nav-dropdown" href="/index.html" id="href-challenge">2024</a></li>
+            <li><a class="nav-dropdown" href="/2023/index.html" id="href-challenge">2023</a></li>
+            <li><a class="nav-dropdown" href="/2022/index.html" id="href-challenge">2022</a></li>
+            <li><a class="nav-dropdown" href="/2020/index.html" id="href-challenge">2020</a></li>
+            <li><a class="nav-dropdown" href="/2019/index.html" id="href-challenge">2019</a></li>
+            <li><a class="nav-dropdown" href="/2018/index.html" id="href-challenge">2018</a></li>
+            <li><a class="nav-dropdown" href="/2017/index.html" id="href-challenge">2017</a></li>
+          </ul>
+        </li>
+        <li class="nav-li"><a class="nav-second-li" href="leaderboard.html" id="href-leaderboard"><b>Leaderboard</b></a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-default navbar-fixed-top" id="nav-first">
+    <div class="container">
+      <div class="navbar-header">
+        <img src="static/img/logo.png" width="400px" id="logo">
+      </div>
+
+
+      <ul class="nav navbar-nav navbar-right" id="nav-first-main">
+        <li class="nav-li"><a href="mailto:social.media.prediction@gmail.com" id="href-contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <div class="container-fluid" id="maintext">
+
+    <div class="row" id="block1">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <h2 class="p-title"><b>User</b></h2>
+          <div class="row">
+          <div class="col-xs-12">
+            <pre class="prettyprint lang-json">
+{
+    "uid": "USER00000867",
+    "user_signature": "chill corner online ☁️  makeup & skincare \nwork: karen@underscoretalent.com",
+    "user_following_count": 408,
+    "user_follower_count": 70200,
+    "user_likes_count": 4200000,
+    "user_video_count": 273,
+    "user_digg_count": 14200,
+    "user_heart_count": 4200000,
+    "user_friend_count": 0
+}
+</pre>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" id="block2">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <h2 class="p-title"><b>Video</b></h2>
+          <div class="row">
+          <div class="col-xs-12">
+            <pre class="prettyprint lang-json">
+{
+    "vid": "VIDEO00004528",
+    "pid": "POST00003480",
+    "uid": "USER00000867",
+    "video_height": 1024,
+    "video_width": 576,
+    "video_duration": 63,
+    "video_ratio": "540p",
+    "video_format": "mp4",
+    "music_title": "original sound",
+    "music_duration": 63
+}
+</pre>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row" id="block3">
+      <div class="container">
+        <div class="col-xs-10 col-xs-offset-1">
+          <h2 class="p-title"><b>Post</b></h2>
+          <div class="row">
+          <div class="col-xs-12">
+            <pre class="prettyprint lang-json">
+{
+    "pid": "POST00004593",
+    "uid": "USER00005028",
+    "post_content": [
+        "Replying",
+        "to",
+        "Ezzibear",
+        "christmas",
+        "fyp",
+        "foryoupage",
+        "foryoupageofficiall",
+        "christmasideas",
+        "christmaslist2023",
+        "christmaslist2023",
+        "inspire",
+        "famous",
+        "amazing",
+        "likes",
+        "ideaforyourmam"
+    ],
+    "post_location": "IE",
+    "post_suggested_words": [],
+    "post_text_language": "un",
+    "video_path": "validation/USER00005028/VIDEO00005795.mp4",
+    "post_time": "2023-10-07 10:30"
+}
+</pre>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row" id="block11">
+      <div class="col-xs-10 col-xs-offset-1">
+        <center>
+          <h5 style="color:white;">Copyright © 2025. SMP Challenge Organization Committee. All rights reserved.</h5>
+        </center>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
