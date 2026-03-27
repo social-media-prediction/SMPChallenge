@@ -4,9 +4,11 @@
     <title>SMP Challenge</title>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
     <link rel="stylesheet" href="static/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="static/css/prettify.css">
     <script src="static/js/jquery.min.js"></script>
     <script src="static/js/bootstrap.js"></script>
     <script src="static/js/sprintf.js"></script>
+    <script src="static/js/run_prettify.js"></script>
     <script src="static/js/md5.js"></script>
     <style type="text/css">
       #nav-first {
@@ -70,7 +72,7 @@
       }
 
       #block7 {
-        background-color: #080808;
+        background-color: black;
       }
 
       .p-body{
@@ -153,7 +155,9 @@
       .nav-dropdown:hover {
         background-color: #666 !important;
       }
+
     </style>
+
   </head>
   <body>
 
@@ -162,8 +166,14 @@
         <ul class="nav navbar-nav" id="nav-second-main">
           <li class="nav-li"><a class="nav-second-li" href="index.html" id="href-home"><b>Home</b></a></li>
           <li class="nav-li"><a class="nav-second-li" href="dataset.html" id="href-description"><b>Dataset</b></a></li>
-          <li class="nav-li"><a class="nav-second-li" href="download.html" id="href-dataset"><b>Download</b></a></li>
-          <li class="nav-li"><a class="nav-second-li" href="challenge.html" id="href-challenge"><b>Task</b></a></li>
+          <li class="nav-li dropdown">
+            <a href='#' class="dropdown-toggle nav-second-li" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Download</b> <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a class="nav-dropdown" href="/download_image.html" id="href-challenge">SMPD-Image</a></li>
+              <li><a class="nav-dropdown" href="/download_video.html" id="href-challenge">SMPD-Video</a></li>
+            </ul>
+          </li>
+          <li class="nav-li active"><a class="nav-second-li" href="challenge.html" id="href-challenge"><b>Task</b></a></li>
           
           <li class="nav-li dropdown">
             <a href='#' class="dropdown-toggle nav-second-li" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Challenges</b> <span class="caret"></span></a>
@@ -179,7 +189,7 @@
               <li><a class="nav-dropdown" href="/2017/index.html" id="href-challenge">2017</a></li>
             </ul>
           </li>
-          <li class="nav-li active"><a class="nav-second-li" href="leaderboard.html" id="href-leaderboard"><b>Leaderboard</b></a></li>
+          <li class="nav-li"><a class="nav-second-li" href="leaderboard.html" id="href-leaderboard"><b>Leaderboard</b></a></li>
         </ul>
       </div>
     </nav>
@@ -191,75 +201,63 @@
         </div>
 
         <ul class="nav navbar-nav navbar-right" id="nav-first-main">
-          <li class="nav-li"><a href="https://evalai.cloudcv.org/web/challenges/challenge-page/543/overview" id="href-register"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Register</a></li>
           <li class="nav-li"><a href="mailto:social.media.prediction@gmail.com" id="href-contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
         </ul>
       </div>
     </nav>
 
+
     <div class="container-fluid" id="maintext">
       <div class="row" id="block1">
         <div class="container">
           <div class="col-xs-10 col-xs-offset-1">
-            <h2 class="p-title"><b>Leaderboard</b></h2>
-
-                <table class="table table-striped table-bordered">
-                  <tr>
-                    <th>Rank</th>
-                    <th>Team</th>
-                    <th>SRC</th>
-                    <th>MAE</th>
-                  </tr>
-<tr><td>1</td><td>ecnu_aida</td><td>0.7040</td><td>1.3707</td></tr>
-<tr><td>1</td><td>USTC CrossModal Robot</td><td>0.6744</td><td>1.3586</td></tr>
-<tr><td>3</td><td>UESTC IntelliGame Lab</td><td>0.6506</td><td>1.3935</td></tr>
-<tr><td>4</td><td>Debut</td><td>0.6399</td><td>1.3925</td></tr>
-<tr><td></td><td><s>chizhu</s></td><td><s>0.6398</s></td><td><s>1.3911</s></td></tr>
-<tr><td>5</td><td>USTC CrossModal SeniorG</td><td>0.6404</td><td>1.3980</td></tr>
-<tr><td>6</td><td>acvlab</td><td>0.6340</td><td>1.4156</td></tr>
-<tr><td>7</td><td>hch</td><td>0.6250</td><td>1.5097</td></tr>
-<tr><td>8</td><td>RIGHT</td><td>0.5876</td><td>1.5723</td></tr>
-<tr><td>9</td><td>first competition</td><td>0.5659</td><td>1.5603</td></tr>
-<tr><td>10</td><td>littleRed</td><td>0.6107</td><td>1.6439</td></tr> 
-<tr><td>11</td><td>NTUST_VIP</td><td>0.5820</td><td>1.6144</td></tr>
-<tr><td>12</td><td>ping</td><td>0.5579</td><td>1.6073</td></tr>
-<tr><td>13</td><td>Shawn</td><td>0.5496</td><td>1.7148</td></tr>
-<tr><td>14</td><td>aoe</td><td>0.5383</td><td>1.733</td></tr>
-<tr><td>15</td><td>zhou</td><td>0.4864</td><td>1.6740</td></tr>
-<tr><td>16</td><td>fruit_yogurt</td><td>0.5127</td><td>1.8404</td></tr>
-<tr><td>17</td><td>jixiangruyi</td><td>0.5120</td><td>1.9088</td></tr>
-<tr><td>17</td><td>LCT</td><td>0.4760</td><td>1.7718</td></tr>
-<tr><td>19</td><td>deadline</td><td>0.4732</td><td>2.1507</td></tr>
-                </table>
+            <h2 class="p-title"><b>Task</b></h2>
+            <p class="p-body"><b class="orange">Social Media Popularity Prediction</b>. The overconsumption of online information has its limitations, so online word-of-mouth helps us to efficiently discover emerging topics, interesting news, or new products from the information ocean. Therefore, predicting online popularity became a crucial task for online media, brand owners, social influencers, and individuals.</p>
+            <p class="p-body">The task focuses on predicting the impact of sharing different posts for a publisher on social media. Given a multimodal post from a publisher, the goal is to automatically predict the future popularity after the post is publicly shared.</p>
           </div>
         </div>
       </div>
-
       <div class="row" id="block2">
         <div class="container">
           <div class="col-xs-10 col-xs-offset-1">
-            <h2 class="p-title"><b>Team Ranking</b></h2>
-            <p class="p-body">
-              The ranking for the competition for each year is based on a quantitative evaluation, respectively. Specifically, a rank list of teams is produced by sorting their scores on each objective evaluation metric, respectively. The final rank of a team is measured by combining its ranking positions in the three ranking list for the respective task and defined as:
+            <h2 class="p-title"><b>Evaluation</b></h2>
+            <p class="p-body">By quantitative evaluation, we measure the systems submitted to this challenge on a testing set. We adopt multiple metrics including <i>Spearman’s Rho (SR)</i> and <i>Mean Absolute Error (MAE)</i>. The ranking for the competition is based on quantitative evaluation.
             </p>
-            <p>
-            <center>
-              <span class="p-body"><i>R</i>(team) = <i>R</i>(team)@SR + <i>R</i>(team)@MAE</span>
-            </center>
-            </p>
-            <p class="p-body">
-              where <i>R</i>(team) is the rank position of the team on a particular metric, e.g., if the team achieves the best performance in terms of <i>Spearman’s Rho</i>, then <i>R</i>(team)@SR is "1". The smaller the final ranking, the better the performance.
-            </p>
+
+            <p class="p-body">The evaluation will be based on the online evaluation server and platform. We released the training dataset and withhold the testing dataset for evaluation.</p>
+            <p class="p-body"><b>Track1 SMP-Image</b>: We will measure the received solutions by the prediction correlation metric <i>Spearman’s Rho (SR)</i> and the error metric <i>Mean Absolute Error (MAE)</i>. 
+            <p class="p-body"><b>Track2 SMP-Video</b>: We will measure the received solutions by the <i>Mean Absolute Percentage Error (MAPE)</i>.
+         
           </div>
           <br>
         </div>
       </div>
 
-      <div class="row" id="block7">
-        <div class="col-xs-10 col-xs-offset-1">
-          <center><h5 style="color:white;">Copyright © 2020. SMP Challenge Organization Committee. All rights reserved.</h5></center>
+      <div class="row" id="block3">
+        <div class="container">
+          <div class="col-xs-10 col-xs-offset-1">
+            <h2 class="p-title"><b>Submission</b></h2>
+            <p class="p-body"><b><a href="https://huggingface.co/spaces/smp-challenge/SMPDImage">SMP-Image Submission</a></b></p>
+            <p class="p-body"><b><a href="https://huggingface.co/spaces/smp-challenge/SMPDVideo">SMP-Video Submission</a></b></p>
+            <p class="p-body">All teams should complete official registration on the corresponding challenge evaluation platform, providing full information for all team members and their affiliated organizations. Successfully registered teams will be eligible for ranking and awards.</p>
+            <p class="p-body">Step1 Login: Participants must log in to the competition platform using their registered credentials to access the submission portal.</p>
+            <p class="p-body">Step2 Submit: Upload your entry (e.g., result files, documents, or code) in the specified format and according to the guideline s before the deadline.</p>
+            <p class="p-body">Step3: Check Result: After submission, participants can track the evaluation status and will be notified once results are announced.</p>
+            
+            <p class="p-body"><b>Solution Paper</b></p>
+            <p class="p-body">We will recommend top teams to submit a technical paper (6+2 pages) after the result reproducibility and program review.</p> 
+          </div>
         </div>
       </div>
+
+
+      <div class="row" id="block7">
+        <div class="col-xs-10 col-xs-offset-1">
+          <center><h5 style="color:white;">Copyright © 2025. SMP Challenge Organization Committee. All rights reserved.</h5></center>
+        </div>
+      </div>
+
     </div>
+
   </body>
  </html>

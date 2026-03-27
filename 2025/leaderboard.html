@@ -153,6 +153,7 @@
       .nav-dropdown:hover {
         background-color: #666 !important;
       }
+
     </style>
   </head>
   <body>
@@ -162,7 +163,13 @@
         <ul class="nav navbar-nav" id="nav-second-main">
           <li class="nav-li"><a class="nav-second-li" href="index.html" id="href-home"><b>Home</b></a></li>
           <li class="nav-li"><a class="nav-second-li" href="dataset.html" id="href-description"><b>Dataset</b></a></li>
-          <li class="nav-li"><a class="nav-second-li" href="download.html" id="href-dataset"><b>Download</b></a></li>
+          <li class="nav-li dropdown">
+            <a href='#' class="dropdown-toggle nav-second-li" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><b>Download</b> <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a class="nav-dropdown" href="/download_image.html" id="href-challenge">SMPD-Image</a></li>
+              <li><a class="nav-dropdown" href="/download_video.html" id="href-challenge">SMPD-Video</a></li>
+            </ul>
+          </li>
           <li class="nav-li"><a class="nav-second-li" href="challenge.html" id="href-challenge"><b>Task</b></a></li>
           
           <li class="nav-li dropdown">
@@ -191,7 +198,6 @@
         </div>
 
         <ul class="nav navbar-nav navbar-right" id="nav-first-main">
-          <li class="nav-li"><a href="https://evalai.cloudcv.org/web/challenges/challenge-page/543/overview" id="href-register"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Register</a></li>
           <li class="nav-li"><a href="mailto:social.media.prediction@gmail.com" id="href-contact"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a></li>
         </ul>
       </div>
@@ -203,36 +209,59 @@
           <div class="col-xs-10 col-xs-offset-1">
             <h2 class="p-title"><b>Leaderboard</b></h2>
 
-                <table class="table table-striped table-bordered">
+               <h2>SMP Image</h2>
+               <table class="table table-striped table-bordered">
                   <tr>
                     <th>Rank</th>
                     <th>Team</th>
                     <th>SRC</th>
                     <th>MAE</th>
                   </tr>
-<tr><td>1</td><td>ecnu_aida</td><td>0.7040</td><td>1.3707</td></tr>
-<tr><td>1</td><td>USTC CrossModal Robot</td><td>0.6744</td><td>1.3586</td></tr>
-<tr><td>3</td><td>UESTC IntelliGame Lab</td><td>0.6506</td><td>1.3935</td></tr>
-<tr><td>4</td><td>Debut</td><td>0.6399</td><td>1.3925</td></tr>
-<tr><td></td><td><s>chizhu</s></td><td><s>0.6398</s></td><td><s>1.3911</s></td></tr>
-<tr><td>5</td><td>USTC CrossModal SeniorG</td><td>0.6404</td><td>1.3980</td></tr>
-<tr><td>6</td><td>acvlab</td><td>0.6340</td><td>1.4156</td></tr>
-<tr><td>7</td><td>hch</td><td>0.6250</td><td>1.5097</td></tr>
-<tr><td>8</td><td>RIGHT</td><td>0.5876</td><td>1.5723</td></tr>
-<tr><td>9</td><td>first competition</td><td>0.5659</td><td>1.5603</td></tr>
-<tr><td>10</td><td>littleRed</td><td>0.6107</td><td>1.6439</td></tr> 
-<tr><td>11</td><td>NTUST_VIP</td><td>0.5820</td><td>1.6144</td></tr>
-<tr><td>12</td><td>ping</td><td>0.5579</td><td>1.6073</td></tr>
-<tr><td>13</td><td>Shawn</td><td>0.5496</td><td>1.7148</td></tr>
-<tr><td>14</td><td>aoe</td><td>0.5383</td><td>1.733</td></tr>
-<tr><td>15</td><td>zhou</td><td>0.4864</td><td>1.6740</td></tr>
-<tr><td>16</td><td>fruit_yogurt</td><td>0.5127</td><td>1.8404</td></tr>
-<tr><td>17</td><td>jixiangruyi</td><td>0.5120</td><td>1.9088</td></tr>
-<tr><td>17</td><td>LCT</td><td>0.4760</td><td>1.7718</td></tr>
-<tr><td>19</td><td>deadline</td><td>0.4732</td><td>2.1507</td></tr>
+<tr><td>1</td><td>YetZzzzZ</td><td>0.7543</td><td>1.1607</td></tr>
+<tr><td>2</td><td>sudh</td><td>0.7395</td><td>1.181</td></tr>
+<tr><td>3</td><td>yllhwa</td><td>0.7324</td><td>1.2402</td></tr>
+<tr><td>4</td><td>Trails1</td><td>0.7228</td><td>1.2402</td></tr>
+<tr><td>5</td><td>aaaaaa436</td><td>0.723</td><td>1.258</td></tr>
+<tr><td>6</td><td>baseline</td><td>0.7126</td><td>1.2516</td></tr>
+<tr><td>7</td><td>Taka2</td><td>0.6692</td><td>1.3593</td></tr>
+<tr><td>8</td><td>Taka</td><td>0.6571</td><td>1.4559</td></tr>
+<tr><td>9</td><td>AlexLiu512</td><td>0.6463</td><td>1.44</td></tr>
+<tr><td>10</td><td>Noone</td><td>0.6497</td><td>1.4784</td></tr>
+<tr><td>10</td><td>LelandSir</td><td>0.7192</td><td>3.8328</td></tr>
+<tr><td>10</td><td>hewiit313</td><td>0.7161</td><td>2.1219</td></tr>
+<tr><td>13</td><td>AAA</td><td>0.6004</td><td>1.5957</td></tr>
+<tr><td>13</td><td>nowjump</td><td>0.5954</td><td>1.5494</td></tr>
+<tr><td>15</td><td>bsqaq</td><td>0.4453</td><td>2.0698</td></tr>
                 </table>
-          </div>
+
+
+               <h2>SMP Video</h2>
+               <table class="table table-striped table-bordered">
+                  <tr>
+                    <th>Rank</th>
+                    <th>Team</th>
+                    <th>MAPE</th>
+                  </tr>
+<tr><td>1</td><td>yllhwa</td><td>0.1754</td></tr>
+<tr><td>2</td><td>Smiles_Lab</td><td>0.1787</td></tr>
+<tr><td>3</td><td>nowjump</td><td>0.1792</td></tr>
+<tr><td>4</td><td>eqdwdad</td><td>0.1803</td></tr>
+<tr><td>5</td><td>Devil</td><td>0.1958</td></tr>
+<tr><td>6</td><td>NYCU</td><td>0.1968</td></tr>
+<tr><td>7</td><td>Joseph</td><td>0.1974</td></tr>
+<tr><td>8</td><td>helen</td><td>0.1974</td></tr>
+<tr><td>9</td><td>yjsk</td><td>0.1977</td></tr>
+<tr><td>10</td><td>Joe10077</td><td>0.1994</td></tr>
+<tr><td>11</td><td>baseline</td><td>0.2272</td></tr>
+<tr><td>12</td><td>www</td><td>0.2282</td></tr>
+<tr><td>13</td><td>CheYe</td><td>0.2482</td></tr>
+<tr><td>14</td><td>JGYYCJWXXPZ</td><td>0.2695</td></tr>
+<tr><td>15</td><td>SIGS2025</td><td>0.3058</td></tr>
+                </table>
+
+<span>We kindly request the team to contact the organizing committee as soon as possible to update your contact information and complete the code review process. Please note that the final deadline for these updates is June 10th, 2025. Failure to do so by the deadline may affect your eligibility for the competition.</span>
         </div>
+
       </div>
 
       <div class="row" id="block2">
@@ -240,24 +269,24 @@
           <div class="col-xs-10 col-xs-offset-1">
             <h2 class="p-title"><b>Team Ranking</b></h2>
             <p class="p-body">
-              The ranking for the competition for each year is based on a quantitative evaluation, respectively. Specifically, a rank list of teams is produced by sorting their scores on each objective evaluation metric, respectively. The final rank of a team is measured by combining its ranking positions in the three ranking list for the respective task and defined as:
+              The ranking for the competition is based on quantitative evaluation. The final rank of a team is measured by combining objective evaluation metrics:
             </p>
             <p>
             <center>
-              <span class="p-body"><i>R</i>(team) = <i>R</i>(team)@SR + <i>R</i>(team)@MAE</span>
+              <span class="p-body"><i>R</i>(team) = <i>R</i>(team)@SR + <i>R</i>(team)@MAE</span> or 
+              <span class="p-body"><i>R</i>(team) = <i>R</i>(team)@MAPE (smaller is better)</span>
             </center>
-            </p>
-            <p class="p-body">
-              where <i>R</i>(team) is the rank position of the team on a particular metric, e.g., if the team achieves the best performance in terms of <i>Spearman’s Rho</i>, then <i>R</i>(team)@SR is "1". The smaller the final ranking, the better the performance.
             </p>
           </div>
           <br>
         </div>
       </div>
 
+
+
       <div class="row" id="block7">
         <div class="col-xs-10 col-xs-offset-1">
-          <center><h5 style="color:white;">Copyright © 2020. SMP Challenge Organization Committee. All rights reserved.</h5></center>
+          <center><h5 style="color:white;">Copyright © 2025. SMP Challenge Organization Committee. All rights reserved.</h5></center>
         </div>
       </div>
     </div>
